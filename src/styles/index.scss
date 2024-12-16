@@ -1,0 +1,14 @@
+@use "./globals" as *;
+
+// auth
+@use "./components/auth/auth_container.scss";
+@use "./components/auth/login.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  color: $neutral-900;
+  background-color: $neutral-50;
+  font-family: 'Poppins';
+}
