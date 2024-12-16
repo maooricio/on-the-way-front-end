@@ -26,6 +26,38 @@
         object-fit: cover;
       }
     }
+
+    @media screen and (max-height: 600px) {
+      height: 94%;
+    }
+
+    @media screen and (max-height: 550px) {
+      height: 93%;
+    }
+
+    @media screen and (max-height: 500px) {
+      height: 92%;
+    }
+
+    @media screen and (max-height: 450px) {
+      height: 91%;
+    }
+
+    @media screen and (max-height: 400px) {
+      height: 90%;
+    }
+
+    @media screen and (max-height: 300px) {
+      height: 85%;
+    }
+
+    @media screen and (max-height: 200px) {
+      height: 80%;
+    }
+
+    @media screen and (max-height: 100px) {
+      height: 70%;
+    }
   }
 
   .auth-footer {
@@ -35,18 +67,14 @@
     background-color: $primary-500;
     color: $generic-white;
     text-align: center;
+    height: 80px;
   }
 }
 
 @media screen and (max-width: 860px) {
   .auth-container {
-    .auth-content {
-      height: 100%;
-    }
-
     .auth-footer {
       font-size: 14px;
-      height: 80px;
     }
   }
 }

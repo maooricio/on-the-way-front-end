@@ -23,9 +23,9 @@ const AuthLogin = () => {
   return (
     <AuthContainer>
       <section className="login-container">
-        <img src={otw_loco} alt="on the way logo" className="otw-logo" />
-
         <form className="login-form">
+          <img src={otw_loco} alt="on the way logo" className="otw-logo" />
+
           <div className="inputs-container">
             <InputElement
               type="text"
