@@ -4,6 +4,9 @@
 @use "./components/auth/auth_container.scss";
 @use "./components/auth/login.scss";
 
+// elements
+@use "./components/inputs/input.scss";
+
 body {
   margin: 0;
   padding: 0;

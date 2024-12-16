@@ -1,11 +1,70 @@
 @use "../../globals" as *;
 
 .login-container {
-    @include flex(column, flex-start, center, 24px);
-    width: 50%;
-    height: 100%;
+  @include flex(column, flex-start, center, 24px);
+  width: 50%;
+  height: 100%;
 
-    .otw-logo {
-        margin-top: 54px;
+  .otw-logo {
+    margin-top: 54px;
+  }
+
+  .login-form {
+    @include flex(column, flex-start, center, 16px);
+    width: 45%;
+    height: 60%;
+    margin-top: 32px;
+
+    .inputs-container {
+      @include flex(column, flex-start, center, 24px);
+      width: 100%;
+    }
+
+    .forgotten-password {
+      align-self: flex-start;
+      font-size: 16px;
+      color: $neutral-900;
+
+      .password-link {
+        all: unset;
+        color: $primary-500;
+        text-decoration: none;
+      }
+    }
+
+    button[type="submit"] {
+      all: unset;
+      cursor: pointer;
+      @include flex(row, center, center);
+      width: 100%;
+      background-color: $primary-600;
+      color: $generic-white;
+      border-radius: 12px;
+      padding: 12px 0;
+      margin-top: 32px;
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+    .login-container {
+        .login-form {
+            width: 60%;
+        }
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .login-container {
+        width: 100%;
+        gap: 0;
+
+        .otw-logo {
+            margin-top: 16px;
+        }
+
+        .login-form {
+            width: 90%;
+        }
     }
 }

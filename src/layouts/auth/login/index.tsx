@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { Routes } from "../../../utils/router/router_enum";
 import InputElement from "../../../components/inputs/input";
 import { useState } from "react";
+import eye from "../../../assets/icons/utils/eye.svg";
+import eye_closed from "../../../assets/icons/utils/eye_closed.svg";
 
 export interface ILoginFormData {
   user: string;
@@ -13,9 +15,10 @@ export interface ILoginFormData {
 const AuthLogin = () => {
   const initialState: ILoginFormData = {
     user: "",
-    password: ""
-  }
+    password: "",
+  };
   const [formData, setFormData] = useState<ILoginFormData>(initialState);
+  const [showPassword, setShowPassword] = useState<string>("password");
 
   return (
     <AuthContainer>
@@ -24,7 +27,7 @@ const AuthLogin = () => {
 
         <form className="login-form">
           <div className="inputs-container">
-            <InputElement 
+            <InputElement
               type="text"
               label="Usuario o email"
               placeholder="Ingresa tu usuario"
@@ -34,11 +37,32 @@ const AuthLogin = () => {
               value={formData.user}
               icon={<></>}
             />
+
+            <InputElement
+              type={showPassword}
+              label="Contraseña"
+              placeholder="Ingresa tu contraseña"
+              name="password"
+              setFormData={setFormData}
+              error={""}
+              value={formData.password}
+              icon={
+                <img
+                  src={showPassword === "text" ? eye_closed : eye}
+                  alt=""
+                  onClick={() =>
+                    setShowPassword(
+                      showPassword === "text" ? "password" : "text",
+                    )
+                  }
+                />
+              }
+            />
           </div>
 
           <p className="forgotten-password">
             ¿Has olvidado la contraseña?{" "}
-            <Link to={Routes.password}>Haz click aquí.</Link>
+            <Link to={Routes.password} className="password-link">Haz click aquí.</Link>
           </p>
 
           <button type="submit">Iniciar sesión</button>
