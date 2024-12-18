@@ -1,27 +1,48 @@
 @use "../../globals" as *;
 
-.login-container {
+.auth-form-container {
   @include flex(column, flex-start, center, 24px);
   width: 50%;
   height: 100%;
   overflow-x: auto;
 
   .otw-logo {
-    margin-bottom: 32px;
+    margin-bottom: 12px;
 
     @media screen and (max-height: 500px) {
       display: none;
     }
   }
 
-  .login-form {
+  .auth-form {
     @include flex(column, center, center, 16px);
     width: 45%;
     height: 110%;
 
-    .inputs-container {
-      @include flex(column, flex-start, center, 24px);
+    .password-header {
+      @include flex(row, flex-start, center, 8px);
       width: 100%;
+
+      .link {
+        @include flex(row, flex-start, center);
+      }
+
+      h3 {
+        font-size: 16px;
+        font-weight: 600;
+      }
+    }
+
+    .inputs-container {
+      @include flex(column, flex-start, center);
+      width: 100%;
+
+      .auth-form-error {
+        font-size: 14px;
+        color: $error-500;
+        margin-left: 8px;
+        margin-top: 8px;
+      }
 
       @media screen and (max-height: 500px) {
         margin-top: 24px;
@@ -37,6 +58,11 @@
         all: unset;
         color: $primary-500;
         text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
 
@@ -53,21 +79,21 @@
     }
 
     @media screen and (max-height: 470px) {
-        @include flex(column, flex-start, center, 16px);
+      @include flex(column, flex-start, center, 16px);
     }
   }
 }
 
 @media screen and (max-width: 1400px) {
-  .login-container {
-    .login-form {
+  .auth-form-container {
+    .auth-form {
       width: 60%;
     }
   }
 }
 
 @media screen and (max-width: 860px) {
-  .login-container {
+  .auth-form-container {
     width: 100%;
     gap: 0;
 
@@ -75,7 +101,7 @@
       margin-top: 16px;
     }
 
-    .login-form {
+    .auth-form {
       width: 90%;
     }
   }
