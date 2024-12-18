@@ -3,11 +3,13 @@
 .input-container {
   @include flex(column, flex-start, flex-start);
   width: 100%;
+  margin-top: 24px;
 
   .input-label {
     font-size: 14px;
     color: $neutral-800;
     margin-left: 8px;
+    margin-bottom: 6px;
   }
 
   .input {
@@ -15,6 +17,8 @@
     width: 100%;
     border: 1px solid $neutral-200;
     border-radius: 12px;
+    cursor: text;
+    overflow: hidden;
 
     input {
       all: unset;
@@ -26,5 +30,15 @@
       margin-right: 14px;
       cursor: pointer;
     }
+  }
+
+  .focused-input {
+    border: 1px solid $primary-500;
+    box-shadow: 0 0 0 4px $primary-shadow;
+  }
+
+  .input-has-error {
+    border: 1px solid $error-500;
+    box-shadow: 0 0 0 4px $error-shadow;
   }
 }
