@@ -15,3 +15,9 @@ body {
   background-color: $neutral-50;
   font-family: 'Poppins';
 }
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none;
+}
