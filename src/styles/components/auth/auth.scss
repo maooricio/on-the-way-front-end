@@ -23,7 +23,10 @@
       @include flex(row, flex-start, center, 8px);
       width: 100%;
 
-      .link {
+      .link,
+      button[type="button"] {
+        all: unset;
+        cursor: pointer;
         @include flex(row, flex-start, center);
       }
 
@@ -49,6 +52,30 @@
       }
     }
 
+    .code-inputs-container {
+      @include flex(row, space-between, center, 8px);
+      width: 100%;
+
+      .code-input {
+        all: unset;
+        width: 16%;
+        height: 54px;
+        border-radius: 12px;
+        border: 1px solid $neutral-300;
+        padding-left: 25px;
+
+        &:focus {
+          border: 1px solid $primary-500;
+          box-shadow: 0 0 0 4px $primary-shadow;
+        }
+      }
+
+      .input-has-error {
+        border: 1px solid $error-500;
+        box-shadow: 0 0 0 2px $error-shadow;
+      }
+    }
+
     .forgotten-password {
       align-self: flex-start;
       font-size: 16px;
@@ -66,6 +93,28 @@
       }
     }
 
+    .resend-code {
+      width: 100%;
+      color: $neutral-900;
+
+      button[type="button"] {
+        all: unset;
+        cursor: pointer;
+        color: $primary-500;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .change-password-error {
+      color: $error-500;
+      font-size: 14px;
+      align-self: flex-start;
+      margin-left: 8px;
+    }
+
     button[type="submit"] {
       all: unset;
       cursor: pointer;
@@ -76,6 +125,16 @@
       border-radius: 12px;
       padding: 12px 0;
       margin-top: 32px;
+
+      &:hover {
+        background-color: $primary-700;
+        color: $neutral-100;
+      }
+
+      &:active {
+        background-color: $primary-800;
+        color: $neutral-200;
+      }
     }
 
     @media screen and (max-height: 470px) {

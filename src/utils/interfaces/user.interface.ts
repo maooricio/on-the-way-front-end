@@ -10,5 +10,10 @@ export interface ILoginFormData {
 }
 
 export interface IPasswordFormData {
-    email: string;
+  email: string;
+}
+
+export interface INewPasswordFormData {
+  password: string;
+  newPassword: string;
 }

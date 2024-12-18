@@ -22,9 +22,21 @@ const recoverPasswordError: IError = {
   value: "recoverPasswordError",
 };
 
+const passwordCodeError: IError = {
+  label: "Debes ingresar el codigo que hemos enviado a tu correo electrónico para cambiar tu contraseña.",
+  value: "recoverPasswordError",
+};
+
+const newPasswordError: IError = {
+  label: "Las contraseñas no coinciden.",
+  value: "recoverPasswordError",
+};
+
 export {
   validateUserError,
   emptyUserError,
   recoverPasswordError,
+  passwordCodeError,
+  newPasswordError,
   initialFormError,
 };

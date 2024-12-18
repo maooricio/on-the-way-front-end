@@ -7,6 +7,7 @@ import {
 } from "react";
 import {
   ILoginFormData,
+  INewPasswordFormData,
   IPasswordFormData,
 } from "../../utils/interfaces/user.interface";
 
@@ -17,11 +18,13 @@ interface Props {
   name: string;
   setFormData:
     | Dispatch<SetStateAction<ILoginFormData>>
-    | Dispatch<SetStateAction<IPasswordFormData>>;
+    | Dispatch<SetStateAction<IPasswordFormData>>
+    | Dispatch<SetStateAction<INewPasswordFormData>>;
   error: string;
   value: string;
   icon: ReactNode;
   disabled?: boolean;
+  showError?: boolean;
 }
 
 const InputElement = ({
@@ -34,6 +37,7 @@ const InputElement = ({
   value,
   icon,
   disabled,
+  showError,
 }: Props) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -66,7 +70,9 @@ const InputElement = ({
         {icon}
       </div>
 
-      {/* {error.length > 0 && <span className="input-error">{error}</span>} */}
+      {showError && error.length > 0 && (
+        <span className="input-error">{error}</span>
+      )}
     </label>
   );
 };

@@ -41,4 +41,10 @@
     border: 1px solid $error-500;
     box-shadow: 0 0 0 4px $error-shadow;
   }
+
+  .input-error {
+    color: $error-500;
+    font-size: 14px;
+    margin-top: 8px;
+  }
 }
