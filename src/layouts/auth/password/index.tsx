@@ -33,6 +33,8 @@ const AuthPassword = () => {
     setFormError(initialFormError);
   };
 
+  console.log(formError);
+
   return (
     <AuthContainer>
       <section className="auth-form-container">
