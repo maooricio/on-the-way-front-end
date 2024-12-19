@@ -1,4 +1,7 @@
 export enum Routes {
-    main = "/",
-    password = "/password"
+  main = "/",
+  password = "/password",
+  quotes = "/quotes",
+  users = "/users",
+  settings = "/settings",
 }

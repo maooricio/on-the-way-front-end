@@ -1,0 +1,98 @@
+@use "../../../globals" as *;
+
+.navbar-container {
+  @include flex(column, space-between, center);
+  width: 15%;
+  background-color: $primary-900;
+  overflow: hidden;
+
+  .navbar-header {
+    @include flex(column, flex-start, center, 56px);
+    width: 90%;
+    min-height: 50%;
+    margin-top: 24px;
+
+    button[type="button"] {
+      all: unset;
+      align-self: flex-start;
+      cursor: pointer;
+    }
+
+    .navbar-content {
+      @include flex(column, space-between, center, 24px);
+      width: 100%;
+
+      .navbar-links-container {
+        all: unset;
+        list-style: none;
+        @include flex(column, space-between, center, 8px);
+        width: 100%;
+        margin-top: 24px;
+
+        li {
+          width: 100%;
+
+          .link {
+            @include flex(row, flex-start, center, 8px);
+            text-decoration: none;
+            padding: 12px 0;
+            border-radius: 12px;
+
+            img {
+              margin-left: 16px;
+            }
+
+            span {
+              color: $generic-white;
+            }
+          }
+
+          .is-focus {
+            background-color: #d4c7f049;
+          }
+        }
+      }
+    }
+  }
+
+  .navbar-footer {
+    @include flex(column, flex-start, center, 32px);
+    width: 90%;
+    margin-bottom: 24px;
+
+    .navbar-user {
+      all: unset;
+      @include flex(column, flex-start, flex-start, 0);
+      width: 100%;
+      margin-left: 16px;
+
+      img {
+        width: 48px;
+        height: 48px;
+        overflow: hidden;
+        border-radius: 16px;
+      }
+
+      .navbar-user-name {
+        font-size: 16px;
+        font-weight: 400;
+        color: $generic-white;
+        margin-top: 8px;
+      }
+
+      .navbar-user-role {
+        color: $primary-600;
+      }
+    }
+
+    button[type="button"] {
+      all: unset;
+      cursor: pointer;
+      @include flex(row, flex-start, center, 8px);
+      color: $generic-white;
+      align-self: flex-start;
+      line-height: 24px;
+      padding: 12px 16px;
+    }
+  }
+}

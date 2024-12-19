@@ -38,6 +38,18 @@ export class RouterUtils {
             path: Routes.main,
             element: <AdminHome />,
           },
+          {
+            path: Routes.quotes,
+            element: <AdminHome />,
+          },
+          {
+            path: Routes.users,
+            element: <AdminHome />,
+          },
+          {
+            path: Routes.settings,
+            element: <AdminHome />,
+          },
         ];
   };
 }
