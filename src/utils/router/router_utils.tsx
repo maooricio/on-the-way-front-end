@@ -8,6 +8,7 @@ import AuthPassword from "../../layouts/auth/password";
 export class RouterUtils {
   routes = (): RouteObject[] => {
     const user = userIsLogin();
+    // const navigate = useNavigate();
     //   const scrollToContent = (targetId: string) => {
     //     const targetElement = document.getElementById(targetId);
     //     if (targetElement) {
@@ -16,7 +17,11 @@ export class RouterUtils {
     //       }, 100);
     //     }
     //   };
-    console.log(user);
+
+    if (user && location.pathname === Routes.password) {
+      window.history.pushState({}, "", "/");
+    }
+
     return !user
       ? [
           {
@@ -31,6 +36,18 @@ export class RouterUtils {
       : [
           {
             path: Routes.main,
+            element: <AdminHome />,
+          },
+          {
+            path: Routes.quotes,
+            element: <AdminHome />,
+          },
+          {
+            path: Routes.users,
+            element: <AdminHome />,
+          },
+          {
+            path: Routes.settings,
             element: <AdminHome />,
           },
         ];

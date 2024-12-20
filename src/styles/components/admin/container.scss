@@ -1,0 +1,14 @@
+@use "../../globals" as *;
+
+.admin-container {
+    @include flex(row, flex-start, normal);
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+
+    .admin-content-container {
+        @include flex(row, center, center);
+        width: 85%;
+        background-color: $secondary-50;
+    }
+}

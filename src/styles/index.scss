@@ -5,7 +5,12 @@
 @use "./components/auth/auth.scss";
 
 // elements
-@use "./components/inputs/input.scss";
+@use "./components/elements/inputs/input.scss";
+@use "./components/elements/main/navbar.scss";
+
+// admin
+@use "./components/admin/container.scss";
+@use "./components/admin/home.scss";
 
 body {
   margin: 0;
