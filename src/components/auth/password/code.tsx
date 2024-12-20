@@ -6,6 +6,7 @@ import {
 } from "../../../utils/data/erros";
 import arrow_left from "../../../assets/icons/arrow/arrow_left.svg";
 import CodeInputs from "./code_inputs";
+import Image from "next/image";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
@@ -41,7 +42,7 @@ const PasswordCode = ({ setStage }: Props) => {
     >
       <header className="password-header">
         <button type="button" className="link" onClick={() => setStage(0)}>
-          <img src={arrow_left} alt="arrow left icon" />
+          <Image src={arrow_left} alt="arrow left icon" />
         </button>
 
         <h3>Restablecer contraseña</h3>

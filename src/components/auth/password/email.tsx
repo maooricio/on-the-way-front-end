@@ -5,10 +5,11 @@ import {
   initialFormError,
   recoverPasswordError,
 } from "../../../utils/data/erros";
-import { Link } from "react-router-dom";
 import InputElement from "../../inputs/input";
 import { Routes } from "../../../utils/router/router_enum";
 import arrow_left from "../../../assets/icons/arrow/arrow_left.svg";
+import Link from "next/link";
+import Image from "next/image";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
@@ -45,8 +46,8 @@ const PasswordEmail = ({ setStage }: Props) => {
       onChange={handleOnChange}
     >
       <header className="password-header">
-        <Link to={Routes.main} className="link">
-          <img src={arrow_left} alt="arrow left icon" />
+        <Link href={Routes.login} className="link">
+          <Image src={arrow_left} alt="arrow left icon" />
         </Link>
         <h3>Restablecer contraseña</h3>
       </header>

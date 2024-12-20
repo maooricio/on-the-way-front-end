@@ -15,6 +15,7 @@
     .auth-screen-container {
       @include flex(row, center, center);
       width: 50%;
+      min-width: 50%;
       height: 100%;
       max-height: 100%;
       overflow: hidden;
@@ -24,6 +25,10 @@
         height: 100%;
         max-height: 100%;
         object-fit: cover;
+      }
+
+      @media screen and (max-width: 860px) {
+        display: none;
       }
     }
 
