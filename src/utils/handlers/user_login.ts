@@ -1,29 +1,27 @@
 import { ILoginFormData, IUser } from "../interfaces/user.interface";
+import { getCookie, removeCookie, setCookie } from "./cookies";
 
 export const emailRegEx =
   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]{1,})$/;
 
-export const userIsLogin = () => {
-  const user = localStorage.getItem("user");
-
-  if (!user) {
-    return;
-  }
-
-  return user;
+export const userIsLogin = (): IUser | null => {
+  const user = getCookie("user");
+  return user ? JSON.parse(user) : null;
 };
 
-export const userLogout = () => localStorage.removeItem("user");
+export const userLogout = (): void => {
+  removeCookie("user");
+};
 
-export const userLogin = (userData: ILoginFormData) => {
+export const userLogin = (userData: ILoginFormData): void => {
   const { user, password } = userData;
-  const isEmail = emailRegEx.test(user);
+  const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user);
 
   const userToLogin: IUser = {
-    email: !isEmail ? `${user}@gmail.com` : user,
-    username: !isEmail ? user : user.split("@")[0],
+    email: isEmail ? user : `${user}@gmail.com`,
+    username: isEmail ? user.split('@')[0] : user,
     password,
   };
 
-  localStorage.setItem("user", JSON.stringify(userToLogin));
+  setCookie('user', JSON.stringify(userToLogin), 7);
 };

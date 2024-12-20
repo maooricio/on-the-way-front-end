@@ -5,16 +5,16 @@ import {
   initialFormError,
   newPasswordError,
 } from "../../../utils/data/erros";
-import { Link, useNavigate } from "react-router-dom";
 import InputElement from "../../inputs/input";
 import { Routes } from "../../../utils/router/router_enum";
 import arrow_left from "../../../assets/icons/arrow/arrow_left.svg";
 import eye from "../../../assets/icons/utils/eye.svg";
 import eye_closed from "../../../assets/icons/utils/eye_closed.svg";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
 
 const PasswordChange = () => {
-  const navigate = useNavigate();
-
   const initialState: INewPasswordFormData = {
     password: "",
     newPassword: "",
@@ -34,7 +34,7 @@ const PasswordChange = () => {
       return;
     }
 
-    navigate(Routes.main);
+    redirect(Routes.login);
   };
 
   const handleOnChange = () => {
@@ -48,8 +48,8 @@ const PasswordChange = () => {
       onChange={handleOnChange}
     >
       <header className="password-header">
-        <Link to={Routes.main} className="link">
-          <img src={arrow_left} alt="arrow left icon" />
+        <Link href={Routes.login} className="link">
+          <Image src={arrow_left} alt="arrow left icon" />
         </Link>
         <h3>Restablecer contraseña</h3>
       </header>
@@ -68,7 +68,7 @@ const PasswordChange = () => {
         error={formError.label}
         value={formData.password}
         icon={
-          <img
+          <Image
             src={showPassword === "text" ? eye_closed : eye}
             alt=""
             onClick={() =>
@@ -87,7 +87,7 @@ const PasswordChange = () => {
         error={formError.label}
         value={formData.newPassword}
         icon={
-          <img
+          <Image
             src={showNewPassword === "text" ? eye_closed : eye}
             alt=""
             onClick={() =>

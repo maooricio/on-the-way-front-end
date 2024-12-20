@@ -1,22 +1,19 @@
-import AuthContainer from "../../../containers/auth";
-import otw_loco from "../../../assets/images/otw_logo.svg";
-import { Link, useNavigate } from "react-router-dom";
-import { Routes } from "../../../utils/router/router_enum";
-import InputElement from "../../../components/inputs/input";
+"use client";
+import InputElement from "@/components/inputs/input";
+import AuthContainer from "@/containers/auth";
+import { redirect } from "next/navigation";
+import { emptyUserError, IError, initialFormError } from "@/utils/data/erros";
+import { userLogin } from "@/utils/handlers/user_login";
+import { ILoginFormData } from "@/utils/interfaces/user.interface";
+import { Routes } from "@/utils/router/router_enum";
+import Image from "next/image";
 import { FormEvent, useState } from "react";
+import otw_logo from "../../../assets/images/otw_logo.svg";
 import eye from "../../../assets/icons/utils/eye.svg";
 import eye_closed from "../../../assets/icons/utils/eye_closed.svg";
-import { ILoginFormData } from "../../../utils/interfaces/user.interface";
-import { userLogin } from "../../../utils/handlers/user_login";
-import {
-  emptyUserError,
-  IError,
-  initialFormError,
-} from "../../../utils/data/erros";
+import Link from "next/link";
 
-const AuthLogin = () => {
-  const navigate = useNavigate();
-
+const LoginPage = () => {
   const initialState: ILoginFormData = {
     user: "",
     password: "",
@@ -36,7 +33,7 @@ const AuthLogin = () => {
     }
 
     userLogin(formData);
-    navigate(0);
+    redirect(Routes.main);
   };
 
   const handleOnChange = () => {
@@ -51,7 +48,7 @@ const AuthLogin = () => {
           onSubmit={handleOnSubmit}
           onChange={handleOnChange}
         >
-          <img src={otw_loco} alt="on the way logo" className="otw-logo" />
+          <Image src={otw_logo} alt="on the way logo" className="otw-logo" />
 
           <div className="inputs-container">
             <InputElement
@@ -74,7 +71,7 @@ const AuthLogin = () => {
               error={formError.value}
               value={formData.password}
               icon={
-                <img
+                <Image
                   src={showPassword === "text" ? eye_closed : eye}
                   alt=""
                   onClick={() =>
@@ -93,7 +90,7 @@ const AuthLogin = () => {
 
           <p className="forgotten-password">
             ¿Has olvidado la contraseña?{" "}
-            <Link to={Routes.password} className="password-link">
+            <Link href={Routes.password} className="password-link">
               Haz click aquí.
             </Link>
           </p>
@@ -105,4 +102,4 @@ const AuthLogin = () => {
   );
 };
 
-export default AuthLogin;
+export default LoginPage;
