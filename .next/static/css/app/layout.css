@@ -564,6 +564,7 @@
 }
 
 .admin-home-container {
+  overflow: auto;
   width: 95%;
   min-height: 100%;
 }

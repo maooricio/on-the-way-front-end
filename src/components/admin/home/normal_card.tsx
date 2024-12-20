@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface Props {
   icon: string;
   title: string;
@@ -17,7 +19,7 @@ const NormalCard = ({
     <section className={`normal-card-container ${icon ? "has-icon" : ""}`}>
       <header className="normal-card-header">
         <h3>{title}</h3>
-        <img src={icon} alt="" className="normal-card-header-item" />
+        <Image src={icon} alt="" className="normal-card-header-item" />
       </header>
 
       <div className="normal-card-content">
