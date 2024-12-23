@@ -21,6 +21,7 @@ const Navbar = () => {
   const pathname = usePathname();
   const width = useScreenWidth();
   const clientSideIsLoaded = width !== null;
+
   const [showNavbar, setShowNavbar] = useState<boolean>(false);
 
   const links: INavbarLinks[] = [
