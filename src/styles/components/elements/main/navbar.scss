@@ -5,6 +5,8 @@
   width: 15%;
   background-color: $primary-900;
   overflow: hidden;
+  position: fixed;
+  height: 100%;
 
   .navbar-header {
     @include flex(column, flex-start, center, 56px);

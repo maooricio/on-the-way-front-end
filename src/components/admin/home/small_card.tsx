@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface Props {
   icon?: string;
   number: string;
@@ -13,7 +15,7 @@ const SmallCard = ({ icon, number, title, description, buttonInfo }: Props) => {
         {!icon ? (
           <span className="small-card-header-item">{number}</span>
         ) : (
-          <img src={icon} alt="" className="small-card-header-item" />
+          <Image src={icon} alt="" className="small-card-header-item" />
         )}
       </header>
 
@@ -22,7 +24,9 @@ const SmallCard = ({ icon, number, title, description, buttonInfo }: Props) => {
         <p>{description}</p>
       </div>
 
-      <button type="button">{buttonInfo}</button>
+      <footer className="small-card-button-container">
+        <button type="button">{buttonInfo}</button>
+      </footer>
     </section>
   );
 };

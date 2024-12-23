@@ -4,12 +4,13 @@ import calculator from "@/assets/icons/utils/calculator.svg";
 import NormalCard from "@/components/admin/home/normal_card";
 import user from "@/assets/icons/utils/user.svg";
 import quote from "@/assets/icons/utils/quote.svg";
+import LongCardTable from "@/components/admin/home/long_card";
 
 export default function Home() {
   return (
     <AdminContainer>
       <section className="admin-home-container">
-        <header className="admin-home-container">
+        <header className="admin-home-header">
           <h1>Inicio</h1>
         </header>
 
@@ -52,6 +53,10 @@ export default function Home() {
             description={"$COP 2.304.100,00 en total por verificar"}
             buttonInfo={"Verificar pagos"}
           />
+        </section>
+
+        <section className="long-card-container">
+          <LongCardTable />
         </section>
       </section>
     </AdminContainer>
