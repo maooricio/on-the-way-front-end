@@ -11,6 +11,7 @@
     top: 0;
     padding: 0 12px;
     background-color: $secondary-50;
+    z-index: 5000;
 
     h1 {
       font-size: 18px;
@@ -92,26 +93,25 @@
     }
 
     .has-icon {
-        background-color: $primary-100;
-        border: 1px solid $primary-200;
+      background-color: $primary-100;
+      border: 1px solid $primary-200;
 
-        .small-card-button-container {
-  
-          button[type="button"] {
-            background-color: $primary-600;
-            color: $generic-white;
-  
-            &:hover {
-              background-color: $primary-700;
-              color: $neutral-100;
-            }
-  
-            &:active {
-              background-color: $primary-800;
-              color: $neutral-200;
-            }
+      .small-card-button-container {
+        button[type="button"] {
+          background-color: $primary-600;
+          color: $generic-white;
+
+          &:hover {
+            background-color: $primary-700;
+            color: $neutral-100;
+          }
+
+          &:active {
+            background-color: $primary-800;
+            color: $neutral-200;
           }
         }
+      }
     }
   }
 
@@ -244,7 +244,7 @@
             }
 
             &:last-child {
-                @include flex(row, space-between, center);
+              @include flex(row, space-between, center);
               margin-right: 8px;
 
               .long-card-last-item {
@@ -295,6 +295,84 @@
 
           &:active {
             color: $primary-800;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .admin-home-container {
+    .admin-home-header {
+      width: 100%;
+
+      h1 {
+        margin-left: 56px;
+      }
+    }
+
+    .small-cards-container {
+      @include flex(column, flex-start, center, 24px);
+      height: auto;
+
+      .small-card-container {
+        width: 100%;
+      }
+    }
+
+    .normal-cards-container {
+      @include flex(column, flex-start, center, 24px);
+      height: auto;
+
+      .normal-card-container {
+        width: 100%;
+      }
+    }
+
+    .long-card-container {
+      .long-card-table {
+        .is-not-mobile {
+          display: none;
+        }
+
+        .long-card-table-header {
+            span {
+              &:first-child {
+                  width: 30%;
+              }
+              
+              &:nth-child(2) {
+                  width: 50%;
+              }
+  
+              &:last-child {
+                width: 20%;
+  
+                .long-card-last-item-amount {
+                  display: none;
+                }
+              }
+            }
+        }
+
+        .long-card-table-item {
+          span {
+            &:first-child {
+                width: 30%;
+            }
+            
+            &:nth-child(2) {
+                width: 50%;
+            }
+
+            &:last-child {
+              width: 20%;
+
+              .long-card-last-item-amount {
+                display: none;
+              }
+            }
           }
         }
       }

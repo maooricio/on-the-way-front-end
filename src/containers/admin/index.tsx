@@ -1,7 +1,12 @@
+"use client";
 import { ReactNode } from "react";
 import Navbar from "../../components/elements/navbar";
 
-const AdminContainer = ({ children }: { children: ReactNode }) => {
+interface Props {
+  children: ReactNode;
+}
+
+const AdminContainer = ({ children }: Props) => {
   return (
     <main className="admin-container">
       <Navbar />
