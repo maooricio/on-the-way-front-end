@@ -311,5 +311,71 @@
         margin-left: 56px;
       }
     }
+
+    .small-cards-container {
+      @include flex(column, flex-start, center, 24px);
+      height: auto;
+
+      .small-card-container {
+        width: 100%;
+      }
+    }
+
+    .normal-cards-container {
+      @include flex(column, flex-start, center, 24px);
+      height: auto;
+
+      .normal-card-container {
+        width: 100%;
+      }
+    }
+
+    .long-card-container {
+      .long-card-table {
+        .is-not-mobile {
+          display: none;
+        }
+
+        .long-card-table-header {
+            span {
+              &:first-child {
+                  width: 30%;
+              }
+              
+              &:nth-child(2) {
+                  width: 50%;
+              }
+  
+              &:last-child {
+                width: 20%;
+  
+                .long-card-last-item-amount {
+                  display: none;
+                }
+              }
+            }
+        }
+
+        .long-card-table-item {
+          span {
+            &:first-child {
+                width: 30%;
+            }
+            
+            &:nth-child(2) {
+                width: 50%;
+            }
+
+            &:last-child {
+              width: 20%;
+
+              .long-card-last-item-amount {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
