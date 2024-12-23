@@ -4,11 +4,12 @@
     @include flex(row, flex-start, normal);
     height: 100vh;
     max-height: 100vh;
-    overflow: hidden;
+    overflow: auto;
 
     .admin-content-container {
-        @include flex(row, center, center);
+        @include flex(row, center, flex-start);
         width: 85%;
         background-color: $secondary-50;
+        margin-left: 15%;
     }
 }
