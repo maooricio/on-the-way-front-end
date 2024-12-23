@@ -62,7 +62,7 @@ const Navbar = () => {
                 <Link
                   href={i.path}
                   className={`link ${
-                    location.pathname === i.path ? "is-focus" : ""
+                    location?.pathname === i.path ? "is-focus" : ""
                   }`}
                 >
                   <Image src={i.icon} alt={`navbar icon: ${i.name}`} />
