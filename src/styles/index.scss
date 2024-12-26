@@ -7,10 +7,12 @@
 // elements
 @use "./components/elements/inputs/input.scss";
 @use "./components/elements/main/navbar.scss";
+@use "./components/elements/main/loader.scss";
 
 // admin
 @use "./components/admin/container.scss";
 @use "./components/admin/home.scss";
+@use "./components/admin/settings.scss";
 
 body {
   margin: 0;

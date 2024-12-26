@@ -1,0 +1,26 @@
+@use "../../../globals" as *;
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader-container {
+  @include flex(row, center, center);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9000;
+  background-color: $neutral-shadow;
+
+  .arrow-animated {
+    animation: ease rotate 1.7s infinite;
+    transform-origin: center;
+  }
+}

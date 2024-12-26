@@ -1,7 +1,10 @@
 export interface IUser {
+  firstName: string;
+  lastName: string;
   username: string;
   email: string;
-  password: string;
+  password?: string;
+  photo?: string;
 }
 
 export interface ILoginFormData {

@@ -1,13 +1,15 @@
+import ProfileInfo from "@/components/admin/settings/profile_info";
 import AdminContainer from "@/containers/admin";
-import React from "react";
 
 const SettingsPage = () => {
   return (
     <AdminContainer>
-      <section className="admin-home-container">
-        <header className="admin-home-header">
+      <section className="admin-settings-container">
+        <header className="admin-settings-header">
           <h1>Configuraciones</h1>
         </header>
+
+        <ProfileInfo />
       </section>
     </AdminContainer>
   );

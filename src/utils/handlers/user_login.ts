@@ -10,7 +10,7 @@ export const userIsLogin = (): IUser | null => {
 };
 
 export const userLogout = (): void => {
-  Cookies.remove('authToken');
+  Cookies.remove("authToken");
 };
 
 export const userLogin = (userData: ILoginFormData): void => {
@@ -19,9 +19,11 @@ export const userLogin = (userData: ILoginFormData): void => {
 
   const userToLogin: IUser = {
     email: isEmail ? user : `${user}@gmail.com`,
-    username: isEmail ? user.split('@')[0] : user,
+    username: isEmail ? user.split("@")[0] : user,
+    firstName: "María Laura",
+    lastName: "Dominguez",
     password,
   };
 
-  Cookies.set('authToken', JSON.stringify(userToLogin), { expires: 7 });
+  Cookies.set("authToken", JSON.stringify(userToLogin), { expires: 7 });
 };

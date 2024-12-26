@@ -1,21 +1,10 @@
 @use "../../globals" as *;
 
 .admin-home-container {
-  @include flex(column, flex-start, center, 32px);
-  width: 95%;
-  margin-top: 80px;
+  @include adminContainer();
 
   .admin-home-header {
-    position: fixed;
-    width: 80%;
-    top: 0;
-    padding: 0 12px;
-    background-color: $secondary-50;
-    z-index: 5000;
-
-    h1 {
-      font-size: 18px;
-    }
+    @include header();
   }
 
   .small-cards-container {
@@ -304,14 +293,6 @@
 
 @media screen and (max-width: 768px) {
   .admin-home-container {
-    .admin-home-header {
-      width: 100%;
-
-      h1 {
-        margin-left: 56px;
-      }
-    }
-
     .small-cards-container {
       @include flex(column, flex-start, center, 24px);
       height: auto;
