@@ -1,9 +1,78 @@
 @use "../../globals" as *;
 
 .admin-settings-container {
-    @include adminContainer();
+  @include adminContainer();
 
-    .admin-settings-header {
-        @include header();
+  .admin-settings-header {
+    @include header();
+  }
+
+  .admin-settings-info {
+    @include flex(row, space-between, center);
+    width: 100%;
+    background-color: $primary-100;
+    border: 1px solid $primary-200;
+    border-radius: 24px;
+
+    .photo-container {
+      @include flex(column, center, center);
+      padding: 0 24px;
+      padding-top: 28px;
+
+      .image-container {
+        @include flex(row, center, center);
+        overflow: hidden;
+        width: 120px;
+        height: 120px;
+        border-radius: 16px;
+        background-color: $primary-200;
+
+        p {
+            font-size: 24px;
+            font-weight: 700;
+            color: $primary-900;
+        }
+      }
+
+      button[type="button"] {
+        all: unset;
+        cursor: pointer;
+        @include flex(row, center, center);
+        background-color: $primary-600;
+        padding: 16px;
+        border-radius: 12px;
+        transform: translate(0, -50%);
+      }
     }
+
+    .admin-settings-profile-info {
+      @include flex(column, space-evenly, flex-start, 12px);
+      width: 100%;
+      margin-bottom: 24px;
+
+      .profile-info-header-container {
+        @include flex(row, flex-start, center, 24px);
+
+        h5 {
+          all: unset;
+          font-weight: 600;
+          font-size: 24px;
+          line-height: 32px;
+          color: $neutral-800;
+        }
+
+        button[type="button"] {
+          all: unset;
+          cursor: pointer;
+          @include flex(row, center, center);
+        }
+      }
+
+      span {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+      }
+    }
+  }
 }

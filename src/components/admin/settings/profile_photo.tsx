@@ -3,7 +3,7 @@ import { getNameInitials } from "@/utils/handlers/get_name_initials";
 import { IUser } from "@/utils/interfaces/user.interface";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import pen from "@/assets/icons/utils/pen.svg";
+import pen_white from "@/assets/icons/utils/pen_white.svg";
 import Loader from "@/assets/images/loader";
 
 interface Props {
@@ -22,8 +22,8 @@ const ProfilePhoto = ({ user }: Props) => {
       setisLoading(true);
       setShowPicOptions(false);
 
-    //   await deleteProfilePicture();
-    //   updateDataOfUser();
+      //   await deleteProfilePicture();
+      //   updateDataOfUser();
     } finally {
       setisLoading(false);
     }
@@ -41,11 +41,11 @@ const ProfilePhoto = ({ user }: Props) => {
       const formData = new FormData();
       formData.append("file", selectedFile);
 
-    //   await updateProfilePicture(formData);
+      //   await updateProfilePicture(formData);
 
       event.target.value = "";
 
-    //   await updateDataOfUser();
+      //   await updateDataOfUser();
     } finally {
       setisLoading(false);
     }
@@ -53,19 +53,20 @@ const ProfilePhoto = ({ user }: Props) => {
 
   return (
     <section className="photo-container">
-      <div className="image-container avatar-picture">
+      <div className="image-container">
         {user?.photo ? (
           <Image src={user?.photo} alt="user photo" />
         ) : (
-          <p className="letters-avatar">{getNameInitials(user!)}</p>
+          <p>{user ? getNameInitials(user) : "NN"}</p>
         )}
       </div>
 
       <button
+        type="button"
         onClick={() => setShowPicOptions(!showPicOptions)}
         onBlur={() => setTimeout(() => setShowPicOptions(false), 100)}
       >
-        <Image src={pen} alt="edit icon" />
+        <Image src={pen_white} alt="edit icon" />
       </button>
 
       {showPicOptions && (
