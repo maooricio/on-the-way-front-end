@@ -55,7 +55,7 @@ const ProfilePhoto = ({ user }: Props) => {
     <section className="photo-container">
       <div className="image-container">
         {user?.photo ? (
-          <Image src={user?.photo} alt="user photo" />
+          <Image src={user?.photo} alt="user photo" priority />
         ) : (
           <p>{user ? getNameInitials(user) : "NN"}</p>
         )}

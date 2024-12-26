@@ -1,10 +1,12 @@
+import { StaticImageData } from "next/image";
+
 export interface IUser {
   firstName: string;
   lastName: string;
   username: string;
   email: string;
   password?: string;
-  photo?: string;
+  photo?: string | StaticImageData;
 }
 
 export interface ILoginFormData {

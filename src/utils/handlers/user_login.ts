@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 export const emailRegEx =
   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]{1,})$/;
 
+
 export const userIsLogin = (): IUser | null => {
   const user = Cookies.get("authToken");
   return user ? JSON.parse(user) : null;
