@@ -10,6 +10,7 @@ import {
   INewPasswordFormData,
   IPasswordFormData,
 } from "../../utils/interfaces/user.interface";
+import { IPassword } from "../admin/settings/password_modal";
 
 interface Props {
   type: string;
@@ -19,7 +20,8 @@ interface Props {
   setFormData:
     | Dispatch<SetStateAction<ILoginFormData>>
     | Dispatch<SetStateAction<IPasswordFormData>>
-    | Dispatch<SetStateAction<INewPasswordFormData>>;
+    | Dispatch<SetStateAction<INewPasswordFormData>>
+    | Dispatch<SetStateAction<IPassword>>;
   error: string;
   value: string;
   icon: ReactNode;
@@ -44,6 +46,7 @@ const InputElement = ({
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setFormData((prev: any) => ({ ...prev, [name]: value }));
   };
 

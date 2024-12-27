@@ -8,7 +8,6 @@ import { IUser } from "@/utils/interfaces/user.interface";
 import { useEffect, useState } from "react";
 import { userIsLogin } from "@/utils/handlers/user_login";
 
-
 const ProfileInfo = () => {
   const [userInfo, setUserInfo] = useState<IUser>();
 
@@ -16,20 +15,21 @@ const ProfileInfo = () => {
     const user = userIsLogin();
 
     setUserInfo(user!);
-  }, [])
+  }, []);
 
   if (!userInfo) {
-    return <Loader />
+    return <Loader />;
   }
 
   return (
     <section className="admin-settings-info">
-      <ProfilePhoto user={{...userInfo!, photo: user_photo}} />
+      <ProfilePhoto user={{ ...userInfo!, photo: user_photo }} />
 
       <section className="admin-settings-profile-info">
         <div className="profile-info-header-container">
           <h5>
-            {userInfo?.firstName.toUpperCase()} {userInfo?.lastName.toUpperCase()}
+            {userInfo?.firstName.toUpperCase()}{" "}
+            {userInfo?.lastName.toUpperCase()}
           </h5>
 
           <button type="button">
