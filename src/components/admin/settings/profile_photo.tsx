@@ -1,5 +1,5 @@
 "use client";
-import { getNameInitials } from "@/utils/handlers/get_name_initials";
+import otw_logo from "@/assets/images/otw_only_logo.svg";
 import { IUser } from "@/utils/interfaces/user.interface";
 import Image from "next/image";
 import { useRef, useState } from "react";
@@ -54,11 +54,12 @@ const ProfilePhoto = ({ user }: Props) => {
   return (
     <section className="photo-container">
       <div className="image-container">
-        {user?.photo ? (
-          <Image src={user?.photo} alt="user photo" priority />
-        ) : (
-          <p>{user ? getNameInitials(user) : "NN"}</p>
-        )}
+        <Image
+          src={user?.photo ?? otw_logo}
+          alt="user photo"
+          priority
+          className={`${user?.photo ? "" : "not-has-photo"}`}
+        />
       </div>
 
       <button

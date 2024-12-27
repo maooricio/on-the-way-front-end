@@ -38,6 +38,12 @@
           height: 100%;
           object-fit: cover;
         }
+
+        .not-has-photo {
+          width: 70%;
+          height: 80%;
+          opacity: 25%;
+        }
       }
 
       button[type="button"] {
