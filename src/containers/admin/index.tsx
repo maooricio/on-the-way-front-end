@@ -1,6 +1,6 @@
-"use client";
 import { ReactNode } from "react";
 import Navbar from "../../components/elements/navbar";
+import { Suspense } from "react";
 
 interface Props {
   children: ReactNode;
@@ -10,7 +10,9 @@ const AdminContainer = ({ children }: Props) => {
   return (
     <main className="admin-container">
       <Navbar />
-      <section className="admin-content-container">{children}</section>
+      <Suspense>
+        <section className="admin-content-container">{children}</section>
+      </Suspense>
     </main>
   );
 };

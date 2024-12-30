@@ -17,6 +17,10 @@
 @use "./components/admin/settings.scss";
 @use "./components/admin/settings_options.scss";
 @use "./components/admin/quotes.scss";
+@use "./components/admin/users.scss";
+
+// suspenses
+@use "./components/elements/suspenses/settings_suspense.scss";
 
 body {
   margin: 0;
@@ -33,7 +37,8 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   display: none;
 }
 
-button[type="button"], button[type="submit"] {
+button[type="button"],
+button[type="submit"] {
   all: unset;
   cursor: pointer;
   @include flex(row, center, center);

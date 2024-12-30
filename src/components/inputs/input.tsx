@@ -11,6 +11,7 @@ import {
   IPasswordFormData,
 } from "../../utils/interfaces/user.interface";
 import { IPassword } from "../admin/settings/password_modal";
+import { ISearch } from "@/app/users/page";
 
 interface Props {
   type: string;
@@ -21,7 +22,8 @@ interface Props {
     | Dispatch<SetStateAction<ILoginFormData>>
     | Dispatch<SetStateAction<IPasswordFormData>>
     | Dispatch<SetStateAction<INewPasswordFormData>>
-    | Dispatch<SetStateAction<IPassword>>;
+    | Dispatch<SetStateAction<IPassword>>
+    | Dispatch<SetStateAction<ISearch>>;
   error: string;
   value: string;
   icon: ReactNode;
