@@ -1,6 +1,11 @@
 "use client";
 import InputElement from "@/components/inputs/input";
-import React, { useState } from "react";
+import { FakeUsersList } from "@/utils/data/fakers";
+import { useState } from "react";
+import three_dots from "@/assets/icons/dots/three_dots.svg";
+import Image from "next/image";
+import Pagination from "@/components/elements/handlers/pagination";
+import { paginateList } from "@/utils/handlers/paginate";
 
 export interface ISearch {
   value: string;
@@ -8,10 +13,18 @@ export interface ISearch {
 
 const UsersPage = () => {
   const initialState: ISearch = {
-    value: ""
-  }
+    value: "",
+  };
   const [searchData, setSearchData] = useState<ISearch>(initialState);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
+
+  const usersList = paginateList(FakeUsersList);
+
+  const handlePagination = (page: number) => {
+    setCurrentPage(page);
+  }
+  console.log({currentPage})
   return (
     <section className="admin-users-container">
       <header className="admin-users-header">
@@ -30,18 +43,48 @@ const UsersPage = () => {
         </div>
 
         <div className="user-search-handler">
-          <InputElement 
+          <InputElement
             type="text"
-              label=""
-              placeholder="Busca un usuario..."
-              name="value"
-              setFormData={setSearchData}
-              error=""
-              value={searchData.value}
-              icon={<></>}
+            label=""
+            placeholder="Busca un usuario..."
+            name="value"
+            setFormData={setSearchData}
+            error=""
+            value={searchData.value}
+            icon={<></>}
           />
         </div>
       </section>
+
+      <ul className="users-list-container">
+        <li className="users-list-header">
+          <span>Nombre y Apellido</span>
+          <span>Razón Social</span>
+          <span>Rol</span>
+          <span>Fecha de alta</span>
+        </li>
+
+        {usersList[currentPage - 1].map((item) => (
+          <li key={item.id} className="users-list-row">
+            <span>{item.name}</span>
+            <span>{item.company}</span>
+            <span>{item.role}</span>
+            <span>
+              {item.endDate}
+
+              <button type="button">
+                <Image src={three_dots} alt="three dots icon" />
+              </button>
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={usersList.length}
+        onPageChange={handlePagination}
+      />
     </section>
   );
 };

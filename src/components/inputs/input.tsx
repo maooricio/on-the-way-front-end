@@ -54,7 +54,7 @@ const InputElement = ({
 
   return (
     <label className={`input-container`}>
-      <span className="input-label">{label}</span>
+      {label.length > 0 && <span className="input-label">{label}</span>}
 
       <div
         className={`input ${isFocused && "focused-input"} ${
