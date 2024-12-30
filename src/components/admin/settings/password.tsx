@@ -19,7 +19,7 @@ const PasswordSettings = () => {
 
         <p>Actualiza tu contraseña para mayor seguridad de tu cuenta.</p>
 
-        <button onClick={() => setShowModal(true)}>Cambiar contraseña</button>
+        <button type="button" onClick={() => setShowModal(true)}>Cambiar contraseña</button>
       </article>
 
       {showModal && (

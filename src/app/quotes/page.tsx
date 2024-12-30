@@ -1,65 +1,193 @@
-import LongCardTable from "@/components/admin/home/long_card";
 import NormalCard from "@/components/admin/home/normal_card";
 import SmallCard from "@/components/admin/home/small_card";
-import AdminContainer from "@/containers/admin";
 import React from "react";
-import calculator from "@/assets/icons/utils/calculator.svg";
-import user from "@/assets/icons/utils/user.svg";
-import quote from "@/assets/icons/utils/quote.svg";
+import calculator from "@/assets/icons/others/calculator.svg";
+import clock from "@/assets/icons/others/clock.svg";
+import sheet from "@/assets/icons/others/sheet.svg";
+import pen from "@/assets/icons/others/pen.svg";
+import message from "@/assets/icons/others/message.svg";
+import Image from "next/image";
 
 const QuotesPage = () => {
   return (
-    <AdminContainer>
-      <section className="admin-home-container">
-        <header className="admin-home-header">
-          <h1>Cotizaciones</h1>
-        </header>
-        <section className="small-cards-container">
-          <SmallCard
-            icon={calculator}
-            number=""
-            title="Nueva cotización"
-            description="Crea una nueva cotización, guárdala en borradores o envíala al cliente."
-            buttonInfo="Nueva cotización"
-          />
+    <section className="admin-quotes-container">
+      <header className="admin-quotes-header">
+        <h1>Cotizaciones</h1>
+      </header>
 
-          <SmallCard
-            number="07"
-            title="Por cotizar"
-            description="Solicitudes de cotización recibidas de clientes."
-            buttonInfo="Ver pedidos"
-          />
+      <section className="normal-cards-container">
+        <NormalCard
+          header={
+            <header className="normal-card-header">
+              <h3 className="is-title">789</h3>
+              <Image
+                src={calculator}
+                alt=""
+                className="normal-card-header-item"
+              />
+            </header>
+          }
+          content={
+            <div className="normal-card-content">
+              <h3>Historial de cotizaciones</h3>
+              <p>Revisa todas las cotizaciones enviadas, o crea una nueva.</p>
+            </div>
+          }
+          footer={
+            <footer className="normal-card-button-container">
+              <button type="button">Nueva cotización</button>
+              <button type="button" className="without-bg">
+                Ver historial de cotizaciones
+              </button>
+            </footer>
+          }
+        />
 
-          <SmallCard
-            number="23"
-            title="Cotizaciones en proceso"
-            description="Cotizaciones enviadas a las espera del pago o revisión del cliente."
-            buttonInfo="Ver pendientes"
-          />
-        </section>
-
-        <section className="normal-cards-container">
-          <NormalCard
-            icon={user}
-            title={"Usuarios registrados"}
-            number={"907"}
-            description={"26 usuarios nuevos esta semana"}
-            buttonInfo={"Gestionar usuarios"}
-          />
-          <NormalCard
-            icon={quote}
-            title={"Pagos por verificar"}
-            number={"06"}
-            description={"$COP 2.304.100,00 en total por verificar"}
-            buttonInfo={"Verificar pagos"}
-          />
-        </section>
-
-        <section className="long-card-container">
-          <LongCardTable />
-        </section>
+        <NormalCard
+          header={
+            <header className="normal-card-header">
+              <h3 className="is-title">07</h3>
+              <Image src={sheet} alt="" className="normal-card-header-item" />
+            </header>
+          }
+          content={
+            <div className="normal-card-content">
+              <h3>Por cotizar</h3>
+              <p>Solicitudes de cotización recibidas de clientes.</p>
+            </div>
+          }
+          footer={
+            <footer className="normal-card-button-container">
+              <button type="button">Ver solicitudes</button>
+            </footer>
+          }
+        />
       </section>
-    </AdminContainer>
+
+      <section className="small-cards-container">
+        <SmallCard
+          header={
+            <header className="small-card-header has-both">
+              <span className="is-title">23</span>
+              <Image src={clock} alt="" />
+            </header>
+          }
+          content={
+            <div className="small-card-content">
+              <h3>En proceso</h3>
+              <p>
+                Cotizaciones enviadas a las espera del pago o revisión del
+                cliente.
+              </p>
+            </div>
+          }
+          footer={
+            <footer className="small-card-button-container">
+              <button type="button">Ver cotizaciones en proceso</button>
+            </footer>
+          }
+        />
+
+        <SmallCard
+          header={
+            <header className="small-card-header has-both">
+              <span className="is-title">04</span>
+              <Image src={message} alt="" />
+            </header>
+          }
+          content={
+            <div className="small-card-content">
+              <h3>Solicitudes y comentarios</h3>
+              <p>Cotizaciones en proceso con solicitudes y/o comentarios.</p>
+            </div>
+          }
+          footer={
+            <footer className="small-card-button-container">
+              <button type="button">Ver solicitudes</button>
+            </footer>
+          }
+        />
+
+        <SmallCard
+          header={
+            <header className="small-card-header has-both">
+              <span className="is-title">08</span>
+              <Image src={pen} alt="" />
+            </header>
+          }
+          content={
+            <div className="small-card-content">
+              <h3>Borradores</h3>
+              <p>Cotizaciones que has guardado sin finalizar o enviar.</p>
+            </div>
+          }
+          footer={
+            <footer className="small-card-button-container">
+              <button type="button">Ver borradores</button>
+            </footer>
+          }
+        />
+      </section>
+
+      <section className="small-cards-container">
+        <SmallCard
+          header={
+            <header className="small-card-header has-both">
+              <span>Pagos recibidos</span>
+            </header>
+          }
+          content={
+            <div className="small-card-content">
+              <h3 className="is-title">$COP 641.023.773,50</h3>
+              <p>Total recibido en pagos de cotizaciones</p>
+            </div>
+          }
+          footer={
+            <footer className="small-card-button-container">
+              <button type="button">Ver pagos recibidos</button>
+            </footer>
+          }
+        />
+
+        <SmallCard
+          header={
+            <header className="small-card-header has-both">
+              <span>Pagos pendientes</span>
+            </header>
+          }
+          content={
+            <div className="small-card-content">
+              <h3 className="is-title">$COP 17.494.010,00</h3>
+              <p>Total en pagos de 13 cotizaciones</p>
+            </div>
+          }
+          footer={
+            <footer className="small-card-button-container">
+              <button type="button">Ver pagos pendientes</button>
+            </footer>
+          }
+        />
+
+        <SmallCard
+          header={
+            <header className="small-card-header has-both">
+              <span>Pagos por verificar</span>
+            </header>
+          }
+          content={
+            <div className="small-card-content">
+              <h3 className="is-title">$COP 3.711.480,50</h3>
+              <p>Total en pagos de 4 cotizaciones</p>
+            </div>
+          }
+          footer={
+            <footer className="small-card-button-container">
+              <button type="button">Verificar pagos</button>
+            </footer>
+          }
+        />
+      </section>
+    </section>
   );
 };
 

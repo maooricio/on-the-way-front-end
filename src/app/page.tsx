@@ -1,64 +1,134 @@
 import SmallCard from "@/components/admin/home/small_card";
-import AdminContainer from "@/containers/admin";
-import calculator from "@/assets/icons/utils/calculator.svg";
+import calculator from "@/assets/icons/others/calculator.svg";
 import NormalCard from "@/components/admin/home/normal_card";
 import user from "@/assets/icons/utils/user.svg";
 import quote from "@/assets/icons/utils/quote.svg";
 import LongCardTable from "@/components/admin/home/long_card";
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <AdminContainer>
-      <section className="admin-home-container">
-        <header className="admin-home-header">
-          <h1>Inicio</h1>
-        </header>
+    <section className="admin-home-container">
+      <header className="admin-home-header">
+        <h1>Inicio</h1>
+      </header>
 
-        <section className="small-cards-container">
-          <SmallCard
-            icon={calculator}
-            number=""
-            title="Nueva cotización"
-            description="Crea una nueva cotización, guárdala en borradores o envíala al cliente."
-            buttonInfo="Nueva cotización"
-          />
+      <section className="small-cards-container">
+        <SmallCard
+          header={
+            <header className="small-card-header">
+              <Image
+                src={calculator}
+                alt=""
+              />
+            </header>
+          }
+          content={
+            <div className="small-card-content">
+              <h3>Nueva cotización</h3>
+              <p>
+                Crea una nueva cotización, guárdala en borradores o envíala al
+                cliente.
+              </p>
+            </div>
+          }
+          footer={
+            <footer className="small-card-button-container">
+              <button type="button">Nueva cotización</button>
+            </footer>
+          }
+        />
 
-          <SmallCard
-            number="07"
-            title="Por cotizar"
-            description="Solicitudes de cotización recibidas de clientes."
-            buttonInfo="Ver pedidos"
-          />
+        <SmallCard
+          header={
+            <header className="small-card-header has-both">
+              <span className="is-title">07</span>
+            </header>
+          }
+          content={
+            <div className="small-card-content">
+              <h3>Por cotizar</h3>
+              <p>Solicitudes de cotización recibidas de clientes.</p>
+            </div>
+          }
+          footer={
+            <footer className="small-card-button-container">
+              <button type="button">Ver pedidos</button>
+            </footer>
+          }
+        />
 
-          <SmallCard
-            number="23"
-            title="Cotizaciones en proceso"
-            description="Cotizaciones enviadas a las espera del pago o revisión del cliente."
-            buttonInfo="Ver pendientes"
-          />
-        </section>
-
-        <section className="normal-cards-container">
-          <NormalCard
-            icon={user}
-            title={"Usuarios registrados"}
-            number={"907"}
-            description={"26 usuarios nuevos esta semana"}
-            buttonInfo={"Gestionar usuarios"}
-          />
-          <NormalCard
-            icon={quote}
-            title={"Pagos por verificar"}
-            number={"06"}
-            description={"$COP 2.304.100,00 en total por verificar"}
-            buttonInfo={"Verificar pagos"}
-          />
-        </section>
-
-        <section className="long-card-container">
-          <LongCardTable />
-        </section>
+        <SmallCard
+          header={
+            <header className="small-card-header has-both">
+              <span className="is-title">23</span>
+            </header>
+          }
+          content={
+            <div className="small-card-content">
+              <h3>Cotizaciones en proceso</h3>
+              <p>
+                Cotizaciones enviadas a las espera del pago o revisión del
+                cliente.
+              </p>
+            </div>
+          }
+          footer={
+            <footer className="small-card-button-container">
+              <button type="button">Ver pendientes</button>
+            </footer>
+          }
+        />
       </section>
-    </AdminContainer>
+
+      <section className="normal-cards-container">
+        <NormalCard
+          header={
+            <header className="normal-card-header">
+              <h3>Usuarios registrados</h3>
+              <Image src={user} alt="" className="normal-card-header-item" />
+            </header>
+          }
+          content={
+            <div className="normal-card-content">
+              <h3 className="is-title">907</h3>
+              <p>26 usuarios nuevos esta semana</p>
+            </div>
+          }
+          footer={
+            <footer className="normal-card-button-container">
+              <button type="button" className="without-bg">
+                Gestionar usuarios
+              </button>
+            </footer>
+          }
+        />
+        <NormalCard
+          header={
+            <header className="normal-card-header">
+              <h3>Pagos por verificar</h3>
+              <Image src={quote} alt="" className="normal-card-header-item" />
+            </header>
+          }
+          content={
+            <div className="normal-card-content">
+              <h3 className="is-title">06</h3>
+              <p>$COP 2.304.100,00 en total por verificar</p>
+            </div>
+          }
+          footer={
+            <footer className="normal-card-button-container">
+              <button type="button" className="without-bg">
+                Verificar pagos
+              </button>
+            </footer>
+          }
+        />
+      </section>
+
+      <section className="long-card-container">
+        <LongCardTable />
+      </section>
+    </section>
   );
 }

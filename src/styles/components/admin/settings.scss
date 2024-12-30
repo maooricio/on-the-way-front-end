@@ -28,9 +28,9 @@
         background-color: $primary-200;
 
         p {
-            font-size: 24px;
-            font-weight: 700;
-            color: $primary-900;
+          font-size: 24px;
+          font-weight: 700;
+          color: $primary-900;
         }
 
         img {
@@ -47,21 +47,7 @@
       }
 
       button[type="button"] {
-        all: unset;
-        cursor: pointer;
-        @include flex(row, center, center);
-        background-color: $primary-600;
-        padding: 16px;
-        border-radius: 12px;
         transform: translate(0, -50%);
-
-        &:hover {
-          background-color: $primary-700;
-        }
-
-        &:active {
-          background-color: $primary-800;
-        }
       }
 
       .photo-options {
@@ -110,6 +96,7 @@
           all: unset;
           cursor: pointer;
           @include flex(row, center, center);
+          align-self: flex-start;
         }
       }
 
@@ -119,6 +106,48 @@
         line-height: 24px;
         color: $neutral-700;
       }
+    }
+  }
+
+  .admin-settings-content {
+    @include flex(row, space-between, center, 24px);
+    margin-bottom: 32px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .admin-settings-container {
+    .admin-settings-info {
+      @include flex(column, flex-start, center);
+
+      .admin-settings-profile-info {
+        @include flex(column, flex-start, center, 8px);
+
+        .profile-info-header-container {
+          @include flex(row, center, center, 8px);
+          width: 100%;
+
+          h5 {
+            font-size: 16px;
+            line-height: 24px;
+          }
+
+          button[type="button"] {
+            margin-right: 8px;
+          }
+        }
+
+        span {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 24px;
+          color: $neutral-700;
+        }
+      }
+    }
+    
+    .admin-settings-content {
+      flex-wrap: wrap;
     }
   }
 }

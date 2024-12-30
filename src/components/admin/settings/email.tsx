@@ -18,7 +18,7 @@ const EmailSettings = ({ email }: Props) => {
 
       <p>
         Si necesita cambiar tu correo electrónico, ponte en contacto con el
-        Servicio de Atención al Cliente.
+        <span> Servicio de Atención al Cliente.</span>
       </p>
     </article>
   );

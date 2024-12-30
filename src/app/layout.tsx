@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "../styles/index.scss";
+import AdminContainer from "@/containers/admin";
 
 const PoppinsSans = Poppins({
-  weight: ['400', '500', '700', '800'],
-  subsets: ['latin']
+  weight: ["400", "500", "700", "800"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -19,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${PoppinsSans}`}>{children}</body>
+      <body className={`${PoppinsSans}`}>
+        <AdminContainer>{children}</AdminContainer>
+      </body>
     </html>
   );
 }

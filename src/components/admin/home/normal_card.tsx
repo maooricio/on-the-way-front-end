@@ -1,35 +1,23 @@
-import Image from "next/image";
+import { ReactNode } from "react";
 
 interface Props {
-  icon: string;
-  title: string;
-  number: string;
-  description: string;
-  buttonInfo: string;
+  header: ReactNode;
+  content: ReactNode;
+  footer: ReactNode;
 }
 
 const NormalCard = ({
-  icon,
-  number,
-  title,
-  description,
-  buttonInfo,
+  header,
+  content,
+  footer,
 }: Props) => {
   return (
     <section className={`normal-card-container`}>
-      <header className="normal-card-header">
-        <h3>{title}</h3>
-        <Image src={icon} alt="" className="normal-card-header-item" />
-      </header>
+      {header}
 
-      <div className="normal-card-content">
-        <h3>{number}</h3>
-        <p>{description}</p>
-      </div>
+      {content}
 
-      <footer className="normal-card-button-container">
-        <button type="button">{buttonInfo}</button>
-      </footer>
+      {footer}
     </section>
   );
 };

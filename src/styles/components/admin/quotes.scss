@@ -1,18 +1,18 @@
 @use "../../globals" as *;
 
-.admin-home-container {
+.admin-quotes-container {
   @include adminContainer();
 
-  .admin-home-header {
+  .admin-quotes-header {
     @include header();
   }
 
-  .small-cards-container {
+  .normal-cards-container {
     @include flex(row, space-between, center);
     width: 100%;
     height: 300px;
 
-    .small-card-container {
+    .normal-card-container {
       &:first-child {
         background-color: $primary-100;
         border: 1px solid $primary-200;
@@ -37,20 +37,15 @@
     }
   }
 
-  .normal-cards-container {
+  .small-cards-container {
     @include flex(row, space-between, center);
     width: 100%;
     height: 300px;
   }
-
-  .long-card-container {
-    width: 100%;
-    margin-bottom: 56px;
-  }
 }
 
 @media screen and (max-width: 768px) {
-  .admin-home-container {
+  .admin-quotes-container {
     .small-cards-container {
       @include flex(column, flex-start, center, 24px);
       height: auto;

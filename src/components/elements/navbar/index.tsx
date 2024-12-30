@@ -87,6 +87,7 @@ const Navbar = () => {
                 <Link
                   href={i.path}
                   className={`link ${pathname === i.path ? "is-focus" : ""}`}
+                  onClick={() => setTimeout(() => setShowNavbar(false), 100)}
                 >
                   <Image src={i.icon} alt={`navbar icon: ${i.name}`} />
                   <span>{i.name}</span>
