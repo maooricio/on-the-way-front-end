@@ -15,6 +15,9 @@ const SelectOptions = ({ onSelectOption, options, valueSelected }: Props) => {
     option: ISelectOption
   ) => {
     e.stopPropagation();
+
+    if (option.value === valueSelected) return;
+
     onSelectOption(option);
   };
 

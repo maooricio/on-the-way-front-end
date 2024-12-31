@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import SelectOptions from "./select_container";
-import down from "@/assets/icons/arrow/select_down.svg";
-import up from "@/assets/icons/arrow/select_up.svg";
+import arrow from "@/assets/icons/arrow/select_down.svg";
 import Image from "next/image";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
 
@@ -24,7 +23,9 @@ function CustomSelect({
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const [showOptions, setShowOptions] = useState<boolean>(false);
-  const [optionSelected, setOptionSelected] = useState<string>(options[0].label);
+  const [optionSelected, setOptionSelected] = useState<string>(
+    options[0].label
+  );
 
   const onSelectOption = (payload: any) => {
     if (payload.disabled) return;
@@ -63,7 +64,11 @@ function CustomSelect({
           }}
         >
           <div className="custom-select-content">{optionSelected}</div>
-          <Image src={showOptions ? up : down} alt="arrow icon" />
+          <Image
+            src={arrow}
+            alt="arrow icon"
+            className={`${showOptions ? "rotate" : ""}`}
+          />
         </div>
 
         {showOptions && (

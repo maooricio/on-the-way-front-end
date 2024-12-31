@@ -65,6 +65,7 @@
 
         .select-option-content {
           @include flex(row, flex-start, center);
+          user-select: none;
         }
       }
     }

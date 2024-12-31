@@ -47,7 +47,7 @@
       }
 
       button[type="button"] {
-        transform: translate(0, -50%);
+        translate: 0 -50%;
       }
 
       .photo-options {
@@ -57,7 +57,7 @@
         background-color: $generic-white;
         border-radius: 12px;
         overflow: hidden;
-        transform: translate(0, 120%);
+        translate: 0 120%;
 
         li {
           padding: 12px 24px 12px 18px;
