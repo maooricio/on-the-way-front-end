@@ -83,7 +83,7 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button">Ver cotizaciones en proceso</button>
+              <button type="button" className="button">Ver cotizaciones en proceso</button>
             </footer>
           }
         />
@@ -103,7 +103,7 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button">Ver solicitudes</button>
+              <button type="button" className="button">Ver solicitudes</button>
             </footer>
           }
         />
@@ -123,7 +123,7 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button">Ver borradores</button>
+              <button type="button" className="button">Ver borradores</button>
             </footer>
           }
         />

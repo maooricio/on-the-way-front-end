@@ -53,7 +53,7 @@ export default function Home() {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button">Ver pedidos</button>
+              <button type="button" className="button">Ver pedidos</button>
             </footer>
           }
         />
@@ -75,7 +75,7 @@ export default function Home() {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button">Ver pendientes</button>
+              <button type="button" className="button">Ver pendientes</button>
             </footer>
           }
         />
