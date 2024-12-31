@@ -53,7 +53,7 @@ const InputElement = ({
   };
 
   return (
-    <label className={`input-container`}>
+    <label className="input-container">
       {label.length > 0 && <span className="input-label">{label}</span>}
 
       <div

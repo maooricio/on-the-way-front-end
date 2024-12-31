@@ -9,6 +9,8 @@ import { paginateList } from "@/utils/handlers/paginate";
 import CustomSelect from "@/components/elements/handlers/custom_select";
 import { usersRoleOptions } from "@/utils/data/users";
 import { getRole } from "@/utils/handlers/get_role";
+import glass from "@/assets/icons/others/glass.svg";
+import { filterUsers } from "@/utils/handlers/filters";
 
 export interface ISearch {
   value: string;
@@ -30,18 +32,15 @@ const UsersPage = () => {
   };
 
   useEffect(() => {
+    const filteredUsers = filterUsers(
+      FakeUsersList,
+      searchData.value,
+      roleFilter
+    );
 
-    if (roleFilter === "all") {
-      setUsersList(paginateList(FakeUsersList));
-    } else {
-      const filteredUsers = FakeUsersList.filter(
-        (i) => i.role.toLowerCase() === roleFilter.toLowerCase()
-      );
-
-      setUsersList(paginateList(filteredUsers));
-    }
+    setUsersList(filteredUsers);
     setCurrentPage(1);
-  }, [roleFilter]);
+  }, [roleFilter, searchData]);
 
   return (
     <section className="admin-users-container">
@@ -71,7 +70,7 @@ const UsersPage = () => {
             setFormData={setSearchData}
             error=""
             value={searchData.value}
-            icon={<></>}
+            icon={<Image src={glass} alt="glass icon" />}
           />
         </div>
       </section>
@@ -84,20 +83,26 @@ const UsersPage = () => {
           <span>Fecha de alta</span>
         </li>
 
-        {usersList[currentPage - 1].map((item) => (
-          <li key={item.id} className="users-list-row">
-            <span>{item.name}</span>
-            <span>{item.company}</span>
-            <span>{getRole(item.role)}</span>
-            <span>
-              {item.endDate}
+        {usersList.length > 0 ? (
+          usersList[currentPage - 1].map((item) => (
+            <li key={item.id} className="users-list-row">
+              <span>{item.name}</span>
+              <span>{item.company}</span>
+              <span>{getRole(item.role)}</span>
+              <span>
+                {item.endDate}
 
-              <button type="button">
-                <Image src={three_dots} alt="three dots icon" />
-              </button>
-            </span>
+                <button type="button">
+                  <Image src={three_dots} alt="three dots icon" />
+                </button>
+              </span>
+            </li>
+          ))
+        ) : (
+          <li className="users-list-row">
+            <span>No hay usuarios para mostrar.</span>
           </li>
-        ))}
+        )}
       </ul>
 
       {usersList.length > 1 && (
