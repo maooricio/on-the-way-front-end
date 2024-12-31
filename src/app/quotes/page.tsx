@@ -144,7 +144,9 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button">Ver pagos recibidos</button>
+              <button type="button" className="without-bg">
+                Ver pagos recibidos
+              </button>
             </footer>
           }
         />
@@ -163,7 +165,9 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button">Ver pagos pendientes</button>
+              <button type="button" className="without-bg">
+                Ver pagos pendientes
+              </button>
             </footer>
           }
         />
@@ -182,7 +186,9 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button">Verificar pagos</button>
+              <button type="button" className="without-bg">
+                Verificar pagos
+              </button>
             </footer>
           }
         />
