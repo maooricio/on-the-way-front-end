@@ -1,6 +1,5 @@
 "use client";
 import InputElement from "@/components/inputs/input";
-import AuthContainer from "@/containers/auth";
 import { redirect } from "next/navigation";
 import { emptyUserError, IError, initialFormError } from "@/utils/data/erros";
 import { userLogin } from "@/utils/handlers/user_login";
@@ -41,64 +40,60 @@ const LoginPage = () => {
   };
 
   return (
-    <AuthContainer>
-      <section className="auth-form-container">
-        <form
-          className="auth-form"
-          onSubmit={handleOnSubmit}
-          onChange={handleOnChange}
-        >
-          <Image src={otw_logo} alt="on the way logo" className="otw-logo" />
+    <section className="auth-form-container">
+      <form
+        className="auth-form"
+        onSubmit={handleOnSubmit}
+        onChange={handleOnChange}
+      >
+        <Image src={otw_logo} alt="on the way logo" className="otw-logo" />
 
-          <div className="inputs-container">
-            <InputElement
-              type="text"
-              label="Usuario o email"
-              placeholder="Ingresa tu usuario"
-              name="user"
-              setFormData={setFormData}
-              error={formError.value}
-              value={formData.user}
-              icon={<></>}
-            />
+        <div className="inputs-container">
+          <InputElement
+            type="text"
+            label="Usuario o email"
+            placeholder="Ingresa tu usuario"
+            name="user"
+            setFormData={setFormData}
+            error={formError.value}
+            value={formData.user}
+            icon={<></>}
+          />
 
-            <InputElement
-              type={showPassword}
-              label="Contraseña"
-              placeholder="Ingresa tu contraseña"
-              name="password"
-              setFormData={setFormData}
-              error={formError.value}
-              value={formData.password}
-              icon={
-                <Image
-                  src={showPassword === "text" ? eye_closed : eye}
-                  alt=""
-                  onClick={() =>
-                    setShowPassword(
-                      showPassword === "text" ? "password" : "text",
-                    )
-                  }
-                />
-              }
-            />
+          <InputElement
+            type={showPassword}
+            label="Contraseña"
+            placeholder="Ingresa tu contraseña"
+            name="password"
+            setFormData={setFormData}
+            error={formError.value}
+            value={formData.password}
+            icon={
+              <Image
+                src={showPassword === "text" ? eye_closed : eye}
+                alt=""
+                onClick={() =>
+                  setShowPassword(showPassword === "text" ? "password" : "text")
+                }
+              />
+            }
+          />
 
-            {formError.value.length > 0 && (
-              <span className="auth-form-error">{formError.label}</span>
-            )}
-          </div>
+          {formError.value.length > 0 && (
+            <span className="auth-form-error">{formError.label}</span>
+          )}
+        </div>
 
-          <p className="forgotten-password">
-            ¿Has olvidado la contraseña?{" "}
-            <Link href={Routes.password} className="password-link">
-              Haz click aquí.
-            </Link>
-          </p>
+        <p className="forgotten-password">
+          ¿Has olvidado la contraseña?{" "}
+          <Link href={Routes.password} className="password-link">
+            Haz click aquí.
+          </Link>
+        </p>
 
-          <button type="submit">Iniciar sesión</button>
-        </form>
-      </section>
-    </AuthContainer>
+        <button type="submit">Iniciar sesión</button>
+      </form>
+    </section>
   );
 };
 

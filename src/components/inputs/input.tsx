@@ -11,7 +11,7 @@ import {
   IPasswordFormData,
 } from "../../utils/interfaces/user.interface";
 import { IPassword } from "../admin/settings/password_modal";
-import { ISearch } from "@/app/users/page";
+import { ISearch } from "@/app/dashboard/users/page";
 
 interface Props {
   type: string;

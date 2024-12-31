@@ -2,7 +2,6 @@
 import PasswordChange from "@/components/auth/password/change";
 import PasswordCode from "@/components/auth/password/code";
 import PasswordEmail from "@/components/auth/password/email";
-import AuthContainer from "@/containers/auth";
 import { useState } from "react";
 
 const PasswordPage = () => {
@@ -21,11 +20,7 @@ const PasswordPage = () => {
     }
   };
 
-  return (
-    <AuthContainer>
-      <section className="auth-form-container">{getStage()}</section>
-    </AuthContainer>
-  );
+  return <section className="auth-form-container">{getStage()}</section>;
 };
 
 export default PasswordPage;

@@ -1,7 +1,7 @@
 "use client";
 import InputElement from "@/components/inputs/input";
 import { FakeUsersList, IFakeUser } from "@/utils/data/fakers";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import three_dots from "@/assets/icons/dots/three_dots.svg";
 import Image from "next/image";
 import Pagination from "@/components/elements/handlers/pagination";
@@ -17,6 +17,9 @@ export interface ISearch {
 }
 
 const UsersPage = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const pageRef = useRef<any>(null);
+
   const initialState: ISearch = {
     value: "",
   };
@@ -44,7 +47,7 @@ const UsersPage = () => {
   }, [roleFilter, searchData]);
 
   return (
-    <section className="admin-users-container">
+    <section className="admin-users-container" ref={pageRef}>
       <header className="admin-users-header">
         <h1>Gestión de usuarios</h1>
       </header>
