@@ -1,0 +1,24 @@
+@use "../../../globals" as *;
+
+.pagination-handlers-container {
+  @include flex(row, flex-end, center, 8px);
+  width: 100%;
+  margin-bottom: 32px;
+
+  button {
+    all: unset;
+    cursor: pointer;
+    @include flex(row, center, center);
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+
+    &:hover {
+      background-color: $primary-200;
+    }
+  }
+
+  .is-selected {
+    background-color: $primary-100;
+  }
+}

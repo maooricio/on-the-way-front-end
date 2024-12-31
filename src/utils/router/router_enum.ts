@@ -1,8 +1,8 @@
 export enum Routes {
-  main = "/",
+  main = "/dashboard",
   login = "/auth/login",
   password = "/auth/password",
-  quotes = "/quotes",
-  users = "/users",
-  settings = "/settings",
+  quotes = "/dashboard/quotes",
+  users = "/dashboard/users",
+  settings = "/dashboard/settings",
 }

@@ -7,10 +7,22 @@
 // elements
 @use "./components/elements/inputs/input.scss";
 @use "./components/elements/main/navbar.scss";
+@use "./components/elements/main/loader.scss";
+@use "./components/elements/main/modal.scss";
+@use "./components/elements/main/cards.scss";
+@use "./components/elements/handlers/pagitnation.scss";
+@use "./components/elements/handlers/select.scss";
 
 // admin
 @use "./components/admin/container.scss";
 @use "./components/admin/home.scss";
+@use "./components/admin/settings.scss";
+@use "./components/admin/settings_options.scss";
+@use "./components/admin/quotes.scss";
+@use "./components/admin/users.scss";
+
+// suspenses
+@use "./components/elements/suspenses/settings_suspense.scss";
 
 body {
   margin: 0;
@@ -18,11 +30,40 @@ body {
   scroll-behavior: smooth;
   color: $neutral-900;
   background-color: $neutral-50;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 
 input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear,
 input[type="password"]::-webkit-credentials-auto-fill-button {
   display: none;
+}
+
+button[type="button"],
+button[type="submit"] {
+  all: unset;
+  cursor: pointer;
+  @include flex(row, center, center);
+  background-color: $primary-600;
+  padding: 16px;
+  border-radius: 12px;
+  color: $generic-white;
+
+  &:hover {
+    background-color: $primary-700;
+  }
+
+  &:active {
+    background-color: $primary-800;
+  }
+}
+
+.rotate {
+  rotate: 180deg;
+}
+
+@media screen and (max-width: 768px) {
+  .only-mobile {
+    display: none;
+  }
 }

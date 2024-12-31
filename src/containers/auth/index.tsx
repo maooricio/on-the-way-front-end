@@ -8,7 +8,7 @@ const AuthContainer = ({ children }: { children: ReactNode }) => {
     <main className="auth-container">
       <section className="auth-content">
         <div className="auth-screen-container">
-          <Image src={auth_screen} alt="auth screen image" />
+          <Image src={auth_screen} alt="auth screen image" priority />
         </div>
 
         {children}

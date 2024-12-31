@@ -1,59 +1,60 @@
 $generic-white: #fff;
 $generic-black: #000;
 
-$neutral-50: #FAFAFA;
-$neutral-100: #F0F0F0;
-$neutral-200: #D6D6D6;
-$neutral-300: #CCCCCC;
-$neutral-400: #ABABAB;
+$neutral-50: #fafafa;
+$neutral-100: #f0f0f0;
+$neutral-200: #d6d6d6;
+$neutral-300: #cccccc;
+$neutral-400: #ababab;
 $neutral-500: #919191;
-$neutral-600: #6E6E6E;
+$neutral-600: #6e6e6e;
 $neutral-700: #575757;
-$neutral-800: #3B3B3B;
+$neutral-800: #3b3b3b;
 $neutral-900: #212121;
+$neutral-shadow: #21212147;
+$neutral-shadow-50: #0000000D;
 
-$primary-50: #F9F7FD;
-$primary-100: #EFEBF9;
-$primary-200: #E3DBF5;
-$primary-300: #D4C7F0;
-$primary-400: #C4B3EA;
-$primary-500: #A78DE0;
-$primary-600: #906FD8;
-$primary-700: #7A53D0;
-$primary-800: #6034C0;
-$primary-900: #381F70;
+$primary-50: #f9f7fd;
+$primary-100: #efebf9;
+$primary-200: #e3dbf5;
+$primary-300: #d4c7f0;
+$primary-400: #c4b3ea;
+$primary-500: #a78de0;
+$primary-600: #906fd8;
+$primary-700: #7a53d0;
+$primary-800: #6034c0;
+$primary-900: #381f70;
 $primary-shadow: #a78de048;
 
-$secondary-50: #FCF6FE;
-$secondary-100: #F8ECFD;
-$secondary-200: #F2DEFC;
-$secondary-300: #EBCCFA;
-$secondary-400: #E2B5F7;
-$secondary-500: #DCA7F6;
-$secondary-600: #D18BF3;
-$secondary-700: #C266EF;
-$secondary-800: #AA2AE9;
-$secondary-900: #6F109D;
+$secondary-50: #fcf6fe;
+$secondary-100: #f8ecfd;
+$secondary-200: #f2defc;
+$secondary-300: #ebccfa;
+$secondary-400: #e2b5f7;
+$secondary-500: #dca7f6;
+$secondary-600: #d18bf3;
+$secondary-700: #c266ef;
+$secondary-800: #aa2ae9;
+$secondary-900: #6f109d;
 
-$warning-100: #FEF3C7;
-$warning-200: #FDE68A;
-$warning-300: #FCD34D;
-$warning-400: #F59E0B;
-$warning-500: #D97706;
+$warning-100: #fef3c7;
+$warning-200: #fde68a;
+$warning-300: #fcd34d;
+$warning-400: #f59e0b;
+$warning-500: #d97706;
 
-$error-100: #FEE2E2;
-$error-200: #FECACA;
-$error-300: #F87171;
-$error-400: #EF4444;
-$error-500: #DC2626;
+$error-100: #fee2e2;
+$error-200: #fecaca;
+$error-300: #f87171;
+$error-400: #ef4444;
+$error-500: #dc2626;
 $error-shadow: #dc262646;
 
-$success-100: #F0FDF4;
-$success-200: #BBF7D0;
-$success-300: #4ADE80;
-$success-400: #22C55E;
-$success-500: #16A34A;
-
+$success-100: #f0fdf4;
+$success-200: #bbf7d0;
+$success-300: #4ade80;
+$success-400: #22c55e;
+$success-500: #16a34a;
 
 @mixin flex($d, $j, $a, $g: 0, $w: nowrap) {
   display: flex;
@@ -62,4 +63,56 @@ $success-500: #16A34A;
   align-items: $a;
   gap: $g;
   flex-wrap: $w;
+}
+
+@mixin header() {
+  position: fixed;
+  width: 80%;
+  top: 0;
+  padding: 0 12px;
+  background-color: $secondary-50;
+  z-index: 5000;
+
+  h1 {
+    font-size: 18px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+
+    h1 {
+      margin-left: 90px;
+      margin-top: 24px;
+    }
+  }
+
+  @media screen and (max-width: 460px) {
+    h1 {
+      margin-left: 68px;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    h1 {
+      margin-left: 56px;
+    }
+  }
+}
+
+@mixin adminContainer() {
+  @include flex(column, flex-start, center, 32px);
+  width: 95%;
+  margin-top: 80px;
+}
+
+@keyframes suspense {
+  0% {
+    filter: brightness(92%);
+  }
+  50% {
+    filter: brightness(100%);
+  }
+  100% {
+    filter: brightness(92%);
+  }
 }

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import "../styles/index.scss";
+import "@/styles/index.scss";
 
 const PoppinsSans = Poppins({
-  weight: ['400', '500', '700', '800'],
-  subsets: ['latin']
+  weight: ["400", "500", "700", "800"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {

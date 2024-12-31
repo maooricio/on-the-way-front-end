@@ -1,16 +1,17 @@
 import { ILoginFormData, IUser } from "../interfaces/user.interface";
-import { getCookie, removeCookie, setCookie } from "./cookies";
+import Cookies from "js-cookie";
 
 export const emailRegEx =
   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]{1,})$/;
 
+
 export const userIsLogin = (): IUser | null => {
-  const user = getCookie("user");
+  const user = Cookies.get("authToken");
   return user ? JSON.parse(user) : null;
 };
 
 export const userLogout = (): void => {
-  removeCookie("user");
+  Cookies.remove("authToken");
 };
 
 export const userLogin = (userData: ILoginFormData): void => {
@@ -19,9 +20,11 @@ export const userLogin = (userData: ILoginFormData): void => {
 
   const userToLogin: IUser = {
     email: isEmail ? user : `${user}@gmail.com`,
-    username: isEmail ? user.split('@')[0] : user,
+    username: isEmail ? user.split("@")[0] : user,
+    firstName: "María Laura",
+    lastName: "Dominguez",
     password,
   };
 
-  setCookie('user', JSON.stringify(userToLogin), 7);
+  Cookies.set("authToken", JSON.stringify(userToLogin), { expires: 7 });
 };

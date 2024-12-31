@@ -10,7 +10,7 @@ import quotes from "../../../assets/icons/navbar/quotes.svg";
 import users from "../../../assets/icons/navbar/users.svg";
 import settings from "../../../assets/icons/navbar/settings.svg";
 import { Routes } from "../../../utils/router/router_enum";
-import user_profile from "../../../assets/images/user_profile.svg";
+import user_photo from "../../../assets/images/user_photo.jpg";
 import { userLogout } from "../../../utils/handlers/user_login";
 import { redirect, usePathname } from "next/navigation";
 import Image from "next/image";
@@ -21,6 +21,7 @@ const Navbar = () => {
   const pathname = usePathname();
   const width = useScreenWidth();
   const clientSideIsLoaded = width !== null;
+
   const [showNavbar, setShowNavbar] = useState<boolean>(false);
 
   const links: INavbarLinks[] = [
@@ -86,6 +87,7 @@ const Navbar = () => {
                 <Link
                   href={i.path}
                   className={`link ${pathname === i.path ? "is-focus" : ""}`}
+                  onClick={() => setTimeout(() => setShowNavbar(false), 100)}
                 >
                   <Image src={i.icon} alt={`navbar icon: ${i.name}`} />
                   <span>{i.name}</span>
@@ -98,7 +100,7 @@ const Navbar = () => {
 
       <footer className="navbar-footer">
         <div className="navbar-user">
-          <Image src={user_profile} alt="user profile pic" />
+          <Image src={user_photo} alt="user profile pic" priority />
 
           <span className="navbar-user-name">María Laura Dominguez</span>
           <span className="navbar-user-role">Administrador</span>

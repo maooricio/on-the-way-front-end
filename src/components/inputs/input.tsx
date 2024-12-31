@@ -10,6 +10,8 @@ import {
   INewPasswordFormData,
   IPasswordFormData,
 } from "../../utils/interfaces/user.interface";
+import { IPassword } from "../admin/settings/password_modal";
+import { ISearch } from "@/app/dashboard/users/page";
 
 interface Props {
   type: string;
@@ -19,7 +21,9 @@ interface Props {
   setFormData:
     | Dispatch<SetStateAction<ILoginFormData>>
     | Dispatch<SetStateAction<IPasswordFormData>>
-    | Dispatch<SetStateAction<INewPasswordFormData>>;
+    | Dispatch<SetStateAction<INewPasswordFormData>>
+    | Dispatch<SetStateAction<IPassword>>
+    | Dispatch<SetStateAction<ISearch>>;
   error: string;
   value: string;
   icon: ReactNode;
@@ -44,12 +48,13 @@ const InputElement = ({
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setFormData((prev: any) => ({ ...prev, [name]: value }));
   };
 
   return (
-    <label className={`input-container`}>
-      <span className="input-label">{label}</span>
+    <label className="input-container">
+      {label.length > 0 && <span className="input-label">{label}</span>}
 
       <div
         className={`input ${isFocused && "focused-input"} ${
