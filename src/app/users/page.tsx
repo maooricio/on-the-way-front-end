@@ -6,6 +6,7 @@ import three_dots from "@/assets/icons/dots/three_dots.svg";
 import Image from "next/image";
 import Pagination from "@/components/elements/handlers/pagination";
 import { paginateList } from "@/utils/handlers/paginate";
+import CustomSelect from "@/components/elements/handlers/custom_select";
 
 export interface ISearch {
   value: string;
@@ -17,14 +18,14 @@ const UsersPage = () => {
   };
   const [searchData, setSearchData] = useState<ISearch>(initialState);
   const [currentPage, setCurrentPage] = useState<number>(1);
-
+  const [roleFilter, setRoleFilter] = useState<string>("all");
 
   const usersList = paginateList(FakeUsersList);
 
   const handlePagination = (page: number) => {
     setCurrentPage(page);
   }
-  console.log({currentPage})
+
   return (
     <section className="admin-users-container">
       <header className="admin-users-header">
@@ -37,9 +38,20 @@ const UsersPage = () => {
         </div>
 
         <div className="user-select-handler">
-          <select>
-            <option value="1">Mostrar todos los usuarios</option>
-          </select>
+          <CustomSelect 
+            options={[{
+              label: "Mostrar todos los usuarios",
+              value: "all"
+            },{
+              label: "Administrador",
+              value: "admin"
+            },{
+              label: "Cliente",
+              value: "customer"
+            }]}
+            setValue={setRoleFilter}
+            value={roleFilter}
+          />
         </div>
 
         <div className="user-search-handler">
