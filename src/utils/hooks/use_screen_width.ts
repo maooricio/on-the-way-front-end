@@ -5,7 +5,7 @@ export default function useScreenWidth(): number | null {
   const [width, setWidth] = useState<number | null>(null);
 
   useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
+    const handleResize = () => setWidth(innerWidth);
 
     handleResize();
     window.addEventListener("resize", handleResize);

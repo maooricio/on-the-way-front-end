@@ -5,7 +5,7 @@
 
   .custom-select {
     @include flex(column, flex-start, normal);
-    width: 380px;
+    width: 100%;
     position: relative;
     border-radius: 8px;
     background-color: $generic-white;

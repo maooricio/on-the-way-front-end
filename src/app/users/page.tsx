@@ -20,6 +20,7 @@ const UsersPage = () => {
   const initialState: ISearch = {
     value: "",
   };
+
   const [searchData, setSearchData] = useState<ISearch>(initialState);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [roleFilter, setRoleFilter] = useState<string>("all");
@@ -78,7 +79,7 @@ const UsersPage = () => {
       <ul className="users-list-container">
         <li className="users-list-header">
           <span>Nombre y Apellido</span>
-          <span>Razón Social</span>
+          <span className="only-mobile">Razón Social</span>
           <span>Rol</span>
           <span>Fecha de alta</span>
         </li>
@@ -87,7 +88,7 @@ const UsersPage = () => {
           usersList[currentPage - 1].map((item) => (
             <li key={item.id} className="users-list-row">
               <span>{item.name}</span>
-              <span>{item.company}</span>
+              <span className="only-mobile">{item.company}</span>
               <span>{getRole(item.role)}</span>
               <span>
                 {item.endDate}

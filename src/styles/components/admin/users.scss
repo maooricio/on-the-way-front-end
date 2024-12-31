@@ -8,13 +8,13 @@
   }
 
   .admin-users-handler {
-    @include flex(row, space-between, center, 0, wrap);
+    @include flex(row, space-between, center, 24px);
     width: 100%;
 
     .user-register-handler,
     .user-select-handler,
     .user-search-handler {
-      width: 33%;
+      width: 32%;
     }
 
     .user-register-handler {
@@ -97,6 +97,41 @@
 
       &:last-child {
         border: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .admin-users-container {
+    .admin-users-handler {
+      @include flex(column, center, flex-start, 16px);
+
+      .user-register-handler,
+      .user-select-handler,
+      .user-search-handler {
+        width: 100%;
+      }
+    }
+
+    .users-list-container {
+      li {
+        span {
+          width: 40%;
+
+          &:nth-child(3) {
+            width: 20%;
+          }
+        }
+      }
+
+      .users-list-row {
+        span {
+          &:nth-child(3) {
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
       }
     }
   }
