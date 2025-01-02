@@ -107,7 +107,7 @@ const UsersPage = () => {
           <span className="only-mobile">Fecha</span>
           <span>Cotización</span>
           <span>Cliente</span>
-          <span>Monto</span>
+          <span className="only-mobile">Monto</span>
           <span>Estado</span>
         </li>
 
@@ -117,14 +117,14 @@ const UsersPage = () => {
               <span className="only-mobile">{item.date}</span>
               <span>{item.quote}</span>
               <span>{item.customer}</span>
-              <span>{item.amount}</span>
+              <span className="only-mobile">{item.amount}</span>
               <span>
                 <div className="custom-list-state">
                   <div
                     className="custom-list-state-dot"
                     style={{ backgroundColor: getDotColor(item.state) }}
                   ></div>
-                  {item.state}
+                  <p className="only-mobile">{item.state}</p>
                 </div>
 
                 <button type="button">

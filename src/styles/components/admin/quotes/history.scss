@@ -54,14 +54,46 @@
 }
 
 @media screen and (max-width: 768px) {
-  .admin-users-container {
-    .admin-users-handler {
+  .quotes-history-container {
+    .quotes-history-header {
+      button {
+        display: none;
+      }
+    }
+
+    .quotes-history-handler {
       @include flex(column, center, flex-start, 16px);
 
-      .user-register-handler,
-      .user-select-handler,
-      .user-search-handler {
+      .quotes-history-register-handler,
+      .quotes-history-select-handler,
+      .quotes-history-search-handler {
         width: 100%;
+      }
+    }
+
+    .custom-list-container {
+      li {
+        span {
+          width: 15%;
+
+          &:nth-child(2) {
+            width: 35%;
+            margin-left: 8px;
+          }
+
+          &:nth-child(3) {
+            width: 50%;
+          }
+        }
+      }
+
+      .custom-list-row {
+        span {
+          &:nth-child(3) {
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
       }
     }
   }
