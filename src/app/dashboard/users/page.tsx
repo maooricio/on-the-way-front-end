@@ -79,8 +79,8 @@ const UsersPage = () => {
         </div>
       </section>
 
-      <ul className="users-list-container">
-        <li className="users-list-header">
+      <ul className="custom-list-container">
+        <li className="custom-list-header">
           <span>Nombre y Apellido</span>
           <span className="only-mobile">Razón Social</span>
           <span>Rol</span>
@@ -89,7 +89,7 @@ const UsersPage = () => {
 
         {usersList.length > 0 ? (
           usersList[currentPage - 1].map((item) => (
-            <li key={item.id} className="users-list-row">
+            <li key={item.id} className="custom-list-row">
               <span>{item.name}</span>
               <span className="only-mobile">{item.company}</span>
               <span>{getRole(item.role)}</span>
@@ -103,7 +103,7 @@ const UsersPage = () => {
             </li>
           ))
         ) : (
-          <li className="users-list-row">
+          <li className="custom-list-row">
             <span>No hay usuarios para mostrar.</span>
           </li>
         )}

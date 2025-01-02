@@ -1,5 +1,7 @@
 "use client";
 import useScreenWidth from "@/utils/hooks/use_screen_width";
+import { Routes } from "@/utils/router/router_enum";
+import Link from "next/link";
 
 const LongCardTable = () => {
   const width = useScreenWidth();
@@ -95,7 +97,9 @@ const LongCardTable = () => {
       </ul>
 
       <footer className="long-card-button-container">
-        <button type="button">Ver todas las cotizaciones</button>
+        <Link href={Routes.quotes_history} type="button" className="link">
+          Ver todas las cotizaciones
+        </Link>
       </footer>
     </section>
   );

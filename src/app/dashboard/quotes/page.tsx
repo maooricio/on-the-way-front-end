@@ -7,6 +7,8 @@ import sheet from "@/assets/icons/others/sheet.svg";
 import pen from "@/assets/icons/others/pen.svg";
 import message from "@/assets/icons/others/message.svg";
 import Image from "next/image";
+import Link from "next/link";
+import { Routes } from "@/utils/router/router_enum";
 
 const QuotesPage = () => {
   return (
@@ -36,9 +38,9 @@ const QuotesPage = () => {
           footer={
             <footer className="normal-card-button-container">
               <button type="button">Nueva cotización</button>
-              <button type="button" className="without-bg">
+              <Link href={Routes.quotes_history} type="button" className="without-bg">
                 Ver historial de cotizaciones
-              </button>
+              </Link>
             </footer>
           }
         />

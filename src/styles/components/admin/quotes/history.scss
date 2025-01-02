@@ -1,29 +1,36 @@
-@use "../../globals" as *;
+@use "../../../globals" as *;
 
-.admin-users-container {
+.quotes-history-container {
   @include adminContainer();
 
-  .admin-users-header {
+  .quotes-history-header {
     @include header();
+    @include flex(row, flex-start, center, 16px);
+
+    button {
+      all: unset;
+      cursor: pointer;
+      @include flex(row, center, center);
+    }
   }
 
-  .admin-users-handler {
+  .quotes-history-handler {
     @include flex(row, space-between, center, 24px);
     width: 100%;
 
-    .user-register-handler,
-    .user-select-handler,
-    .user-search-handler {
+    .quotes-history-register-handler,
+    .quotes-history-select-handler,
+    .quotes-history-search-handler {
       width: 32%;
     }
 
-    .user-register-handler {
+    .quotes-history-register-handler {
       button[type="button"] {
         padding: 11px 16px;
       }
     }
 
-    .user-search-handler {
+    .quotes-history-search-handler {
       .input-container {
         margin: 0;
 

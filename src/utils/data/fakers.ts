@@ -6,6 +6,15 @@ export interface IFakeUser {
   endDate: string;
 }
 
+export interface IFakeQuote {
+  id: string;
+  date: string;
+  quote: string;
+  customer: string;
+  amount: string;
+  state: string;
+}
+
 export const FakeUsersList: IFakeUser[] = [
   {
     id: "asdfasdfasdq5",
@@ -111,5 +120,128 @@ export const FakeUsersList: IFakeUser[] = [
     company: "La yumba S.C",
     role: "customer",
     endDate: "10/03/2024",
+  },
+];
+
+export const FakeQuotesList: IFakeQuote[] = [
+  {
+    id: "asdfasdfasdq5",
+    date: "12/03/2024",
+    quote: "00278",
+    customer: "Juan José Eventos",
+    amount: "$ 12.000.42,90",
+    state: "En proceso",
+  },
+  {
+    id: "asdfasdfasdq1",
+    date: "12/03/2024",
+    quote: "00158",
+    customer: "María Suarez",
+    amount: "$ 1.902.000,00",
+    state: "En proceso",
+  },
+  {
+    id: "asdfasdfasdq2",
+    date: "10/03/2024",
+    quote: "00201",
+    customer: "Harley Bar",
+    amount: "$ 412.000,50",
+    state: "Pagada",
+  },
+  {
+    id: "asdfasdfasdq3",
+    date: "09/03/2024",
+    quote: "00140",
+    customer: "El Garage S.L",
+    amount: "$ 902.000,50",
+    state: "Cancelada",
+  },
+  {
+    id: "asdfasdfasdq4",
+    date: "05/03/2024",
+    quote: "00250",
+    customer: "Eventos la Esmeralda",
+    amount: "$ 1.002.000,50",
+    state: "Pagada",
+  },
+  {
+    id: "asdfasdfasdq6",
+    date: "05/03/2024",
+    quote: "00210",
+    customer: "La Yumba S.C",
+    amount: "$ 1.200.000,00",
+    state: "Pago pendiente",
+  },
+  {
+    id: "asdfasdfasdq7",
+    date: "09/03/2024",
+    quote: "00183",
+    customer: "Juan José Eventos",
+    amount: "$ 902.000,50",
+    state: "En proceso",
+  },
+  {
+    id: "asdfasdfasdq8",
+    date: "10/03/2024",
+    quote: "00287",
+    customer: "Juan José Eventos",
+    amount: "$ 1.812.000,00",
+    state: "Pagada",
+  },
+  {
+    id: "asdfasdfasdq9",
+    date: "10/03/2024",
+    quote: "00215",
+    customer: "Festividades Cabildo",
+    amount: "$ 302.550,00",
+    state: "Verificar pago",
+  },
+  {
+    id: "asdfasdfasdq0",
+    date: "10/03/2024",
+    quote: "00145",
+    customer: "Felipe Rodriguez",
+    amount: "$ 753.000,00",
+    state: "En proceso",
+  },
+  {
+    id: "asdfasdfasda1",
+    date: "05/03/2024",
+    quote: "00209",
+    customer: "Hey Ya S.A.S",
+    amount: "$ 1.200.000,00",
+    state: "Pago pendiente",
+  },
+  {
+    id: "asdfasdfasda2",
+    date: "09/03/2024",
+    quote: "00257",
+    customer: "Cristian Sancho",
+    amount: "$902.000,50",
+    state: "Pagada",
+  },
+  {
+    id: "asdfasdfasda3",
+    date: "10/03/2024",
+    quote: "00146",
+    customer: "María Suarez",
+    amount: "$ 302.550,00",
+    state: "En proceso",
+  },
+  {
+    id: "asdfasdfasda4",
+    date: "10/03/2024",
+    quote: "00264",
+    customer: "Paco Eventos",
+    amount: "$ 302.550,00",
+    state: "En proceso",
+  },
+  {
+    id: "asdfasdfasda5",
+    date: "10/03/2024",
+    quote: "00269",
+    customer: "Hey ya S.A.S",
+    amount: "$ 302.550,00",
+    state: "En proceso",
   },
 ];
