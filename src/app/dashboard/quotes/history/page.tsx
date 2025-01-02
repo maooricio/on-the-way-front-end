@@ -12,12 +12,14 @@ import { filterQuotes } from "@/utils/handlers/filters";
 import { quotesFilterOptions } from "@/utils/data/quotes";
 import back from "@/assets/icons/arrow/arrow_back.svg";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Routes } from "@/utils/router/router_enum";
 
 export interface ISearch {
   value: string;
 }
 
-const UsersPage = () => {
+const QuotesHistoryPage = () => {
   const router = useRouter();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -77,7 +79,9 @@ const UsersPage = () => {
 
       <section className="quotes-history-handler">
         <div className="quotes-history-register-handler">
-          <button type="button">Nueva cotización</button>
+          <Link href={Routes.quotes_new} type="button" className="button">
+            Nueva cotización
+          </Link>
         </div>
 
         <div className="quotes-history-select-handler">
@@ -151,4 +155,4 @@ const UsersPage = () => {
   );
 };
 
-export default UsersPage;
+export default QuotesHistoryPage;

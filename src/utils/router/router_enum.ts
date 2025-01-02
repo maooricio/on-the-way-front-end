@@ -11,4 +11,5 @@ export enum Routes {
 
   // quotes
   quotes_history = "/dashboard/quotes/history",
+  quotes_new = "/dashboard/quotes/new",
 }

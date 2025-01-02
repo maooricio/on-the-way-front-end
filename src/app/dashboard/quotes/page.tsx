@@ -37,8 +37,8 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="normal-card-button-container">
-              <button type="button">Nueva cotización</button>
-              <Link href={Routes.quotes_history} type="button" className="without-bg">
+              <Link href={Routes.quotes_new} className="button">Nueva cotización</Link>
+              <Link href={Routes.quotes_history} className="without-bg">
                 Ver historial de cotizaciones
               </Link>
             </footer>

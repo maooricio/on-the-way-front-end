@@ -12,6 +12,7 @@ import {
 } from "../../utils/interfaces/user.interface";
 import { IPassword } from "../admin/settings/password_modal";
 import { ISearch } from "@/app/dashboard/users/page";
+import { ICustomerForm } from "@/app/dashboard/quotes/new/page";
 
 interface Props {
   type: string;
@@ -23,7 +24,8 @@ interface Props {
     | Dispatch<SetStateAction<IPasswordFormData>>
     | Dispatch<SetStateAction<INewPasswordFormData>>
     | Dispatch<SetStateAction<IPassword>>
-    | Dispatch<SetStateAction<ISearch>>;
+    | Dispatch<SetStateAction<ISearch>>
+    | Dispatch<SetStateAction<ICustomerForm>>;
   error: string;
   value: string;
   icon: ReactNode;
