@@ -1,7 +1,7 @@
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import close from "@/assets/icons/utils/close.svg";
 import Image from "next/image";
-import InputElement from "@/components/inputs/input";
+import InputElement from "@/components/elements/inputs/input";
 import eye from "@/assets/icons/utils/eye.svg";
 import eye_closed from "@/assets/icons/utils/eye_closed.svg";
 

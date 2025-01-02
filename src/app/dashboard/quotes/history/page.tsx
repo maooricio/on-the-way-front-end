@@ -1,5 +1,5 @@
 "use client";
-import InputElement from "@/components/inputs/input";
+import InputElement from "@/components/elements/inputs/input";
 import { FakeQuotesList, IFakeQuote } from "@/utils/data/fakers";
 import { useEffect, useRef, useState } from "react";
 import three_dots from "@/assets/icons/dots/three_dots.svg";

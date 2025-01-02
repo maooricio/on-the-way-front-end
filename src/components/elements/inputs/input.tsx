@@ -9,8 +9,8 @@ import {
   ILoginFormData,
   INewPasswordFormData,
   IPasswordFormData,
-} from "../../utils/interfaces/user.interface";
-import { IPassword } from "../admin/settings/password_modal";
+} from "../../../utils/interfaces/user.interface";
+import { IPassword } from "../../admin/settings/password_modal";
 import { ISearch } from "@/app/dashboard/users/page";
 import { ICustomerForm } from "@/app/dashboard/quotes/new/page";
 
@@ -31,6 +31,8 @@ interface Props {
   icon: ReactNode;
   disabled?: boolean;
   showError?: boolean;
+  onFocus?: () => void;
+  onBlur?: () => void;
 }
 
 const InputElement = ({
@@ -44,6 +46,8 @@ const InputElement = ({
   icon,
   disabled,
   showError,
+  onFocus,
+  onBlur,
 }: Props) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -72,6 +76,8 @@ const InputElement = ({
           value={value}
           disabled={disabled}
           onChange={handleOnChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
         />
 
         {icon}

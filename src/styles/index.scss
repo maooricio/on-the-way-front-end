@@ -62,6 +62,12 @@ button[type="submit"],
   &:active {
     background-color: $primary-800;
   }
+
+  &:disabled {
+    background-color: $neutral-100;
+    color: $neutral-300;
+    cursor: default;
+  }
 }
 
 .rotate {

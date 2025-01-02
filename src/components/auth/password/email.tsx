@@ -5,7 +5,7 @@ import {
   initialFormError,
   recoverPasswordError,
 } from "../../../utils/data/erros";
-import InputElement from "../../inputs/input";
+import InputElement from "../../elements/inputs/input";
 import { Routes } from "../../../utils/router/router_enum";
 import arrow_left from "../../../assets/icons/arrow/arrow_left.svg";
 import Link from "next/link";
