@@ -28,7 +28,7 @@ const SelectOptions = ({ onSelectOption, options, valueSelected }: Props) => {
           className={`custom-select-option`}
           key={option.value}
           data-is-selected={option.value == valueSelected || option.disabled}
-          onClick={(e) => handleOptionOnClick(e, option)}
+          onMouseDown={(e) => handleOptionOnClick(e, option)}
         >
           <div className="select-option-content">
             {option.iconImg && (

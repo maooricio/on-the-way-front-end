@@ -1,17 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import SelectOptions from "../handlers/select_container";
 import search from "@/assets/icons/others/glass.svg";
 import Image from "next/image";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
 import InputElement from "./input";
-import { ICustomerForm } from "@/app/dashboard/quotes/new/page";
-import { FakeUsersList } from "@/utils/data/fakers";
 
 interface Props {
   labelName?: string;
   options: ISelectOption[];
-  setValue: Dispatch<SetStateAction<ICustomerForm>>;
+  setValue: (payload: any) => void;
   value: string;
   disabled?: boolean;
 }
@@ -29,23 +27,17 @@ function SelectWithInput({
 
   const onSelectOption = (payload: any) => {
     if (payload.disabled) return;
-    const filteredUser = FakeUsersList.find((i) => i.id === payload.value);
 
-    setValue({
-      customer: filteredUser,
-      search: payload.label,
-    });
+    setValue(payload);
     setShowOptions(false);
   };
 
   return (
     <section className="custom-select-container">
-      {labelName !== "" && <span>{labelName}</span>}
-
       <div className="custom-select" ref={wrapperRef}>
         <InputElement
           type="text"
-          label=""
+          label={labelName ?? ""}
           placeholder="Busca un cliente..."
           name="search"
           setFormData={setValue}

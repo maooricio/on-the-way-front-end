@@ -24,7 +24,7 @@ function CustomSelect({
 
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const [optionSelected, setOptionSelected] = useState<string>(
-    options[0].label
+    typeof options[0].label === "string" ? options[0].label : ""
   );
 
   const onSelectOption = (payload: any) => {
@@ -50,7 +50,7 @@ function CustomSelect({
 
   return (
     <section className="custom-select-container">
-      {labelName !== "" && <span>{labelName}</span>}
+      {labelName !== "" && <span className="custom-select-label">{labelName}</span>}
 
       <div className="custom-select" ref={wrapperRef}>
         <div

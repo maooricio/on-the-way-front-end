@@ -12,7 +12,7 @@ import {
 } from "../../../utils/interfaces/user.interface";
 import { IPassword } from "../../admin/settings/password_modal";
 import { ISearch } from "@/app/dashboard/users/page";
-import { ICustomerForm } from "@/app/dashboard/quotes/new/page";
+import { INewQuoteStageOneForm, INewQuoteStageTwoForm } from "@/utils/interfaces/new_quote.interface";
 
 interface Props {
   type: string;
@@ -25,7 +25,8 @@ interface Props {
     | Dispatch<SetStateAction<INewPasswordFormData>>
     | Dispatch<SetStateAction<IPassword>>
     | Dispatch<SetStateAction<ISearch>>
-    | Dispatch<SetStateAction<ICustomerForm>>;
+    | Dispatch<SetStateAction<INewQuoteStageOneForm>>
+    | Dispatch<SetStateAction<INewQuoteStageTwoForm>>;
   error: string;
   value: string;
   icon: ReactNode;
