@@ -43,7 +43,11 @@ const NewQuotePage = () => {
 
     setCustomersOptions(
       customersList.map((i) => ({
-        label: i.company,
+        label: (
+          <p className="new-quote-select-option">
+            {i.company} <span>Responsable: {i.name}</span>
+          </p>
+        ),
         value: i.id,
       }))
     );
@@ -98,6 +102,7 @@ const NewQuotePage = () => {
                 setValue={setFormData}
                 value={formData.search}
               />
+
               <button type="button">O añade uno nuevo</button>
             </div>
           )}

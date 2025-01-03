@@ -44,6 +44,7 @@
       .new-quote-form-content {
         @include flex(row, space-between, center, 24px);
         width: 100%;
+
         .custom-select-container {
           width: 100%;
 
@@ -51,6 +52,7 @@
             .input-container {
               margin: 0;
             }
+
             .custom-select-options-container {
               top: 60px;
             }
@@ -70,6 +72,16 @@
 
           &:active {
             color: $primary-800;
+          }
+        }
+
+        .new-quote-select-option {
+          all: unset;
+          color: $neutral-800;
+
+          span {
+            color: $neutral-400;
+            margin-left: 8px;
           }
         }
       }
