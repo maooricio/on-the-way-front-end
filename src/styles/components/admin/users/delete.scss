@@ -1,0 +1,41 @@
+@use "../../../globals" as *;
+
+.delete-user-container {
+  z-index: 9900;
+
+  .delete-user-content {
+    @include flex(row, flex-start, center, 24px);
+    background-color: $primary-50;
+    width: 100%;
+    border-radius: 20px;
+    padding: 24px 0;
+
+    .user-photo-container {
+      width: 64px;
+      height: 64px;
+      margin-left: 24px;
+    }
+
+    .delete-user-info {
+      @include flex(column, center, flex-start, 8px);
+      color: $neutral-800;
+
+      h3 {
+        all: unset;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .delete-button {
+    background-color: $error-400;
+
+    &:hover {
+      background-color: $error-500;
+    }
+
+    &:active {
+      background-color: $error-600;
+    }
+  }
+}

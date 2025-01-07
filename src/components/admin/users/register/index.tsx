@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import close from "@/assets/icons/utils/close.svg";
 import CustomSelect from "@/components/elements/handlers/custom_select";
 import { usersRoleOptions } from "@/utils/data/users";
@@ -23,7 +23,8 @@ const RegisterForm = ({ setShowForm }: Props) => {
   const [userRole, setUserRole] = useState<string>("");
   const [formData, setFormData] = useState<IUser>(initialState);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setShowForm(false);
   };
 

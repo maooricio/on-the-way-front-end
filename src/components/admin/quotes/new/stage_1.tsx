@@ -34,7 +34,7 @@ const NewQuoteStageOne = ({ setStage }: Props) => {
       const isCustomer = i.role === "customer";
       const hasSearchValue = formData.search.length > 0;
       const searchFilter = hasSearchValue
-        ? i.company.toLowerCase().includes(formData.search.toLowerCase())
+        ? i.company?.toLowerCase().includes(formData.search.toLowerCase())
         : false;
 
       if (hasSearchValue) {
@@ -45,14 +45,18 @@ const NewQuoteStageOne = ({ setStage }: Props) => {
     });
 
     setCustomersOptions(
-      customersList.map((i) => ({
-        label: (
-          <p className="new-quote-select-option">
-            {i.company} <span>Responsable: {i.name}</span>
-          </p>
-        ),
-        value: i.id,
-      }))
+      customersList.map((i) => {
+        const name = `${i.firstName} ${i.lastName}`;
+
+        return {
+          label: (
+            <p className="new-quote-select-option">
+              {i.company} <span>Responsable: {name}</span>
+            </p>
+          ),
+          value: i.id!,
+        };
+      })
     );
   };
 

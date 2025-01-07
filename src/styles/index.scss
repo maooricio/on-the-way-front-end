@@ -29,6 +29,8 @@
 // admin/users
 @use "./components/admin/users.scss";
 @use "./components/admin/users/register.scss";
+@use "./components/admin/users/details.scss";
+@use "./components/admin/users/delete.scss";
 
 // suspenses
 @use "./components/elements/suspenses/settings_suspense.scss";
@@ -76,6 +78,21 @@ button[type="submit"],
 
 .rotate {
   rotate: 180deg;
+}
+
+.user-photo-container {
+  @include flex(row, center, center);
+  overflow: hidden;
+  width: 104px;
+  height: 104px;
+  border-radius: 18px;
+  background-color: $primary-200;
+
+  .user-photo {
+    width: 70%;
+    height: 80%;
+    opacity: 25%;
+  }
 }
 
 @media screen and (max-width: 768px) {

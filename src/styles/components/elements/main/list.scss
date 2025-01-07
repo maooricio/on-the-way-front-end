@@ -75,6 +75,11 @@
     &:last-child {
       border: none;
     }
+
+    &:hover {
+      background-color: $neutral-10;
+      cursor: pointer;
+    }
   }
 }
 

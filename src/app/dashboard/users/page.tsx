@@ -13,6 +13,7 @@ import glass from "@/assets/icons/others/glass.svg";
 import { filterUsers } from "@/utils/handlers/filters";
 import RegisterForm from "@/components/admin/users/register";
 import { IUser } from "@/utils/interfaces/user.interface";
+import UserDetails from "@/components/admin/users/details";
 
 export interface ISearch {
   value: string;
@@ -29,6 +30,9 @@ const UsersPage = () => {
   const [searchData, setSearchData] = useState<ISearch>(initialState);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [roleFilter, setRoleFilter] = useState<string>("all");
+  const [userSelected, setUserSelected] = useState<IUser | undefined>(
+    undefined
+  );
   const [usersList, setUsersList] = useState<IUser[][]>(
     paginateList(FakeUsersList)
   );
@@ -101,8 +105,14 @@ const UsersPage = () => {
 
         {usersList.length > 0 ? (
           usersList[currentPage - 1].map((item) => (
-            <li key={item.id} className="custom-list-row">
-              <span>{item.firstName} {item.lastName}</span>
+            <li
+              key={item.id}
+              className="custom-list-row"
+              onClick={() => setUserSelected(item)}
+            >
+              <span>
+                {item.firstName} {item.lastName}
+              </span>
               <span className="only-mobile">{item.company}</span>
               <span>{getRole(item.role!)}</span>
               <span>
@@ -127,6 +137,10 @@ const UsersPage = () => {
           totalPages={usersList.length}
           onPageChange={handlePagination}
         />
+      )}
+
+      {userSelected && (
+        <UserDetails user={userSelected} setShowForm={setUserSelected} />
       )}
 
       {showRegisterForm && <RegisterForm setShowForm={setShowRegisterForm} />}
