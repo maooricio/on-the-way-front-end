@@ -19,13 +19,16 @@
 @use "./components/admin/home.scss";
 @use "./components/admin/settings.scss";
 @use "./components/admin/settings_options.scss";
-@use "./components/admin/quotes.scss";
-@use "./components/admin/users.scss";
 
 // admin/quotes
+@use "./components/admin/quotes.scss";
 @use "./components/admin/quotes/history.scss";
 @use "./components/admin/quotes/new.scss";
 @use "./components/admin/quotes/new_stage_2.scss";
+
+// admin/users
+@use "./components/admin/users.scss";
+@use "./components/admin/users/register.scss";
 
 // suspenses
 @use "./components/elements/suspenses/settings_suspense.scss";

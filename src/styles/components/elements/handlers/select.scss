@@ -6,6 +6,7 @@
   .custom-select-label {
     font-size: 14px;
     color: $neutral-800;
+    margin-left: 8px;
   }
 
   .custom-select {
@@ -72,6 +73,16 @@
           user-select: none;
         }
       }
+
+      .is-disabled {
+        cursor: default;
+        color: #b3b3b3;
+        background-color: $neutral-50;
+      }
+    }
+
+    .is-placeholder {
+      color: $neutral-400;
     }
   }
 }

@@ -11,6 +11,7 @@ import { usersRoleOptions } from "@/utils/data/users";
 import { getRole } from "@/utils/handlers/get_role";
 import glass from "@/assets/icons/others/glass.svg";
 import { filterUsers } from "@/utils/handlers/filters";
+import RegisterForm from "@/components/admin/users/register";
 
 export interface ISearch {
   value: string;
@@ -30,6 +31,8 @@ const UsersPage = () => {
   const [usersList, setUsersList] = useState<IFakeUser[][]>(
     paginateList(FakeUsersList)
   );
+
+  const [showRegisterForm, setShowRegisterForm] = useState<boolean>(false);
 
   const handlePagination = (page: number) => {
     setCurrentPage(page);
@@ -54,12 +57,20 @@ const UsersPage = () => {
 
       <section className="admin-users-handler">
         <div className="user-register-handler">
-          <button type="button">Registrar usuario</button>
+          <button type="button" onClick={() => setShowRegisterForm(true)}>
+            Registrar usuario
+          </button>
         </div>
 
         <div className="user-select-handler">
           <CustomSelect
-            options={usersRoleOptions}
+            options={[
+              {
+                label: "Mostrar todos los usuarios",
+                value: "all",
+              },
+              ...usersRoleOptions,
+            ]}
             setValue={setRoleFilter}
             value={roleFilter}
           />
@@ -116,6 +127,8 @@ const UsersPage = () => {
           onPageChange={handlePagination}
         />
       )}
+
+      {showRegisterForm && <RegisterForm setShowForm={setShowRegisterForm} />}
     </section>
   );
 };
