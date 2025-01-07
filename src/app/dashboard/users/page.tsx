@@ -1,6 +1,6 @@
 "use client";
 import InputElement from "@/components/elements/inputs/input";
-import { FakeUsersList, IFakeUser } from "@/utils/data/fakers";
+import { FakeUsersList } from "@/utils/data/fakers";
 import { useEffect, useRef, useState } from "react";
 import three_dots from "@/assets/icons/dots/three_dots.svg";
 import Image from "next/image";
@@ -12,6 +12,7 @@ import { getRole } from "@/utils/handlers/get_role";
 import glass from "@/assets/icons/others/glass.svg";
 import { filterUsers } from "@/utils/handlers/filters";
 import RegisterForm from "@/components/admin/users/register";
+import { IUser } from "@/utils/interfaces/user.interface";
 
 export interface ISearch {
   value: string;
@@ -28,7 +29,7 @@ const UsersPage = () => {
   const [searchData, setSearchData] = useState<ISearch>(initialState);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [roleFilter, setRoleFilter] = useState<string>("all");
-  const [usersList, setUsersList] = useState<IFakeUser[][]>(
+  const [usersList, setUsersList] = useState<IUser[][]>(
     paginateList(FakeUsersList)
   );
 
@@ -101,11 +102,11 @@ const UsersPage = () => {
         {usersList.length > 0 ? (
           usersList[currentPage - 1].map((item) => (
             <li key={item.id} className="custom-list-row">
-              <span>{item.name}</span>
+              <span>{item.firstName} {item.lastName}</span>
               <span className="only-mobile">{item.company}</span>
-              <span>{getRole(item.role)}</span>
+              <span>{getRole(item.role!)}</span>
               <span>
-                {item.endDate}
+                {item.dischargeDate}
 
                 <button type="button">
                   <Image src={three_dots} alt="three dots icon" />

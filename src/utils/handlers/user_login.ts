@@ -28,3 +28,10 @@ export const userLogin = (userData: ILoginFormData): void => {
 
   Cookies.set("authToken", JSON.stringify(userToLogin), { expires: 7 });
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const validateUserForm = (formData: any, rules: any) => {
+  return Object.keys(rules).some(
+    (key: string) => formData[key].length < rules[key]
+  );
+}

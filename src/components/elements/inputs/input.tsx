@@ -9,24 +9,21 @@ import {
   ILoginFormData,
   INewPasswordFormData,
   IPasswordFormData,
+  IUser,
 } from "../../../utils/interfaces/user.interface";
 import { IPassword } from "../../admin/settings/password_modal";
 import { ISearch } from "@/app/dashboard/users/page";
-import { INewQuoteStageOneForm, INewQuoteStageTwoForm } from "@/utils/interfaces/new_quote.interface";
+import {
+  INewQuoteStageOneForm,
+  INewQuoteStageTwoForm,
+} from "@/utils/interfaces/new_quote.interface";
 
 interface Props {
   type: string;
   label: string;
   placeholder: string;
   name: string;
-  setFormData:
-    | Dispatch<SetStateAction<ILoginFormData>>
-    | Dispatch<SetStateAction<IPasswordFormData>>
-    | Dispatch<SetStateAction<INewPasswordFormData>>
-    | Dispatch<SetStateAction<IPassword>>
-    | Dispatch<SetStateAction<ISearch>>
-    | Dispatch<SetStateAction<INewQuoteStageOneForm>>
-    | Dispatch<SetStateAction<INewQuoteStageTwoForm>>;
+  setFormData: SetFormDataActions;
   error: string;
   value: string;
   icon: ReactNode;
@@ -92,3 +89,13 @@ const InputElement = ({
 };
 
 export default InputElement;
+
+type SetFormDataActions =
+  | Dispatch<SetStateAction<ILoginFormData>>
+  | Dispatch<SetStateAction<IPasswordFormData>>
+  | Dispatch<SetStateAction<INewPasswordFormData>>
+  | Dispatch<SetStateAction<IPassword>>
+  | Dispatch<SetStateAction<ISearch>>
+  | Dispatch<SetStateAction<INewQuoteStageOneForm>>
+  | Dispatch<SetStateAction<INewQuoteStageTwoForm>>
+  | Dispatch<SetStateAction<IUser>>;
