@@ -1,6 +1,12 @@
 "use client";
 import Image from "next/image";
-import { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import close from "@/assets/icons/utils/close.svg";
 import CustomSelect from "@/components/elements/handlers/custom_select";
 import { usersRoleOptions } from "@/utils/data/users";
@@ -14,19 +20,39 @@ interface Props {
 }
 
 const RegisterForm = ({ setShowForm }: Props) => {
-  const initialState: IUser = {
+  const initialAdminState: IUser = {
     firstName: "",
     lastName: "",
     username: "",
     email: "",
   };
+  const initialCustomerState: IUser = {
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    phone: "",
+    idType: "",
+    idNumber: "",
+    city: "",
+    address: "",
+    company: "",
+  };
   const [userRole, setUserRole] = useState<string>("");
-  const [formData, setFormData] = useState<IUser>(initialState);
+  const [formData, setFormData] = useState<IUser>(initialAdminState);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setShowForm(false);
   };
+
+  useEffect(() => {
+    setFormData(
+      userRole === "admin" ? initialAdminState : initialCustomerState
+    );
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userRole]);
 
   const formIsDisabled =
     userRole === "admin"

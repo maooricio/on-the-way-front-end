@@ -1,48 +1,55 @@
 @use "../../../globals" as *;
 
 .register-form-container {
-    width: 720px;
+  width: 720px;
 
   .register-form-content-container {
+    @include flex(column, flex-start, center, 24px);
     width: 100%;
 
     .input-label {
-        font-size: 14px;
+      font-size: 14px;
+    }
+
+    .custom-select-container {
+      width: 100%;
+      margin: 0;
+    }
+
+    .input-container {
+      margin: 0;
+
+      .input {
+        input {
+          padding: 10px 16px;
+        }
+      }
     }
 
     .register-form-content-row {
       @include flex(row, space-between, center, 24px);
+      width: 100%;
+
+      .select-with-input {
+        .custom-select {
+
+          .custom-select-options-container {
+            position: fixed;
+            width: 343px;
+            transform: translate(0, -15%);
+            left: 20px;
+            top: 60vh;
+          }
+        }
+      }
     }
   }
 
   .register-form-content-with-overflow {
     overflow: auto;
-    padding-right: 16px;
-    padding-left: 6px;
+    padding: 0 16px 24px 6px;
     margin-left: 8px;
 
-    /* Personalización del scroll */
-    scrollbar-width: thin;
-    scrollbar-color: $primary-300 transparent;
-
-    &::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: #c0c0c0;
-      border-radius: 10px;
-      border: 2px solid transparent;
-    }
-
-    &::-webkit-scrollbar-button {
-      display: none;
-      width: 0;
-      height: 0;
-    }
+    @include scrollThin();
   }
 }

@@ -40,9 +40,15 @@ const UserDetails = ({ user, setShowForm }: Props) => {
           </button>
         </div>
 
-        <div className="user-details-content">
-          <div className="user-photo-container">
-            <Image src={otw_logo} alt="user photo" className="user-photo" />
+        <div
+          className={`user-details-content ${
+            user.role === "customer" && "user-details-content-with-overflow"
+          }`}
+        >
+          <div className="user-details-row">
+            <div className="user-photo-container">
+              <Image src={otw_logo} alt="user photo" className="user-photo" />
+            </div>
           </div>
 
           <div className="user-details-row">
@@ -65,6 +71,53 @@ const UserDetails = ({ user, setShowForm }: Props) => {
               <div className="user-details-row">
                 <p>
                   Email <span>{user.email}</span>
+                </p>
+              </div>
+            </>
+          )}
+
+          {user.role === "customer" && (
+            <>
+              <div className="user-details-row">
+                <p>
+                  Razón social <span>{user.company}</span>
+                </p>
+              </div>
+
+              <div className="user-details-row">
+                <p>
+                  Tipo de documento de la empresa <span>{user.firstName}</span>
+                </p>
+                <p>
+                  Número de documento de la empresa <span>{user.lastName}</span>
+                </p>
+              </div>
+
+              <div className="user-details-row">
+                <p>
+                  Nombre de la persona responsable <span>{user.firstName}</span>
+                </p>
+                <p>
+                  Apellido de la persona responsable{" "}
+                  <span>{user.lastName}</span>
+                </p>
+              </div>
+
+              <div className="user-details-row">
+                <p>
+                  Email <span>{user.firstName}</span>
+                </p>
+                <p>
+                  Teléfono <span>{user.lastName}</span>
+                </p>
+              </div>
+
+              <div className="user-details-row">
+                <p>
+                  Ciudad <span>{user.firstName}</span>
+                </p>
+                <p>
+                  Dirección <span>{user.lastName}</span>
                 </p>
               </div>
             </>

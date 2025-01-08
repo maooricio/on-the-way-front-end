@@ -13,7 +13,7 @@ $neutral-700: #575757;
 $neutral-800: #3b3b3b;
 $neutral-900: #212121;
 $neutral-shadow: #21212147;
-$neutral-shadow-50: #0000000D;
+$neutral-shadow-50: #0000000d;
 
 $primary-50: #f9f7fd;
 $primary-100: #efebf9;
@@ -106,6 +106,32 @@ $success-500: #16a34a;
   @include flex(column, flex-start, center, 32px);
   width: 95%;
   margin-top: 80px;
+}
+
+@mixin scrollThin() {
+  /* Personalización del scroll */
+  scrollbar-width: thin;
+  scrollbar-color: $primary-300 transparent;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #c0c0c0;
+    border-radius: 10px;
+    border: 2px solid transparent;
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
 }
 
 @keyframes suspense {

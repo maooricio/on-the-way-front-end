@@ -26,3 +26,11 @@
     }
   }
 }
+
+.user-details-content-with-overflow {
+  overflow: hidden;
+  overflow-y: auto;
+  padding-bottom: 24px;
+
+  @include scrollThin();
+}

@@ -10,7 +10,7 @@ export interface IUser {
   photo?: string | StaticImageData;
   phone?: string;
   idType?: string;
-  idNumber?: number;
+  idNumber?: string;
   city?: string;
   address?: string;
   company?: string;

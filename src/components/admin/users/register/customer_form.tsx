@@ -1,6 +1,10 @@
+import CustomSelect from "@/components/elements/handlers/custom_select";
 import InputElement from "@/components/elements/inputs/input";
+import { idTypeOptions } from "@/utils/data/id_types";
 import { IUser } from "@/utils/interfaces/user.interface";
-import { Dispatch, SetStateAction } from "react";
+import Image from "next/image";
+import { Dispatch, SetStateAction, useState } from "react";
+import search from "@/assets/icons/others/glass.svg";
 
 interface Props {
   formData: IUser;
@@ -8,41 +12,41 @@ interface Props {
 }
 
 const RegisterCustomerForm = ({ formData, setFormData }: Props) => {
+  const [idType, setIdType] = useState<string>("");
+
   return (
     <>
       <InputElement
         type="text"
         label="Razón social"
         placeholder="Ingresa la razón social"
-        name="email"
+        name="company"
         setFormData={setFormData}
         error=""
-        value={formData.email}
+        value={formData.company!}
         icon={<></>}
         showError={false}
       />
 
       <div className="register-form-content-row">
-        <InputElement
-          type="text"
-          label="Tipo de documento de la empresa"
-          placeholder="Selecciona el tipo"
-          name="email"
-          setFormData={setFormData}
-          error=""
-          value={formData.email}
-          icon={<></>}
-          showError={false}
+        <CustomSelect
+          labelName="Tipo de documento de la empresa"
+          options={[
+            { label: "Selecciona el tipo", value: "" },
+            ...idTypeOptions,
+          ]}
+          setValue={setIdType}
+          value={idType}
         />
 
         <InputElement
           type="text"
           label="Número de documento de la empresa"
           placeholder="Ingresa el número de documento"
-          name="email"
+          name="idNumber"
           setFormData={setFormData}
           error=""
-          value={formData.email}
+          value={formData.idNumber!}
           icon={<></>}
           showError={false}
         />
@@ -91,10 +95,10 @@ const RegisterCustomerForm = ({ formData, setFormData }: Props) => {
           type="text"
           label="Teléfono"
           placeholder="Ingresa el teléfono"
-          name="email"
+          name="phone"
           setFormData={setFormData}
           error=""
-          value={formData.email}
+          value={formData.phone!}
           icon={<></>}
           showError={false}
         />
@@ -105,11 +109,11 @@ const RegisterCustomerForm = ({ formData, setFormData }: Props) => {
           type="text"
           label="Ciudad"
           placeholder="Ingresa la Ciudad"
-          name="email"
+          name="city"
           setFormData={setFormData}
           error=""
-          value={formData.email}
-          icon={<></>}
+          value={formData.city!}
+          icon={<Image src={search} alt="search icon" />}
           showError={false}
         />
 
@@ -117,10 +121,10 @@ const RegisterCustomerForm = ({ formData, setFormData }: Props) => {
           type="text"
           label="Dirección"
           placeholder="Ingresa la dirección"
-          name="email"
+          name="address"
           setFormData={setFormData}
           error=""
-          value={formData.email}
+          value={formData.address!}
           icon={<></>}
           showError={false}
         />
