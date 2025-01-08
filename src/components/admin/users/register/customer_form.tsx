@@ -23,7 +23,7 @@ const RegisterCustomerForm = ({ formData, setFormData }: Props) => {
         name="company"
         setFormData={setFormData}
         error=""
-        value={formData.company!}
+        value={formData.company ?? ""}
         icon={<></>}
         showError={false}
       />
@@ -46,7 +46,7 @@ const RegisterCustomerForm = ({ formData, setFormData }: Props) => {
           name="idNumber"
           setFormData={setFormData}
           error=""
-          value={formData.idNumber!}
+          value={formData.idNumber ?? ""}
           icon={<></>}
           showError={false}
         />
@@ -98,7 +98,7 @@ const RegisterCustomerForm = ({ formData, setFormData }: Props) => {
           name="phone"
           setFormData={setFormData}
           error=""
-          value={formData.phone!}
+          value={formData.phone ?? ""}
           icon={<></>}
           showError={false}
         />
@@ -112,7 +112,7 @@ const RegisterCustomerForm = ({ formData, setFormData }: Props) => {
           name="city"
           setFormData={setFormData}
           error=""
-          value={formData.city!}
+          value={formData.city ?? ""}
           icon={<Image src={search} alt="search icon" />}
           showError={false}
         />
@@ -124,7 +124,7 @@ const RegisterCustomerForm = ({ formData, setFormData }: Props) => {
           name="address"
           setFormData={setFormData}
           error=""
-          value={formData.address!}
+          value={formData.address ?? ""}
           icon={<></>}
           showError={false}
         />
