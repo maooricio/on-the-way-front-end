@@ -42,6 +42,29 @@
       }
     }
 
+    .new-quote-vehicle-info {
+      @include flex(column, center, center);
+      width: 100%;
+      margin-top: 8px;
+
+      h3 {
+        all: unset;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+        text-align: center;
+        color: $neutral-800;
+      }
+
+      span {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+        margin-top: 8px;
+        color: $neutral-600;
+      }
+    }
+
     &:nth-child(6) {
       width: 100%;
     }

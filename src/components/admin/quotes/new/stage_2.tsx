@@ -30,6 +30,35 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
     setFormData((prev) => ({ ...prev, pickupCity: payload.value }));
   };
 
+  const handleSelect = (type: string) => {
+    const isToRest =
+      type === "delivery"
+        ? formData.deliveryTransport
+        : formData.collectionTransport;
+
+    let price = formData.totalPrice;
+
+    if (isToRest) {
+      price = formData.totalPrice - 250000;
+    } else {
+      price = formData.totalPrice + 250000;
+    }
+
+    if (type === "delivery") {
+      setFormData((prev) => ({
+        ...prev,
+        deliveryTransport: !isToRest,
+        totalPrice: price,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        collectionTransport: !isToRest,
+        totalPrice: price,
+      }));
+    }
+  };
+
   return (
     <section className="new-quote-content-container">
       <section className="new-quote-content">
@@ -50,30 +79,14 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
         <form className="new-quote-form" onSubmit={handleOnSubmit}>
           <div className="new-quote-form-stage-two-content">
             <div className="new-quote-form-stage-two-row">
-              <button
-                type="button"
-                onClick={() =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    deliveryTransport: !formData.deliveryTransport,
-                  }))
-                }
-              >
+              <button type="button" onClick={() => handleSelect("delivery")}>
                 Transporte de entrega:{" "}
                 <Image
                   src={getSquareIcon(formData.deliveryTransport)}
                   alt="checkbox icon"
                 />
               </button>
-              <button
-                type="button"
-                onClick={() =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    collectionTransport: !formData.collectionTransport,
-                  }))
-                }
-              >
+              <button type="button" onClick={() => handleSelect("collection")}>
                 Transporte de recogida:{" "}
                 <Image
                   src={getSquareIcon(formData.collectionTransport)}

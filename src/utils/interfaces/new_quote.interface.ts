@@ -1,4 +1,5 @@
 import { IUser } from "./user.interface";
+import { IVehicles } from "./vehicles.interface";
 
 export interface INewQuoteStageOneForm {
   customer?: IUser;
@@ -17,4 +18,6 @@ export interface INewQuoteStageTwoForm {
   collectionAddress: string;
   unloadingCity: string;
   unloadingAdress: string;
+  totalPrice: number;
+  vehicles: IVehicles[];
 }

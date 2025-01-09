@@ -3,13 +3,16 @@ import van from "@/assets/images/vehicles/van.svg";
 import small_truck from "@/assets/images/vehicles/small_truck.svg";
 import normal_truck from "@/assets/images/vehicles/normal_truck.svg";
 import long_truck from "@/assets/images/vehicles/long_truck.svg";
+import { IVehicles } from "../interfaces/vehicles.interface";
 
-export const VehiclesData = [
+export const VehiclesData: IVehicles[] = [
   {
     id: "vehicle-asdf1",
     name: "Motorizado",
     image: motocycle,
     weight: "Hasta 40 kilos",
+    price: 50000,
+    amount: 1,
     sizes: {
       length: 0,
       width: 0,
@@ -21,6 +24,8 @@ export const VehiclesData = [
     name: "Carry - Furgón",
     image: van,
     weight: "Hasta 700 kilos (7 m³)",
+    price: 125000,
+    amount: 1,
     sizes: {
       length: 2.9,
       width: 1.8,
@@ -32,6 +37,8 @@ export const VehiclesData = [
     name: "Nhr - Furgón",
     image: small_truck,
     weight: "Hasta 2.5 toneladas (13 m³)",
+    price: 145000,
+    amount: 1,
     sizes: {
       length: 3.5,
       width: 1.8,
@@ -43,6 +50,8 @@ export const VehiclesData = [
     name: "Turbo - Estacas",
     image: normal_truck,
     weight: "Hasta 4.5 toneladas (25 m³)",
+    price: 162500,
+    amount: 1,
     sizes: {
       length: 5,
       width: 2.25,
@@ -54,6 +63,8 @@ export const VehiclesData = [
     name: "Sencillo - Estacas",
     image: long_truck,
     weight: "Hasta 9 toneladas (38 m³)",
+    price: 180000,
+    amount: 1,
     sizes: {
       length: [5.5, 7],
       width: 2.4,

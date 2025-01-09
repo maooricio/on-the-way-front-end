@@ -1,13 +1,14 @@
 import { VehiclesData } from "@/utils/data/vehicles";
 import { getStageIcon } from "@/utils/handlers/get_icon";
 import Image from "next/image";
-import { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction } from "react";
 import empty from "@/assets/icons/checkbox/square_empty.svg";
 import fill from "@/assets/icons/checkbox/square_fill.svg";
 import NewQuoteSummary from "./summary";
 import { INewQuoteStageTwoForm } from "@/utils/interfaces/new_quote.interface";
 import Link from "next/link";
 import { Routes } from "@/utils/router/router_enum";
+import { IVehicles } from "@/utils/interfaces/vehicles.interface";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
@@ -16,11 +17,20 @@ interface Props {
 }
 
 const NewQuoteStageThree = ({ setStage, formData, setFormData }: Props) => {
-  const [vehicleSelected, setVehicleSelected] = useState<string[]>([]);
-
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStage(3);
+  };
+
+  const handleOnSelect = (vehicle: IVehicles) => {
+    const isSelected = formData.vehicles.find((i) => i.id === vehicle.id);
+
+    setFormData((prev) => ({
+      ...prev,
+      vehicles: isSelected
+        ? formData.vehicles.filter((item) => item.id !== vehicle.id)
+        : [...formData.vehicles, vehicle],
+    }));
   };
 
   return (
@@ -50,24 +60,18 @@ const NewQuoteStageThree = ({ setStage, formData, setFormData }: Props) => {
             <div
               key={i.id}
               className={`new-quote-vehicle-container ${
-                vehicleSelected.includes(i.id)
+                formData.vehicles.includes(i)
                   ? "new-quote-vehicle-container-selected"
                   : ""
               }`}
-              onClick={() =>
-                setVehicleSelected(
-                  vehicleSelected.includes(i.id)
-                    ? vehicleSelected.filter((item) => item !== i.id)
-                    : [...vehicleSelected, i.id]
-                )
-              }
+              onClick={() => handleOnSelect(i)}
             >
               <div className="new-quote-vehicle-header">
                 <span>{i.name}</span>
 
                 <button>
                   <Image
-                    src={vehicleSelected.includes(i.id) ? fill : empty}
+                    src={formData.vehicles.includes(i) ? fill : empty}
                     alt="checkbox icon"
                   />
                 </button>
@@ -100,7 +104,7 @@ const NewQuoteStageThree = ({ setStage, formData, setFormData }: Props) => {
             <Link href={Routes.quotes} className="button">
               Guardar en borradores
             </Link>
-            <button type="submit" disabled={vehicleSelected.length === 0}>
+            <button type="submit" disabled={formData.vehicles.length === 0}>
               Continuar
             </button>
           </footer>

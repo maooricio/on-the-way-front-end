@@ -23,6 +23,8 @@ const NewQuotePage = () => {
     collectionAddress: "",
     unloadingCity: "",
     unloadingAdress: "",
+    totalPrice: 0,
+    vehicles: [],
   };
 
   const [formData, setFormData] = useState<INewQuoteStageTwoForm>(initialState);
@@ -46,10 +48,7 @@ const NewQuotePage = () => {
       </header>
 
       {stage === 0 ? (
-        <NewQuoteStageOne
-          setStage={setStage}
-          setFormQuoteData={setFormData}
-        />
+        <NewQuoteStageOne setStage={setStage} setFormQuoteData={setFormData} />
       ) : stage === 1 ? (
         <NewQuoteStageTwo
           setStage={setStage}
