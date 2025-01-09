@@ -67,6 +67,32 @@
       margin-left: 8px;
     }
 
+    .new-quote-summary-item {
+      @include flex(column, center, center);
+      width: 100%;
+      border-bottom: 1px solid $neutral-100;
+
+      .new-quote-summary-item-header {
+        @include flex(row, space-between, center);
+        width: 100%;
+
+        h1 {
+          all: unset;
+          color: $neutral-800;
+        }
+
+        button {
+          all: unset;
+          cursor: pointer;
+        }
+      }
+
+      span {
+        width: 100%;
+        color: $neutral-500;
+      }
+    }
+
     p {
       all: unset;
       @include flex(row, space-between, center);

@@ -42,7 +42,7 @@ function SelectWithInput({
           name="search"
           setFormData={setValue}
           error=""
-          value={value}
+          value={value ?? ""}
           icon={<Image src={search} alt="search icon" />}
           disabled={disabled}
           onFocus={() => setShowOptions(true)}

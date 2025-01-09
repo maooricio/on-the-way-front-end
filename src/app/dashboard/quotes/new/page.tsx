@@ -25,7 +25,7 @@ const NewQuotePage = () => {
         <button onClick={handleGoBack}>
           <Image src={back} alt="arrow back icon" />
         </button>
-        <h1>Historial de cotizaciones</h1>
+        <h1>Nueva cotización</h1>
       </header>
 
       {stage === 0 ? (

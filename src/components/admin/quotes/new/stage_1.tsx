@@ -32,7 +32,7 @@ const NewQuoteStageOne = ({ setStage }: Props) => {
   const getUsersOption = () => {
     const customersList = FakeUsersList.filter((i) => {
       const isCustomer = i.role === "customer";
-      const hasSearchValue = formData.search.length > 0;
+      const hasSearchValue = formData.search?.length > 0;
       const searchFilter = hasSearchValue
         ? i.company?.toLowerCase().includes(formData.search.toLowerCase())
         : false;
