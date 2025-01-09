@@ -1,11 +1,12 @@
-import { IFakeUser } from "../data/fakers";
+import { IUser } from "./user.interface";
 
 export interface INewQuoteStageOneForm {
-  customer?: IFakeUser;
+  customer?: IUser;
   search: string;
 }
 
 export interface INewQuoteStageTwoForm {
+  userId?: string;
   deliveryTransport: boolean;
   collectionTransport: boolean;
   serviceDate: string;

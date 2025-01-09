@@ -14,13 +14,17 @@ import { Routes } from "@/utils/router/router_enum";
 import SelectWithInput from "@/components/elements/inputs/select";
 import close from "@/assets/icons/utils/close_fill.svg";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
-import { INewQuoteStageOneForm } from "@/utils/interfaces/new_quote.interface";
+import {
+  INewQuoteStageOneForm,
+  INewQuoteStageTwoForm,
+} from "@/utils/interfaces/new_quote.interface";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
+  setFormQuoteData: Dispatch<SetStateAction<INewQuoteStageTwoForm>>;
 }
 
-const NewQuoteStageOne = ({ setStage }: Props) => {
+const NewQuoteStageOne = ({ setStage, setFormQuoteData }: Props) => {
   const initialState: INewQuoteStageOneForm = {
     customer: undefined,
     search: "",
@@ -62,6 +66,11 @@ const NewQuoteStageOne = ({ setStage }: Props) => {
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (formData.customer) {
+      setFormQuoteData((prev) => ({ ...prev, userId: formData.customer?.id }));
+    }
+
     setStage(1);
   };
 
@@ -113,7 +122,10 @@ const NewQuoteStageOne = ({ setStage }: Props) => {
                 <p>Carrera 43 No, 201 - 78. Of 199, Cundinamarca</p>
               </div>
 
-              <p>Persona responsable: {formData.customer.name}</p>
+              <p>
+                Persona responsable: {formData.customer.firstName}{" "}
+                {formData.customer.lastName}
+              </p>
             </div>
 
             <button
