@@ -11,6 +11,7 @@ import {
 import { operatorsOptions } from "@/utils/data/jobs";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
 import close from "@/assets/icons/utils/close_fill.svg";
+import { IOperator } from "@/utils/interfaces/operator.interface";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
@@ -26,9 +27,7 @@ const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
 
   const [selectData, setSelectData] =
     useState<INewQuoteStageOneForm>(initialState);
-  const [operatorsSelected, setOperatorsSelected] = useState<ISelectOption[]>(
-    []
-  );
+  const [operatorsSelected, setOperatorsSelected] = useState<IOperator[]>([]);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,25 +39,40 @@ const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleOnSelect = (payload: any) => {
     const filteredOperator = operatorsOptions.find(
-      (i) => i.value === payload.value
+      (i) => i.id === payload.value
     );
 
     setOperatorsSelected((prev) => [...prev, filteredOperator!]);
     setSelectData({
       selected: undefined,
-      search:
-        typeof payload.label !== "string"
-          ? filteredOperator?.label
-          : payload.label,
+      search: "",
     });
   };
 
-  const removeOperator = (operator: ISelectOption) => {
+  const removeOperator = (operator: IOperator) => {
     const filteredOperators = operatorsSelected.filter(
-      (i) => i.value !== operator.value
+      (i) => i.id !== operator.id
     );
 
     setOperatorsSelected(filteredOperators);
+  };
+
+  const getOperatorOptions = (): ISelectOption[] => {
+    const filteredOperators = operatorsOptions.filter((i) => {
+      const findedOperator = operatorsSelected.find((item) => item.id === i.id);
+
+      return !findedOperator;
+    });
+
+    if (selectData.search.length > 0) {
+      const searchedOperators = filteredOperators.filter((i) =>
+        i.name.toLowerCase().includes(selectData.search)
+      );
+
+      return searchedOperators.map((i) => ({ label: i.name, value: i.id }));
+    }
+
+    return filteredOperators.map((i) => ({ label: i.name, value: i.id }));
   };
 
   return (
@@ -81,9 +95,11 @@ const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
       </header>
 
       <form className="new-quote-form" onSubmit={handleOnSubmit}>
-        <div className="new-quote-form-content">
+        <div className="new-quote-form-content new-quote-operator">
+          <p>Busca el tipo de operarios que necesita:</p>
+
           <SelectWithInput
-            options={operatorsOptions}
+            options={getOperatorOptions()}
             setValue={handleOnSelect}
             setSearchValue={setSelectData}
             value={selectData.search}
@@ -94,8 +110,8 @@ const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
         <div className="new-quote-form-content operators-selected-container">
           {operatorsSelected.length > 0 &&
             operatorsSelected.map((i) => (
-              <span key={i.value} className="operator-selected-container">
-                {i.label}{" "}
+              <span key={i.id} className="operator-selected-container">
+                {i.name}{" "}
                 <button type="button" onClick={() => removeOperator(i)}>
                   <Image src={close} alt="close icon" />
                 </button>

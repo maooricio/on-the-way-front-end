@@ -28,6 +28,7 @@ const NewQuotePage = () => {
     unloadingAdress: "",
     totalPrice: 0,
     vehicles: [],
+    operators: [],
   };
 
   const [formData, setFormData] = useState<INewQuoteStageTwoForm>(initialState);

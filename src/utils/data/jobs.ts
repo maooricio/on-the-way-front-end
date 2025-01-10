@@ -1,64 +1,94 @@
-import { ISelectOption } from "../interfaces/select.interface";
+import { IOperator } from "../interfaces/operator.interface";
 
-export const operatorsOptions: ISelectOption[] = [
+export const operatorsOptions: IOperator[] = [
   {
-    label: "Mozo",
-    value: "waiter",
+    name: "Mozo",
+    id: "waiter",
+    price: 0,
+    amount: 1
   },
   {
-    label: "Personal de limpieza",
-    value: "cleaning_staff",
+    name: "Personal de limpieza",
+    id: "cleaning_staff",
+    price: 0,
+    amount: 1
   },
   {
-    label: "Personal de seguridad",
-    value: "security_personnel",
+    name: "Personal de seguridad",
+    id: "security_personnel",
+    price: 0,
+    amount: 1
   },
   {
-    label: "Técnico de iluminación",
-    value: "lighting_technician",
+    name: "Técnico de iluminación",
+    id: "lighting_technician",
+    price: 0,
+    amount: 1
   },
   {
-    label: "Operador de sonido",
-    value: "sound_operator",
+    name: "Operador de sonido",
+    id: "sound_operator",
+    price: 0,
+    amount: 1
   },
   {
-    label: "Auxiliar de logística",
-    value: "logistics_assistant",
+    name: "Auxiliar de logística",
+    id: "logistics_assistant",
+    price: 0,
+    amount: 1
   },
   {
-    label: "Montador de escenarios",
-    value: "stage_fitter",
+    name: "Montador de escenarios",
+    id: "stage_fitter",
+    price: 0,
+    amount: 1
   },
   {
-    label: "Chofer o conductor",
-    value: "chauffeur of driver",
+    name: "Chofer o conductor",
+    id: "chauffeur_of_driver",
+    price: 0,
+    amount: 1
   },
   {
-    label: "Técnico de mantenimiento",
-    value: "maintenance_technician",
+    name: "Técnico de mantenimiento",
+    id: "maintenance_technician",
+    price: 0,
+    amount: 1
   },
   {
-    label: "Jardinero",
-    value: "gardener",
+    name: "Jardinero",
+    id: "gardener",
+    price: 0,
+    amount: 1
   },
   {
-    label: "Animador de eventos",
-    value: "event_entertainer",
+    name: "Animador de eventos",
+    id: "event_entertainer",
+    price: 0,
+    amount: 1
   },
   {
-    label: "Recepcionista",
-    value: "receptionist",
+    name: "Recepcionista",
+    id: "receptionist",
+    price: 0,
+    amount: 1
   },
   {
-    label: "Camarero de eventos",
-    value: "event_waiter",
+    name: "Camarero de eventos",
+    id: "event_waiter",
+    price: 0,
+    amount: 1
   },
   {
-    label: "Ayudante de cocina",
-    value: "kitchen_assistant",
+    name: "Ayudante de cocina",
+    id: "kitchen_assistant",
+    price: 0,
+    amount: 1
   },
   {
-    label: "Fotógrafo",
-    value: "photographer",
+    name: "Fotógrafo",
+    id: "photographer",
+    price: 0,
+    amount: 1
   },
 ];

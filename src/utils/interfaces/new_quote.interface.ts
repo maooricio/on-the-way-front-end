@@ -1,3 +1,4 @@
+import { IOperator } from "./operator.interface";
 import { IUser } from "./user.interface";
 import { IVehicles } from "./vehicles.interface";
 
@@ -20,4 +21,5 @@ export interface INewQuoteStageTwoForm {
   unloadingAdress: string;
   totalPrice: number;
   vehicles: IVehicles[];
+  operators: IOperator[];
 }
