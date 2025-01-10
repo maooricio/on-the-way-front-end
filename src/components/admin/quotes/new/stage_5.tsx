@@ -19,6 +19,7 @@ import { IVehicles } from "@/utils/interfaces/vehicles.interface";
 import minus from "@/assets/icons/utils/minus.svg";
 import plus from "@/assets/icons/utils/plus.svg";
 import { IOperator } from "@/utils/interfaces/operator.interface";
+import ticket from "@/assets/icons/others/ticket.svg";
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
   formData: INewQuoteStageTwoForm;
@@ -295,9 +296,16 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
               </div>
             ))}
 
-          <p>
-            <span>Total:</span> <span>{formatCurrency(price)}</span>
-          </p>
+          <div className="new-quote-resume-footer">
+            <button type="button">
+              <Image src={ticket} alt="ticket icon" />
+              Aplicar cupón de descuento
+            </button>
+
+            <p>
+              <span>Total:</span> <span>{formatCurrency(price)}</span>
+            </p>
+          </div>
         </div>
 
         <footer className="new-quote-form-footer">

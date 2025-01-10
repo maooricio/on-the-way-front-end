@@ -158,4 +158,35 @@
       color: $neutral-500;
     }
   }
+
+  .new-quote-resume-footer {
+    @include flex(row, space-between, center);
+    width: 100%;
+
+    button[type="button"] {
+      all: unset;
+      cursor: pointer;
+      @include flex(row, center, center, 16px);
+      padding: 12px 16px;
+      color: $primary-600;
+      font-weight: 500;
+    }
+
+    p {
+      @include flex(row, space-between, center, 24px);
+      width: 45%;
+
+      span {
+        color: $neutral-800;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+        text-align: left;
+      }
+
+      span:last-child {
+        margin-right: 56px;
+      }
+    }
+  }
 }
