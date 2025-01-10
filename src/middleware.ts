@@ -12,10 +12,16 @@ export function middleware(req: NextRequest) {
   }
 
   if (!pathname.startsWith("/auth") && !token) {
-    return NextResponse.redirect(new URL("/auth/login", req.url));
+    return NextResponse.redirect(new URL(Routes.login, req.url));
   }
 
-  return NextResponse.next(); 
+  if (pathname === "/") {
+    return NextResponse.redirect(
+      new URL(token ? Routes.main : Routes.login, req.url)
+    );
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {

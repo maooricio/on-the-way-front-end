@@ -23,6 +23,12 @@
       }
     }
 
+    .user-select-handler {
+      .custom-select-container {
+        gap: 0;
+      }
+    }
+
     .user-search-handler {
       .input-container {
         margin: 0;
@@ -44,62 +50,6 @@
       }
     }
   }
-
-  .users-list-container {
-    all: unset;
-    list-style: none;
-    @include flex(column, flex-start, center);
-    width: 96%;
-    background-color: $generic-white;
-    padding: 24px;
-    border-radius: 24px;
-
-    li {
-      @include flex(row, space-between, center);
-      width: 100%;
-      padding: 16px 0;
-
-      span {
-        width: 25%;
-        font-size: 14px;
-        line-height: 22px;
-        color: $primary-500;
-
-        &:first-child {
-          margin-left: 12px;
-        }
-
-        &:last-child {
-          margin-right: 12px;
-        }
-      }
-    }
-
-    .users-list-header {
-      background-color: $primary-50;
-      border-radius: 12px;
-    }
-
-    .users-list-row {
-      border-bottom: 1px solid $primary-50;
-
-      span {
-        color: $neutral-800;
-
-        &:last-child {
-          @include flex(row, space-between, center);
-
-          button {
-            all: unset;
-          }
-        }
-      }
-
-      &:last-child {
-        border: none;
-      }
-    }
-  }
 }
 
 @media screen and (max-width: 768px) {
@@ -111,27 +61,6 @@
       .user-select-handler,
       .user-search-handler {
         width: 100%;
-      }
-    }
-
-    .users-list-container {
-      li {
-        span {
-          width: 40%;
-
-          &:nth-child(3) {
-            width: 20%;
-          }
-        }
-      }
-
-      .users-list-row {
-        span {
-          &:nth-child(3) {
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-        }
       }
     }
   }

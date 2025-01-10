@@ -1,6 +1,6 @@
 "use client";
-import InputElement from "@/components/inputs/input";
-import { FakeUsersList, IFakeUser } from "@/utils/data/fakers";
+import InputElement from "@/components/elements/inputs/input";
+import { FakeUsersList } from "@/utils/data/fakers";
 import { useEffect, useRef, useState } from "react";
 import three_dots from "@/assets/icons/dots/three_dots.svg";
 import Image from "next/image";
@@ -11,6 +11,9 @@ import { usersRoleOptions } from "@/utils/data/users";
 import { getRole } from "@/utils/handlers/get_role";
 import glass from "@/assets/icons/others/glass.svg";
 import { filterUsers } from "@/utils/handlers/filters";
+import RegisterForm from "@/components/admin/users/register";
+import { IUser } from "@/utils/interfaces/user.interface";
+import UserDetails from "@/components/admin/users/details";
 
 export interface ISearch {
   value: string;
@@ -27,9 +30,14 @@ const UsersPage = () => {
   const [searchData, setSearchData] = useState<ISearch>(initialState);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [roleFilter, setRoleFilter] = useState<string>("all");
-  const [usersList, setUsersList] = useState<IFakeUser[][]>(
+  const [userSelected, setUserSelected] = useState<IUser | undefined>(
+    undefined
+  );
+  const [usersList, setUsersList] = useState<IUser[][]>(
     paginateList(FakeUsersList)
   );
+
+  const [showRegisterForm, setShowRegisterForm] = useState<boolean>(false);
 
   const handlePagination = (page: number) => {
     setCurrentPage(page);
@@ -54,12 +62,20 @@ const UsersPage = () => {
 
       <section className="admin-users-handler">
         <div className="user-register-handler">
-          <button type="button">Registrar usuario</button>
+          <button type="button" onClick={() => setShowRegisterForm(true)}>
+            Registrar usuario
+          </button>
         </div>
 
         <div className="user-select-handler">
           <CustomSelect
-            options={usersRoleOptions}
+            options={[
+              {
+                label: "Mostrar todos los usuarios",
+                value: "all",
+              },
+              ...usersRoleOptions,
+            ]}
             setValue={setRoleFilter}
             value={roleFilter}
           />
@@ -79,8 +95,8 @@ const UsersPage = () => {
         </div>
       </section>
 
-      <ul className="users-list-container">
-        <li className="users-list-header">
+      <ul className="custom-list-container">
+        <li className="custom-list-header">
           <span>Nombre y Apellido</span>
           <span className="only-mobile">Razón Social</span>
           <span>Rol</span>
@@ -89,12 +105,18 @@ const UsersPage = () => {
 
         {usersList.length > 0 ? (
           usersList[currentPage - 1].map((item) => (
-            <li key={item.id} className="users-list-row">
-              <span>{item.name}</span>
-              <span className="only-mobile">{item.company}</span>
-              <span>{getRole(item.role)}</span>
+            <li
+              key={item.id}
+              className="custom-list-row"
+              onClick={() => setUserSelected(item)}
+            >
               <span>
-                {item.endDate}
+                {item.firstName} {item.lastName}
+              </span>
+              <span className="only-mobile">{item.company}</span>
+              <span>{getRole(item.role!)}</span>
+              <span>
+                {item.dischargeDate}
 
                 <button type="button">
                   <Image src={three_dots} alt="three dots icon" />
@@ -103,7 +125,7 @@ const UsersPage = () => {
             </li>
           ))
         ) : (
-          <li className="users-list-row">
+          <li className="custom-list-row">
             <span>No hay usuarios para mostrar.</span>
           </li>
         )}
@@ -116,6 +138,12 @@ const UsersPage = () => {
           onPageChange={handlePagination}
         />
       )}
+
+      {userSelected && (
+        <UserDetails user={userSelected} setShowForm={setUserSelected} />
+      )}
+
+      {showRegisterForm && <RegisterForm setShowForm={setShowRegisterForm} />}
     </section>
   );
 };

@@ -1,0 +1,36 @@
+@use "../../../globals" as *;
+
+.user-details-content {
+  @include flex(column, flex-start, flex-start, 24px);
+  width: 100%;
+
+  .user-details-row {
+    @include flex(row, space-between, center);
+    width: 100%;
+
+    p {
+      all: unset;
+      @include flex(column, center, flex-start, 8px);
+      width: 50%;
+
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22px;
+      color: $neutral-800;
+
+      span {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+      }
+    }
+  }
+}
+
+.user-details-content-with-overflow {
+  overflow: hidden;
+  overflow-y: auto;
+  padding-bottom: 24px;
+
+  @include scrollThin();
+}

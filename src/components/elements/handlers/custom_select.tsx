@@ -24,8 +24,9 @@ function CustomSelect({
 
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const [optionSelected, setOptionSelected] = useState<string>(
-    options[0].label
+    typeof options[0].label === "string" ? options[0].label : ""
   );
+  const isPlaceholder = options[0].value.length === 0 && value.length === 0
 
   const onSelectOption = (payload: any) => {
     if (payload.disabled) return;
@@ -50,13 +51,15 @@ function CustomSelect({
 
   return (
     <section className="custom-select-container">
-      {labelName !== "" && <span>{labelName}</span>}
+      {labelName !== "" && (
+        <span className="custom-select-label">{labelName}</span>
+      )}
 
       <div className="custom-select" ref={wrapperRef}>
         <div
           className={`custom-select-content-container ${
             showOptions && "input-focused"
-          }`}
+          } ${isPlaceholder && "is-placeholder"}`}
           onClick={(e) => {
             e.stopPropagation();
             if (disabled) return;

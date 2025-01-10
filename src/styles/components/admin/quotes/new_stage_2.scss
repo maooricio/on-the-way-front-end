@@ -1,0 +1,128 @@
+@use "../../../globals" as *;
+
+.new-quote-content-container {
+  @include flex(row, space-between, flex-start, 32px);
+  width: 100%;
+
+  .new-quote-content {
+    width: 70%;
+
+    .new-quote-form {
+      .new-quote-form-stage-two-content {
+        @include flex(column, flex-start, center);
+        width: 100%;
+
+        .custom-select-container {
+          width: 100%;
+        }
+
+        .new-quote-form-stage-two-row {
+          @include flex(row, space-between, center, 24px);
+          width: 100%;
+          margin-top: 24px;
+
+          button {
+            @include flex(row, space-between, center);
+            width: 50%;
+            background-color: $primary-50;
+            color: $neutral-900;
+            padding: 24px;
+          }
+
+          .input-container {
+            width: 50%;
+            margin: 0;
+          }
+
+          .custom-select-container {
+            width: 50%;
+
+            .custom-select {
+              height: 48px;
+
+              .custom-select-content-container {
+                height: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .new-quote-summary-container {
+    @include flex(column, space-between, center, 24px);
+    width: 30%;
+    background-color: $generic-white;
+    padding: 16px 24px;
+    border-radius: 16px;
+    box-shadow: 0px 0px 20px 5px #00000010;
+    margin-bottom: 24px;
+
+    h2 {
+      all: unset;
+      width: 100%;
+      margin: 16px auto;
+      font-weight: 600;
+      color: $neutral-800;
+      margin-left: 8px;
+    }
+
+    .new-quote-summary-item {
+      @include flex(column, center, center, 16px);
+      width: 100%;
+      border-bottom: 1px solid $neutral-100;
+
+      .new-quote-summary-item-header {
+        @include flex(row, space-between, center);
+        width: 100%;
+
+        h1 {
+          all: unset;
+          color: $neutral-800;
+        }
+
+        button {
+          all: unset;
+          cursor: pointer;
+        }
+      }
+
+      p {
+        all: unset;
+        width: 60%;
+        background-color: $generic-white;
+        border: 1px solid $neutral-200;
+        padding: 8px 12px;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        align-self: flex-start;
+      }
+
+      .new-quote-summary-item-handler {
+        @include flex(row, flex-start, center, 12px);
+        width: 100%;
+        margin-bottom: 16px;
+
+        p {
+          margin: 0;
+          width: 50%;
+        }
+      }
+
+      span {
+        width: 100%;
+        color: $neutral-500;
+      }
+    }
+
+    p {
+      all: unset;
+      @include flex(row, space-between, center);
+      width: 100%;
+      margin: 16px auto;
+      font-weight: 500;
+      color: $neutral-800;
+    }
+  }
+}

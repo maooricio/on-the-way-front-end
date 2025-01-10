@@ -10,11 +10,17 @@ interface Props {
 }
 
 const SelectOptions = ({ onSelectOption, options, valueSelected }: Props) => {
+  const firstOptionIsPlaceholder = options[0]?.value.length === 0;
+
   const handleOptionOnClick = (
     e: MouseEvent<HTMLLIElement>,
     option: ISelectOption
   ) => {
     e.stopPropagation();
+
+    if (firstOptionIsPlaceholder && option.value.length === 0) {
+      return;
+    }
 
     if (option.value === valueSelected) return;
 
@@ -25,10 +31,14 @@ const SelectOptions = ({ onSelectOption, options, valueSelected }: Props) => {
     <ul className="custom-select-options-container">
       {options.map((option) => (
         <li
-          className={`custom-select-option`}
+          className={`custom-select-option ${
+            firstOptionIsPlaceholder && option.value.length === 0
+              ? "is-disabled"
+              : ""
+          }`}
           key={option.value}
           data-is-selected={option.value == valueSelected || option.disabled}
-          onClick={(e) => handleOptionOnClick(e, option)}
+          onMouseDown={(e) => handleOptionOnClick(e, option)}
         >
           <div className="select-option-content">
             {option.iconImg && (

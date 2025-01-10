@@ -1,14 +1,19 @@
 @use "../../../globals" as *;
 
 .custom-select-container {
-  max-height: 44px;
+  @include flex(column, center, flex-start, 6px);
+
+  .custom-select-label {
+    font-size: 14px;
+    color: $neutral-800;
+    margin-left: 8px;
+  }
 
   .custom-select {
     @include flex(column, flex-start, normal);
     width: 100%;
     position: relative;
     border-radius: 8px;
-    background-color: $generic-white;
 
     .custom-select-content-container {
       @include flex(row, flex-start, center);
@@ -40,12 +45,18 @@
       background: #fff;
       overflow: hidden;
       box-shadow: 0 2px 12px 0 $neutral-shadow-50;
+      border: 1px solid $neutral-100;
+      min-height: 50px;
+      max-height: 300px;
+      overflow-y: auto;
 
       position: absolute;
       width: 100%;
       right: 0;
       top: 50px;
       z-index: 1;
+
+      @include scrollThin();
 
       .option-selector-disabled {
         color: #b3b3b3;
@@ -68,6 +79,16 @@
           user-select: none;
         }
       }
+
+      .is-disabled {
+        cursor: default;
+        color: #b3b3b3;
+        background-color: $neutral-50;
+      }
+    }
+
+    .is-placeholder {
+      color: $neutral-400;
     }
   }
 }

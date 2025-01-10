@@ -1,5 +1,5 @@
 "use client";
-import InputElement from "@/components/inputs/input";
+import InputElement from "@/components/elements/inputs/input";
 import { redirect } from "next/navigation";
 import { emptyUserError, IError, initialFormError } from "@/utils/data/erros";
 import { userLogin } from "@/utils/handlers/user_login";

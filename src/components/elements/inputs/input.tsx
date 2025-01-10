@@ -9,26 +9,28 @@ import {
   ILoginFormData,
   INewPasswordFormData,
   IPasswordFormData,
-} from "../../utils/interfaces/user.interface";
-import { IPassword } from "../admin/settings/password_modal";
+  IUser,
+} from "../../../utils/interfaces/user.interface";
+import { IPassword } from "../../admin/settings/password_modal";
 import { ISearch } from "@/app/dashboard/users/page";
+import {
+  INewQuoteStageOneForm,
+  INewQuoteStageTwoForm,
+} from "@/utils/interfaces/new_quote.interface";
 
 interface Props {
   type: string;
   label: string;
   placeholder: string;
   name: string;
-  setFormData:
-    | Dispatch<SetStateAction<ILoginFormData>>
-    | Dispatch<SetStateAction<IPasswordFormData>>
-    | Dispatch<SetStateAction<INewPasswordFormData>>
-    | Dispatch<SetStateAction<IPassword>>
-    | Dispatch<SetStateAction<ISearch>>;
+  setFormData: SetFormDataActions;
   error: string;
   value: string;
   icon: ReactNode;
   disabled?: boolean;
   showError?: boolean;
+  onFocus?: () => void;
+  onBlur?: () => void;
 }
 
 const InputElement = ({
@@ -42,6 +44,8 @@ const InputElement = ({
   icon,
   disabled,
   showError,
+  onFocus,
+  onBlur,
 }: Props) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -70,6 +74,8 @@ const InputElement = ({
           value={value}
           disabled={disabled}
           onChange={handleOnChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
         />
 
         {icon}
@@ -83,3 +89,13 @@ const InputElement = ({
 };
 
 export default InputElement;
+
+type SetFormDataActions =
+  | Dispatch<SetStateAction<ILoginFormData>>
+  | Dispatch<SetStateAction<IPasswordFormData>>
+  | Dispatch<SetStateAction<INewPasswordFormData>>
+  | Dispatch<SetStateAction<IPassword>>
+  | Dispatch<SetStateAction<ISearch>>
+  | Dispatch<SetStateAction<INewQuoteStageOneForm>>
+  | Dispatch<SetStateAction<INewQuoteStageTwoForm>>
+  | Dispatch<SetStateAction<IUser>>;
