@@ -35,7 +35,7 @@ const NewQuoteStageOne = ({
   );
 
   const initialState: INewQuoteStageOneForm = {
-    customer: initialCustomer ?? undefined,
+    selected: initialCustomer ?? undefined,
     search: "",
   };
 
@@ -76,24 +76,26 @@ const NewQuoteStageOne = ({
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (formData.customer) {
-      setFormQuoteData((prev) => ({ ...prev, userId: formData.customer?.id }));
+    if (formData.selected) {
+      setFormQuoteData((prev) => ({ ...prev, userId: formData.selected?.id }));
     }
 
     setStage(1);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleOnSelect = (payload: any) => {
-    const filteredUser = FakeUsersList.find((i) => i.id === payload.value);
+  const handleOnSelect = (item: any, f: string) => {
+    if (f === "isSelect") {
+      const filteredUser = FakeUsersList.find((i) => i.id === item.value);
 
-    setFormData({
-      customer: filteredUser,
-      search:
-        typeof payload.label !== "string"
-          ? filteredUser?.company
-          : payload.label,
-    });
+      setFormData({
+        selected: filteredUser,
+        search:
+          typeof item.label !== "string" ? filteredUser?.company : item.label,
+      });
+    } else {
+      console.log({ customer: item.search });
+    }
   };
 
   useEffect(() => {
@@ -122,7 +124,7 @@ const NewQuoteStageOne = ({
       </header>
 
       <form className="new-quote-form" onSubmit={handleOnSubmit}>
-        {formData.customer ? (
+        {formData.selected ? (
           <div className="new-quote-form-customer">
             <div className="user-photo-container">
               <Image src={otw_logo} alt="user photo" className="user-photo" />
@@ -130,20 +132,20 @@ const NewQuoteStageOne = ({
 
             <div className="new-quote-form-customer-content">
               <div className="new-quote-form-customer-content-title">
-                <p>{formData.customer.company}</p>
+                <p>{formData.selected.company}</p>
                 <p>Carrera 43 No, 201 - 78. Of 199, Cundinamarca</p>
               </div>
 
               <p>
-                Persona responsable: {formData.customer.firstName}{" "}
-                {formData.customer.lastName}
+                Persona responsable: {formData.selected.firstName}{" "}
+                {formData.selected.lastName}
               </p>
             </div>
 
             <button
               type="button"
               onClick={() =>
-                setFormData((prev) => ({ ...prev, customer: undefined }))
+                setFormData((prev) => ({ ...prev, selected: undefined }))
               }
             >
               <Image src={close} alt="close button icon" />
@@ -154,6 +156,7 @@ const NewQuoteStageOne = ({
             <SelectWithInput
               options={customersOptions}
               setValue={handleOnSelect}
+              setSearchValue={setFormData}
               value={formData.search}
             />
 
@@ -165,7 +168,7 @@ const NewQuoteStageOne = ({
           <Link href={Routes.quotes} className="button">
             Cancelar cotización
           </Link>
-          <button type="submit" disabled={!formData.customer}>
+          <button type="submit" disabled={!formData.selected}>
             Continuar
           </button>
         </footer>

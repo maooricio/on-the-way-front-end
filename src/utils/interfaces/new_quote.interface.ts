@@ -2,7 +2,7 @@ import { IUser } from "./user.interface";
 import { IVehicles } from "./vehicles.interface";
 
 export interface INewQuoteStageOneForm {
-  customer?: IUser;
+  selected?: IUser;
   search: string;
 }
 

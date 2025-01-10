@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useRef, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import SelectOptions from "../handlers/select_container";
 import search from "@/assets/icons/others/glass.svg";
 import Image from "next/image";
@@ -9,7 +9,8 @@ import InputElement from "./input";
 interface Props {
   labelName?: string;
   options: ISelectOption[];
-  setValue: (payload: any) => void;
+  setValue: (item: any, f: string) => void;
+  setSearchValue: Dispatch<SetStateAction<{ search: string }>>;
   value: string;
   disabled?: boolean;
   placeholder?: string;
@@ -19,6 +20,7 @@ function SelectWithInput({
   labelName,
   options,
   setValue,
+  setSearchValue,
   value,
   disabled,
   placeholder,
@@ -30,7 +32,7 @@ function SelectWithInput({
   const onSelectOption = (payload: any) => {
     if (payload.disabled) return;
 
-    setValue(payload);
+    setValue(payload, "isSelect");
     setShowOptions(false);
   };
 
@@ -42,7 +44,7 @@ function SelectWithInput({
           label={labelName ?? ""}
           placeholder={placeholder ?? "Busca un cliente..."}
           name="search"
-          setFormData={setValue}
+          setFormData={setSearchValue}
           error=""
           value={value ?? ""}
           icon={<Image src={search} alt="search icon" />}

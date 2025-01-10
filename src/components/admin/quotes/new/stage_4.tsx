@@ -20,7 +20,7 @@ interface Props {
 
 const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
   const initialState: INewQuoteStageOneForm = {
-    customer: undefined,
+    selected: undefined,
     search: "",
   };
 
@@ -45,7 +45,7 @@ const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
 
     setOperatorsSelected((prev) => [...prev, filteredOperator!]);
     setSelectData({
-      customer: undefined,
+      selected: undefined,
       search:
         typeof payload.label !== "string"
           ? filteredOperator?.label
@@ -85,6 +85,7 @@ const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
           <SelectWithInput
             options={operatorsOptions}
             setValue={handleOnSelect}
+            setSearchValue={setSelectData}
             value={selectData.search}
             placeholder="Buscar operario..."
           />

@@ -10,7 +10,7 @@ interface Props {
 }
 
 const SelectOptions = ({ onSelectOption, options, valueSelected }: Props) => {
-  const firstOptionIsPlaceholder = options[0].value.length === 0;
+  const firstOptionIsPlaceholder = options[0]?.value.length === 0;
 
   const handleOptionOnClick = (
     e: MouseEvent<HTMLLIElement>,

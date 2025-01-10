@@ -1,6 +1,9 @@
 import InputElement from "@/components/elements/inputs/input";
 import { getSquareIcon, getStageIcon } from "@/utils/handlers/get_icon";
-import { INewQuoteStageTwoForm } from "@/utils/interfaces/new_quote.interface";
+import {
+  INewQuoteStageOneForm,
+  INewQuoteStageTwoForm,
+} from "@/utils/interfaces/new_quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,6 +20,15 @@ interface Props {
 }
 
 const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
+  const initialState: INewQuoteStageOneForm = {
+    selected: undefined,
+    search: "",
+  };
+
+  const [pickupCity, setPickupCity] =
+    useState<INewQuoteStageOneForm>(initialState);
+  const [unloadingCity, setUnloadingCity] =
+    useState<INewQuoteStageOneForm>(initialState);
   const [serviceHour, setServiceHour] = useState<string>("");
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -57,6 +69,8 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
       }));
     }
   };
+
+  console.log({ pickupCity, unloadingCity });
 
   return (
     <section className="new-quote-content">
@@ -125,6 +139,7 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
             labelName="Ciudad de cargue"
             options={citiesOptions}
             setValue={handleOnSelect}
+            setSearchValue={setPickupCity}
             value={formData.pickupCity}
           />
 
@@ -170,7 +185,8 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
               },
             ]}
             setValue={handleOnSelect}
-            value={formData.pickupCity}
+            setSearchValue={setUnloadingCity}
+            value={formData.unloadingCity}
           />
 
           <InputElement
