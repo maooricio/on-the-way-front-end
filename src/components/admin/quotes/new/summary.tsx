@@ -1,7 +1,8 @@
+"use client";
 import Image from "next/image";
 import delete_icon from "@/assets/icons/utils/close_fill.svg";
 import { INewQuoteStageTwoForm } from "@/utils/interfaces/new_quote.interface";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { formatCurrency } from "@/utils/handlers/currency";
 import plus from "@/assets/icons/utils/plus.svg";
 import minus from "@/assets/icons/utils/minus.svg";
@@ -13,6 +14,8 @@ interface Props {
 }
 
 const NewQuoteSummary = ({ formData, setFormData }: Props) => {
+  const [price, setPrice] = useState<number>(0);
+
   const handleCounter = (type: string, vehicle: IVehicles) => {
     setFormData((prev) => ({
       ...prev,
@@ -31,18 +34,35 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
 
   const calculatePrice = () => {
     const vehicles = [...formData.vehicles];
+    const hasDelivery = formData.deliveryTransport;
+    const hasCollection = formData.collectionTransport;
+
     let price = formData.totalPrice;
+
+    if (hasDelivery) {
+      price += 250000;
+    }
+
+    if (hasCollection) {
+      price += 250000;
+    }
 
     if (vehicles.length > 0) {
       for (let i = 0; i < vehicles.length; i++) {
         const vehiclePrice = vehicles[i].price * vehicles[i].amount;
 
-        price += vehiclePrice
+        price += vehiclePrice;
       }
     }
 
-    return price
-  }
+    setPrice(price);
+  };
+
+  useEffect(() => {
+    calculatePrice();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formData]);
 
   return (
     <section className="new-quote-summary-container">
@@ -135,7 +155,7 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
         ))}
 
       <p>
-        <span>Total:</span> <span>{formatCurrency(calculatePrice())}</span>
+        <span>Total:</span> <span>{formatCurrency(price)}</span>
       </p>
     </section>
   );

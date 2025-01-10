@@ -47,25 +47,23 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
         ? formData.deliveryTransport
         : formData.collectionTransport;
 
-    let price = formData.totalPrice;
+    // let price = formData.totalPrice;
 
-    if (isToRest) {
-      price = formData.totalPrice - 250000;
-    } else {
-      price = formData.totalPrice + 250000;
-    }
+    // if (isToRest) {
+    //   price = formData.totalPrice - 250000;
+    // } else {
+    //   price = formData.totalPrice + 250000;
+    // }
 
     if (type === "delivery") {
       setFormData((prev) => ({
         ...prev,
         deliveryTransport: !isToRest,
-        totalPrice: price,
       }));
     } else {
       setFormData((prev) => ({
         ...prev,
         collectionTransport: !isToRest,
-        totalPrice: price,
       }));
     }
   };

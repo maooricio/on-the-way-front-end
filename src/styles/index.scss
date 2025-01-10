@@ -26,6 +26,7 @@
 @use "./components/admin/quotes/new.scss";
 @use "./components/admin/quotes/new_stage_2.scss";
 @use "./components/admin/quotes/new_stage_3.scss";
+@use "./components/admin/quotes/new_summary.scss";
 
 // admin/users
 @use "./components/admin/users.scss";
@@ -97,7 +98,7 @@ button[type="submit"],
 }
 
 .counter-handler {
-  @include flex(row, center, center, 16px);
+  @include flex(row, space-between, center, 16px);
   background-color: $generic-white;
   border: 1px solid $neutral-200;
   padding: 8px 12px;

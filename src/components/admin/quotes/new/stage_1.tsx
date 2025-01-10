@@ -144,9 +144,10 @@ const NewQuoteStageOne = ({
 
             <button
               type="button"
-              onClick={() =>
-                setFormData((prev) => ({ ...prev, selected: undefined }))
-              }
+              onClick={() => {
+                setFormQuoteData((prev) => ({ ...prev, userId: "" }));
+                setFormData(initialState);
+              }}
             >
               <Image src={close} alt="close button icon" />
             </button>
