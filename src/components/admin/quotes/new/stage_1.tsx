@@ -84,18 +84,14 @@ const NewQuoteStageOne = ({
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleOnSelect = (item: any, f: string) => {
-    if (f === "isSelect") {
-      const filteredUser = FakeUsersList.find((i) => i.id === item.value);
+  const handleOnSelect = (item: any) => {
+    const filteredUser = FakeUsersList.find((i) => i.id === item.value);
 
-      setFormData({
-        selected: filteredUser,
-        search:
-          typeof item.label !== "string" ? filteredUser?.company : item.label,
-      });
-    } else {
-      console.log({ customer: item.search });
-    }
+    setFormData({
+      selected: filteredUser,
+      search:
+        typeof item.label !== "string" ? filteredUser?.company : item.label,
+    });
   };
 
   useEffect(() => {

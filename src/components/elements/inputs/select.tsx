@@ -9,7 +9,7 @@ import InputElement from "./input";
 interface Props {
   labelName?: string;
   options: ISelectOption[];
-  setValue: (item: any, f: string) => void;
+  setValue: (item: any) => void;
   setSearchValue: Dispatch<SetStateAction<{ search: string }>>;
   value: string;
   disabled?: boolean;
@@ -32,7 +32,7 @@ function SelectWithInput({
   const onSelectOption = (payload: any) => {
     if (payload.disabled) return;
 
-    setValue(payload, "isSelect");
+    setValue(payload);
     setShowOptions(false);
   };
 

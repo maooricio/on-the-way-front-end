@@ -27,7 +27,6 @@ const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
 
   const [selectData, setSelectData] =
     useState<INewQuoteStageOneForm>(initialState);
-  const [operatorsSelected, setOperatorsSelected] = useState<IOperator[]>([]);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,12 +36,14 @@ const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleOnSelect = (payload: any) => {
-    const filteredOperator = operatorsOptions.find(
-      (i) => i.id === payload.value
-    );
+  const handleOnSelect = (item: any) => {
+    const filteredOperator = operatorsOptions.find((i) => i.id === item.value);
 
-    setOperatorsSelected((prev) => [...prev, filteredOperator!]);
+    // setOperatorsSelected((prev) => [...prev, filteredOperator!]);
+    setFormData((prev) => ({
+      ...prev,
+      operators: [...formData.operators, filteredOperator!],
+    }));
     setSelectData({
       selected: undefined,
       search: "",
@@ -50,16 +51,19 @@ const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
   };
 
   const removeOperator = (operator: IOperator) => {
-    const filteredOperators = operatorsSelected.filter(
+    const filteredOperators = formData.operators.filter(
       (i) => i.id !== operator.id
     );
 
-    setOperatorsSelected(filteredOperators);
+    setFormData((prev) => ({ ...prev, operators: filteredOperators }));
+    // setOperatorsSelected(filteredOperators);
   };
 
   const getOperatorOptions = (): ISelectOption[] => {
     const filteredOperators = operatorsOptions.filter((i) => {
-      const findedOperator = operatorsSelected.find((item) => item.id === i.id);
+      const findedOperator = formData.operators.find(
+        (item) => item.id === i.id
+      );
 
       return !findedOperator;
     });
@@ -108,8 +112,8 @@ const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
         </div>
 
         <div className="new-quote-form-content operators-selected-container">
-          {operatorsSelected.length > 0 &&
-            operatorsSelected.map((i) => (
+          {formData.operators.length > 0 &&
+            formData.operators.map((i) => (
               <span key={i.id} className="operator-selected-container">
                 {i.name}{" "}
                 <button type="button" onClick={() => removeOperator(i)}>
@@ -126,7 +130,7 @@ const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
           <Link href={Routes.quotes} className="button">
             Guardar en borradores
           </Link>
-          <button type="submit" disabled={operatorsSelected.length === 0}>
+          <button type="submit" disabled={formData.operators.length === 0}>
             Continuar
           </button>
         </footer>

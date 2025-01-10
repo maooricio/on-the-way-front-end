@@ -18,6 +18,7 @@ import delete_icon from "@/assets/icons/utils/close_fill.svg";
 import { IVehicles } from "@/utils/interfaces/vehicles.interface";
 import minus from "@/assets/icons/utils/minus.svg";
 import plus from "@/assets/icons/utils/plus.svg";
+import { IOperator } from "@/utils/interfaces/operator.interface";
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
   formData: INewQuoteStageTwoForm;
@@ -36,24 +37,45 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
     setStage(4);
   };
 
-  const handleCounter = (type: string, vehicle: IVehicles) => {
-    setFormData((prev) => ({
-      ...prev,
-      vehicles: formData.vehicles.map((item) => {
-        if (item.id === vehicle.id) {
-          return {
-            ...item,
-            amount: type === "plus" ? item.amount + 1 : item.amount - 1,
-          };
-        } else {
-          return item;
-        }
-      }),
-    }));
+  const handleCounter = (
+    type: string,
+    focusItem: IVehicles | IOperator,
+    focus: string
+  ) => {
+    if (focus === "isOperator") {
+      setFormData((prev) => ({
+        ...prev,
+        operators: formData.operators.map((item) => {
+          if (item.id === focusItem.id) {
+            return {
+              ...item,
+              amount: type === "plus" ? item.amount + 1 : item.amount - 1,
+            };
+          } else {
+            return item;
+          }
+        }),
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        vehicles: formData.vehicles.map((item) => {
+          if (item.id === focusItem.id) {
+            return {
+              ...item,
+              amount: type === "plus" ? item.amount + 1 : item.amount - 1,
+            };
+          } else {
+            return item;
+          }
+        }),
+      }));
+    }
   };
 
   const calculatePrice = () => {
     const vehicles = [...formData.vehicles];
+    const operators = [...formData.operators];
     const hasDelivery = formData.deliveryTransport;
     const hasCollection = formData.collectionTransport;
 
@@ -72,6 +94,14 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
         const vehiclePrice = vehicles[i].price * vehicles[i].amount;
 
         price += vehiclePrice;
+      }
+    }
+
+    if (operators.length > 0) {
+      for (let i = 0; i < operators.length; i++) {
+        const operatorPrice = operators[i].price * operators[i].amount;
+
+        price += operatorPrice;
       }
     }
 
@@ -187,7 +217,7 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
                   <div className="counter-handler">
                     <button
                       type="button"
-                      onClick={() => handleCounter("minus", item)}
+                      onClick={() => handleCounter("minus", item, "isVehicle")}
                       disabled={item.amount === 1}
                     >
                       <Image src={minus} alt="minus icon" />
@@ -195,7 +225,7 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
                     {item.amount}
                     <button
                       type="button"
-                      onClick={() => handleCounter("plus", item)}
+                      onClick={() => handleCounter("plus", item, "isVehicle")}
                     >
                       <Image src={plus} alt="plus icon" />
                     </button>
@@ -210,6 +240,51 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
                     setFormData((prev) => ({
                       ...prev,
                       vehicles: formData.vehicles.filter(
+                        (i) => i.id !== item.id
+                      ),
+                    }))
+                  }
+                >
+                  <Image src={delete_icon} alt="delete icon" />
+                </button>
+              </div>
+            ))}
+
+          {formData.operators.length > 0 &&
+            formData.operators.map((item) => (
+              <div key={item.id} className="new-quote-summary-item">
+                <div className="new-quote-summary-item-header">
+                  <h1>{item.name}</h1>
+                  <span>-</span>
+                </div>
+
+                <div className="new-quote-summary-item-handler">
+                  <div className="counter-handler">
+                    <button
+                      type="button"
+                      onClick={() => handleCounter("minus", item, "isOperator")}
+                      disabled={item.amount === 1}
+                    >
+                      <Image src={minus} alt="minus icon" />
+                    </button>
+                    {item.amount}
+                    <button
+                      type="button"
+                      onClick={() => handleCounter("plus", item, "isOperator")}
+                    >
+                      <Image src={plus} alt="plus icon" />
+                    </button>
+                  </div>
+
+                  <p>{formatCurrency(item.price * item.amount)}</p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      operators: formData.operators.filter(
                         (i) => i.id !== item.id
                       ),
                     }))
