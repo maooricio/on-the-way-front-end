@@ -22,11 +22,20 @@ import {
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
   setFormQuoteData: Dispatch<SetStateAction<INewQuoteStageTwoForm>>;
+  formQuoteData: INewQuoteStageTwoForm;
 }
 
-const NewQuoteStageOne = ({ setStage, setFormQuoteData }: Props) => {
+const NewQuoteStageOne = ({
+  setStage,
+  setFormQuoteData,
+  formQuoteData,
+}: Props) => {
+  const initialCustomer = FakeUsersList.find(
+    (i) => i.id === formQuoteData.userId
+  );
+
   const initialState: INewQuoteStageOneForm = {
-    customer: undefined,
+    customer: initialCustomer ?? undefined,
     search: "",
   };
 
@@ -98,6 +107,9 @@ const NewQuoteStageOne = ({ setStage, setFormQuoteData }: Props) => {
       <header className="new-quote-stages-container">
         <Image src={getStageIcon(true, false)} alt="stage icon" />
         <span>Cliente</span>
+
+        <div className="new-quote-stage-divider"></div>
+        <Image src={getStageIcon(false, false)} alt="stage icon" />
 
         <div className="new-quote-stage-divider"></div>
         <Image src={getStageIcon(false, false)} alt="stage icon" />

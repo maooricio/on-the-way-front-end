@@ -7,6 +7,9 @@ import { useState } from "react";
 import NewQuoteStageTwo from "@/components/admin/quotes/new/stage_2";
 import NewQuoteStageThree from "@/components/admin/quotes/new/stage_3";
 import { INewQuoteStageTwoForm } from "@/utils/interfaces/new_quote.interface";
+import NewQuoteSummary from "@/components/admin/quotes/new/summary";
+import NewQuoteStageFour from "@/components/admin/quotes/new/stage_4";
+import NewQuoteStageFive from "@/components/admin/quotes/new/stage_5";
 
 const NewQuotePage = () => {
   const router = useRouter();
@@ -48,25 +51,47 @@ const NewQuotePage = () => {
       </header>
 
       {stage === 0 ? (
-        <NewQuoteStageOne setStage={setStage} setFormQuoteData={setFormData} />
+        <NewQuoteStageOne
+          setStage={setStage}
+          setFormQuoteData={setFormData}
+          formQuoteData={formData}
+        />
       ) : stage === 1 ? (
-        <NewQuoteStageTwo
-          setStage={setStage}
-          formData={formData}
-          setFormData={setFormData}
-        />
+        <section className="new-quote-content-container">
+          <NewQuoteStageTwo
+            setStage={setStage}
+            formData={formData}
+            setFormData={setFormData}
+          />
+
+          <NewQuoteSummary formData={formData} setFormData={setFormData} />
+        </section>
       ) : stage === 2 ? (
-        <NewQuoteStageThree
+        <section className="new-quote-content-container">
+          <NewQuoteStageThree
+            setStage={setStage}
+            formData={formData}
+            setFormData={setFormData}
+          />
+
+          <NewQuoteSummary formData={formData} setFormData={setFormData} />
+        </section>
+      ) : stage === 3 ? (
+        <section className="new-quote-content-container">
+          <NewQuoteStageFour
+            setStage={setStage}
+            formData={formData}
+            setFormData={setFormData}
+          />
+
+          <NewQuoteSummary formData={formData} setFormData={setFormData} />
+        </section>
+      ) : (
+        <NewQuoteStageFive
           setStage={setStage}
           formData={formData}
           setFormData={setFormData}
         />
-      ) : stage === 3 ? (
-        <></>
-      ) : stage === 4 ? (
-        <></>
-      ) : (
-        <></>
       )}
     </section>
   );

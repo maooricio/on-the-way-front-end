@@ -9,7 +9,6 @@ import calendar from "@/assets/icons/utils/calendar.svg";
 import CustomSelect from "@/components/elements/handlers/custom_select";
 import SelectWithInput from "@/components/elements/inputs/select";
 import { citiesOptions } from "@/utils/data/cities";
-import NewQuoteSummary from "./summary";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
@@ -60,143 +59,142 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
   };
 
   return (
-    <section className="new-quote-content-container">
-      <section className="new-quote-content">
-        <header className="new-quote-stages-container">
-          <Image src={getStageIcon(true, true)} alt="stage icon" />
+    <section className="new-quote-content">
+      <header className="new-quote-stages-container">
+        <Image src={getStageIcon(true, true)} alt="stage icon" />
 
-          <div className="new-quote-stage-divider"></div>
-          <Image src={getStageIcon(true, false)} alt="stage icon" />
-          <span>Información del evento o servicio</span>
+        <div className="new-quote-stage-divider"></div>
+        <Image src={getStageIcon(true, false)} alt="stage icon" />
+        <span>Información del evento o servicio</span>
 
-          <div className="new-quote-stage-divider"></div>
-          <Image src={getStageIcon(false, false)} alt="stage icon" />
+        <div className="new-quote-stage-divider"></div>
+        <Image src={getStageIcon(false, false)} alt="stage icon" />
 
-          <div className="new-quote-stage-divider"></div>
-          <Image src={getStageIcon(false, false)} alt="stage icon" />
-        </header>
+        <div className="new-quote-stage-divider"></div>
+        <Image src={getStageIcon(false, false)} alt="stage icon" />
 
-        <form className="new-quote-form" onSubmit={handleOnSubmit}>
-          <div className="new-quote-form-stage-two-content">
-            <div className="new-quote-form-stage-two-row">
-              <button type="button" onClick={() => handleSelect("delivery")}>
-                Transporte de entrega:{" "}
-                <Image
-                  src={getSquareIcon(formData.deliveryTransport)}
-                  alt="checkbox icon"
-                />
-              </button>
-              <button type="button" onClick={() => handleSelect("collection")}>
-                Transporte de recogida:{" "}
-                <Image
-                  src={getSquareIcon(formData.collectionTransport)}
-                  alt="checkbox icon"
-                />
-              </button>
-            </div>
+        <div className="new-quote-stage-divider"></div>
+        <Image src={getStageIcon(false, false)} alt="stage icon" />
+      </header>
 
-            <div className="new-quote-form-stage-two-row">
-              <InputElement
-                type="text"
-                label="Fecha del servicio"
-                placeholder="Selecciona la fecha"
-                name="serviceDate"
-                setFormData={setFormData}
-                error=""
-                value={formData.serviceDate}
-                icon={<Image src={calendar} alt="calendar icon" />}
+      <form className="new-quote-form" onSubmit={handleOnSubmit}>
+        <div className="new-quote-form-stage-two-content">
+          <div className="new-quote-form-stage-two-row">
+            <button type="button" onClick={() => handleSelect("delivery")}>
+              Transporte de entrega:{" "}
+              <Image
+                src={getSquareIcon(formData.deliveryTransport)}
+                alt="checkbox icon"
               />
-
-              <CustomSelect
-                labelName="Hora del servicio"
-                options={[
-                  {
-                    label: "Selecciona la hora",
-                    value: "",
-                  },
-                ]}
-                setValue={setServiceHour}
-                value={serviceHour}
+            </button>
+            <button type="button" onClick={() => handleSelect("collection")}>
+              Transporte de recogida:{" "}
+              <Image
+                src={getSquareIcon(formData.collectionTransport)}
+                alt="checkbox icon"
               />
-            </div>
+            </button>
+          </div>
 
-            <SelectWithInput
-              labelName="Ciudad de cargue"
-              options={citiesOptions}
-              setValue={handleOnSelect}
-              value={formData.pickupCity}
-            />
-
+          <div className="new-quote-form-stage-two-row">
             <InputElement
               type="text"
-              label="Dirección de cargue"
+              label="Fecha del servicio"
               placeholder="Selecciona la fecha"
               name="serviceDate"
               setFormData={setFormData}
               error=""
               value={formData.serviceDate}
-              icon={<></>}
+              icon={<Image src={calendar} alt="calendar icon" />}
             />
 
-            <InputElement
-              type="text"
-              label="Dirección de entrega"
-              placeholder="Selecciona la fecha"
-              name="serviceDate"
-              setFormData={setFormData}
-              error=""
-              value={formData.serviceDate}
-              icon={<></>}
-            />
-
-            <InputElement
-              type="text"
-              label="Dirección de recogida"
-              placeholder="Selecciona la fecha"
-              name="serviceDate"
-              setFormData={setFormData}
-              error=""
-              value={formData.serviceDate}
-              icon={<></>}
-            />
-
-            <SelectWithInput
-              labelName="Ciudad de descargue"
+            <CustomSelect
+              labelName="Hora del servicio"
               options={[
                 {
-                  label: "Busca la ciudad",
+                  label: "Selecciona la hora",
                   value: "",
                 },
               ]}
-              setValue={handleOnSelect}
-              value={formData.pickupCity}
-            />
-
-            <InputElement
-              type="text"
-              label="Dirección de descargue"
-              placeholder="Selecciona la fecha"
-              name="serviceDate"
-              setFormData={setFormData}
-              error=""
-              value={formData.serviceDate}
-              icon={<></>}
+              setValue={setServiceHour}
+              value={serviceHour}
             />
           </div>
 
-          <footer className="new-quote-form-footer">
-            <Link href={Routes.quotes} className="button">
-              Cancelar cotización
-            </Link>
-            <Link href={Routes.quotes} className="button">
-              Guardar en borradores
-            </Link>
-            <button type="submit">Continuar</button>
-          </footer>
-        </form>
-      </section>
+          <SelectWithInput
+            labelName="Ciudad de cargue"
+            options={citiesOptions}
+            setValue={handleOnSelect}
+            value={formData.pickupCity}
+          />
 
-      <NewQuoteSummary formData={formData} setFormData={setFormData} />
+          <InputElement
+            type="text"
+            label="Dirección de cargue"
+            placeholder="Selecciona la fecha"
+            name="serviceDate"
+            setFormData={setFormData}
+            error=""
+            value={formData.serviceDate}
+            icon={<></>}
+          />
+
+          <InputElement
+            type="text"
+            label="Dirección de entrega"
+            placeholder="Selecciona la fecha"
+            name="serviceDate"
+            setFormData={setFormData}
+            error=""
+            value={formData.serviceDate}
+            icon={<></>}
+          />
+
+          <InputElement
+            type="text"
+            label="Dirección de recogida"
+            placeholder="Selecciona la fecha"
+            name="serviceDate"
+            setFormData={setFormData}
+            error=""
+            value={formData.serviceDate}
+            icon={<></>}
+          />
+
+          <SelectWithInput
+            labelName="Ciudad de descargue"
+            options={[
+              {
+                label: "Busca la ciudad",
+                value: "",
+              },
+            ]}
+            setValue={handleOnSelect}
+            value={formData.pickupCity}
+          />
+
+          <InputElement
+            type="text"
+            label="Dirección de descargue"
+            placeholder="Selecciona la fecha"
+            name="serviceDate"
+            setFormData={setFormData}
+            error=""
+            value={formData.serviceDate}
+            icon={<></>}
+          />
+        </div>
+
+        <footer className="new-quote-form-footer">
+          <Link href={Routes.quotes} className="button">
+            Cancelar cotización
+          </Link>
+          <Link href={Routes.quotes} className="button">
+            Guardar en borradores
+          </Link>
+          <button type="submit">Continuar</button>
+        </footer>
+      </form>
     </section>
   );
 };

@@ -96,6 +96,26 @@ button[type="submit"],
   }
 }
 
+.counter-handler {
+  @include flex(row, center, center, 16px);
+  background-color: $generic-white;
+  border: 1px solid $neutral-200;
+  padding: 8px 12px;
+  border-radius: 8px;
+
+  button {
+    all: unset;
+    @include flex(row, center, center);
+    cursor: pointer;
+    min-height: 20px;
+
+    &:hover,
+    &:disabled {
+      background: none;
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .only-mobile {
     display: none;

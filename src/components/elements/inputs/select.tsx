@@ -12,6 +12,7 @@ interface Props {
   setValue: (payload: any) => void;
   value: string;
   disabled?: boolean;
+  placeholder?: string;
 }
 
 function SelectWithInput({
@@ -20,6 +21,7 @@ function SelectWithInput({
   setValue,
   value,
   disabled,
+  placeholder,
 }: Props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -38,7 +40,7 @@ function SelectWithInput({
         <InputElement
           type="text"
           label={labelName ?? ""}
-          placeholder="Busca un cliente..."
+          placeholder={placeholder ?? "Busca un cliente..."}
           name="search"
           setFormData={setValue}
           error=""

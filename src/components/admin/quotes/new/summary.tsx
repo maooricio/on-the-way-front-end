@@ -29,6 +29,21 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
     }));
   };
 
+  const calculatePrice = () => {
+    const vehicles = [...formData.vehicles];
+    let price = formData.totalPrice;
+
+    if (vehicles.length > 0) {
+      for (let i = 0; i < vehicles.length; i++) {
+        const vehiclePrice = vehicles[i].price * vehicles[i].amount;
+
+        price += vehiclePrice
+      }
+    }
+
+    return price
+  }
+
   return (
     <section className="new-quote-summary-container">
       <h2>Resumen de cotización</h2>
@@ -120,7 +135,7 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
         ))}
 
       <p>
-        <span>Total:</span> <span>{formatCurrency(formData.totalPrice)}</span>
+        <span>Total:</span> <span>{formatCurrency(calculatePrice())}</span>
       </p>
     </section>
   );

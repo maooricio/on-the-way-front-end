@@ -151,6 +151,24 @@
         }
       }
 
+      .operators-selected-container {
+        @include flex(row, flex-start, center, 16px, wrap);
+
+        .operator-selected-container {
+          @include flex(row, center, center, 8px);
+          background-color: $primary-50;
+          border-radius: 24px;
+          padding: 8px 16px;
+          color: $neutral-800;
+
+          button {
+            all: unset;
+            cursor: pointer;
+            @include flex(row, center, center);
+          }
+        }
+      }
+
       .new-quote-form-footer {
         @include flex(row, flex-end, center, 24px);
         width: 100%;
