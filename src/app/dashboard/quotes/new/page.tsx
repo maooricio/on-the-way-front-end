@@ -29,6 +29,10 @@ const NewQuotePage = () => {
     totalPrice: 0,
     vehicles: [],
     operators: [],
+    discountVoucher: {
+      type: "%",
+      amount: 0,
+    },
   };
 
   const [formData, setFormData] = useState<INewQuoteStageTwoForm>(initialState);

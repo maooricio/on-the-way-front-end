@@ -17,6 +17,7 @@ import {
   INewQuoteStageOneForm,
   INewQuoteStageTwoForm,
 } from "@/utils/interfaces/new_quote.interface";
+import { IVoucherAmount } from "@/components/admin/quotes/add_discount_voucher";
 
 interface Props {
   type: string;
@@ -98,4 +99,5 @@ type SetFormDataActions =
   | Dispatch<SetStateAction<ISearch>>
   | Dispatch<SetStateAction<INewQuoteStageOneForm>>
   | Dispatch<SetStateAction<INewQuoteStageTwoForm>>
-  | Dispatch<SetStateAction<IUser>>;
+  | Dispatch<SetStateAction<IUser>>
+  | Dispatch<SetStateAction<IVoucherAmount>>;

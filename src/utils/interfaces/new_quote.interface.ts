@@ -22,4 +22,8 @@ export interface INewQuoteStageTwoForm {
   totalPrice: number;
   vehicles: IVehicles[];
   operators: IOperator[];
+  discountVoucher: {
+    type: string;
+    amount: number;
+  };
 }

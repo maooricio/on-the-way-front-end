@@ -20,7 +20,8 @@ import minus from "@/assets/icons/utils/minus.svg";
 import plus from "@/assets/icons/utils/plus.svg";
 import { IOperator } from "@/utils/interfaces/operator.interface";
 import ticket from "@/assets/icons/others/ticket.svg";
-import ChangeCustomerModal from "./change_customer";
+import ChangeCustomerModal from "../change_customer";
+import AddDiscountVoucherModal from "../add_discount_voucher";
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
   formData: INewQuoteStageTwoForm;
@@ -32,6 +33,7 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
 
   const [price, setPrice] = useState<number>(0);
   const [showCustomerModal, setShowCustomerModal] = useState<boolean>(false);
+  const [showDiscountModal, setShowDiscountModal] = useState<boolean>(false);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -301,14 +303,57 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
             ))}
 
           <div className="new-quote-resume-footer">
-            <button type="button">
-              <Image src={ticket} alt="ticket icon" />
-              Aplicar cupón de descuento
-            </button>
+            {formData.discountVoucher.amount === 0 ? (
+              <button type="button" onClick={() => setShowDiscountModal(true)} className="discount-button">
+                <Image src={ticket} alt="ticket icon" />
+                Aplicar cupón de descuento
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    discountVoucher: { type: "%", amount: 0 },
+                  }))
+                }
+                className="discount-button delete-button"
+              >
+                Eliminar cupón de descuento
+              </button>
+            )}
 
-            <p>
-              <span>Total:</span> <span>{formatCurrency(price)}</span>
-            </p>
+            {formData.discountVoucher.amount === 0 ? (
+              <p>
+                <span>Total:</span> <span>{formatCurrency(price)}</span>
+              </p>
+            ) : (
+              <div className="new-quote-summary-with-discount">
+                <p>
+                  <span>Subtotal:</span>{" "}
+                  <span className="text-regular">{formatCurrency(price)}</span>
+                </p>
+                <p>
+                  <span>Descuento:</span>{" "}
+                  <span className="text-regular">
+                    {formData.discountVoucher.type === "%"
+                      ? `${formData.discountVoucher.amount}%`
+                      : formatCurrency(formData.discountVoucher.amount)}
+                  </span>
+                </p>
+                <p>
+                  <span>Total:</span>{" "}
+                  <span>
+                    {formatCurrency(
+                      formData.discountVoucher.type === "%"
+                        ? price -
+                            price * (formData.discountVoucher.amount / 100)
+                        : price - formData.discountVoucher.amount
+                    )}
+                  </span>
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
@@ -329,6 +374,13 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
         <ChangeCustomerModal
           setShowModal={setShowCustomerModal}
           setFormQuoteData={setFormData}
+        />
+      )}
+
+      {showDiscountModal && (
+        <AddDiscountVoucherModal
+          setShowModal={setShowDiscountModal}
+          setFormData={setFormData}
         />
       )}
     </section>

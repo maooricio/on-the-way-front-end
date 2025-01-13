@@ -153,7 +153,9 @@ const ChangeCustomerModal = ({ setShowModal, setFormQuoteData }: Props) => {
           <button type="button" onClick={() => setShowModal(false)}>
             Cancelar
           </button>
-          <button type="submit">Cambiar cliente</button>
+          <button type="submit" disabled={!formData.selected}>
+            Cambiar cliente
+          </button>
         </div>
       </form>
     </section>

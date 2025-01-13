@@ -61,6 +61,16 @@
           }
         }
       }
+
+      .discount-voucher-type-select {
+        @include flex(row, flex-start, center, 24px);
+
+        button {
+          all: unset;
+          cursor: pointer;
+          @include flex(row, center, center, 8px);
+        }
+      }
     }
 
     .new-quote-form-customer {
