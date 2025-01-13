@@ -20,6 +20,7 @@ import minus from "@/assets/icons/utils/minus.svg";
 import plus from "@/assets/icons/utils/plus.svg";
 import { IOperator } from "@/utils/interfaces/operator.interface";
 import ticket from "@/assets/icons/others/ticket.svg";
+import ChangeCustomerModal from "./change_customer";
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
   formData: INewQuoteStageTwoForm;
@@ -30,6 +31,7 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
   const userSelected = FakeUsersList.find((i) => i.id === formData.userId);
 
   const [price, setPrice] = useState<number>(0);
+  const [showCustomerModal, setShowCustomerModal] = useState<boolean>(false);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -156,7 +158,9 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
                 </p>
               </div>
 
-              <button type="button">Cambiar cliente</button>
+              <button type="button" onClick={() => setShowCustomerModal(true)}>
+                Cambiar cliente
+              </button>
             </div>
           )}
 
@@ -320,6 +324,13 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
           </button>
         </footer>
       </form>
+
+      {showCustomerModal && (
+        <ChangeCustomerModal
+          setShowModal={setShowCustomerModal}
+          setFormQuoteData={setFormData}
+        />
+      )}
     </section>
   );
 };

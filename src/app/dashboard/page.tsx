@@ -5,6 +5,8 @@ import user from "@/assets/icons/utils/user.svg";
 import quote from "@/assets/icons/utils/quote.svg";
 import LongCardTable from "@/components/admin/home/long_card";
 import Image from "next/image";
+import Link from "next/link";
+import { Routes } from "@/utils/router/router_enum";
 
 export default function Home() {
   return (
@@ -17,10 +19,7 @@ export default function Home() {
         <SmallCard
           header={
             <header className="small-card-header">
-              <Image
-                src={calculator}
-                alt=""
-              />
+              <Image src={calculator} alt="" />
             </header>
           }
           content={
@@ -34,7 +33,9 @@ export default function Home() {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button">Nueva cotización</button>
+              <Link href={Routes.quotes_new} className="link">
+                Nueva cotización
+              </Link>
             </footer>
           }
         />
@@ -53,7 +54,9 @@ export default function Home() {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button" className="button">Ver pedidos</button>
+              <button type="button" className="button">
+                Ver pedidos
+              </button>
             </footer>
           }
         />
@@ -75,7 +78,9 @@ export default function Home() {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button" className="button">Ver pendientes</button>
+              <button type="button" className="button">
+                Ver pendientes
+              </button>
             </footer>
           }
         />
