@@ -33,6 +33,7 @@ const NewQuotePage = () => {
       type: "%",
       amount: 0,
     },
+    comment: "",
   };
 
   const [formData, setFormData] = useState<INewQuoteStageTwoForm>(initialState);
@@ -93,7 +94,6 @@ const NewQuotePage = () => {
         </section>
       ) : (
         <NewQuoteStageFive
-          setStage={setStage}
           formData={formData}
           setFormData={setFormData}
         />

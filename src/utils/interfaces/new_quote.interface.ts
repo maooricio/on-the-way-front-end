@@ -26,4 +26,5 @@ export interface INewQuoteStageTwoForm {
     type: string;
     amount: number;
   };
+  comment: string;
 }

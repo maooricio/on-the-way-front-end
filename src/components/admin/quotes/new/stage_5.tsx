@@ -22,14 +22,17 @@ import { IOperator } from "@/utils/interfaces/operator.interface";
 import ticket from "@/assets/icons/others/ticket.svg";
 import ChangeCustomerModal from "../change_customer";
 import AddDiscountVoucherModal from "../add_discount_voucher";
+import InputElement from "@/components/elements/inputs/input";
+import { useRouter } from "next/navigation";
 interface Props {
-  setStage: Dispatch<SetStateAction<number>>;
   formData: INewQuoteStageTwoForm;
   setFormData: Dispatch<SetStateAction<INewQuoteStageTwoForm>>;
 }
 
-const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
+const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
   const userSelected = FakeUsersList.find((i) => i.id === formData.userId);
+
+  const router = useRouter();
 
   const [price, setPrice] = useState<number>(0);
   const [showCustomerModal, setShowCustomerModal] = useState<boolean>(false);
@@ -37,9 +40,7 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
-    setFormData((prev) => prev);
-    setStage(4);
+    router.replace(Routes.quotes_history);
   };
 
   const handleCounter = (
@@ -302,9 +303,24 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
               </div>
             ))}
 
+          <InputElement
+            type="textarea"
+            label=""
+            placeholder="Añade una nota o comentario para el cliente..."
+            name="comment"
+            setFormData={setFormData}
+            error=""
+            value={formData.comment}
+            icon={<></>}
+          />
+
           <div className="new-quote-resume-footer">
             {formData.discountVoucher.amount === 0 ? (
-              <button type="button" onClick={() => setShowDiscountModal(true)} className="discount-button">
+              <button
+                type="button"
+                onClick={() => setShowDiscountModal(true)}
+                className="discount-button"
+              >
                 <Image src={ticket} alt="ticket icon" />
                 Aplicar cupón de descuento
               </button>
@@ -364,9 +380,7 @@ const NewQuoteStageFive = ({ setStage, formData, setFormData }: Props) => {
           <Link href={Routes.quotes} className="button">
             Guardar en borradores
           </Link>
-          <button type="submit" disabled={true}>
-            Continuar
-          </button>
+          <button type="submit">Enviar cotización</button>
         </footer>
       </form>
 

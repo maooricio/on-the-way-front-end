@@ -68,16 +68,22 @@ const InputElement = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
       >
-        <input
-          type={type}
-          placeholder={placeholder}
-          name={name}
-          value={value}
-          disabled={disabled}
-          onChange={handleOnChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-        />
+        {type !== "textarea" ? (
+          <input
+            type={type}
+            placeholder={placeholder}
+            name={name}
+            value={value}
+            disabled={disabled}
+            onChange={handleOnChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+          />
+        ) : (
+          <textarea placeholder={placeholder} name={name}>
+            {value}
+          </textarea>
+        )}
 
         {icon}
       </div>
