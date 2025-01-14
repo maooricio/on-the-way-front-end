@@ -32,18 +32,109 @@
 
       h1 {
         all: unset;
-        font-size: 18px;
+        font-size: 24px;
         color: $neutral-800;
         font-weight: 600;
       }
     }
 
     .generic-modal-content {
+      @include flex(column, space-between, flex-start, 24px);
       width: 100%;
 
       p {
+        all: unset;
         font-size: 16px;
         color: $neutral-800;
+      }
+
+      .custom-select-container {
+        width: 100%;
+
+        .custom-select {
+          .input-container {
+            margin: 0;
+          }
+
+          .custom-select-options-container {
+            top: 60px;
+          }
+        }
+      }
+
+      .discount-voucher-type-select {
+        @include flex(row, flex-start, center, 24px);
+
+        button {
+          all: unset;
+          cursor: pointer;
+          @include flex(row, center, center, 8px);
+        }
+      }
+    }
+
+    .new-quote-form-customer {
+      @include flex(row, space-between, center, 16px);
+      width: 100%;
+      background-color: $primary-50;
+      border-radius: 24px;
+      padding: 40px 0;
+
+      .user-photo-container {
+        @include flex(row, center, center);
+        overflow: hidden;
+        width: 64px;
+        height: 64px;
+        border-radius: 18px;
+        background-color: $primary-200;
+        margin-left: 32px;
+
+        .user-photo {
+          width: 70%;
+          height: 80%;
+          opacity: 25%;
+        }
+      }
+
+      .new-quote-form-customer-content {
+        @include flex(column, center, flex-start, 8px);
+        width: 85%;
+
+        p {
+          all: unset;
+        }
+
+        .new-quote-form-customer-content-title {
+          @include flex(row, flex-start, center, 16px);
+
+          p {
+            &:first-child {
+              font-size: 16px;
+              font-weight: 600;
+              line-height: 24px;
+              color: $neutral-800;
+            }
+
+            &:last-child {
+              font-size: 16px;
+              line-height: 24px;
+              color: $neutral-500;
+            }
+          }
+        }
+
+        p {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 24px;
+          color: $neutral-800;
+        }
+      }
+
+      button[type="button"] {
+        all: unset;
+        cursor: pointer;
+        margin-right: 32px;
       }
     }
 

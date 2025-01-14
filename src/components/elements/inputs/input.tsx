@@ -17,6 +17,7 @@ import {
   INewQuoteStageOneForm,
   INewQuoteStageTwoForm,
 } from "@/utils/interfaces/new_quote.interface";
+import { IVoucherAmount } from "@/components/admin/quotes/add_discount_voucher";
 
 interface Props {
   type: string;
@@ -67,16 +68,22 @@ const InputElement = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
       >
-        <input
-          type={type}
-          placeholder={placeholder}
-          name={name}
-          value={value}
-          disabled={disabled}
-          onChange={handleOnChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-        />
+        {type !== "textarea" ? (
+          <input
+            type={type}
+            placeholder={placeholder}
+            name={name}
+            value={value}
+            disabled={disabled}
+            onChange={handleOnChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+          />
+        ) : (
+          <textarea placeholder={placeholder} name={name}>
+            {value}
+          </textarea>
+        )}
 
         {icon}
       </div>
@@ -98,4 +105,5 @@ type SetFormDataActions =
   | Dispatch<SetStateAction<ISearch>>
   | Dispatch<SetStateAction<INewQuoteStageOneForm>>
   | Dispatch<SetStateAction<INewQuoteStageTwoForm>>
-  | Dispatch<SetStateAction<IUser>>;
+  | Dispatch<SetStateAction<IUser>>
+  | Dispatch<SetStateAction<IVoucherAmount>>;

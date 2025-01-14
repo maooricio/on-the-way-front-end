@@ -6,3 +6,16 @@ export const formatCurrency = (value: number): string => {
     maximumFractionDigits: 2,
   }).format(value);
 };
+
+export const parseCurrency = (value: string): number => {
+  const numericValue = value
+    .replace(/[^\d,-]/g, "")
+    .replace(".", "")
+    .replace(",", ".");
+
+  return parseFloat(numericValue);
+};
+
+export const parsePercentage = (value: string): number => {
+  return parseFloat(value.replace("%", "").trim());
+};

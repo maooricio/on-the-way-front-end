@@ -29,6 +29,11 @@ const NewQuotePage = () => {
     totalPrice: 0,
     vehicles: [],
     operators: [],
+    discountVoucher: {
+      type: "%",
+      amount: 0,
+    },
+    comment: "",
   };
 
   const [formData, setFormData] = useState<INewQuoteStageTwoForm>(initialState);
@@ -89,7 +94,6 @@ const NewQuotePage = () => {
         </section>
       ) : (
         <NewQuoteStageFive
-          setStage={setStage}
           formData={formData}
           setFormData={setFormData}
         />
