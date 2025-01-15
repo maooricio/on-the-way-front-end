@@ -2,12 +2,12 @@ import { IOperator } from "./operator.interface";
 import { IUser } from "./user.interface";
 import { IVehicles } from "./vehicles.interface";
 
-export interface INewQuoteStageOneForm {
+export interface ICustomerSelect {
   selected?: IUser;
   search: string;
 }
 
-export interface INewQuoteStageTwoForm {
+export interface IQuote {
   userId?: string;
   deliveryTransport: boolean;
   collectionTransport: boolean;

@@ -14,8 +14,8 @@ import {
 import { IPassword } from "../../admin/settings/password_modal";
 import { ISearch } from "@/app/dashboard/users/page";
 import {
-  INewQuoteStageOneForm,
-  INewQuoteStageTwoForm,
+  ICustomerSelect,
+  IQuote,
 } from "@/utils/interfaces/new_quote.interface";
 import { IVoucherAmount } from "@/components/admin/quotes/add_discount_voucher";
 
@@ -103,7 +103,7 @@ type SetFormDataActions =
   | Dispatch<SetStateAction<INewPasswordFormData>>
   | Dispatch<SetStateAction<IPassword>>
   | Dispatch<SetStateAction<ISearch>>
-  | Dispatch<SetStateAction<INewQuoteStageOneForm>>
-  | Dispatch<SetStateAction<INewQuoteStageTwoForm>>
+  | Dispatch<SetStateAction<ICustomerSelect>>
+  | Dispatch<SetStateAction<IQuote>>
   | Dispatch<SetStateAction<IUser>>
   | Dispatch<SetStateAction<IVoucherAmount>>;

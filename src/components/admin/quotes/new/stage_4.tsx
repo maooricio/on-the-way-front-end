@@ -5,8 +5,8 @@ import Link from "next/link";
 import { getStageIcon } from "@/utils/handlers/get_icon";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import {
-  INewQuoteStageOneForm,
-  INewQuoteStageTwoForm,
+  ICustomerSelect,
+  IQuote,
 } from "@/utils/interfaces/new_quote.interface";
 import { operatorsOptions } from "@/utils/data/jobs";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
@@ -15,18 +15,18 @@ import { IOperator } from "@/utils/interfaces/operator.interface";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
-  formData: INewQuoteStageTwoForm;
-  setFormData: Dispatch<SetStateAction<INewQuoteStageTwoForm>>;
+  formData: IQuote;
+  setFormData: Dispatch<SetStateAction<IQuote>>;
 }
 
 const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
-  const initialState: INewQuoteStageOneForm = {
+  const initialState: ICustomerSelect = {
     selected: undefined,
     search: "",
   };
 
   const [selectData, setSelectData] =
-    useState<INewQuoteStageOneForm>(initialState);
+    useState<ICustomerSelect>(initialState);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

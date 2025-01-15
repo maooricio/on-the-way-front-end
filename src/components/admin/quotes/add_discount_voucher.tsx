@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { INewQuoteStageTwoForm } from "@/utils/interfaces/new_quote.interface";
+import { IQuote } from "@/utils/interfaces/new_quote.interface";
 import InputElement from "@/components/elements/inputs/input";
 import empty from "@/assets/icons/checkbox/circle_empty.svg";
 import fill from "@/assets/icons/checkbox/circle_fill.svg";
@@ -24,7 +24,7 @@ export interface IVoucherAmount {
 
 interface Props {
   setShowModal: Dispatch<SetStateAction<boolean>>;
-  setFormData: Dispatch<SetStateAction<INewQuoteStageTwoForm>>;
+  setFormData: Dispatch<SetStateAction<IQuote>>;
 }
 
 const AddDiscountVoucherModal = ({ setShowModal, setFormData }: Props) => {

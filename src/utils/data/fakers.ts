@@ -7,6 +7,7 @@ export interface IFakeQuote {
   customer: string;
   amount: string;
   state: string;
+  responsible: string;
 }
 
 export const FakeUsersList: IUser[] = [
@@ -170,6 +171,7 @@ export const FakeQuotesList: IFakeQuote[] = [
     customer: "Juan José Eventos",
     amount: "$ 12.000.42,90",
     state: "En proceso",
+    responsible: "Mariano Guzmán",
   },
   {
     id: "asdfasdfasdq1",
@@ -178,6 +180,7 @@ export const FakeQuotesList: IFakeQuote[] = [
     customer: "María Suarez",
     amount: "$ 1.902.000,00",
     state: "En proceso",
+    responsible: "María Suarez",
   },
   {
     id: "asdfasdfasdq2",
@@ -186,6 +189,7 @@ export const FakeQuotesList: IFakeQuote[] = [
     customer: "Harley Bar",
     amount: "$ 412.000,50",
     state: "Pagada",
+    responsible: "Alejandro Martínez",
   },
   {
     id: "asdfasdfasdq3",
@@ -194,6 +198,7 @@ export const FakeQuotesList: IFakeQuote[] = [
     customer: "El Garage S.L",
     amount: "$ 902.000,50",
     state: "Cancelada",
+    responsible: "Matías Álvarez",
   },
   {
     id: "asdfasdfasdq4",
@@ -202,6 +207,7 @@ export const FakeQuotesList: IFakeQuote[] = [
     customer: "Eventos la Esmeralda",
     amount: "$ 1.002.000,50",
     state: "Pagada",
+    responsible: "Natalia Romero",
   },
   {
     id: "asdfasdfasdq6",
@@ -210,6 +216,7 @@ export const FakeQuotesList: IFakeQuote[] = [
     customer: "La Yumba S.C",
     amount: "$ 1.200.000,00",
     state: "Pago pendiente",
+    responsible: "Samuel Pérez",
   },
   {
     id: "asdfasdfasdq7",
@@ -218,6 +225,7 @@ export const FakeQuotesList: IFakeQuote[] = [
     customer: "Juan José Eventos",
     amount: "$ 902.000,50",
     state: "En proceso",
+    responsible: "Mariano Guzmán",
   },
   {
     id: "asdfasdfasdq8",
@@ -226,22 +234,25 @@ export const FakeQuotesList: IFakeQuote[] = [
     customer: "Juan José Eventos",
     amount: "$ 1.812.000,00",
     state: "Pagada",
+    responsible: "Mariano Guzmán",
   },
   {
     id: "asdfasdfasdq9",
     date: "10/03/2024",
     quote: "00215",
-    customer: "Festividades Cabildo",
+    customer: "Playon eventos",
     amount: "$ 302.550,00",
     state: "Verificar pago",
+    responsible: "Mariana Gómez",
   },
   {
     id: "asdfasdfasdq0",
     date: "10/03/2024",
     quote: "00145",
-    customer: "Felipe Rodriguez",
+    customer: "Hey Ya S.A.S",
     amount: "$ 753.000,00",
     state: "En proceso",
+    responsible: "Gabriela Sánchez",
   },
   {
     id: "asdfasdfasda1",
@@ -250,6 +261,7 @@ export const FakeQuotesList: IFakeQuote[] = [
     customer: "Hey Ya S.A.S",
     amount: "$ 1.200.000,00",
     state: "Pago pendiente",
+    responsible: "Gabriela Sánchez",
   },
   {
     id: "asdfasdfasda2",
@@ -258,6 +270,7 @@ export const FakeQuotesList: IFakeQuote[] = [
     customer: "Cristian Sancho",
     amount: "$902.000,50",
     state: "Pagada",
+    responsible: "Cristian Sancho",
   },
   {
     id: "asdfasdfasda3",
@@ -266,14 +279,16 @@ export const FakeQuotesList: IFakeQuote[] = [
     customer: "María Suarez",
     amount: "$ 302.550,00",
     state: "En proceso",
+    responsible: "María Suarez",
   },
   {
     id: "asdfasdfasda4",
     date: "10/03/2024",
     quote: "00264",
-    customer: "Paco Eventos",
+    customer: "Gabriela Fernández",
     amount: "$ 302.550,00",
     state: "En proceso",
+    responsible: "Gabriela Fernández",
   },
   {
     id: "asdfasdfasda5",
@@ -282,5 +297,81 @@ export const FakeQuotesList: IFakeQuote[] = [
     customer: "Hey ya S.A.S",
     amount: "$ 302.550,00",
     state: "En proceso",
+    responsible: "Gabriela Sánchez",
+  },
+];
+
+export const FakeRequestsList: IFakeQuote[] = [
+  {
+    id: "asdfasdfasdq5",
+    date: "12/03/2024",
+    quote: "00278",
+    customer: "Juan José Eventos",
+    amount: "$ 12.000.42,90",
+    state: "En proceso",
+    responsible: "Mariano Guzmán",
+  },
+  {
+    id: "asdfasdfasdq1",
+    date: "12/03/2024",
+    quote: "00158",
+    customer: "María Suarez",
+    amount: "$ 1.902.000,00",
+    state: "En proceso",
+    responsible: "María Suarez",
+  },
+  {
+    id: "asdfasdfasdq2",
+    date: "10/03/2024",
+    quote: "00201",
+    customer: "Harley Bar",
+    amount: "$ 412.000,50",
+    state: "Pagada",
+    responsible: "Alejandro Martínez",
+  },
+  {
+    id: "asdfasdfasdq3",
+    date: "09/03/2024",
+    quote: "00140",
+    customer: "El Garage S.L",
+    amount: "$ 902.000,50",
+    state: "Cancelada",
+    responsible: "Matías Álvarez",
+  },
+  {
+    id: "asdfasdfasdq4",
+    date: "05/03/2024",
+    quote: "00250",
+    customer: "Eventos la Esmeralda",
+    amount: "$ 1.002.000,50",
+    state: "Pagada",
+    responsible: "Natalia Romero",
+  },
+  {
+    id: "asdfasdfasdq6",
+    date: "05/03/2024",
+    quote: "00210",
+    customer: "La Yumba S.C",
+    amount: "$ 1.200.000,00",
+    state: "Pago pendiente",
+    responsible: "Samuel Pérez",
+  },
+  {
+    id: "asdfasdfasdq7",
+    date: "09/03/2024",
+    quote: "00183",
+    customer: "Juan José Eventos",
+    amount: "$ 902.000,50",
+    state: "En proceso",
+    responsible: "Mariano Guzmán",
+  },
+  {
+    id: "asdfasdfasdq8",
+    date: "10/03/2024",
+    quote: "00287",
+    customer: "Juan José Eventos",
+    amount: "$ 1.812.000,00",
+    state: "Pagada",
+    responsible: "Mariano Guzmán",
   },
 ];

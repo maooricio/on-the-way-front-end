@@ -8,6 +8,7 @@
   background-color: $generic-white;
   padding: 24px;
   border-radius: 24px;
+  margin-bottom: 24px;
 
   li {
     @include flex(row, space-between, center);
@@ -46,6 +47,9 @@
 
         button {
           all: unset;
+          color: $primary-500;
+          font-weight: 500;
+          margin-right: 8px;
         }
       }
 

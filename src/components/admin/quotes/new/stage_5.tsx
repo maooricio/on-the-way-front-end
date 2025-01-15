@@ -1,7 +1,7 @@
 "use client";
 import { FakeUsersList } from "@/utils/data/fakers";
 import { getStageIcon } from "@/utils/handlers/get_icon";
-import { INewQuoteStageTwoForm } from "@/utils/interfaces/new_quote.interface";
+import { IQuote } from "@/utils/interfaces/new_quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,8 +25,8 @@ import AddDiscountVoucherModal from "../add_discount_voucher";
 import InputElement from "@/components/elements/inputs/input";
 import { useRouter } from "next/navigation";
 interface Props {
-  formData: INewQuoteStageTwoForm;
-  setFormData: Dispatch<SetStateAction<INewQuoteStageTwoForm>>;
+  formData: IQuote;
+  setFormData: Dispatch<SetStateAction<IQuote>>;
 }
 
 const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
