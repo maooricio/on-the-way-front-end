@@ -10,7 +10,7 @@
   border-radius: 24px;
   margin-bottom: 24px;
 
-  li {
+  li, .custom-list-row {
     @include flex(row, space-between, center);
     width: 100%;
     padding: 16px 0;
@@ -38,6 +38,7 @@
 
   .custom-list-row {
     border-bottom: 1px solid $primary-50;
+    text-decoration: none;
 
     span {
       color: $neutral-800;

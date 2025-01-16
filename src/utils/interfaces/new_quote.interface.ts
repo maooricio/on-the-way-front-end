@@ -8,7 +8,10 @@ export interface ICustomerSelect {
 }
 
 export interface IQuote {
+  id?: string;
   userId?: string;
+  quoteNumber?: string;
+  state?: string;
   deliveryTransport: boolean;
   collectionTransport: boolean;
   serviceDate: string;
@@ -27,4 +30,5 @@ export interface IQuote {
     amount: number;
   };
   comment: string;
+  date?: string;
 }

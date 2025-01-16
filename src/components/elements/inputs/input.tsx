@@ -50,7 +50,9 @@ const InputElement = ({
 }: Props) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
-  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -80,9 +82,12 @@ const InputElement = ({
             onBlur={onBlur}
           />
         ) : (
-          <textarea placeholder={placeholder} name={name}>
-            {value}
-          </textarea>
+          <textarea
+            placeholder={placeholder}
+            name={name}
+            value={value}
+            onChange={handleOnChange}
+          />
         )}
 
         {icon}

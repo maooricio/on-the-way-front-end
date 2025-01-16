@@ -1,6 +1,6 @@
 "use client";
 import InputElement from "@/components/elements/inputs/input";
-import { FakeQuotesList, IFakeQuote } from "@/utils/data/fakers";
+import { FakeQuotesList, FakeUsersList } from "@/utils/data/fakers";
 import { useEffect, useRef, useState } from "react";
 import three_dots from "@/assets/icons/dots/three_dots.svg";
 import Image from "next/image";
@@ -14,6 +14,8 @@ import back from "@/assets/icons/arrow/arrow_back.svg";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Routes } from "@/utils/router/router_enum";
+import { IQuote } from "@/utils/interfaces/new_quote.interface";
+import { formatCurrency } from "@/utils/handlers/currency";
 
 export interface ISearch {
   value: string;
@@ -32,7 +34,7 @@ const QuotesHistoryPage = () => {
   const [searchData, setSearchData] = useState<ISearch>(initialState);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [roleFilter, setRoleFilter] = useState<string>("all");
-  const [quotesList, setQuotesList] = useState<IFakeQuote[][]>(
+  const [quotesList, setQuotesList] = useState<IQuote[][]>(
     paginateList(FakeQuotesList)
   );
 
@@ -116,27 +118,35 @@ const QuotesHistoryPage = () => {
         </li>
 
         {quotesList.length > 0 ? (
-          quotesList[currentPage - 1].map((item) => (
-            <li key={item.id} className="custom-list-row">
-              <span className="only-mobile">{item.date}</span>
-              <span>{item.quote}</span>
-              <span>{item.customer}</span>
-              <span className="only-mobile">{item.amount}</span>
-              <span>
-                <div className="custom-list-state">
-                  <div
-                    className="custom-list-state-dot"
-                    style={{ backgroundColor: getDotColor(item.state) }}
-                  ></div>
-                  <p className="only-mobile">{item.state}</p>
-                </div>
+          quotesList[currentPage - 1].map((item) => {
+            const user = FakeUsersList.find((i) => i.id === item.userId);
 
-                <button type="button">
-                  <Image src={three_dots} alt="three dots icon" />
-                </button>
-              </span>
-            </li>
-          ))
+            return (
+              <li key={item.id} className="custom-list-row">
+                <span className="only-mobile">{item.date}</span>
+                <span>{item.quoteNumber}</span>
+                <span>
+                  {user?.firstName} {user?.lastName}
+                </span>
+                <span className="only-mobile">
+                  {formatCurrency(item.totalPrice)}
+                </span>
+                <span>
+                  <div className="custom-list-state">
+                    <div
+                      className="custom-list-state-dot"
+                      style={{ backgroundColor: getDotColor(item.state!) }}
+                    ></div>
+                    <p className="only-mobile">{item.state}</p>
+                  </div>
+
+                  <button type="button">
+                    <Image src={three_dots} alt="three dots icon" />
+                  </button>
+                </span>
+              </li>
+            );
+          })
         ) : (
           <li className="custom-list-row">
             <span>No hay usuarios para mostrar.</span>

@@ -1,6 +1,6 @@
 "use client";
 import InputElement from "@/components/elements/inputs/input";
-import { FakeRequestsList, IFakeQuote } from "@/utils/data/fakers";
+import { FakeRequestsList, FakeUsersList } from "@/utils/data/fakers";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Pagination from "@/components/elements/handlers/pagination";
@@ -11,6 +11,7 @@ import back from "@/assets/icons/arrow/arrow_back.svg";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Routes } from "@/utils/router/router_enum";
+import { IQuote } from "@/utils/interfaces/new_quote.interface";
 
 export interface ISearch {
   value: string;
@@ -28,7 +29,7 @@ const QuotesPendingPage = () => {
 
   const [searchData, setSearchData] = useState<ISearch>(initialState);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [quotesList, setQuotesList] = useState<IFakeQuote[][]>(
+  const [quotesList, setQuotesList] = useState<IQuote[][]>(
     paginateList(FakeRequestsList)
   );
 
@@ -88,18 +89,30 @@ const QuotesPendingPage = () => {
         </li>
 
         {quotesList.length > 0 ? (
-          quotesList[currentPage - 1].map((item) => (
-            <li key={item.id} className="custom-list-row">
-              <span className="only-mobile">{item.date}</span>
-              <span>{item.quote}</span>
-              <span>{item.customer}</span>
-              <span>
-                <>{item.customer}</>
+          quotesList[currentPage - 1].map((item) => {
+            const user = FakeUsersList.find((i) => i.id === item.userId);
 
-                <button type="button">Cotizar</button>
-              </span>
-            </li>
-          ))
+            return (
+              <Link
+                href={`${Routes.quotes}/request/${item.id}`}
+                key={item.id}
+                className="custom-list-row"
+              >
+                <span className="only-mobile">{item.date}</span>
+                <span>{item.quoteNumber}</span>
+                <span>
+                  {user?.firstName} {user?.lastName}
+                </span>
+                <span>
+                  <>
+                    {user?.firstName} {user?.lastName}
+                  </>
+
+                  <button type="button">Cotizar</button>
+                </span>
+              </Link>
+            );
+          })
         ) : (
           <li className="custom-list-row">
             <span>No hay usuarios para mostrar.</span>
