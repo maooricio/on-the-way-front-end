@@ -2,15 +2,12 @@
 import Image from "next/image";
 import back from "@/assets/icons/arrow/arrow_back.svg";
 import { useParams, useRouter } from "next/navigation";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent } from "react";
 import { IQuote } from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import Link from "next/link";
 import { formatCurrency } from "@/utils/handlers/currency";
-import AddDiscountVoucherModal from "@/components/admin/quotes/add_discount_voucher";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
-import ticket from "@/assets/icons/others/ticket.svg";
-import InputElement from "@/components/elements/inputs/input";
 import { FakeRequestsList, FakeUsersList } from "@/utils/data/fakers";
 
 export interface IQuoteRequest {
@@ -24,71 +21,15 @@ export interface IDiscountData {
 const QuoteDetailsPage = () => {
   const router = useRouter();
   const { id } = useParams();
-  const requestSelected: IQuote | undefined = FakeRequestsList.find(
+  const quoteData: IQuote | undefined = FakeRequestsList.find(
     (i) => i.id === id
   );
-  const userSelected = FakeUsersList.find(
-    (i) => i.id === requestSelected?.userId
-  );
-
-  const initialState: IQuoteRequest = {
-    deliveryTransport: "",
-    collectionTransport: "",
-    comment: "",
-    ...Object.fromEntries(
-      requestSelected?.vehicles.map((v) => [v.id, ""]) || []
-    ),
-    ...Object.fromEntries(
-      requestSelected?.operators.map((o) => [o.id, ""]) || []
-    ),
-  };
-
-  const initialDiscount: IDiscountData = {
-    discountVoucher: requestSelected
-      ? requestSelected.discountVoucher
-      : { type: "%", amount: 0 },
-  };
-
-  const [formData, setFormData] = useState<IQuoteRequest>(initialState);
-  const [discountData, setDiscountData] =
-    useState<IDiscountData>(initialDiscount);
-  const [requestData, setRequestData] = useState<IQuote>(requestSelected!);
-  const [showDiscountModal, setShowDiscountModal] = useState<boolean>(false);
-  const [price, setPrice] = useState<number>(0);
+  const userSelected = FakeUsersList.find((i) => i.id === quoteData?.userId);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     router.replace(Routes.quotes_history);
   };
-
-  const calculatePrice = () => {
-    let price = 0;
-
-    for (const key in formData) {
-      if (Object.prototype.hasOwnProperty.call(formData, key)) {
-        const elementValue = Number(formData[key]);
-
-        if (!isNaN(elementValue)) {
-          price += elementValue;
-        }
-      }
-    }
-
-    setPrice(price);
-  };
-
-  useEffect(() => {
-    calculatePrice();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formData]);
-
-  useEffect(() => {
-    setRequestData((prev) => ({
-      ...prev,
-      discountVoucher: discountData.discountVoucher,
-    }));
-  }, [discountData]);
 
   return (
     <section className="new-quote-container">
@@ -100,34 +41,37 @@ const QuoteDetailsPage = () => {
       </header>
 
       <section className="new-quote-content">
-        {requestData && (
-          <form className="new-quote-form" onSubmit={handleOnSubmit}>
-            <div className="new-quote-resume">
-              {userSelected && (
-                <div className="new-quote-resume-customer">
-                  <div className="user-photo-container">
-                    <Image
-                      src={otw_logo}
-                      alt="user photo"
-                      className="user-photo"
-                    />
-                  </div>
-
-                  <div className="new-quote-resume-customer-content">
-                    <div className="new-quote-resume-customer-content-title">
-                      <p>{userSelected.company}</p>
-                      <p>Carrera 43 No, 201 - 78. Of 199, Cundinamarca</p>
-                    </div>
-
-                    <p>
-                      Persona responsable: {userSelected.firstName}{" "}
-                      {userSelected.lastName}
-                    </p>
-                  </div>
+        {quoteData && (
+          <form
+            className="new-quote-form quote-details-form"
+            onSubmit={handleOnSubmit}
+          >
+            {userSelected && (
+              <div className="new-quote-resume-customer">
+                <div className="user-photo-container">
+                  <Image
+                    src={otw_logo}
+                    alt="user photo"
+                    className="user-photo"
+                  />
                 </div>
-              )}
 
-              {requestData.deliveryTransport && (
+                <div className="new-quote-resume-customer-content">
+                  <div className="new-quote-resume-customer-content-title">
+                    <p>{userSelected.company}</p>
+                    <p>Carrera 43 No, 201 - 78. Of 199, Cundinamarca</p>
+                  </div>
+
+                  <p>
+                    Persona responsable: {userSelected.firstName}{" "}
+                    {userSelected.lastName}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            <div className="new-quote-resume">
+              {quoteData.deliveryTransport && (
                 <div className="new-quote-summary-item">
                   <div className="new-quote-summary-item-header">
                     <h1>Transporte de entrega</h1>
@@ -142,7 +86,7 @@ const QuoteDetailsPage = () => {
                 </div>
               )}
 
-              {requestData.collectionTransport && (
+              {quoteData.collectionTransport && (
                 <div className="new-quote-summary-item">
                   <div className="new-quote-summary-item-header">
                     <h1>Transporte de recogida</h1>
@@ -157,8 +101,8 @@ const QuoteDetailsPage = () => {
                 </div>
               )}
 
-              {requestData.vehicles.length > 0 &&
-                requestData.vehicles.map((item) => (
+              {quoteData.vehicles.length > 0 &&
+                quoteData.vehicles.map((item) => (
                   <div key={item.id} className="new-quote-summary-item">
                     <div className="new-quote-summary-item-header">
                       <h1>Vehículo {item.name}</h1>
@@ -173,8 +117,8 @@ const QuoteDetailsPage = () => {
                   </div>
                 ))}
 
-              {requestData.operators.length > 0 &&
-                requestData.operators.map((item) => (
+              {quoteData.operators.length > 0 &&
+                quoteData.operators.map((item) => (
                   <div key={item.id} className="new-quote-summary-item">
                     <div className="new-quote-summary-item-header">
                       <h1>{item.name}</h1>
@@ -189,7 +133,7 @@ const QuoteDetailsPage = () => {
                   </div>
                 ))}
 
-              <InputElement
+              {/* <InputElement
                 type="textarea"
                 label=""
                 placeholder="Añade una nota o comentario para el cliente..."
@@ -198,61 +142,34 @@ const QuoteDetailsPage = () => {
                 error=""
                 value={formData.comment}
                 icon={<></>}
-              />
+              /> */}
 
               <div className="new-quote-resume-footer">
-                {requestData.discountVoucher.amount === 0 ? (
-                  <button
-                    type="button"
-                    onClick={() => setShowDiscountModal(true)}
-                    className="discount-button"
-                  >
-                    <Image src={ticket} alt="ticket icon" />
-                    Aplicar cupón de descuento
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setDiscountData({
-                        discountVoucher: { type: "%", amount: 0 },
-                      })
-                    }
-                    className="discount-button delete-button"
-                  >
-                    Eliminar cupón de descuento
-                  </button>
-                )}
-
-                {requestData.discountVoucher.amount === 0 ? (
+                {quoteData.discountVoucher.amount === 0 ? (
                   <p>
-                    <span>Total:</span> <span>{formatCurrency(price)}</span>
+                    <span>Total:</span> <span>{formatCurrency(0)}</span>
                   </p>
                 ) : (
                   <div className="new-quote-summary-with-discount">
                     <p>
                       <span>Subtotal:</span>{" "}
-                      <span className="text-regular">
-                        {formatCurrency(price)}
-                      </span>
+                      <span className="text-regular">{formatCurrency(0)}</span>
                     </p>
                     <p>
                       <span>Descuento:</span>{" "}
                       <span className="text-regular">
-                        {requestData.discountVoucher.type === "%"
-                          ? `${requestData.discountVoucher.amount}%`
-                          : formatCurrency(requestData.discountVoucher.amount)}
+                        {quoteData.discountVoucher.type === "%"
+                          ? `${quoteData.discountVoucher.amount}%`
+                          : formatCurrency(quoteData.discountVoucher.amount)}
                       </span>
                     </p>
                     <p>
                       <span>Total:</span>{" "}
                       <span>
                         {formatCurrency(
-                          requestData.discountVoucher.type === "%"
-                            ? price -
-                                price *
-                                  (requestData.discountVoucher.amount / 100)
-                            : price - requestData.discountVoucher.amount
+                          quoteData.discountVoucher.type === "%"
+                            ? 0 - 0 * (quoteData.discountVoucher.amount / 100)
+                            : 0 - quoteData.discountVoucher.amount
                         )}
                       </span>
                     </p>
@@ -270,13 +187,6 @@ const QuoteDetailsPage = () => {
           </form>
         )}
       </section>
-
-      {showDiscountModal && (
-        <AddDiscountVoucherModal
-          setShowModal={setShowDiscountModal}
-          setFormData={setDiscountData}
-        />
-      )}
     </section>
   );
 };
