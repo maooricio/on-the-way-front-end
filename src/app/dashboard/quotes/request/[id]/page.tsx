@@ -3,10 +3,10 @@ import Image from "next/image";
 import back from "@/assets/icons/arrow/arrow_back.svg";
 import { useParams, useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
-import { IQuote } from "@/utils/interfaces/new_quote.interface";
+import { IQuote } from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import Link from "next/link";
-import { formatCurrency, parseCurrency } from "@/utils/handlers/currency";
+import { formatCurrency } from "@/utils/handlers/currency";
 import AddDiscountVoucherModal from "@/components/admin/quotes/add_discount_voucher";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
 import ticket from "@/assets/icons/others/ticket.svg";
@@ -58,18 +58,20 @@ const QuoteRequestDetailsPage = () => {
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    router.replace(Routes.quotes_history);
   };
 
   const calculatePrice = () => {
-    const deliveryValue = formData.deliveryTransport;
-    const deliveryPrice = parseCurrency(
-      typeof deliveryValue === "string" ? deliveryValue : ""
-    );
-
     let price = 0;
 
-    if (!isNaN(deliveryPrice)) {
-      price += deliveryPrice;
+    for (const key in formData) {
+      if (Object.prototype.hasOwnProperty.call(formData, key)) {
+        const elementValue = Number(formData[key]);
+
+        if (!isNaN(elementValue)) {
+          price += elementValue;
+        }
+      }
     }
 
     setPrice(price);
@@ -99,29 +101,56 @@ const QuoteRequestDetailsPage = () => {
 
       <section className="new-quote-content">
         {requestData && (
-          <form className="new-quote-form" onSubmit={handleOnSubmit}>
+          <form
+            className="new-quote-form quote-request-form"
+            onSubmit={handleOnSubmit}
+          >
             <div className="new-quote-resume">
               {userSelected && (
                 <div className="new-quote-resume-customer">
-                  <div className="user-photo-container">
-                    <Image
-                      src={otw_logo}
-                      alt="user photo"
-                      className="user-photo"
-                    />
-                  </div>
-
-                  <div className="new-quote-resume-customer-content">
-                    <div className="new-quote-resume-customer-content-title">
-                      <p>{userSelected.company}</p>
-                      <p>Carrera 43 No, 201 - 78. Of 199, Cundinamarca</p>
+                  <div className="new-quote-resume-customer-info">
+                    <div className="user-photo-container">
+                      <Image
+                        src={otw_logo}
+                        alt="user photo"
+                        className="user-photo"
+                      />
                     </div>
 
-                    <p>
-                      Persona responsable: {userSelected.firstName}{" "}
-                      {userSelected.lastName}
-                    </p>
+                    <div className="new-quote-resume-customer-content">
+                      <div className="new-quote-resume-customer-content-title">
+                        <p>{userSelected.company}</p>
+                        <p>Carrera 43 No, 201 - 78. Of 199, Cundinamarca</p>
+                      </div>
+
+                      <p>
+                        Persona responsable: {userSelected.firstName}{" "}
+                        {userSelected.lastName}
+                      </p>
+                    </div>
                   </div>
+
+                  {requestData.comment.length > 0 && (
+                    <ul className="new-quote-request-comments">
+                      {requestData.comment.map((i) => (
+                        <li key={`${i.userId}: ${i.date}`}>
+                          <div className="new-quote-request-comments-header">
+                            <div className="user-photo-container">
+                              <Image
+                                src={otw_logo}
+                                alt="user photo"
+                                className="user-photo"
+                              />
+                            </div>
+                            <h3>Comentario</h3>
+                            <span>{i.date}</span>
+                          </div>
+
+                          <p>{i.comment}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               )}
 

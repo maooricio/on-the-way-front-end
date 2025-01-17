@@ -1,7 +1,7 @@
 "use client";
 import { FakeUsersList } from "@/utils/data/fakers";
 import { getStageIcon } from "@/utils/handlers/get_icon";
-import { IQuote } from "@/utils/interfaces/new_quote.interface";
+import { IQuote } from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import Image from "next/image";
 import Link from "next/link";

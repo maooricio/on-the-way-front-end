@@ -14,7 +14,7 @@ import back from "@/assets/icons/arrow/arrow_back.svg";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Routes } from "@/utils/router/router_enum";
-import { IQuote } from "@/utils/interfaces/new_quote.interface";
+import { IQuote } from "@/utils/interfaces/quote.interface";
 import { formatCurrency } from "@/utils/handlers/currency";
 
 export interface ISearch {

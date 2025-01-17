@@ -7,6 +7,12 @@ export interface ICustomerSelect {
   search: string;
 }
 
+export interface IQuoteComment {
+  userId: string;
+  date: string;
+  comment: string;
+}
+
 export interface IQuote {
   id?: string;
   userId?: string;
@@ -29,6 +35,6 @@ export interface IQuote {
     type: string;
     amount: number;
   };
-  comment: string;
+  comment: IQuoteComment[];
   date?: string;
 }

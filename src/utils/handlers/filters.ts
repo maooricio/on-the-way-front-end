@@ -1,5 +1,5 @@
 import { FakeUsersList } from "../data/fakers";
-import { IQuote } from "../interfaces/new_quote.interface";
+import { IQuote } from "../interfaces/quote.interface";
 import { IUser } from "../interfaces/user.interface";
 import { paginateList } from "./paginate";
 

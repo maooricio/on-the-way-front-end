@@ -7,7 +7,7 @@ import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import {
   ICustomerSelect,
   IQuote,
-} from "@/utils/interfaces/new_quote.interface";
+} from "@/utils/interfaces/quote.interface";
 import { operatorsOptions } from "@/utils/data/jobs";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
 import close from "@/assets/icons/utils/close_fill.svg";

@@ -16,7 +16,7 @@ import { ISearch } from "@/app/dashboard/users/page";
 import {
   ICustomerSelect,
   IQuote,
-} from "@/utils/interfaces/new_quote.interface";
+} from "@/utils/interfaces/quote.interface";
 import { IVoucherAmount } from "@/components/admin/quotes/add_discount_voucher";
 import { IQuoteRequest } from "@/app/dashboard/quotes/request/[id]/page";
 

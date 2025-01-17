@@ -3,7 +3,7 @@ import { getSquareIcon, getStageIcon } from "@/utils/handlers/get_icon";
 import {
   ICustomerSelect,
   IQuote,
-} from "@/utils/interfaces/new_quote.interface";
+} from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import Image from "next/image";
 import Link from "next/link";

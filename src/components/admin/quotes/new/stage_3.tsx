@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 import empty from "@/assets/icons/checkbox/square_empty.svg";
 import fill from "@/assets/icons/checkbox/square_fill.svg";
-import { IQuote } from "@/utils/interfaces/new_quote.interface";
+import { IQuote } from "@/utils/interfaces/quote.interface";
 import Link from "next/link";
 import { Routes } from "@/utils/router/router_enum";
 import { IVehicles } from "@/utils/interfaces/vehicles.interface";

@@ -17,7 +17,7 @@ import otw_logo from "@/assets/images/otw_only_logo.svg";
 import {
   ICustomerSelect,
   IQuote,
-} from "@/utils/interfaces/new_quote.interface";
+} from "@/utils/interfaces/quote.interface";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;

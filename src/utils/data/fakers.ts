@@ -1,4 +1,4 @@
-import { IQuote } from "../interfaces/new_quote.interface";
+import { IQuote } from "../interfaces/quote.interface";
 import { IUser } from "../interfaces/user.interface";
 import motocycle from "@/assets/images/vehicles/motocycle.svg";
 
@@ -179,7 +179,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq1",
@@ -204,7 +204,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq2",
@@ -229,7 +229,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq3",
@@ -254,7 +254,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq4",
@@ -279,7 +279,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq6",
@@ -304,7 +304,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq7",
@@ -329,7 +329,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq8",
@@ -354,7 +354,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq9",
@@ -379,7 +379,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq0",
@@ -404,7 +404,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasda1",
@@ -429,7 +429,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdd3",
@@ -454,7 +454,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasda3",
@@ -479,7 +479,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasda4",
@@ -504,7 +504,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasda5",
@@ -529,7 +529,7 @@ export const FakeQuotesList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
 ];
 
@@ -578,7 +578,14 @@ export const FakeRequestsList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq1",
@@ -603,7 +610,7 @@ export const FakeRequestsList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq2",
@@ -628,7 +635,7 @@ export const FakeRequestsList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq3",
@@ -653,7 +660,7 @@ export const FakeRequestsList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq4",
@@ -678,7 +685,7 @@ export const FakeRequestsList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq6",
@@ -703,7 +710,7 @@ export const FakeRequestsList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq7",
@@ -728,7 +735,7 @@ export const FakeRequestsList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
   {
     id: "asdfasdfasdq8",
@@ -753,6 +760,6 @@ export const FakeRequestsList: IQuote[] = [
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   },
 ];

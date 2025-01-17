@@ -6,7 +6,7 @@ import NewQuoteStageOne from "@/components/admin/quotes/new/stage_1";
 import { useState } from "react";
 import NewQuoteStageTwo from "@/components/admin/quotes/new/stage_2";
 import NewQuoteStageThree from "@/components/admin/quotes/new/stage_3";
-import { IQuote } from "@/utils/interfaces/new_quote.interface";
+import { IQuote } from "@/utils/interfaces/quote.interface";
 import NewQuoteSummary from "@/components/admin/quotes/new/summary";
 import NewQuoteStageFour from "@/components/admin/quotes/new/stage_4";
 import NewQuoteStageFive from "@/components/admin/quotes/new/stage_5";

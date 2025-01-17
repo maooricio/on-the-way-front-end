@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import delete_icon from "@/assets/icons/utils/close_fill.svg";
-import { IQuote } from "@/utils/interfaces/new_quote.interface";
+import { IQuote } from "@/utils/interfaces/quote.interface";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { formatCurrency } from "@/utils/handlers/currency";
 import plus from "@/assets/icons/utils/plus.svg";

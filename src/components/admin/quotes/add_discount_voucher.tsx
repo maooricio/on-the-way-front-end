@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { IQuote } from "@/utils/interfaces/new_quote.interface";
+import { IQuote } from "@/utils/interfaces/quote.interface";
 import InputElement from "@/components/elements/inputs/input";
 import empty from "@/assets/icons/checkbox/circle_empty.svg";
 import fill from "@/assets/icons/checkbox/circle_fill.svg";

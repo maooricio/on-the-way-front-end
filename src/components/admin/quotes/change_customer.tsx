@@ -12,7 +12,7 @@ import SelectWithInput from "@/components/elements/inputs/select";
 import {
   ICustomerSelect,
   IQuote,
-} from "@/utils/interfaces/new_quote.interface";
+} from "@/utils/interfaces/quote.interface";
 import { FakeUsersList } from "@/utils/data/fakers";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
