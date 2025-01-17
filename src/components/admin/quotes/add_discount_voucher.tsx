@@ -12,7 +12,7 @@ import InputElement from "@/components/elements/inputs/input";
 import empty from "@/assets/icons/checkbox/circle_empty.svg";
 import fill from "@/assets/icons/checkbox/circle_fill.svg";
 import { parseCurrency, parsePercentage } from "@/utils/handlers/currency";
-import { IQuoteRequest } from "@/app/dashboard/quotes/request/[id]/page";
+import { IDiscountData, IQuoteRequest } from "@/app/dashboard/quotes/request/[id]/page";
 
 interface IVoucherData {
   type: string;
@@ -27,7 +27,8 @@ interface Props {
   setShowModal: Dispatch<SetStateAction<boolean>>;
   setFormData:
     | Dispatch<SetStateAction<IQuote>>
-    | Dispatch<SetStateAction<IQuoteRequest>>;
+    | Dispatch<SetStateAction<IQuoteRequest>>
+    | Dispatch<SetStateAction<IDiscountData>>;
 }
 
 const AddDiscountVoucherModal = ({ setShowModal, setFormData }: Props) => {

@@ -14,9 +14,11 @@ import InputElement from "@/components/elements/inputs/input";
 import { FakeRequestsList, FakeUsersList } from "@/utils/data/fakers";
 
 export interface IQuoteRequest {
-  deliveryTransport: string;
-  collectionTransport: string;
-  comment: string;
+  [key: string]: string;
+}
+
+export interface IDiscountData {
+  discountVoucher: { type: string; amount: number };
 }
 
 const QuoteRequestDetailsPage = () => {
@@ -33,9 +35,24 @@ const QuoteRequestDetailsPage = () => {
     deliveryTransport: "",
     collectionTransport: "",
     comment: "",
+    ...Object.fromEntries(
+      requestSelected?.vehicles.map((v) => [v.id, ""]) || []
+    ),
+    ...Object.fromEntries(
+      requestSelected?.operators.map((o) => [o.id, ""]) || []
+    ),
+  };
+
+  const initialDiscount: IDiscountData = {
+    discountVoucher: requestSelected
+      ? requestSelected.discountVoucher
+      : { type: "%", amount: 0 },
   };
 
   const [formData, setFormData] = useState<IQuoteRequest>(initialState);
+  const [discountData, setDiscountData] =
+    useState<IDiscountData>(initialDiscount);
+  const [requestData, setRequestData] = useState<IQuote>(requestSelected!);
   const [showDiscountModal, setShowDiscountModal] = useState<boolean>(false);
   const [price, setPrice] = useState<number>(0);
 
@@ -44,7 +61,10 @@ const QuoteRequestDetailsPage = () => {
   };
 
   const calculatePrice = () => {
-    const deliveryPrice = parseCurrency(formData.deliveryTransport);
+    const deliveryValue = formData.deliveryTransport;
+    const deliveryPrice = parseCurrency(
+      typeof deliveryValue === "string" ? deliveryValue : ""
+    );
 
     let price = 0;
 
@@ -61,6 +81,13 @@ const QuoteRequestDetailsPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
+  useEffect(() => {
+    setRequestData((prev) => ({
+      ...prev,
+      discountVoucher: discountData.discountVoucher,
+    }));
+  }, [discountData]);
+
   return (
     <section className="new-quote-container">
       <header className="new-quote-header">
@@ -71,7 +98,7 @@ const QuoteRequestDetailsPage = () => {
       </header>
 
       <section className="new-quote-content">
-        {requestSelected && (
+        {requestData && (
           <form className="new-quote-form" onSubmit={handleOnSubmit}>
             <div className="new-quote-resume">
               {userSelected && (
@@ -98,7 +125,7 @@ const QuoteRequestDetailsPage = () => {
                 </div>
               )}
 
-              {requestSelected.deliveryTransport && (
+              {requestData.deliveryTransport && (
                 <div className="new-quote-summary-item">
                   <div className="new-quote-summary-item-header">
                     <h1>Transporte de entrega</h1>
@@ -115,14 +142,18 @@ const QuoteRequestDetailsPage = () => {
                       name="deliveryTransport"
                       setFormData={setFormData}
                       error=""
-                      value={formData.deliveryTransport}
+                      value={
+                        typeof formData.deliveryTransport === "string"
+                          ? formData.deliveryTransport
+                          : ""
+                      }
                       icon={<></>}
                     />
                   </div>
                 </div>
               )}
 
-              {requestSelected.collectionTransport && (
+              {requestData.collectionTransport && (
                 <div className="new-quote-summary-item">
                   <div className="new-quote-summary-item-header">
                     <h1>Transporte de recogida</h1>
@@ -139,15 +170,19 @@ const QuoteRequestDetailsPage = () => {
                       name="deliveryTransport"
                       setFormData={setFormData}
                       error=""
-                      value={formData.deliveryTransport}
+                      value={
+                        typeof formData.deliveryTransport === "string"
+                          ? formData.deliveryTransport
+                          : ""
+                      }
                       icon={<></>}
                     />
                   </div>
                 </div>
               )}
 
-              {requestSelected.vehicles.length > 0 &&
-                requestSelected.vehicles.map((item) => (
+              {requestData.vehicles.length > 0 &&
+                requestData.vehicles.map((item) => (
                   <div key={item.id} className="new-quote-summary-item">
                     <div className="new-quote-summary-item-header">
                       <h1>Vehículo {item.name}</h1>
@@ -161,18 +196,18 @@ const QuoteRequestDetailsPage = () => {
                         type="text"
                         label=""
                         placeholder="$00,00"
-                        name="deliveryTransport"
+                        name={item.id}
                         setFormData={setFormData}
                         error=""
-                        value={formData.deliveryTransport}
+                        value={formData[item.id] || ""}
                         icon={<></>}
                       />
                     </div>
                   </div>
                 ))}
 
-              {requestSelected.operators.length > 0 &&
-                requestSelected.operators.map((item) => (
+              {requestData.operators.length > 0 &&
+                requestData.operators.map((item) => (
                   <div key={item.id} className="new-quote-summary-item">
                     <div className="new-quote-summary-item-header">
                       <h1>{item.name}</h1>
@@ -186,10 +221,10 @@ const QuoteRequestDetailsPage = () => {
                         type="text"
                         label=""
                         placeholder="$00,00"
-                        name="deliveryTransport"
+                        name={item.id}
                         setFormData={setFormData}
                         error=""
-                        value={formData.deliveryTransport}
+                        value={formData[item.id]}
                         icon={<></>}
                       />
                     </div>
@@ -208,7 +243,7 @@ const QuoteRequestDetailsPage = () => {
               />
 
               <div className="new-quote-resume-footer">
-                {requestSelected.discountVoucher.amount === 0 ? (
+                {requestData.discountVoucher.amount === 0 ? (
                   <button
                     type="button"
                     onClick={() => setShowDiscountModal(true)}
@@ -221,10 +256,9 @@ const QuoteRequestDetailsPage = () => {
                   <button
                     type="button"
                     onClick={() =>
-                      setFormData((prev) => ({
-                        ...prev,
+                      setDiscountData({
                         discountVoucher: { type: "%", amount: 0 },
-                      }))
+                      })
                     }
                     className="discount-button delete-button"
                   >
@@ -232,7 +266,7 @@ const QuoteRequestDetailsPage = () => {
                   </button>
                 )}
 
-                {requestSelected.discountVoucher.amount === 0 ? (
+                {requestData.discountVoucher.amount === 0 ? (
                   <p>
                     <span>Total:</span> <span>{formatCurrency(price)}</span>
                   </p>
@@ -247,22 +281,20 @@ const QuoteRequestDetailsPage = () => {
                     <p>
                       <span>Descuento:</span>{" "}
                       <span className="text-regular">
-                        {requestSelected.discountVoucher.type === "%"
-                          ? `${requestSelected.discountVoucher.amount}%`
-                          : formatCurrency(
-                              requestSelected.discountVoucher.amount
-                            )}
+                        {requestData.discountVoucher.type === "%"
+                          ? `${requestData.discountVoucher.amount}%`
+                          : formatCurrency(requestData.discountVoucher.amount)}
                       </span>
                     </p>
                     <p>
                       <span>Total:</span>{" "}
                       <span>
                         {formatCurrency(
-                          requestSelected.discountVoucher.type === "%"
+                          requestData.discountVoucher.type === "%"
                             ? price -
                                 price *
-                                  (requestSelected.discountVoucher.amount / 100)
-                            : price - requestSelected.discountVoucher.amount
+                                  (requestData.discountVoucher.amount / 100)
+                            : price - requestData.discountVoucher.amount
                         )}
                       </span>
                     </p>
@@ -284,7 +316,7 @@ const QuoteRequestDetailsPage = () => {
       {showDiscountModal && (
         <AddDiscountVoucherModal
           setShowModal={setShowDiscountModal}
-          setFormData={setFormData}
+          setFormData={setDiscountData}
         />
       )}
     </section>

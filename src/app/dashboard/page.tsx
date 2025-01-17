@@ -54,9 +54,9 @@ export default function Home() {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button" className="button">
+              <Link href={Routes.to_quote} className="link">
                 Ver pedidos
-              </button>
+              </Link>
             </footer>
           }
         />
