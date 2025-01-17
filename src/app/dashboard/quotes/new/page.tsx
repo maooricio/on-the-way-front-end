@@ -33,7 +33,7 @@ const NewQuotePage = () => {
       type: "%",
       amount: 0,
     },
-    comment: "",
+    comment: [],
   };
 
   const [formData, setFormData] = useState<IQuote>(initialState);

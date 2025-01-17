@@ -13,12 +13,10 @@ import {
 } from "../../../utils/interfaces/user.interface";
 import { IPassword } from "../../admin/settings/password_modal";
 import { ISearch } from "@/app/dashboard/users/page";
-import {
-  ICustomerSelect,
-  IQuote,
-} from "@/utils/interfaces/quote.interface";
+import { ICustomerSelect, IQuote } from "@/utils/interfaces/quote.interface";
 import { IVoucherAmount } from "@/components/admin/quotes/add_discount_voucher";
 import { IQuoteRequest } from "@/app/dashboard/quotes/request/[id]/page";
+import { IComment } from "@/components/admin/quotes/new/stage_5";
 
 interface Props {
   type: string;
@@ -113,4 +111,5 @@ type SetFormDataActions =
   | Dispatch<SetStateAction<IQuote>>
   | Dispatch<SetStateAction<IUser>>
   | Dispatch<SetStateAction<IVoucherAmount>>
-  | Dispatch<SetStateAction<IQuoteRequest>>;
+  | Dispatch<SetStateAction<IQuoteRequest>>
+  | Dispatch<SetStateAction<IComment>>;

@@ -13,6 +13,6 @@ export enum Routes {
   quotes_history = "/dashboard/quotes/history",
   quotes_new = "/dashboard/quotes/new",
   to_quote = "/dashboard/quotes/pending",
-  request_details = "/dashboard/quotes/request/:id"
-  
+  request_details = "/dashboard/quotes/request/:id",
+  quote_details = "/dashboard/quotes/:id",
 }

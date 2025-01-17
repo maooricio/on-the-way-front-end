@@ -122,7 +122,11 @@ const QuotesHistoryPage = () => {
             const user = FakeUsersList.find((i) => i.id === item.userId);
 
             return (
-              <li key={item.id} className="custom-list-row">
+              <Link
+                href={`${Routes.quotes}/${item.id}`}
+                key={item.id}
+                className="custom-list-row"
+              >
                 <span className="only-mobile">{item.date}</span>
                 <span>{item.quoteNumber}</span>
                 <span>
@@ -144,7 +148,7 @@ const QuotesHistoryPage = () => {
                     <Image src={three_dots} alt="three dots icon" />
                   </button>
                 </span>
-              </li>
+              </Link>
             );
           })
         ) : (
