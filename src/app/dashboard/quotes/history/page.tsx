@@ -16,6 +16,7 @@ import Link from "next/link";
 import { Routes } from "@/utils/router/router_enum";
 import { IQuote } from "@/utils/interfaces/quote.interface";
 import { formatCurrency } from "@/utils/handlers/currency";
+import { getStateColor } from "@/utils/handlers/get_state_color";
 
 export interface ISearch {
   value: string;
@@ -40,23 +41,6 @@ const QuotesHistoryPage = () => {
 
   const handlePagination = (page: number) => {
     setCurrentPage(page);
-  };
-
-  const getDotColor = (state: string): string => {
-    switch (state) {
-      case "En proceso":
-        return "#F59E0B";
-      case "Pagada":
-        return "#22C55E";
-      case "Pago pendiente":
-        return "#DCA7F6";
-      case "Verificar pago":
-        return "#CCCCCC";
-      case "Cancelada":
-        return "#EF4444";
-      default:
-        return "#CCCCCC";
-    }
   };
 
   useEffect(() => {
@@ -139,7 +123,7 @@ const QuotesHistoryPage = () => {
                   <div className="custom-list-state">
                     <div
                       className="custom-list-state-dot"
-                      style={{ backgroundColor: getDotColor(item.state!) }}
+                      style={{ backgroundColor: getStateColor(item.state!) }}
                     ></div>
                     <p className="only-mobile">{item.state}</p>
                   </div>
