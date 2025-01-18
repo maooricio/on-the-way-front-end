@@ -37,7 +37,9 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="normal-card-button-container">
-              <Link href={Routes.quotes_new} className="button">Nueva cotización</Link>
+              <Link href={Routes.quotes_new} className="button">
+                Nueva cotización
+              </Link>
               <Link href={Routes.quotes_history} className="without-bg">
                 Ver historial de cotizaciones
               </Link>
@@ -60,7 +62,9 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="normal-card-button-container">
-              <button type="button">Ver solicitudes</button>
+              <Link href={Routes.to_quote} className="button">
+                Ver solicitudes
+              </Link>
             </footer>
           }
         />
@@ -85,7 +89,9 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button" className="button">Ver cotizaciones en proceso</button>
+              <button type="button" className="button">
+                Ver cotizaciones en proceso
+              </button>
             </footer>
           }
         />
@@ -105,7 +111,9 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button" className="button">Ver solicitudes</button>
+              <button type="button" className="button">
+                Ver solicitudes
+              </button>
             </footer>
           }
         />
@@ -125,7 +133,9 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button" className="button">Ver borradores</button>
+              <button type="button" className="button">
+                Ver borradores
+              </button>
             </footer>
           }
         />

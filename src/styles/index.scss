@@ -10,7 +10,7 @@
 @use "./components/elements/main/loader.scss";
 @use "./components/elements/main/modal.scss";
 @use "./components/elements/main/cards.scss";
-@use "./components/elements/handlers/pagitnation.scss";
+@use "./components/elements/handlers/pagination.scss";
 @use "./components/elements/handlers/select.scss";
 @use "./components/elements/main/list.scss";
 
@@ -27,6 +27,8 @@
 @use "./components/admin/quotes/new_stage_2.scss";
 @use "./components/admin/quotes/new_stage_3.scss";
 @use "./components/admin/quotes/new_summary.scss";
+@use "./components/admin/quotes/request.scss";
+@use "./components/admin/quotes/q_details.scss";
 
 // admin/users
 @use "./components/admin/users.scss";
@@ -35,7 +37,7 @@
 @use "./components/admin/users/delete.scss";
 
 // suspenses
-@use "./components/elements/suspenses/settings_suspense.scss";
+// @use "./components/elements/suspenses/settings_suspense.scss";
 
 body {
   margin: 0;
@@ -57,11 +59,11 @@ button[type="submit"],
 .button {
   all: unset;
   cursor: pointer;
-  @include flex(row, center, center);
   background-color: $primary-600;
   padding: 16px;
   border-radius: 12px;
   color: $generic-white;
+  @include flex(row, center, center);
 
   &:hover {
     background-color: $primary-700;
@@ -83,14 +85,14 @@ button[type="submit"],
 }
 
 .user-photo-container {
-  @include flex(row, center, center);
   overflow: hidden;
   width: 104px;
   height: 104px;
   border-radius: 18px;
   background-color: $primary-200;
+  @include flex(row, center, center);
 
-  .user-photo {
+  & .user-photo {
     width: 70%;
     height: 80%;
     opacity: 25%;
@@ -98,17 +100,17 @@ button[type="submit"],
 }
 
 .counter-handler {
-  @include flex(row, space-between, center, 16px);
   background-color: $generic-white;
   border: 1px solid $neutral-200;
   padding: 8px 12px;
   border-radius: 8px;
+  @include flex(row, space-between, center, 16px);
 
-  button {
+  & button {
     all: unset;
-    @include flex(row, center, center);
     cursor: pointer;
     min-height: 20px;
+    @include flex(row, center, center);
 
     &:hover,
     &:disabled {

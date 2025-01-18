@@ -3,37 +3,36 @@
 .register-form-container {
   width: 720px;
 
-  .register-form-content-container {
-    @include flex(column, flex-start, center, 24px);
+  & .register-form-content-container {
     width: 100%;
+    @include flex(column, flex-start, center, 24px);
 
-    .input-label {
+    & .input-label {
       font-size: 14px;
     }
 
-    .custom-select-container {
+    & .custom-select-container {
       width: 100%;
       margin: 0;
     }
 
-    .input-container {
+    & .input-container {
       margin: 0;
 
-      .input {
+      & .input {
         input {
           padding: 10px 16px;
         }
       }
     }
 
-    .register-form-content-row {
-      @include flex(row, space-between, center, 24px);
+    & .register-form-content-row {
       width: 100%;
+      @include flex(row, space-between, center, 24px);
 
-      .select-with-input {
-        .custom-select {
-
-          .custom-select-options-container {
+      & .select-with-input {
+        & .custom-select {
+          & .custom-select-options-container {
             position: fixed;
             width: 343px;
             transform: translate(0, -15%);
@@ -45,7 +44,7 @@
     }
   }
 
-  .register-form-content-with-overflow {
+  & .register-form-content-with-overflow {
     overflow: auto;
     padding: 0 16px 24px 6px;
     margin-left: 8px;

@@ -10,25 +10,25 @@ import close from "@/assets/icons/utils/close.svg";
 import close_fill from "@/assets/icons/utils/close_fill.svg";
 import SelectWithInput from "@/components/elements/inputs/select";
 import {
-  INewQuoteStageOneForm,
-  INewQuoteStageTwoForm,
-} from "@/utils/interfaces/new_quote.interface";
+  ICustomerSelect,
+  IQuote,
+} from "@/utils/interfaces/quote.interface";
 import { FakeUsersList } from "@/utils/data/fakers";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
 
 interface Props {
   setShowModal: Dispatch<SetStateAction<boolean>>;
-  setFormQuoteData: Dispatch<SetStateAction<INewQuoteStageTwoForm>>;
+  setFormQuoteData: Dispatch<SetStateAction<IQuote>>;
 }
 
 const ChangeCustomerModal = ({ setShowModal, setFormQuoteData }: Props) => {
-  const initialState: INewQuoteStageOneForm = {
+  const initialState: ICustomerSelect = {
     selected: undefined,
     search: "",
   };
 
-  const [formData, setFormData] = useState<INewQuoteStageOneForm>(initialState);
+  const [formData, setFormData] = useState<ICustomerSelect>(initialState);
   const [customersOptions, setCustomersOptions] = useState<ISelectOption[]>([]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

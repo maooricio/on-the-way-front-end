@@ -1,12 +1,12 @@
 @use "../../globals" as *;
 
 .auth-form-container {
-  @include flex(column, flex-start, center, 24px);
   width: 50%;
   height: 100%;
   overflow-x: auto;
+  @include flex(column, flex-start, center, 24px);
 
-  .otw-logo {
+  & .otw-logo {
     margin-bottom: 12px;
 
     @media screen and (max-height: 500px) {
@@ -14,33 +14,39 @@
     }
   }
 
-  .auth-form {
+  & .auth-form {
     @include flex(column, center, center, 16px);
-    width: 45%;
-    height: 110%;
 
-    .password-header {
-      @include flex(row, flex-start, center, 8px);
+    & {
+      width: 45%;
+      height: 110%;
+    }
+
+    & .password-header {
       width: 100%;
+      @include flex(row, flex-start, center, 8px);
 
-      .link,
-      button[type="button"] {
+      & .link,
+      & button[type="button"] {
         all: unset;
         cursor: pointer;
         @include flex(row, flex-start, center);
       }
 
-      h3 {
+      & h3 {
         font-size: 16px;
         font-weight: 600;
       }
     }
 
-    .inputs-container {
+    & .inputs-container {
       @include flex(column, flex-start, center);
-      width: 100%;
 
-      .auth-form-error {
+      & {
+        width: 100%;
+      }
+
+      & .auth-form-error {
         font-size: 14px;
         color: $error-500;
         margin-left: 8px;
@@ -52,11 +58,14 @@
       }
     }
 
-    .code-inputs-container {
+    & .code-inputs-container {
       @include flex(row, space-between, center, 8px);
-      width: 100%;
 
-      .code-input {
+      & {
+        width: 100%;
+      }
+
+      & .code-input {
         all: unset;
         width: 16%;
         height: 54px;
@@ -70,18 +79,18 @@
         }
       }
 
-      .input-has-error {
+      & .input-has-error {
         border: 1px solid $error-500;
         box-shadow: 0 0 0 2px $error-shadow;
       }
     }
 
-    .forgotten-password {
+    & .forgotten-password {
       align-self: flex-start;
       font-size: 16px;
       color: $neutral-900;
 
-      .password-link {
+      & .password-link {
         all: unset;
         color: $primary-500;
         text-decoration: none;
@@ -93,11 +102,11 @@
       }
     }
 
-    .resend-code {
+    & .resend-code {
       width: 100%;
       color: $neutral-900;
 
-      button[type="button"] {
+      & button[type="button"] {
         all: unset;
         cursor: pointer;
         color: $primary-500;
@@ -108,23 +117,23 @@
       }
     }
 
-    .change-password-error {
+    & .change-password-error {
       color: $error-500;
       font-size: 14px;
       align-self: flex-start;
       margin-left: 8px;
     }
 
-    button[type="submit"] {
+    & button[type="submit"] {
       all: unset;
       cursor: pointer;
-      @include flex(row, center, center);
       width: 100%;
       background-color: $primary-600;
       color: $generic-white;
       border-radius: 12px;
       padding: 12px 0;
       margin-top: 32px;
+      @include flex(row, center, center);
 
       &:hover {
         background-color: $primary-700;
@@ -145,7 +154,7 @@
 
 @media screen and (max-width: 1400px) {
   .auth-form-container {
-    .auth-form {
+    & .auth-form {
       width: 60%;
     }
   }
@@ -156,11 +165,11 @@
     width: 100%;
     gap: 0;
 
-    .otw-logo {
+    & .otw-logo {
       margin-top: 16px;
     }
 
-    .auth-form {
+    & .auth-form {
       width: 90%;
     }
   }

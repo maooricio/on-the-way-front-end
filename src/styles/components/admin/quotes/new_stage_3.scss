@@ -1,24 +1,24 @@
 @use "../../../globals" as *;
 
 .new-quote-form-vehicles {
-  @include flex(row, space-between, center, 24px, wrap);
   width: 95%;
   margin-bottom: 24px;
+  @include flex(row, space-between, center, 24px, wrap);
 
-  .new-quote-vehicle-container {
-    @include flex(column, center, center, 0);
+  & .new-quote-vehicle-container {
     width: 48%;
     background-color: $neutral-50;
     border: 1px solid $neutral-200;
     border-radius: 24px;
     padding: 18px 0;
     cursor: pointer;
+    @include flex(column, center, center, 0);
 
-    .new-quote-vehicle-header {
-      @include flex(row, space-between, center);
+    & .new-quote-vehicle-header {
       width: 100%;
+      @include flex(row, space-between, center);
 
-      span {
+      & span {
         margin-left: 24px;
         background-color: $generic-white;
         padding: 8px 16px;
@@ -26,28 +26,28 @@
         border-radius: 8px;
       }
 
-      button {
+      & button {
         all: unset;
         margin-right: 24px;
       }
     }
 
-    .new-quote-vehicle-icon {
-      @include flex(row, center, center);
+    & .new-quote-vehicle-icon {
       border-bottom: 1px solid $neutral-200;
       width: 90%;
+      @include flex(row, center, center);
 
-      img {
+      & img {
         margin-top: 24px;
       }
     }
 
-    .new-quote-vehicle-info {
-      @include flex(column, center, center);
+    & .new-quote-vehicle-info {
       width: 100%;
       margin-top: 8px;
+      @include flex(column, center, center);
 
-      h3 {
+      & h3 {
         all: unset;
         font-size: 16px;
         font-weight: 600;
@@ -56,7 +56,7 @@
         color: $neutral-800;
       }
 
-      span {
+      & span {
         font-size: 14px;
         font-weight: 400;
         line-height: 22px;
@@ -70,22 +70,22 @@
     }
   }
 
-  .new-quote-vehicle-container-selected {
+  & .new-quote-vehicle-container-selected {
     background-color: $primary-100;
     border-color: $primary-500;
   }
 
-  .new-quote-form-footer {
-    @include flex(row, flex-end, center, 24px);
+  & .new-quote-form-footer {
     width: 100%;
     margin-top: 24px;
+    @include flex(row, flex-end, center, 24px);
 
-    button,
-    .button {
+    & button,
+    & .button {
       padding: 12px 16px;
     }
 
-    .button {
+    & .button {
       background-color: $primary-100;
       color: $primary-600;
       font-weight: 500;

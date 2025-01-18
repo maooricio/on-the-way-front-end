@@ -1,48 +1,48 @@
 @use "../../../globals" as *;
 
 .new-quote-resume {
-  @include flex(column, flex-start, center, 16px, wrap);
   width: 100%;
+  @include flex(column, flex-start, center, 16px, wrap);
 
-  p {
+  & p {
     width: 100%;
   }
 
-  .new-quote-resume-customer {
-    @include flex(row, space-between, center, 16px);
+  & .new-quote-resume-customer {
     width: 100%;
     background-color: $primary-50;
     border-radius: 24px;
     padding: 40px 0;
+    @include flex(row, space-between, center, 16px);
 
-    .user-photo-container {
-      @include flex(row, center, center);
+    & .user-photo-container {
       overflow: hidden;
       width: 64px;
       height: 64px;
       border-radius: 18px;
       background-color: $primary-200;
       margin-left: 32px;
+      @include flex(row, center, center);
 
-      .user-photo {
+      & .user-photo {
         width: 70%;
         height: 80%;
         opacity: 25%;
       }
     }
 
-    .new-quote-resume-customer-content {
-      @include flex(column, center, flex-start, 8px);
+    & .new-quote-resume-customer-content {
       width: 85%;
+      @include flex(column, center, flex-start, 8px);
 
-      p {
+      & p {
         all: unset;
       }
 
-      .new-quote-resume-customer-content-title {
+      & .new-quote-resume-customer-content-title {
         @include flex(row, flex-start, center, 16px);
 
-        p {
+        & p {
           &:first-child {
             font-size: 16px;
             font-weight: 600;
@@ -58,7 +58,7 @@
         }
       }
 
-      p {
+      & p {
         font-size: 16px;
         font-weight: 400;
         line-height: 24px;
@@ -66,7 +66,7 @@
       }
     }
 
-    button[type="button"] {
+    & button[type="button"] {
       all: unset;
       cursor: pointer;
       margin-right: 32px;
@@ -86,18 +86,18 @@
     }
   }
 
-  .new-quote-summary-item {
-    @include flex(row, space-between, center, 16px);
+  & .new-quote-summary-item {
     width: 100%;
     border-bottom: 1px solid $neutral-100;
     padding: 18px 0;
+    @include flex(row, space-between, center, 16px);
 
-    button {
+    & button {
       all: unset;
       cursor: pointer;
-      @include flex(row, center, center);
       margin-right: 24px;
       margin-left: 16px;
+      @include flex(row, center, center);
 
       &:hover,
       &:active {
@@ -105,17 +105,17 @@
       }
     }
 
-    .new-quote-summary-item-header {
-      @include flex(column, space-between, flex-start, 8px);
+    & .new-quote-summary-item-header {
       width: 100%;
+      @include flex(column, space-between, flex-start, 8px);
 
-      h1 {
+      & h1 {
         all: unset;
         color: $neutral-800;
       }
     }
 
-    p {
+    & p {
       all: unset;
       width: 70%;
       background-color: $generic-white;
@@ -125,25 +125,25 @@
       margin: 0;
     }
 
-    .new-quote-summary-item-handler {
-      @include flex(row, flex-start, center, 16px);
+    & .new-quote-summary-item-handler {
       width: 75%;
       margin: 0;
+      @include flex(row, flex-start, center, 16px);
 
-      p {
+      & p {
         margin: 0;
         width: 50%;
       }
 
-      .counter-handler {
+      & .counter-handler {
         width: 50%;
 
-        button {
+        & button {
           all: unset;
-          @include flex(row, center, center);
           cursor: pointer;
           min-height: 20px;
           margin: 0 16px;
+          @include flex(row, center, center);
 
           &:hover,
           &:disabled {
@@ -151,25 +151,29 @@
           }
         }
       }
+
+      & .input-container {
+        margin: 0;
+      }
     }
 
-    span {
+    & span {
       width: 100%;
       color: $neutral-500;
     }
   }
 
-  .new-quote-resume-footer {
-    @include flex(row, space-between, flex-start);
+  & .new-quote-resume-footer {
     width: 100%;
+    @include flex(row, space-between, flex-start);
 
-    .discount-button {
+    & .discount-button {
       all: unset;
       cursor: pointer;
-      @include flex(row, center, center, 16px);
       padding: 12px 16px;
       color: $primary-600;
       font-weight: 500;
+      @include flex(row, center, center, 16px);
 
       &:hover {
         color: $primary-700;
@@ -180,7 +184,7 @@
       }
     }
 
-    .delete-button {
+    & .delete-button {
       color: $error-500;
 
       &:hover {
@@ -188,11 +192,11 @@
       }
     }
 
-    p {
-      @include flex(row, space-between, center, 24px);
+    & p {
       width: 45%;
+      @include flex(row, space-between, center, 24px);
 
-      span {
+      & span {
         color: $neutral-800;
         font-size: 16px;
         font-weight: 600;
@@ -200,18 +204,18 @@
         text-align: left;
       }
 
-      span:last-child {
+      & span:last-child {
         margin-right: 56px;
       }
     }
 
-    .new-quote-summary-with-discount {
+    & .new-quote-summary-with-discount {
       width: 45%;
 
-      p {
+      & p {
         width: 100%;
 
-        .text-regular {
+        & .text-regular {
           font-weight: 500;
         }
       }

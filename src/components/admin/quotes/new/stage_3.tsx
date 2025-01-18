@@ -4,15 +4,15 @@ import Image from "next/image";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 import empty from "@/assets/icons/checkbox/square_empty.svg";
 import fill from "@/assets/icons/checkbox/square_fill.svg";
-import { INewQuoteStageTwoForm } from "@/utils/interfaces/new_quote.interface";
+import { IQuote } from "@/utils/interfaces/quote.interface";
 import Link from "next/link";
 import { Routes } from "@/utils/router/router_enum";
 import { IVehicles } from "@/utils/interfaces/vehicles.interface";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
-  formData: INewQuoteStageTwoForm;
-  setFormData: Dispatch<SetStateAction<INewQuoteStageTwoForm>>;
+  formData: IQuote;
+  setFormData: Dispatch<SetStateAction<IQuote>>;
 }
 
 const NewQuoteStageThree = ({ setStage, formData, setFormData }: Props) => {

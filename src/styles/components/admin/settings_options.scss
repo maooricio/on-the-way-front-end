@@ -1,49 +1,49 @@
 @use "../../globals" as *;
 
 .admin-settings-handler-container {
-  @include flex(column, space-between, flex-start);
   width: 50%;
   min-height: 180px;
   background-color: $generic-white;
   padding: 24px 24px 32px 24px;
   border-radius: 24px;
+  @include flex(column, space-between, flex-start);
 
-  .admin-settings-handler-header {
-    @include flex(row, space-between, center);
+  & .admin-settings-handler-header {
     width: 100%;
+    @include flex(row, space-between, center);
 
-    span {
+    & span {
       all: unset;
       font-weight: 600;
       line-height: 22px;
       color: $neutral-800;
     }
 
-    img {
-      @include flex(row, center, center);
+    & img {
       background-color: $secondary-50;
       padding: 16px;
       border-radius: 50%;
+      @include flex(row, center, center);
     }
   }
 
-  p {
+  & p {
     color: $neutral-400;
     font-size: 14px;
 
-    span {
+    & span {
       color: $primary-500;
       white-space: nowrap;
     }
   }
 
-  .current-email {
+  & .current-email {
     color: $neutral-700;
   }
 }
 
 @media screen and (max-width: 768px) {
-    .admin-settings-handler-container {
-        width: 100%;
-    }
+  .admin-settings-handler-container {
+    width: 100%;
   }
+}

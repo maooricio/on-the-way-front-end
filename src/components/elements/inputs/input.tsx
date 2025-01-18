@@ -13,11 +13,10 @@ import {
 } from "../../../utils/interfaces/user.interface";
 import { IPassword } from "../../admin/settings/password_modal";
 import { ISearch } from "@/app/dashboard/users/page";
-import {
-  INewQuoteStageOneForm,
-  INewQuoteStageTwoForm,
-} from "@/utils/interfaces/new_quote.interface";
+import { ICustomerSelect, IQuote } from "@/utils/interfaces/quote.interface";
 import { IVoucherAmount } from "@/components/admin/quotes/add_discount_voucher";
+import { IQuoteRequest } from "@/app/dashboard/quotes/request/[id]/page";
+import { IComment } from "@/components/admin/quotes/new/stage_5";
 
 interface Props {
   type: string;
@@ -50,7 +49,9 @@ const InputElement = ({
 }: Props) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
-  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -80,9 +81,12 @@ const InputElement = ({
             onBlur={onBlur}
           />
         ) : (
-          <textarea placeholder={placeholder} name={name}>
-            {value}
-          </textarea>
+          <textarea
+            placeholder={placeholder}
+            name={name}
+            value={value}
+            onChange={handleOnChange}
+          />
         )}
 
         {icon}
@@ -103,7 +107,9 @@ type SetFormDataActions =
   | Dispatch<SetStateAction<INewPasswordFormData>>
   | Dispatch<SetStateAction<IPassword>>
   | Dispatch<SetStateAction<ISearch>>
-  | Dispatch<SetStateAction<INewQuoteStageOneForm>>
-  | Dispatch<SetStateAction<INewQuoteStageTwoForm>>
+  | Dispatch<SetStateAction<ICustomerSelect>>
+  | Dispatch<SetStateAction<IQuote>>
   | Dispatch<SetStateAction<IUser>>
-  | Dispatch<SetStateAction<IVoucherAmount>>;
+  | Dispatch<SetStateAction<IVoucherAmount>>
+  | Dispatch<SetStateAction<IQuoteRequest>>
+  | Dispatch<SetStateAction<IComment>>;

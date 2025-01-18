@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import delete_icon from "@/assets/icons/utils/close_fill.svg";
-import { INewQuoteStageTwoForm } from "@/utils/interfaces/new_quote.interface";
+import { IQuote } from "@/utils/interfaces/quote.interface";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { formatCurrency } from "@/utils/handlers/currency";
 import plus from "@/assets/icons/utils/plus.svg";
@@ -10,8 +10,8 @@ import { IVehicles } from "@/utils/interfaces/vehicles.interface";
 import { IOperator } from "@/utils/interfaces/operator.interface";
 
 interface Props {
-  formData: INewQuoteStageTwoForm;
-  setFormData: Dispatch<SetStateAction<INewQuoteStageTwoForm>>;
+  formData: IQuote;
+  setFormData: Dispatch<SetStateAction<IQuote>>;
 }
 
 const NewQuoteSummary = ({ formData, setFormData }: Props) => {

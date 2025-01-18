@@ -1,27 +1,27 @@
 @use "../../globals" as *;
 
 .admin-container {
-  @include flex(row, flex-start, normal);
   height: 100vh;
   max-height: 100vh;
   overflow: auto;
   scrollbar-gutter: stable;
+  @include flex(row, flex-start, normal);
 
-  .admin-content-container {
-    @include flex(row, center, flex-start);
+  & .admin-content-container {
     width: 85%;
     background-color: $secondary-50;
     margin-left: calc(15% + 10px);
+    @include flex(row, center, flex-start);
   }
 }
 
 @media screen and (max-width: 768px) {
   .admin-container {
-    .admin-content-container {
-      @include flex(row, center, flex-start);
+    & .admin-content-container {
       width: 100%;
       background-color: $secondary-50;
       margin-left: 0;
+      @include flex(row, center, flex-start);
     }
   }
 }

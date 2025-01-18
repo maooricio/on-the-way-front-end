@@ -3,45 +3,45 @@
 .admin-users-container {
   @include adminContainer();
 
-  .admin-users-header {
+  & .admin-users-header {
     @include header();
   }
 
-  .admin-users-handler {
-    @include flex(row, space-between, center, 24px);
+  & .admin-users-handler {
     width: 100%;
+    @include flex(row, space-between, center, 24px);
 
-    .user-register-handler,
-    .user-select-handler,
-    .user-search-handler {
+    & .user-register-handler,
+    & .user-select-handler,
+    & .user-search-handler {
       width: 32%;
     }
 
-    .user-register-handler {
-      button[type="button"] {
+    & .user-register-handler {
+      & button[type="button"] {
         padding: 11px 16px;
       }
     }
 
-    .user-select-handler {
-      .custom-select-container {
+    & .user-select-handler {
+      & .custom-select-container {
         gap: 0;
       }
     }
 
-    .user-search-handler {
-      .input-container {
+    & .user-search-handler {
+      & .input-container {
         margin: 0;
 
-        .input {
+        & .input {
           @include flex(row-reverse, space-between, center);
 
-          input {
+          & input {
             padding: 10px 16px;
             padding-left: 0;
           }
 
-          img {
+          & img {
             margin-right: 8px;
             margin-left: 8px;
             cursor: text;
@@ -54,12 +54,12 @@
 
 @media screen and (max-width: 768px) {
   .admin-users-container {
-    .admin-users-handler {
+    & .admin-users-handler {
       @include flex(column, center, flex-start, 16px);
 
-      .user-register-handler,
-      .user-select-handler,
-      .user-search-handler {
+      & .user-register-handler,
+      & .user-select-handler,
+      & .user-search-handler {
         width: 100%;
       }
     }

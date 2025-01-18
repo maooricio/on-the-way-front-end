@@ -3,18 +3,20 @@
 .custom-list-container {
   all: unset;
   list-style: none;
-  @include flex(column, flex-start, center);
   width: 96%;
   background-color: $generic-white;
   padding: 24px;
   border-radius: 24px;
+  margin-bottom: 24px;
+  @include flex(column, flex-start, center);
 
-  li {
-    @include flex(row, space-between, center);
+  & li,
+  & .custom-list-row {
     width: 100%;
     padding: 16px 0;
+    @include flex(row, space-between, center);
 
-    span {
+    & span {
       width: 25%;
       font-size: 14px;
       line-height: 22px;
@@ -30,27 +32,30 @@
     }
   }
 
-  .custom-list-header {
+  & .custom-list-header {
     background-color: $primary-50;
     border-radius: 12px;
   }
 
-  .custom-list-row {
+  & .custom-list-row {
     border-bottom: 1px solid $primary-50;
+    text-decoration: none;
 
-    span {
+    & span {
       color: $neutral-800;
 
       &:last-child {
         @include flex(row, space-between, center);
 
-        button {
+        & button {
           all: unset;
+          color: $primary-500;
+          font-weight: 500;
+          margin-right: 8px;
         }
       }
 
-      .custom-list-state {
-        @include flex(row, flex-start, center, 8px);
+      & .custom-list-state {
         width: auto;
         background-color: $secondary-50;
         padding: 4px 0;
@@ -58,15 +63,16 @@
         border-radius: 24px;
         color: $neutral-800;
         user-select: none;
+        @include flex(row, flex-start, center, 8px);
 
-        .custom-list-state-dot {
+        & .custom-list-state-dot {
           width: 8px;
           height: 8px;
           border-radius: 50%;
           margin-left: 12px;
         }
 
-        p {
+        & p {
           all: unset;
         }
       }
@@ -85,8 +91,8 @@
 
 @media screen and (max-width: 768px) {
   .custom-list-container {
-    li {
-      span {
+    & li {
+      & span {
         width: 40%;
 
         &:nth-child(3) {
@@ -95,8 +101,8 @@
       }
     }
 
-    .custom-list-row {
-      span {
+    & .custom-list-row {
+      & span {
         &:nth-child(3) {
           overflow: hidden;
           text-overflow: ellipsis;

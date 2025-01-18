@@ -1,9 +1,9 @@
 import InputElement from "@/components/elements/inputs/input";
 import { getSquareIcon, getStageIcon } from "@/utils/handlers/get_icon";
 import {
-  INewQuoteStageOneForm,
-  INewQuoteStageTwoForm,
-} from "@/utils/interfaces/new_quote.interface";
+  ICustomerSelect,
+  IQuote,
+} from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,20 +15,20 @@ import { citiesOptions } from "@/utils/data/cities";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
-  formData: INewQuoteStageTwoForm;
-  setFormData: Dispatch<SetStateAction<INewQuoteStageTwoForm>>;
+  formData: IQuote;
+  setFormData: Dispatch<SetStateAction<IQuote>>;
 }
 
 const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
-  const initialState: INewQuoteStageOneForm = {
+  const initialState: ICustomerSelect = {
     selected: undefined,
     search: "",
   };
 
   const [pickupCity, setPickupCity] =
-    useState<INewQuoteStageOneForm>(initialState);
+    useState<ICustomerSelect>(initialState);
   const [unloadingCity, setUnloadingCity] =
-    useState<INewQuoteStageOneForm>(initialState);
+    useState<ICustomerSelect>(initialState);
   const [serviceHour, setServiceHour] = useState<string>("");
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {

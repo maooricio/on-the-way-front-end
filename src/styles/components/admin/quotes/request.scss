@@ -1,0 +1,54 @@
+@use "../../../globals" as *;
+
+.quote-request-form {
+  & .new-quote-resume {
+    & .new-quote-resume-customer {
+      @include flex(column, flex-start, center);
+
+      & .new-quote-resume-customer-info {
+        width: 100%;
+        @include flex(row, flex-start, center, 24px);
+      }
+
+      & .new-quote-request-comments {
+        all: unset;
+        list-style: none;
+        margin-top: 32px;
+        @include flex(column, flex-start, center, 16px);
+
+        & li {
+          width: 90%;
+          padding: 16px 24px 24px 24px;
+          background-color: $generic-white;
+          border-radius: 16px;
+
+          & .new-quote-request-comments-header {
+            @include flex(row, flex-start, center, 16px);
+
+            & .user-photo-container {
+              margin: 0;
+              width: 32px;
+              height: 32px;
+              border-radius: 12px;
+            }
+
+            & h3 {
+              font-size: 16px;
+              font-weight: 600;
+            }
+
+            & span {
+              color: $neutral-500;
+              font-size: 14px;
+            }
+          }
+
+          & p {
+            all: unset;
+            color: $neutral-500;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+@use "../../../globals" as *;
+
+.quote-details-form {
+  & .new-quote-resume-customer {
+    width: 100%;
+    background-color: $primary-50;
+    border-radius: 24px;
+    padding: 40px 0;
+    @include flex(row, space-between, center, 16px);
+
+    & .user-photo-container {
+      overflow: hidden;
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background-color: $primary-200;
+      margin-left: 32px;
+      @include flex(row, center, center);
+
+      & .user-photo {
+        width: 70%;
+        height: 80%;
+        opacity: 25%;
+      }
+    }
+
+    & .new-quote-resume-customer-content {
+      width: 85%;
+      @include flex(column, center, flex-start, 8px);
+
+      & p {
+        all: unset;
+      }
+
+      & .new-quote-resume-customer-content-title {
+        @include flex(row, flex-start, center, 16px);
+
+        & p {
+          &:first-child {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+            color: $neutral-800;
+          }
+
+          &:last-child {
+            font-size: 16px;
+            line-height: 24px;
+            color: $neutral-500;
+          }
+        }
+      }
+
+      & p {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        color: $neutral-800;
+      }
+    }
+
+    & button[type="button"] {
+      all: unset;
+      cursor: pointer;
+      margin-right: 32px;
+      white-space: nowrap;
+      padding: 12px 16px;
+      background: none;
+      color: $primary-600;
+      font-weight: 500;
+
+      &:hover {
+        color: $primary-700;
+      }
+
+      &:active {
+        color: $primary-800;
+      }
+    }
+  }
+
+  & .new-quote-resume {
+    width: 100%;
+    background-color: $primary-50;
+    border-radius: 24px;
+    padding: 40px 0;
+
+    & .new-quote-summary-item {
+      width: 90%;
+
+      & .new-quote-summary-item-handler {
+        width: 50%;
+        @include flex(row, space-between, center);
+
+        & p {
+          all: unset;
+          color: $neutral-800;
+          font-size: 14px;
+          font-weight: 600;
+          line-height: 22px;
+          text-align: right;
+        }
+      }
+    }
+
+    & .input-container {
+      width: 90%;
+    }
+
+    & .new-quote-resume-footer {
+      width: 90%;
+      @include flex(row, flex-end, flex-start);
+    }
+  }
+}

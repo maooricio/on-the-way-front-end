@@ -2,13 +2,22 @@ import { IOperator } from "./operator.interface";
 import { IUser } from "./user.interface";
 import { IVehicles } from "./vehicles.interface";
 
-export interface INewQuoteStageOneForm {
+export interface ICustomerSelect {
   selected?: IUser;
   search: string;
 }
 
-export interface INewQuoteStageTwoForm {
+export interface IQuoteComment {
+  userId: string;
+  date: string;
+  comment: string;
+}
+
+export interface IQuote {
+  id?: string;
   userId?: string;
+  quoteNumber?: string;
+  state?: string;
   deliveryTransport: boolean;
   collectionTransport: boolean;
   serviceDate: string;
@@ -26,5 +35,6 @@ export interface INewQuoteStageTwoForm {
     type: string;
     amount: number;
   };
-  comment: string;
+  comment: IQuoteComment[];
+  date?: string;
 }

@@ -3,59 +3,59 @@
 .quotes-history-container {
   @include adminContainer();
 
-  .quotes-history-header {
+  & .quotes-history-header {
     @include header();
     @include flex(row, flex-start, center, 16px);
 
-    button {
+    & button {
       all: unset;
       cursor: pointer;
       @include flex(row, center, center);
     }
   }
 
-  .quotes-history-handler {
-    @include flex(row, space-between, center, 24px);
+  & .quotes-history-handler {
     width: 100%;
+    @include flex(row, space-between, center, 24px);
 
-    .quotes-history-register-handler,
-    .quotes-history-select-handler,
-    .quotes-history-search-handler {
+    & .quotes-history-register-handler,
+    & .quotes-history-select-handler,
+    & .quotes-history-search-handler {
       width: 32%;
     }
 
-    .quotes-history-register-handler {
-      .button {
+    & .quotes-history-register-handler {
+      & .button {
         all: unset;
         cursor: pointer;
         background-color: $primary-600;
         padding: 11px 16px;
         border-radius: 12px;
         color: $generic-white;
-      
+
         &:hover {
           background-color: $primary-700;
         }
-      
+
         &:active {
           background-color: $primary-800;
         }
       }
     }
 
-    .quotes-history-search-handler {
-      .input-container {
+    & .quotes-history-search-handler {
+      & .input-container {
         margin: 0;
 
-        .input {
+        & .input {
           @include flex(row-reverse, space-between, center);
 
-          input {
+          & input {
             padding: 10px 16px;
             padding-left: 0;
           }
 
-          img {
+          & img {
             margin-right: 8px;
             margin-left: 8px;
             cursor: text;
@@ -68,25 +68,25 @@
 
 @media screen and (max-width: 768px) {
   .quotes-history-container {
-    .quotes-history-header {
-      button {
+    & .quotes-history-header {
+      & button {
         display: none;
       }
     }
 
-    .quotes-history-handler {
+    & .quotes-history-handler {
       @include flex(column, center, flex-start, 16px);
 
-      .quotes-history-register-handler,
-      .quotes-history-select-handler,
-      .quotes-history-search-handler {
+      & .quotes-history-register-handler,
+      & .quotes-history-select-handler,
+      & .quotes-history-search-handler {
         width: 100%;
       }
     }
 
-    .custom-list-container {
-      li {
-        span {
+    & .custom-list-container {
+      & li {
+        & span {
           width: 15%;
 
           &:nth-child(2) {
@@ -100,13 +100,9 @@
         }
       }
 
-      .custom-list-row {
-        span {
-          &:nth-child(3) {
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-        }
+      & .custom-list-row span:nth-child(3) {
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }

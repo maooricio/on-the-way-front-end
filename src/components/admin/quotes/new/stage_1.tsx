@@ -15,14 +15,14 @@ import SelectWithInput from "@/components/elements/inputs/select";
 import close from "@/assets/icons/utils/close_fill.svg";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
 import {
-  INewQuoteStageOneForm,
-  INewQuoteStageTwoForm,
-} from "@/utils/interfaces/new_quote.interface";
+  ICustomerSelect,
+  IQuote,
+} from "@/utils/interfaces/quote.interface";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
-  setFormQuoteData: Dispatch<SetStateAction<INewQuoteStageTwoForm>>;
-  formQuoteData: INewQuoteStageTwoForm;
+  setFormQuoteData: Dispatch<SetStateAction<IQuote>>;
+  formQuoteData: IQuote;
 }
 
 const NewQuoteStageOne = ({
@@ -34,12 +34,12 @@ const NewQuoteStageOne = ({
     (i) => i.id === formQuoteData.userId
   );
 
-  const initialState: INewQuoteStageOneForm = {
+  const initialState: ICustomerSelect = {
     selected: initialCustomer ?? undefined,
     search: "",
   };
 
-  const [formData, setFormData] = useState<INewQuoteStageOneForm>(initialState);
+  const [formData, setFormData] = useState<ICustomerSelect>(initialState);
   const [customersOptions, setCustomersOptions] = useState<ISelectOption[]>([]);
 
   const getUsersOption = () => {

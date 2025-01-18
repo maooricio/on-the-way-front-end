@@ -1,7 +1,7 @@
 "use client";
 import { FakeUsersList } from "@/utils/data/fakers";
 import { getStageIcon } from "@/utils/handlers/get_icon";
-import { INewQuoteStageTwoForm } from "@/utils/interfaces/new_quote.interface";
+import { IQuote } from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,9 +24,13 @@ import ChangeCustomerModal from "../change_customer";
 import AddDiscountVoucherModal from "../add_discount_voucher";
 import InputElement from "@/components/elements/inputs/input";
 import { useRouter } from "next/navigation";
+
+export interface IComment {
+  comment: string;
+}
 interface Props {
-  formData: INewQuoteStageTwoForm;
-  setFormData: Dispatch<SetStateAction<INewQuoteStageTwoForm>>;
+  formData: IQuote;
+  setFormData: Dispatch<SetStateAction<IQuote>>;
 }
 
 const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
@@ -37,6 +41,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
   const [price, setPrice] = useState<number>(0);
   const [showCustomerModal, setShowCustomerModal] = useState<boolean>(false);
   const [showDiscountModal, setShowDiscountModal] = useState<boolean>(false);
+  const [comment, setComment] = useState<{ comment: string }>({ comment: "" });
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -308,9 +313,9 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
             label=""
             placeholder="Añade una nota o comentario para el cliente..."
             name="comment"
-            setFormData={setFormData}
+            setFormData={setComment}
             error=""
-            value={formData.comment}
+            value={comment.comment}
             icon={<></>}
           />
 

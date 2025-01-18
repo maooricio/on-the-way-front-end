@@ -1,4 +1,5 @@
-import { IFakeQuote } from "../data/fakers";
+import { FakeUsersList } from "../data/fakers";
+import { IQuote } from "../interfaces/quote.interface";
 import { IUser } from "../interfaces/user.interface";
 import { paginateList } from "./paginate";
 
@@ -29,30 +30,34 @@ export const filterUsers = (users: IUser[], search: string, role: string) => {
 };
 
 export const filterQuotes = (
-  users: IFakeQuote[],
+  quotes: IQuote[],
   search: string,
   role: string
 ) => {
-  const allQuotes = [...users];
+  const allQuotes = [...quotes];
   const searchValue = search.toLowerCase().trim();
   const roleValue = role;
 
-  let filteredQuotes: IFakeQuote[] = [...users];
+  let filteredQuotes: IQuote[] = [...quotes];
 
   // filter to role
   if (roleValue !== "all") {
     filteredQuotes = allQuotes.filter(
-      (i) => i.state.toLowerCase() === roleValue.toLowerCase()
+      (i) => i.state?.toLowerCase() === roleValue.toLowerCase()
     );
   }
 
   // filter to search value
   if (searchValue.length > 0) {
-    filteredQuotes = filteredQuotes.filter(
-      (i) =>
-        i.customer.toLowerCase().includes(searchValue) ||
-        i.quote.toLowerCase().includes(searchValue)
-    );
+    filteredQuotes = filteredQuotes.filter((i) => {
+      const user = FakeUsersList.find((u) => u.id === i.userId);
+      const customer = `${user?.firstName} ${user?.lastName}`;
+
+      return (
+        customer.toLowerCase().includes(searchValue) ||
+        i.quoteNumber?.toLowerCase().includes(searchValue)
+      );
+    });
   }
 
   return paginateList(filteredQuotes);

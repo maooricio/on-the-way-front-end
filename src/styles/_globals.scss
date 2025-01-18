@@ -59,12 +59,14 @@ $success-400: #22c55e;
 $success-500: #16a34a;
 
 @mixin flex($d, $j, $a, $g: 0, $w: nowrap) {
-  display: flex;
-  flex-direction: $d;
-  justify-content: $j;
-  align-items: $a;
-  gap: $g;
-  flex-wrap: $w;
+  & {
+    display: flex;
+    flex-direction: $d;
+    justify-content: $j;
+    align-items: $a;
+    gap: $g;
+    flex-wrap: $w;
+  }
 }
 
 @mixin header() {
@@ -75,14 +77,14 @@ $success-500: #16a34a;
   background-color: $secondary-50;
   z-index: 5000;
 
-  h1 {
+  & h1 {
     font-size: 18px;
   }
 
   @media screen and (max-width: 768px) {
     width: 100%;
 
-    h1 {
+    & h1 {
       margin-left: 90px;
       margin-top: 24px;
       font-size: 14px;
@@ -90,22 +92,22 @@ $success-500: #16a34a;
   }
 
   @media screen and (max-width: 460px) {
-    h1 {
+    & h1 {
       margin-left: 68px;
     }
   }
 
   @media screen and (max-width: 320px) {
-    h1 {
+    & h1 {
       margin-left: 56px;
     }
   }
 }
 
 @mixin adminContainer() {
-  @include flex(column, flex-start, center, 32px);
   width: 95%;
   margin-top: 80px;
+  @include flex(column, flex-start, center, 32px);
 }
 
 @mixin scrollThin() {
