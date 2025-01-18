@@ -88,11 +88,12 @@
     padding: 40px 0;
 
     & .new-quote-resume-details {
-      width: 90%;
+      width: 100%;
+      cursor: pointer;
       @include flex(column, normal, center, 16px);
 
       & .new-quote-resume-details-row {
-        width: 100%;
+        width: 90%;
         @include flex(row, space-between, center);
 
         & p {
@@ -124,9 +125,7 @@
           color: $neutral-700;
         }
 
-        & button {
-          all: unset;
-          cursor: pointer;
+        & img {
           @include flex(row, center, center);
         }
 
@@ -201,6 +200,17 @@
           color: $neutral-500;
         }
       }
+    }
+
+    & .add-comment-button {
+      all: unset;
+      cursor: pointer;
+      color: $primary-600;
+      font-weight: 500;
+      padding: 12px;
+      align-self: flex-end;
+      margin-right: 40px;
+      margin-top: 24px;
     }
   }
 }

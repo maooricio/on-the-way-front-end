@@ -11,6 +11,7 @@ import otw_logo from "@/assets/images/otw_only_logo.svg";
 import { FakeRequestsList, FakeUsersList } from "@/utils/data/fakers";
 import arrow_down from "@/assets/icons/arrow/select_down.svg";
 import { getStateColor } from "@/utils/handlers/get_state_color";
+import AddCommentModal from "@/components/admin/quotes/add_comment";
 
 export interface IQuoteRequest {
   [key: string]: string;
@@ -29,6 +30,7 @@ const QuoteDetailsPage = () => {
   const userSelected = FakeUsersList.find((i) => i.id === quoteData?.userId);
 
   const [showQuoteInfo, setShowQuoteInfo] = useState<boolean>(true);
+  const [showCommentModal, setShowCommentModal] = useState<boolean>(false);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -75,7 +77,10 @@ const QuoteDetailsPage = () => {
             )}
 
             <div className="new-quote-resume">
-              <div className="new-quote-resume-details">
+              <div
+                className="new-quote-resume-details"
+                onClick={() => setShowQuoteInfo(!showQuoteInfo)}
+              >
                 <div className="new-quote-resume-details-row">
                   <p>
                     Cotización {quoteData.quoteNumber}{" "}
@@ -105,16 +110,11 @@ const QuoteDetailsPage = () => {
                     {quoteData.comment.length > 1 && "s"}
                   </p>
 
-                  <button
-                    type="button"
-                    onClick={() => setShowQuoteInfo(!showQuoteInfo)}
-                  >
-                    <Image
-                      src={arrow_down}
-                      alt="arrow down"
-                      className={!showQuoteInfo ? "rotate" : ""}
-                    />
-                  </button>
+                  <Image
+                    src={arrow_down}
+                    alt="arrow down"
+                    className={showQuoteInfo ? "rotate" : ""}
+                  />
                 </div>
               </div>
 
@@ -182,17 +182,6 @@ const QuoteDetailsPage = () => {
                   </div>
                 ))}
 
-              {/* <InputElement
-                type="textarea"
-                label=""
-                placeholder="Añade una nota o comentario para el cliente..."
-                name="comment"
-                setFormData={setFormData}
-                error=""
-                value={formData.comment}
-                icon={<></>}
-              /> */}
-
               {showQuoteInfo && (
                 <div className="new-quote-resume-footer">
                   {quoteData.discountVoucher.amount === 0 ? (
@@ -230,7 +219,7 @@ const QuoteDetailsPage = () => {
                 </div>
               )}
 
-              {quoteData.comment.length > 0 && (
+              {quoteData.comment.length > 0 && showQuoteInfo && (
                 <ul className="new-quote-request-comments">
                   {quoteData.comment.map((i) => {
                     const commentUser = FakeUsersList.find(
@@ -259,6 +248,14 @@ const QuoteDetailsPage = () => {
                   })}
                 </ul>
               )}
+
+              <button
+                type="button"
+                className="add-comment-button"
+                onClick={() => setShowCommentModal(true)}
+              >
+                Añadir un comentario
+              </button>
             </div>
 
             <footer className="new-quote-form-footer">
@@ -270,6 +267,10 @@ const QuoteDetailsPage = () => {
           </form>
         )}
       </section>
+
+      {showCommentModal && (
+        <AddCommentModal setShowModal={setShowCommentModal} quote={quoteData} />
+      )}
     </section>
   );
 };
