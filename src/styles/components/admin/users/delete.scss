@@ -3,31 +3,31 @@
 .delete-user-container {
   z-index: 9900;
 
-  .delete-user-content {
-    @include flex(row, flex-start, center, 24px);
+  & .delete-user-content {
     background-color: $primary-50;
     width: 100%;
     border-radius: 20px;
     padding: 24px 0;
+    @include flex(row, flex-start, center, 24px);
 
-    .user-photo-container {
+    & .user-photo-container {
       width: 64px;
       height: 64px;
       margin-left: 24px;
     }
 
-    .delete-user-info {
-      @include flex(column, center, flex-start, 8px);
+    & .delete-user-info {
       color: $neutral-800;
+      @include flex(column, center, flex-start, 8px);
 
-      h3 {
+      & h3 {
         all: unset;
         font-weight: 600;
       }
     }
   }
 
-  .delete-button {
+  & .delete-button {
     background-color: $error-400;
 
     &:hover {

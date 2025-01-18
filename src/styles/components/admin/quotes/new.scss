@@ -3,80 +3,80 @@
 .new-quote-container {
   @include adminContainer();
 
-  .new-quote-header {
+  & .new-quote-header {
     @include header();
     @include flex(row, flex-start, center, 16px);
 
-    button {
+    & button {
       all: unset;
       cursor: pointer;
       @include flex(row, center, center);
     }
   }
 
-  .new-quote-content {
-    @include flex(column, space-between, center, 32px);
+  & .new-quote-content {
     width: 100%;
     padding: 24px 0;
     background-color: $generic-white;
     border-radius: 24px;
     margin-bottom: 24px;
+    @include flex(column, space-between, center, 32px);
 
-    .new-quote-stages-container {
-      @include flex(row, flex-start, center, 8px);
+    & .new-quote-stages-container {
       width: 95%;
+      @include flex(row, flex-start, center, 8px);
 
-      span {
+      & span {
         color: $neutral-800;
         font-weight: 600;
       }
 
-      .new-quote-stage-divider {
+      & .new-quote-stage-divider {
         height: 1px;
         width: 40px;
         background-color: $neutral-200;
       }
     }
 
-    .new-quote-form {
-      @include flex(column, center, center, 36px);
+    & .new-quote-form {
       width: 95%;
+      @include flex(column, center, center, 36px);
 
-      .new-quote-form-customer {
-        @include flex(row, space-between, center, 16px);
+      & .new-quote-form-customer {
         width: 100%;
         background-color: $primary-50;
         border-radius: 24px;
         padding: 40px 0;
+        @include flex(row, space-between, center, 16px);
 
-        .user-photo-container {
-          @include flex(row, center, center);
+        & .user-photo-container {
           overflow: hidden;
           width: 64px;
           height: 64px;
           border-radius: 18px;
           background-color: $primary-200;
           margin-left: 32px;
+          @include flex(row, center, center);
 
-          .user-photo {
+          & .user-photo {
             width: 70%;
             height: 80%;
             opacity: 25%;
           }
         }
 
-        .new-quote-form-customer-content {
-          @include flex(column, center, flex-start, 8px);
+        & .new-quote-form-customer-content {
           width: 85%;
+          @include flex(column, center, flex-start, 8px);
 
-          p {
+          & p {
             all: unset;
           }
 
-          .new-quote-form-customer-content-title {
+          & .new-quote-form-customer-content-title {
             @include flex(row, flex-start, center, 16px);
 
-            p {
+            & p {
               &:first-child {
                 font-size: 16px;
                 font-weight: 600;
@@ -92,7 +92,7 @@
             }
           }
 
-          p {
+          & p {
             font-size: 16px;
             font-weight: 400;
             line-height: 24px;
@@ -100,32 +100,32 @@
           }
         }
 
-        button[type="button"] {
+        & button[type="button"] {
           all: unset;
           cursor: pointer;
           margin-right: 32px;
         }
       }
 
-      .new-quote-form-content {
-        @include flex(row, space-between, center, 24px);
+      & .new-quote-form-content {
         width: 100%;
+        @include flex(row, space-between, center, 24px);
 
-        .custom-select-container {
+        & .custom-select-container {
           width: 100%;
 
-          .custom-select {
-            .input-container {
+          & .custom-select {
+            & .input-container {
               margin: 0;
             }
 
-            .custom-select-options-container {
+            & .custom-select-options-container {
               top: 60px;
             }
           }
         }
 
-        button[type="button"] {
+        & button[type="button"] {
           white-space: nowrap;
           padding: 12px 16px;
           background: none;
@@ -141,28 +141,28 @@
           }
         }
 
-        .new-quote-select-option {
+        & .new-quote-select-option {
           all: unset;
           color: $neutral-800;
 
-          span {
+          & span {
             color: $neutral-400;
             margin-left: 8px;
           }
         }
       }
 
-      .operators-selected-container {
+      & .operators-selected-container {
         @include flex(row, flex-start, center, 16px, wrap);
 
-        .operator-selected-container {
-          @include flex(row, center, center, 8px);
+        & .operator-selected-container {
           background-color: $primary-50;
           border-radius: 24px;
           padding: 8px 16px;
           color: $neutral-800;
+          @include flex(row, center, center, 8px);
 
-          button {
+          & button {
             all: unset;
             cursor: pointer;
             @include flex(row, center, center);
@@ -170,16 +170,16 @@
         }
       }
 
-      .new-quote-form-footer {
-        @include flex(row, flex-end, center, 24px);
+      & .new-quote-form-footer {
         width: 100%;
+        @include flex(row, flex-end, center, 24px);
 
-        button,
-        .button {
+        & button,
+        & .button {
           padding: 12px 16px;
         }
 
-        .button {
+        & .button {
           background-color: $primary-100;
           color: $primary-600;
           font-weight: 500;
@@ -196,7 +196,7 @@
         }
       }
 
-      .new-quote-operator {
+      & .new-quote-operator {
         @include flex(column, normal, flex-start, 24px);
       }
     }
@@ -205,8 +205,8 @@
 
 @media screen and (max-width: 768px) {
   .quotes-history-container {
-    .quotes-history-header {
-      button {
+    & .quotes-history-header {
+      & button {
         display: none;
       }
     }

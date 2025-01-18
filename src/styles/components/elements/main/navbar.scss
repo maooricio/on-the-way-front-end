@@ -1,57 +1,57 @@
 @use "../../../globals" as *;
 
 .navbar-container {
-  @include flex(column, space-between, center);
   width: 15%;
   background-color: $primary-900;
   overflow: hidden;
   position: fixed;
   height: 100%;
   z-index: 8000;
+  @include flex(column, space-between, center);
 
-  .navbar-header {
-    @include flex(column, flex-start, center, 56px);
+  & .navbar-header {
     width: 90%;
     min-height: 50%;
     margin-top: 24px;
+    @include flex(column, flex-start, center, 56px);
 
-    button[type="button"] {
+    & button[type="button"] {
       all: unset;
       align-self: flex-start;
       cursor: pointer;
       margin-bottom: 5px;
     }
 
-    .navbar-content {
-      @include flex(column, space-between, center, 24px);
+    & .navbar-content {
       width: 100%;
+      @include flex(column, space-between, center, 24px);
 
-      .navbar-links-container {
+      & .navbar-links-container {
         all: unset;
         list-style: none;
-        @include flex(column, space-between, center, 8px);
         width: 100%;
         margin-top: 24px;
+        @include flex(column, space-between, center, 8px);
 
-        li {
+        & li {
           width: 100%;
 
-          .link {
-            @include flex(row, flex-start, center, 8px);
+          & .link {
             text-decoration: none;
             padding: 12px 0;
             border-radius: 12px;
+            @include flex(row, flex-start, center, 8px);
 
-            img {
+            & img {
               margin-left: 16px;
             }
 
-            span {
+            & span {
               color: $generic-white;
             }
           }
 
-          .is-focus {
+          & .is-focus {
             background-color: #d4c7f049;
           }
         }
@@ -59,44 +59,44 @@
     }
   }
 
-  .navbar-footer {
-    @include flex(column, flex-start, center, 32px);
+  & .navbar-footer {
     width: 90%;
     margin-bottom: 24px;
+    @include flex(column, flex-start, center, 32px);
 
-    .navbar-user {
+    & .navbar-user {
       all: unset;
-      @include flex(column, flex-start, flex-start, 0);
       width: 100%;
       margin-left: 16px;
+      @include flex(column, flex-start, flex-start, 0);
 
-      img {
+      & img {
         width: 48px;
         height: 48px;
         overflow: hidden;
         border-radius: 16px;
       }
 
-      .navbar-user-name {
+      & .navbar-user-name {
         font-size: 16px;
         font-weight: 400;
         color: $generic-white;
         margin-top: 8px;
       }
 
-      .navbar-user-role {
+      & .navbar-user-role {
         color: $primary-600;
       }
     }
 
-    button[type="button"] {
+    & button[type="button"] {
       all: unset;
       cursor: pointer;
-      @include flex(row, flex-start, center, 8px);
       color: $generic-white;
       align-self: flex-start;
       line-height: 24px;
       padding: 12px 16px;
+      @include flex(row, flex-start, center, 8px);
     }
   }
 }
@@ -105,10 +105,10 @@
   .navbar-container {
     width: 100%;
 
-    .navbar-header {
+    & .navbar-header {
       gap: 16px;
 
-      .navbar-logo {
+      & .navbar-logo {
         display: none;
       }
     }
@@ -118,13 +118,13 @@
     height: auto;
     background-color: transparent;
 
-    .navbar-header {
-      .navbar-content {
+    & .navbar-header {
+      & .navbar-content {
         display: none;
       }
     }
 
-    .navbar-footer {
+    & .navbar-footer {
       display: none;
     }
   }

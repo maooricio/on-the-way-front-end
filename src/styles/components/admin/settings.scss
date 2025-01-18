@@ -3,54 +3,54 @@
 .admin-settings-container {
   @include adminContainer();
 
-  .admin-settings-header {
+  & .admin-settings-header {
     @include header();
   }
 
-  .admin-settings-info {
-    @include flex(row, space-between, center);
+  & .admin-settings-info {
     width: 100%;
     background-color: $primary-100;
     border: 1px solid $primary-200;
     border-radius: 24px;
+    @include flex(row, space-between, center);
 
-    .photo-container {
-      @include flex(column, center, center);
+    & .photo-container {
       padding: 0 24px;
       padding-top: 28px;
+      @include flex(column, center, center);
 
-      .image-container {
-        @include flex(row, center, center);
+      & .image-container {
         overflow: hidden;
         width: 120px;
         height: 120px;
         border-radius: 16px;
         background-color: $primary-200;
+        @include flex(row, center, center);
 
-        p {
+        & p {
           font-size: 24px;
           font-weight: 700;
           color: $primary-900;
         }
 
-        img {
+        & img {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
 
-        .not-has-photo {
+        & .not-has-photo {
           width: 70%;
           height: 80%;
           opacity: 25%;
         }
       }
 
-      button[type="button"] {
+      & button[type="button"] {
         translate: 0 -50%;
       }
 
-      .photo-options {
+      & .photo-options {
         all: unset;
         list-style: none;
         position: absolute;
@@ -59,7 +59,7 @@
         overflow: hidden;
         translate: 0 120%;
 
-        li {
+        & li {
           padding: 12px 24px 12px 18px;
           cursor: pointer;
           color: $neutral-800;
@@ -76,15 +76,15 @@
       }
     }
 
-    .admin-settings-profile-info {
-      @include flex(column, space-evenly, flex-start, 12px);
+    & .admin-settings-profile-info {
       width: 100%;
       margin-bottom: 24px;
+      @include flex(column, space-evenly, flex-start, 12px);
 
-      .profile-info-header-container {
+      & .profile-info-header-container {
         @include flex(row, flex-start, center, 24px);
 
-        h5 {
+        & h5 {
           all: unset;
           font-weight: 600;
           font-size: 24px;
@@ -92,15 +92,15 @@
           color: $neutral-800;
         }
 
-        button[type="button"] {
+        & button[type="button"] {
           all: unset;
           cursor: pointer;
-          @include flex(row, center, center);
           align-self: flex-start;
+          @include flex(row, center, center);
         }
       }
 
-      span {
+      & span {
         font-size: 16px;
         font-weight: 400;
         line-height: 24px;
@@ -109,35 +109,35 @@
     }
   }
 
-  .admin-settings-content {
-    @include flex(row, space-between, center, 24px);
+  & .admin-settings-content {
     margin-bottom: 32px;
+    @include flex(row, space-between, center, 24px);
   }
 }
 
 @media screen and (max-width: 768px) {
   .admin-settings-container {
-    .admin-settings-info {
+    & .admin-settings-info {
       @include flex(column, flex-start, center);
 
-      .admin-settings-profile-info {
+      & .admin-settings-profile-info {
         @include flex(column, flex-start, center, 8px);
 
-        .profile-info-header-container {
-          @include flex(row, center, center, 8px);
+        & .profile-info-header-container {
           width: 100%;
+          @include flex(row, center, center, 8px);
 
-          h5 {
+          & h5 {
             font-size: 16px;
             line-height: 24px;
           }
 
-          button[type="button"] {
+          & button[type="button"] {
             margin-right: 8px;
           }
         }
 
-        span {
+        & span {
           font-size: 16px;
           font-weight: 400;
           line-height: 24px;
@@ -146,7 +146,7 @@
       }
     }
     
-    .admin-settings-content {
+    & .admin-settings-content {
       flex-wrap: wrap;
     }
   }

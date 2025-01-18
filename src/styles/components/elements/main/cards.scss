@@ -1,68 +1,68 @@
 @use "../../../globals" as *;
 
 .normal-card-container {
-  @include flex(column, space-between, center, 16px);
   width: 48%;
   height: 100%;
   border-radius: 24px;
   background-color: $generic-white;
   overflow: hidden;
+  @include flex(column, space-between, center, 16px);
 
-  .normal-card-header {
-    @include flex(row, space-between, center);
+  & .normal-card-header {
     width: 90%;
     margin-top: 32px;
     max-height: 32px;
+    @include flex(row, space-between, center);
 
-    h3 {
+    & h3 {
       font-size: 16px;
       font-weight: 600;
     }
 
-    img {
+    & img {
       background-color: $secondary-50;
       padding: 16px;
       border-radius: 50%;
     }
 
-    .is-title {
+    & .is-title {
       font-size: 24px;
     }
   }
 
-  .normal-card-content {
+  & .normal-card-content {
     width: 90%;
     height: 100%;
 
-    h3 {
+    & h3 {
       font-size: 16px;
       line-height: 16px;
       font-weight: 600;
     }
 
-    p {
+    & p {
       font-size: 16px;
       line-height: 24px;
       color: $neutral-400;
     }
 
-    .is-title {
+    & .is-title {
       font-size: 24px;
     }
   }
 
-  .normal-card-button-container {
+  & .normal-card-button-container {
     all: unset;
-    @include flex(row, flex-start, center);
     width: 90%;
     padding-bottom: 24px;
+    @include flex(row, flex-start, center);
 
-    button[type="button"],
-    .button {
+    & button[type="button"],
+    & .button {
       padding: 12px 16px;
     }
 
-    .without-bg {
+    & .without-bg {
       all: unset;
       cursor: pointer;
       align-self: flex-start;
@@ -83,64 +83,64 @@
 }
 
 .small-card-container {
-  @include flex(column, space-between, center, 16px);
   width: 32%;
   height: 100%;
   border-radius: 24px;
   background-color: $generic-white;
   overflow: hidden;
+  @include flex(column, space-between, center, 16px);
 
-  .small-card-header {
-    @include flex(row, flex-start, center);
+  & .small-card-header {
     width: 85%;
     margin-top: 32px;
     max-height: 32px;
+    @include flex(row, flex-start, center);
 
-    span {
+    & span {
       color: $neutral-800;
       font-weight: 700;
       font-size: 16px;
     }
 
-    img {
+    & img {
       background-color: $secondary-50;
       padding: 16px;
       border-radius: 50%;
     }
 
-    .is-title {
+    & .is-title {
       font-size: 24px;
     }
   }
 
-  .has-both {
+  & .has-both {
     @include flex(row, space-between, center);
   }
 
-  .small-card-content {
+  & .small-card-content {
     width: 85%;
     height: 100%;
 
-    h3 {
+    & h3 {
       font-size: 16px;
     }
 
-    p {
+    & p {
       font-size: 14px;
       color: $neutral-400;
     }
 
-    .is-title {
+    & .is-title {
       font-size: 24px;
     }
   }
 
-  .small-card-button-container {
+  & .small-card-button-container {
     all: unset;
     width: 85%;
     padding-bottom: 24px;
 
-    .button {
+    & .button {
       padding: 12px 16px;
       background-color: $primary-100;
       color: $primary-600;
@@ -157,7 +157,7 @@
       }
     }
 
-    .without-bg {
+    & .without-bg {
       background: none;
       align-self: flex-start;
       color: $primary-600;
@@ -182,20 +182,20 @@
   overflow: hidden;
   padding-bottom: 24px;
 
-  .long-card-table {
+  & .long-card-table {
     all: unset;
     list-style: none;
-    @include flex(column, flex-start, center);
     padding: 16px;
+    @include flex(column, flex-start, center);
 
-    .long-card-table-header {
-      @include flex(row, space-between, center);
+    & .long-card-table-header {
       width: 100%;
       background-color: $primary-50;
       border-radius: 8px;
       padding: 16px 0;
+      @include flex(row, space-between, center);
 
-      span {
+      & span {
         width: 20%;
         font-size: 16px;
         line-height: 22px;
@@ -211,13 +211,13 @@
       }
     }
 
-    .long-card-table-item {
-      @include flex(row, space-between, center);
+    & .long-card-table-item {
       width: 100%;
       padding: 16px 0;
       border-bottom: 1px solid $primary-50;
+      @include flex(row, space-between, center);
 
-      span {
+      & span {
         width: 20%;
         font-size: 14px;
         line-height: 22px;
@@ -229,19 +229,19 @@
         }
 
         &:last-child {
-          @include flex(row, space-between, center);
           margin-right: 8px;
+          @include flex(row, space-between, center);
 
-          .long-card-last-item {
-            @include flex(row, flex-start, center, 8px);
+          & .long-card-last-item {
             width: auto;
             background-color: $secondary-50;
             padding: 4px 0;
             padding-right: 12px;
             border-radius: 24px;
             color: $neutral-800;
+            @include flex(row, flex-start, center, 8px);
 
-            .long-card-last-item-dot {
+            & .long-card-last-item-dot {
               width: 8px;
               height: 8px;
               border-radius: 50%;
@@ -249,7 +249,7 @@
             }
           }
 
-          .long-card-last-item-amount {
+          & .long-card-last-item-amount {
             background-color: $secondary-50;
             padding: 4px 16px;
             border-radius: 24px;
@@ -259,12 +259,12 @@
     }
   }
 
-  .long-card-button-container {
+  & .long-card-button-container {
     all: unset;
     width: 100%;
     padding-bottom: 24px;
 
-    .link {
+    & .link {
       all: unset;
       cursor: pointer;
       align-self: flex-start;
@@ -289,18 +289,19 @@
   .small-card-container {
     width: 100%;
   }
+
   .normal-card-container {
     width: 100%;
   }
 
   .long-card-container {
-    .long-card-table {
-      .is-not-mobile {
+    & .long-card-table {
+      & .is-not-mobile {
         display: none;
       }
 
-      .long-card-table-header {
-        span {
+      & .long-card-table-header {
+        & span {
           &:first-child {
             width: 30%;
           }
@@ -312,15 +313,15 @@
           &:last-child {
             width: 20%;
 
-            .long-card-last-item-amount {
+            & .long-card-last-item-amount {
               display: none;
             }
           }
         }
       }
 
-      .long-card-table-item {
-        span {
+      & .long-card-table-item {
+        & span {
           &:first-child {
             width: 30%;
           }
@@ -332,7 +333,7 @@
           &:last-child {
             width: 20%;
 
-            .long-card-last-item-amount {
+            & .long-card-last-item-amount {
               display: none;
             }
           }

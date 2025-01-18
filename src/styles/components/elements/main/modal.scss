@@ -1,15 +1,15 @@
 @use "../../../globals" as *;
 
 .generic-modal {
-  @include flex(row, center, center);
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   z-index: 9000;
+  @include flex(row, center, center);
 
-  .generic-modal-background {
+  & .generic-modal-background {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -17,20 +17,20 @@
     z-index: 9100;
   }
 
-  form {
-    @include flex(column, space-between, center, 24px);
+  & form {
     z-index: 9200;
     background-color: $generic-white;
     padding: 32px;
     border-radius: 24px;
     min-width: 560px;
     max-height: 85vh;
+    @include flex(column, space-between, center, 24px);
 
-    .generic-modal-header {
-      @include flex(row, space-between, center);
+    & .generic-modal-header {
       width: 100%;
+      @include flex(row, space-between, center);
 
-      h1 {
+      & h1 {
         all: unset;
         font-size: 24px;
         color: $neutral-800;
@@ -38,34 +38,34 @@
       }
     }
 
-    .generic-modal-content {
-      @include flex(column, space-between, flex-start, 24px);
+    & .generic-modal-content {
       width: 100%;
+      @include flex(column, space-between, flex-start, 24px);
 
-      p {
+      & p {
         all: unset;
         font-size: 16px;
         color: $neutral-800;
       }
 
-      .custom-select-container {
+      & .custom-select-container {
         width: 100%;
 
-        .custom-select {
-          .input-container {
+        & .custom-select {
+          & .input-container {
             margin: 0;
           }
 
-          .custom-select-options-container {
+          & .custom-select-options-container {
             top: 60px;
           }
         }
       }
 
-      .discount-voucher-type-select {
+      & .discount-voucher-type-select {
         @include flex(row, flex-start, center, 24px);
 
-        button {
+        & button {
           all: unset;
           cursor: pointer;
           @include flex(row, center, center, 8px);
@@ -73,41 +73,41 @@
       }
     }
 
-    .new-quote-form-customer {
-      @include flex(row, space-between, center, 16px);
+    & .new-quote-form-customer {
       width: 100%;
       background-color: $primary-50;
       border-radius: 24px;
       padding: 40px 0;
+      @include flex(row, space-between, center, 16px);
 
-      .user-photo-container {
-        @include flex(row, center, center);
+      & .user-photo-container {
         overflow: hidden;
         width: 64px;
         height: 64px;
         border-radius: 18px;
         background-color: $primary-200;
         margin-left: 32px;
+        @include flex(row, center, center);
 
-        .user-photo {
+        & .user-photo {
           width: 70%;
           height: 80%;
           opacity: 25%;
         }
       }
 
-      .new-quote-form-customer-content {
-        @include flex(column, center, flex-start, 8px);
+      & .new-quote-form-customer-content {
         width: 85%;
+        @include flex(column, center, flex-start, 8px);
 
-        p {
+        & p {
           all: unset;
         }
 
-        .new-quote-form-customer-content-title {
+        & .new-quote-form-customer-content-title {
           @include flex(row, flex-start, center, 16px);
 
-          p {
+          & p {
             &:first-child {
               font-size: 16px;
               font-weight: 600;
@@ -123,7 +123,7 @@
           }
         }
 
-        p {
+        & p {
           font-size: 16px;
           font-weight: 400;
           line-height: 24px;
@@ -131,14 +131,14 @@
         }
       }
 
-      button[type="button"] {
+      & button[type="button"] {
         all: unset;
         cursor: pointer;
         margin-right: 32px;
       }
     }
 
-    .generic-modal-description {
+    & .generic-modal-description {
       all: unset;
       width: 100%;
       color: $neutral-800;
@@ -148,16 +148,16 @@
       text-align: left;
     }
 
-    .generic-modal-buttons {
-      @include flex(row, flex-end, center, 16px, wrap);
+    & .generic-modal-buttons {
       width: 100%;
       margin-top: 16px;
+      @include flex(row, flex-end, center, 16px, wrap);
 
-      button {
+      & button {
         padding: 12px 16px;
       }
 
-      button[type="button"] {
+      & button[type="button"] {
         background-color: $primary-100;
         color: $primary-600;
         white-space: nowrap;
@@ -178,7 +178,7 @@
 
 @media screen and (max-width: 768px) {
   .generic-modal {
-    form {
+    & form {
       width: 100vw;
       height: 100vh;
       overflow: hidden;
@@ -186,9 +186,9 @@
       padding: 0;
       border-radius: 0;
 
-      .generic-modal-header,
-      .generic-modal-content,
-      .generic-modal-buttons {
+      & .generic-modal-header,
+      & .generic-modal-content,
+      & .generic-modal-buttons {
         width: 90%;
       }
 
@@ -196,11 +196,11 @@
         margin-top: 24px;
       }
 
-      .generic-modal-content {
+      & .generic-modal-content {
         height: 100%;
       }
 
-      .generic-modal-buttons {
+      & .generic-modal-buttons {
         margin-bottom: 24px;
       }
     }
@@ -209,10 +209,10 @@
 
 @media screen and (max-width: 550px) {
   .generic-modal {
-    form {
-      .generic-modal-header,
-      .generic-modal-content,
-      .generic-modal-buttons {
+    & form {
+      & .generic-modal-header,
+      & .generic-modal-content,
+      & .generic-modal-buttons {
         width: 85%;
       }
     }

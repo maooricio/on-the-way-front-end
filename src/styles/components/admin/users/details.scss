@@ -1,24 +1,23 @@
 @use "../../../globals" as *;
 
 .user-details-content {
-  @include flex(column, flex-start, flex-start, 24px);
   width: 100%;
+  @include flex(column, flex-start, flex-start, 24px);
 
-  .user-details-row {
-    @include flex(row, space-between, center);
+  & .user-details-row {
     width: 100%;
+    @include flex(row, space-between, center);
 
-    p {
+    & p {
       all: unset;
-      @include flex(column, center, flex-start, 8px);
       width: 50%;
-
       font-size: 14px;
       font-weight: 400;
       line-height: 22px;
       color: $neutral-800;
+      @include flex(column, center, flex-start, 8px);
 
-      span {
+      & span {
         font-size: 16px;
         font-weight: 600;
         line-height: 24px;

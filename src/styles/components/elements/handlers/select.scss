@@ -3,41 +3,41 @@
 .custom-select-container {
   @include flex(column, center, flex-start, 6px);
 
-  .custom-select-label {
+  & .custom-select-label {
     font-size: 14px;
     color: $neutral-800;
     margin-left: 8px;
   }
 
-  .custom-select {
-    @include flex(column, flex-start, normal);
+  & .custom-select {
     width: 100%;
     position: relative;
     border-radius: 8px;
+    @include flex(column, flex-start, normal);
 
-    .custom-select-content-container {
-      @include flex(row, flex-start, center);
+    & .custom-select-content-container {
       border: 1px solid $neutral-200;
       border-radius: 8px;
       padding: 0 12px;
       height: 44px;
       cursor: pointer;
+      @include flex(row, flex-start, center);
 
-      .custom-select-content {
+      & .custom-select-content {
         width: 100%;
       }
     }
 
-    .input-focused {
+    & .input-focused {
       box-shadow: 0 0 0 4px #efebf9;
       border: 1px solid $primary-500;
     }
 
-    .option-selector-disabled {
+    & .option-selector-disabled {
       color: #b3b3b3;
     }
 
-    .custom-select-options-container {
+    & .custom-select-options-container {
       all: unset;
       list-style: none;
       cursor: pointer;
@@ -58,36 +58,36 @@
 
       @include scrollThin();
 
-      .option-selector-disabled {
+      & .option-selector-disabled {
         color: #b3b3b3;
       }
 
-      .custom-select-option {
-        @include flex(row, space-between, center);
+      & .custom-select-option {
         padding: 10px 12px;
         font-weight: 400;
         font-size: 16px;
         line-height: 24px;
         border-bottom: 1px solid $neutral-100;
+        @include flex(row, space-between, center);
 
-        .icon {
+        & .icon {
           margin-right: 16px;
         }
 
-        .select-option-content {
-          @include flex(row, flex-start, center);
+        & .select-option-content {
           user-select: none;
+          @include flex(row, flex-start, center);
         }
       }
 
-      .is-disabled {
+      & .is-disabled {
         cursor: default;
         color: #b3b3b3;
         background-color: $neutral-50;
       }
     }
 
-    .is-placeholder {
+    & .is-placeholder {
       color: $neutral-400;
     }
   }
