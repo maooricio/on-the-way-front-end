@@ -1,4 +1,5 @@
 "use client";
+import { getStateColor } from "@/utils/handlers/get_state_color";
 import useScreenWidth from "@/utils/hooks/use_screen_width";
 import { Routes } from "@/utils/router/router_enum";
 import Link from "next/link";
@@ -45,21 +46,6 @@ const LongCardTable = () => {
     },
   ];
 
-  const getDotColor = (state: string): string => {
-    switch (state) {
-      case "En proceso":
-        return "#F59E0B";
-      case "Pagada":
-        return "#22C55E";
-      case "Pago pendiente":
-        return "#DCA7F6";
-      case "Verificar pago":
-        return "#CCCCCC";
-      default:
-        return "#F59E0B";
-    }
-  };
-
   return (
     <section className="long-card-table-container">
       <ul className="long-card-table">
@@ -81,7 +67,7 @@ const LongCardTable = () => {
               <div className="long-card-last-item">
                 <div
                   className="long-card-last-item-dot"
-                  style={{ backgroundColor: getDotColor(i.state) }}
+                  style={{ backgroundColor: getStateColor(i.state) }}
                 ></div>
                 {clientSideIsLoaded && width > 768 ? i.state : ""}
               </div>

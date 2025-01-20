@@ -1,28 +1,25 @@
 "use client";
 import InputElement from "@/components/elements/inputs/input";
-import { FakeQuotesList, FakeUsersList } from "@/utils/data/fakers";
+import { FakeRequestsList, FakeUsersList } from "@/utils/data/fakers";
 import { useEffect, useRef, useState } from "react";
-import three_dots from "@/assets/icons/dots/three_dots.svg";
 import Image from "next/image";
 import Pagination from "@/components/elements/handlers/pagination";
 import { paginateList } from "@/utils/handlers/paginate";
-import CustomSelect from "@/components/elements/handlers/custom_select";
 import glass from "@/assets/icons/others/glass.svg";
 import { filterQuotes } from "@/utils/handlers/filters";
-import { quotesFilterOptions } from "@/utils/data/quotes";
 import back from "@/assets/icons/arrow/arrow_back.svg";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Routes } from "@/utils/router/router_enum";
 import { IQuote } from "@/utils/interfaces/quote.interface";
 import { formatCurrency } from "@/utils/handlers/currency";
-import { getStateColor } from "@/utils/handlers/get_state_color";
+import delete_icon from "@/assets/icons/utils/trash.svg";
 
 export interface ISearch {
   value: string;
 }
 
-const QuotesHistoryPage = () => {
+const QuotesDraftPage = () => {
   const router = useRouter();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,9 +31,8 @@ const QuotesHistoryPage = () => {
 
   const [searchData, setSearchData] = useState<ISearch>(initialState);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [roleFilter, setRoleFilter] = useState<string>("all");
   const [quotesList, setQuotesList] = useState<IQuote[][]>(
-    paginateList(FakeQuotesList)
+    paginateList(FakeRequestsList)
   );
 
   const handlePagination = (page: number) => {
@@ -45,14 +41,14 @@ const QuotesHistoryPage = () => {
 
   useEffect(() => {
     const filteredQuotes = filterQuotes(
-      FakeQuotesList,
+      FakeRequestsList,
       searchData.value,
-      roleFilter
+      "all"
     );
 
     setQuotesList(filteredQuotes);
     setCurrentPage(1);
-  }, [roleFilter, searchData]);
+  }, [searchData]);
 
   return (
     <section className="quotes-history-container" ref={pageRef}>
@@ -60,7 +56,7 @@ const QuotesHistoryPage = () => {
         <button onClick={() => router.back()}>
           <Image src={back} alt="arrow back icon" />
         </button>
-        <h1>Historial de cotizaciones</h1>
+        <h1>Borradores</h1>
       </header>
 
       <section className="quotes-history-handler">
@@ -70,19 +66,13 @@ const QuotesHistoryPage = () => {
           </Link>
         </div>
 
-        <div className="quotes-history-select-handler">
-          <CustomSelect
-            options={quotesFilterOptions}
-            setValue={setRoleFilter}
-            value={roleFilter}
-          />
-        </div>
+        <div className="quotes-history-select-handler"></div>
 
         <div className="quotes-history-search-handler">
           <InputElement
             type="text"
             label=""
-            placeholder="Busca una cotización..."
+            placeholder="Busca una borrador..."
             name="value"
             setFormData={setSearchData}
             error=""
@@ -97,8 +87,7 @@ const QuotesHistoryPage = () => {
           <span className="only-mobile">Fecha</span>
           <span>Cotización</span>
           <span>Cliente</span>
-          <span className="only-mobile">Monto</span>
-          <span>Estado</span>
+          <span>Monto</span>
         </li>
 
         {quotesList.length > 0 ? (
@@ -107,7 +96,7 @@ const QuotesHistoryPage = () => {
 
             return (
               <Link
-                href={`${Routes.quotes}/${item.id}`}
+                href={`${Routes.quotes}/request/${item.id}`}
                 key={item.id}
                 className="custom-list-row"
               >
@@ -116,20 +105,11 @@ const QuotesHistoryPage = () => {
                 <span>
                   {user?.firstName} {user?.lastName}
                 </span>
-                <span className="only-mobile">
-                  {formatCurrency(item.totalPrice)}
-                </span>
                 <span>
-                  <div className="custom-list-state">
-                    <div
-                      className="custom-list-state-dot"
-                      style={{ backgroundColor: getStateColor(item.state!) }}
-                    ></div>
-                    <p className="only-mobile">{item.state}</p>
-                  </div>
+                  <>{formatCurrency(item.totalPrice)}</>
 
                   <button type="button">
-                    <Image src={three_dots} alt="three dots icon" />
+                    <Image src={delete_icon} alt="delete icon" />
                   </button>
                 </span>
               </Link>
@@ -153,4 +133,4 @@ const QuotesHistoryPage = () => {
   );
 };
 
-export default QuotesHistoryPage;
+export default QuotesDraftPage;
