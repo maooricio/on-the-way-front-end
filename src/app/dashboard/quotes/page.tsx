@@ -133,9 +133,9 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button" className="button">
+              <Link href={Routes.quote_drafts} className="button">
                 Ver borradores
-              </button>
+              </Link>
             </footer>
           }
         />

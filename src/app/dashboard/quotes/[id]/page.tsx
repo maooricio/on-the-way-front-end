@@ -255,16 +255,18 @@ const QuoteDetailsPage = () => {
               </button>
             </div>
 
-            <footer className="new-quote-form-footer">
-              <button
-                type="button"
-                className="button"
-                onClick={() => setShowCancelModal(true)}
-              >
-                Cancelar
-              </button>
-              <button type="submit">Enviar cotización</button>
-            </footer>
+            {quoteData.state !== "Cancelada" && (
+              <footer className="new-quote-form-footer">
+                <button
+                  type="button"
+                  className="button"
+                  onClick={() => setShowCancelModal(true)}
+                >
+                  Cancelar
+                </button>
+                <button type="submit">Enviar cotización</button>
+              </footer>
+            )}
           </form>
         )}
       </section>
