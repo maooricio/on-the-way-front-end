@@ -5,17 +5,13 @@ import { useParams, useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { IQuote } from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
-import Link from "next/link";
 import { formatCurrency } from "@/utils/handlers/currency";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
 import { FakeRequestsList, FakeUsersList } from "@/utils/data/fakers";
 import arrow_down from "@/assets/icons/arrow/select_down.svg";
 import { getStateColor } from "@/utils/handlers/get_state_color";
 import AddCommentModal from "@/components/admin/quotes/add_comment";
-
-export interface IQuoteRequest {
-  [key: string]: string;
-}
+import CancelQuoteModal from "@/components/admin/quotes/cancel_quote";
 
 export interface IDiscountData {
   discountVoucher: { type: string; amount: number };
@@ -24,13 +20,14 @@ export interface IDiscountData {
 const QuoteDetailsPage = () => {
   const router = useRouter();
   const { id } = useParams();
-  const quoteData: IQuote | undefined = FakeRequestsList.find(
-    (i) => i.id === id
-  );
-  const userSelected = FakeUsersList.find((i) => i.id === quoteData?.userId);
+  const quote: IQuote | undefined = FakeRequestsList.find((i) => i.id === id);
+  const userSelected = FakeUsersList.find((i) => i.id === quote?.userId);
+
+  const [quoteData, setQuoteData] = useState<IQuote | undefined>(quote);
 
   const [showQuoteInfo, setShowQuoteInfo] = useState<boolean>(true);
   const [showCommentModal, setShowCommentModal] = useState<boolean>(false);
+  const [showCancelModal, setShowCancelModal] = useState<boolean>(false);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -259,9 +256,13 @@ const QuoteDetailsPage = () => {
             </div>
 
             <footer className="new-quote-form-footer">
-              <Link href={Routes.quotes} className="button">
+              <button
+                type="button"
+                className="button"
+                onClick={() => setShowCancelModal(true)}
+              >
                 Cancelar
-              </Link>
+              </button>
               <button type="submit">Enviar cotización</button>
             </footer>
           </form>
@@ -270,6 +271,14 @@ const QuoteDetailsPage = () => {
 
       {showCommentModal && (
         <AddCommentModal setShowModal={setShowCommentModal} quote={quoteData} />
+      )}
+
+      {showCancelModal && (
+        <CancelQuoteModal
+          setShowModal={setShowCancelModal}
+          quote={quoteData}
+          setQuoteData={setQuoteData}
+        />
       )}
     </section>
   );
