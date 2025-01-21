@@ -4,6 +4,7 @@ import SelectOptions from "./select_container";
 import arrow from "@/assets/icons/arrow/select_down.svg";
 import Image from "next/image";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
+import { quotesFilterOptions } from "@/utils/data/quotes";
 
 interface Props {
   labelName?: string;
@@ -26,7 +27,7 @@ function CustomSelect({
   const [optionSelected, setOptionSelected] = useState<string>(
     typeof options[0].label === "string" ? options[0].label : ""
   );
-  const isPlaceholder = options[0].value.length === 0 && value.length === 0
+  const isPlaceholder = options[0].value.length === 0 && value.length === 0;
 
   const onSelectOption = (payload: any) => {
     if (payload.disabled) return;
@@ -35,6 +36,18 @@ function CustomSelect({
     setOptionSelected(payload.label);
     setShowOptions(false);
   };
+
+  const updateOptionSelected = () => {
+    const selected = quotesFilterOptions.find((i) => i.value === value);
+
+    if (typeof selected?.label === "string") setOptionSelected(selected.label);
+  };
+
+  useEffect(() => {
+    updateOptionSelected();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent): void => {

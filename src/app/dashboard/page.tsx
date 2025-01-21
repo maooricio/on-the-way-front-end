@@ -78,9 +78,9 @@ export default function Home() {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button" className="button">
-                Ver pendientes
-              </button>
+              <Link href={`${Routes.to_quote}?state=pending`} className="link">
+                Ver pedidos
+              </Link>
             </footer>
           }
         />
@@ -102,12 +102,13 @@ export default function Home() {
           }
           footer={
             <footer className="normal-card-button-container">
-              <button type="button" className="without-bg">
+              <Link href={Routes.users} className="button without-bg">
                 Gestionar usuarios
-              </button>
+              </Link>
             </footer>
           }
         />
+
         <NormalCard
           header={
             <header className="normal-card-header">
@@ -123,9 +124,12 @@ export default function Home() {
           }
           footer={
             <footer className="normal-card-button-container">
-              <button type="button" className="without-bg">
+              <Link
+                href={`${Routes.quotes_history}?state=verify`}
+                className="button without-bg"
+              >
                 Verificar pagos
-              </button>
+              </Link>
             </footer>
           }
         />

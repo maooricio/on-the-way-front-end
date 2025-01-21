@@ -1,14 +1,14 @@
 export const getStateColor = (state: string): string => {
   switch (state) {
-    case "En proceso":
+    case "in_progress":
       return "#F59E0B";
-    case "Pagada":
+    case "paid":
       return "#22C55E";
-    case "Pago pendiente":
+    case "pending":
       return "#DCA7F6";
-    case "Verificar pago":
+    case "verify":
       return "#CCCCCC";
-    case "Cancelada":
+    case "canceled":
       return "#EF4444";
     default:
       return "#CCCCCC";

@@ -12,6 +12,7 @@ import arrow_down from "@/assets/icons/arrow/select_down.svg";
 import { getStateColor } from "@/utils/handlers/get_state_color";
 import AddCommentModal from "@/components/admin/quotes/add_comment";
 import CancelQuoteModal from "@/components/admin/quotes/cancel_quote";
+import { quotesFilterOptions } from "@/utils/data/quotes";
 
 export interface IDiscountData {
   discountVoucher: { type: string; amount: number };
@@ -22,6 +23,8 @@ const QuoteDetailsPage = () => {
   const { id } = useParams();
   const quote: IQuote | undefined = FakeRequestsList.find((i) => i.id === id);
   const userSelected = FakeUsersList.find((i) => i.id === quote?.userId);
+
+  const quoteState = quotesFilterOptions.find((i) => i.value === quote?.state);
 
   const [quoteData, setQuoteData] = useState<IQuote | undefined>(quote);
 
@@ -89,7 +92,7 @@ const QuoteDetailsPage = () => {
                       backgroundColor: getStateColor(quoteData.state ?? ""),
                     }}
                   >
-                    {quoteData.state}
+                    {quoteState?.label}
                   </span>
                 </div>
 

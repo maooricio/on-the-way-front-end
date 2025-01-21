@@ -12,27 +12,27 @@ export const quotesFilterOptions: ISelectOption[] = [
   },
   {
     label: "En proceso",
-    value: "En proceso",
+    value: "in_progress",
     iconImg: inprogress,
   },
   {
     label: "Pagada",
-    value: "Pagada",
+    value: "paid",
     iconImg: paid,
   },
   {
     label: "Pago pendiente",
-    value: "Pago pendiente",
+    value: "pending",
     iconImg: pending,
   },
   {
     label: "Verificar pago",
-    value: "Verificar pago",
+    value: "verify",
     iconImg: waiting,
   },
   {
     label: "Cancelada",
-    value: "Cancelada",
+    value: "canceled",
     iconImg: cancel,
   },
 ];
