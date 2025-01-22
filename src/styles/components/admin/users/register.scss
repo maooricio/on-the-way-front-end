@@ -52,3 +52,18 @@
     @include scrollThin();
   }
 }
+
+@media screen and (max-width: 768px) {
+  .register-form-container {
+    width: 90vw;
+
+    & .register-form-content-container {
+      width: 90vw;
+      height: 100%;
+
+      & .register-form-content-row {
+        flex-wrap: wrap;
+      }
+    }
+  }
+}
