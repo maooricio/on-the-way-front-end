@@ -3,10 +3,13 @@ import close from "@/assets/icons/utils/close.svg";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import InputElement from "@/components/elements/inputs/input";
 import { IUser } from "@/utils/interfaces/user.interface";
+import CustomSelect from "@/components/elements/handlers/custom_select";
+import { usersRoleOptions } from "@/utils/data/users";
 
-export interface IEditProfile {
+export interface IEditUser {
   firstName: string;
   lastName: string;
+  email: string;
 }
 
 interface Props {
@@ -15,12 +18,14 @@ interface Props {
   userData: IUser | undefined;
 }
 
-const EditProfileModal = ({ setShowModal, setUserData, userData }: Props) => {
-  const initialState: IEditProfile = {
+const EditUserModal = ({ setShowModal, setUserData, userData }: Props) => {
+  const initialState: IEditUser = {
     firstName: userData?.firstName ?? "",
     lastName: userData?.lastName ?? "",
+    email: userData?.email ?? "",
   };
-  const [formData, setFormData] = useState<IEditProfile>(initialState);
+  const [formData, setFormData] = useState<IEditUser>(initialState);
+  const [userRole, setUserRole] = useState<string>(userData?.role ?? "");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,7 +42,7 @@ const EditProfileModal = ({ setShowModal, setUserData, userData }: Props) => {
   };
 
   return (
-    <section className="generic-modal">
+    <section className="generic-modal delete-user-container">
       <div
         className="generic-modal-background"
         onClick={() => setShowModal(false)}
@@ -57,6 +62,19 @@ const EditProfileModal = ({ setShowModal, setUserData, userData }: Props) => {
         </div>
 
         <div className="generic-modal-content">
+          <CustomSelect
+            labelName="Rol"
+            options={[
+              {
+                label: "Selecciona el rol de usuario",
+                value: "",
+              },
+              ...usersRoleOptions,
+            ]}
+            setValue={setUserRole}
+            value={userRole}
+          />
+
           <InputElement
             type="text"
             label="Nombre"
@@ -78,6 +96,17 @@ const EditProfileModal = ({ setShowModal, setUserData, userData }: Props) => {
             value={formData.lastName}
             icon={<></>}
           />
+
+          <InputElement
+            type="text"
+            label="Email"
+            placeholder="Añade una nota o comentario para el cliente..."
+            name="email"
+            setFormData={setFormData}
+            error=""
+            value={formData.email}
+            icon={<></>}
+          />
         </div>
 
         <div className="generic-modal-buttons">
@@ -91,7 +120,7 @@ const EditProfileModal = ({ setShowModal, setUserData, userData }: Props) => {
               userData?.lastName === formData.lastName
             }
           >
-            Editar usuario
+            Cambiar cliente
           </button>
         </div>
       </form>
@@ -99,4 +128,4 @@ const EditProfileModal = ({ setShowModal, setUserData, userData }: Props) => {
   );
 };
 
-export default EditProfileModal;
+export default EditUserModal;

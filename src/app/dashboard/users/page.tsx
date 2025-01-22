@@ -140,7 +140,11 @@ const UsersPage = () => {
       )}
 
       {userSelected && (
-        <UserDetails user={userSelected} setShowForm={setUserSelected} />
+        <UserDetails
+          user={userSelected}
+          setShowForm={setUserSelected}
+          setUserData={setUserSelected}
+        />
       )}
 
       {showRegisterForm && <RegisterForm setShowForm={setShowRegisterForm} />}
