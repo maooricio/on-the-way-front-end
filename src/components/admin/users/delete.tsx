@@ -38,21 +38,21 @@ const DeleteUser = ({ user, setShowModal, setShowDetails }: Props) => {
           </button>
         </div>
 
-        <p className="generic-modal-description">
-          ¿Estás seguro que deseas eliminar el usuario?
-        </p>
+        <div className="generic-modal-content">
+          <p>¿Estás seguro que deseas eliminar el usuario?</p>
 
-        <div className="delete-user-content">
-          <div className="user-photo-container">
-            <Image src={otw_logo} alt="user photo" className="user-photo" />
-          </div>
+          <div className="delete-user-content">
+            <div className="user-photo-container">
+              <Image src={otw_logo} alt="user photo" className="user-photo" />
+            </div>
 
-          <div className="delete-user-info">
-            <h3>
-              {user.firstName} {user.lastName}
-            </h3>
+            <div className="delete-user-info">
+              <h3>
+                {user.firstName} {user.lastName}
+              </h3>
 
-            <span>{getRole(user.role!)}</span>
+              <span>{getRole(user.role!)}</span>
+            </div>
           </div>
         </div>
 

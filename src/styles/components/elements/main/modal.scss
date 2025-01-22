@@ -223,6 +223,7 @@
     & form {
       width: 100vw;
       height: 100vh;
+      min-height: 100vh;
       overflow: hidden;
       overflow: auto;
       padding: 0;
@@ -238,8 +239,13 @@
         margin-top: 24px;
       }
 
+      .generic-modal-description {
+        width: 90vw;
+      }
+
       & .generic-modal-content {
         height: 100%;
+        justify-content: flex-start;
       }
 
       & .generic-modal-buttons {
