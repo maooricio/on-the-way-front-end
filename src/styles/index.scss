@@ -63,6 +63,7 @@ button[type="submit"],
   padding: 16px;
   border-radius: 12px;
   color: $generic-white;
+  white-space: nowrap;
   @include flex(row, center, center);
 
   &:hover {
