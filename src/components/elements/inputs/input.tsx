@@ -17,6 +17,7 @@ import { ICustomerSelect, IQuote } from "@/utils/interfaces/quote.interface";
 import { IVoucherAmount } from "@/components/admin/quotes/add_discount_voucher";
 import { IQuoteRequest } from "@/app/dashboard/quotes/request/[id]/page";
 import { IComment } from "@/components/admin/quotes/new/stage_5";
+import { IUserNames } from "@/components/admin/settings/edit_profile";
 
 interface Props {
   type: string;
@@ -112,4 +113,5 @@ type SetFormDataActions =
   | Dispatch<SetStateAction<IUser>>
   | Dispatch<SetStateAction<IVoucherAmount>>
   | Dispatch<SetStateAction<IQuoteRequest>>
-  | Dispatch<SetStateAction<IComment>>;
+  | Dispatch<SetStateAction<IComment>>
+  | Dispatch<SetStateAction<IUserNames>>;
