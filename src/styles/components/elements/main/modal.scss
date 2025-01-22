@@ -42,6 +42,10 @@
       width: 100%;
       @include flex(column, space-between, flex-start, 24px);
 
+      .input-container {
+        margin: 0;
+      }
+
       & p {
         all: unset;
         font-size: 16px;
@@ -102,6 +106,12 @@
             margin-left: 8px;
           }
         }
+      }
+
+      & .generic-modal-content-row {
+        width: 100%;
+
+        @include flex(row, space-between, center, 24px);
       }
     }
 

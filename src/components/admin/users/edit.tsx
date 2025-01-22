@@ -75,27 +75,29 @@ const EditUserModal = ({ setShowModal, setUserData, userData }: Props) => {
             value={userRole}
           />
 
-          <InputElement
-            type="text"
-            label="Nombre"
-            placeholder="Añade una nota o comentario para el cliente..."
-            name="firstName"
-            setFormData={setFormData}
-            error=""
-            value={formData.firstName}
-            icon={<></>}
-          />
+          <div className="generic-modal-content-row">
+            <InputElement
+              type="text"
+              label="Nombre"
+              placeholder="Añade una nota o comentario para el cliente..."
+              name="firstName"
+              setFormData={setFormData}
+              error=""
+              value={formData.firstName}
+              icon={<></>}
+            />
 
-          <InputElement
-            type="text"
-            label="Apellido"
-            placeholder="Añade una nota o comentario para el cliente..."
-            name="lastName"
-            setFormData={setFormData}
-            error=""
-            value={formData.lastName}
-            icon={<></>}
-          />
+            <InputElement
+              type="text"
+              label="Apellido"
+              placeholder="Añade una nota o comentario para el cliente..."
+              name="lastName"
+              setFormData={setFormData}
+              error=""
+              value={formData.lastName}
+              icon={<></>}
+            />
+          </div>
 
           <InputElement
             type="text"
