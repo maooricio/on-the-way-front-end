@@ -52,3 +52,42 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .quote-request-form {
+    & .new-quote-resume {
+      & .new-quote-resume-customer {
+        @include flex(column, flex-start, center);
+
+        & .new-quote-resume-customer-info {
+          @include flex(column, flex-start, center, 24px);
+        }
+
+        & .new-quote-request-comments {
+          & li {
+            width: 80%;
+
+            & .new-quote-request-comments-header {
+              @include flex(row, flex-start, center, 16px, wrap);
+
+              & .user-photo-container {
+                width: 46px;
+                height: 46px;
+              }
+
+              & span {
+                white-space: nowrap;
+                margin-bottom: 24px;
+              }
+            }
+
+            & p {
+              all: unset;
+              color: $neutral-500;
+            }
+          }
+        }
+      }
+    }
+  }
+}

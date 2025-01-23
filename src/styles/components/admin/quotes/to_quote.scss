@@ -1,0 +1,39 @@
+@use "../../../globals" as *;
+
+.to-quote-list {
+  width: 90%;
+
+  & .custom-list-header {
+    all: unset;
+    width: 100%;
+    @include flex(row, flex-start, center, 0);
+
+    & span {
+      width: 100%;
+
+      &:nth-child(2) {
+        width: 30%;
+        margin-left: 8px;
+      }
+
+      &:nth-child(3) {
+        width: 70%;
+      }
+    }
+  }
+
+  & .custom-list-row {
+    & span {
+      width: 15%;
+
+      &:nth-child(2) {
+        width: 40%;
+        margin-left: 8px;
+      }
+
+      &:nth-child(3) {
+        width: 50%;
+      }
+    }
+  }
+}
