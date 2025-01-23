@@ -58,7 +58,7 @@ const NewQuoteStageThree = ({ setStage, formData, setFormData }: Props) => {
       </header>
 
       <form onSubmit={handleOnSubmit} className="new-quote-form-vehicles">
-        <p>Escoja a continuación el tipo de vehículo que necesita:</p>
+        <p className="full-width">Escoja a continuación el tipo de vehículo que necesita:</p>
 
         {VehiclesData.map((i) => (
           <div

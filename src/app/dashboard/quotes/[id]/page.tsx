@@ -34,7 +34,7 @@ const QuoteDetailsPage = () => {
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.replace(Routes.quotes_history);
+    router.replace(`${Routes.quotes_new}?quote=${quote?.id}`);
   };
 
   return (
@@ -269,7 +269,7 @@ const QuoteDetailsPage = () => {
                 >
                   Cancelar
                 </button>
-                <button type="submit">Enviar cotización</button>
+                <button type="submit">Editar cotización</button>
               </footer>
             )}
           </form>
