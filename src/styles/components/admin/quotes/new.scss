@@ -172,7 +172,7 @@
 
       & .new-quote-form-footer {
         width: 100%;
-        @include flex(row, flex-end, center, 24px);
+        @include flex(row, flex-end, center, 24px, wrap);
 
         & button,
         & .button {
@@ -213,10 +213,10 @@
 
     & .new-quote-content {
       @include flex(column, space-between, center, 32px);
-  
+
       & .new-quote-stages-container {
         gap: 6px;
-  
+
         & span {
           font-size: 14px;
         }
@@ -225,25 +225,24 @@
       & .new-quote-form {
         width: 95%;
         @include flex(column, center, center, 36px);
-  
+
         & .new-quote-form-customer {
           padding: 24px 0;
           @include flex(column, flex-start, center, 16px);
-  
+
           & .user-photo-container {
             width: 120px;
             height: 120px;
             margin: 0;
           }
-  
+
           & .new-quote-form-customer-content {
-  
             & .new-quote-form-customer-content-title {
               gap: 8px;
               flex-wrap: wrap;
             }
           }
-  
+
           & button[type="button"] {
             all: unset;
             cursor: pointer;
@@ -256,7 +255,7 @@
         & .new-quote-form-content {
           width: 100%;
           flex-wrap: wrap;
-  
+
           & button[type="button"] {
             padding-left: 8px;
           }
