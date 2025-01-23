@@ -74,6 +74,10 @@
 
         & p {
           all: unset;
+
+          @media screen and (max-width: 768px) {
+            display: none;
+          }
         }
       }
     }
@@ -103,9 +107,20 @@
 
     & .custom-list-row {
       & span {
+        width: 40%;
+
+        &:nth-child(2) {
+          margin-left: 8px;
+        }
+
         &:nth-child(3) {
+          width: 55%;
           overflow: hidden;
           text-overflow: ellipsis;
+        }
+
+        &:last-child {
+          width: 15%;
         }
       }
     }
