@@ -102,3 +102,19 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .new-quote-form-vehicles {
+    & .new-quote-vehicle-container {
+      width: 100%;
+
+      &:nth-child(6) {
+        width: 100%;
+      }
+    }
+
+    & .new-quote-form-footer {
+      flex-wrap: wrap;
+    }
+  }
+}

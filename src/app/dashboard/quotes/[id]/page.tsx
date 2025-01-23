@@ -210,7 +210,7 @@ const QuoteDetailsPage = () => {
                           {formatCurrency(
                             quoteData.discountVoucher.type === "%"
                               ? 0 - 0 * (quoteData.discountVoucher.amount / 100)
-                              : 0 - quoteData.discountVoucher.amount
+                              : 0 - quoteData.discountVoucher.amount,
                           )}
                         </span>
                       </p>
@@ -223,7 +223,7 @@ const QuoteDetailsPage = () => {
                 <ul className="new-quote-request-comments">
                   {quoteData.comment.map((i) => {
                     const commentUser = FakeUsersList.find(
-                      (u) => u.id === i.userId
+                      (u) => u.id === i.userId,
                     );
 
                     return (
@@ -249,13 +249,15 @@ const QuoteDetailsPage = () => {
                 </ul>
               )}
 
-              <button
-                type="button"
-                className="add-comment-button"
-                onClick={() => setShowCommentModal(true)}
-              >
-                Añadir un comentario
-              </button>
+              {showQuoteInfo && (
+                <button
+                  type="button"
+                  className="add-comment-button"
+                  onClick={() => setShowCommentModal(true)}
+                >
+                  Añadir un comentario
+                </button>
+              )}
             </div>
 
             {quoteData.state !== "Cancelada" && (
