@@ -204,10 +204,30 @@
 }
 
 @media screen and (max-width: 768px) {
-  .quotes-history-container {
-    & .quotes-history-header {
+  .new-quote-container {
+    & .new-quote-header {
       & button {
         display: none;
+      }
+    }
+
+    & .new-quote-content {
+      @include flex(column, space-between, center, 32px);
+  
+      & .new-quote-stages-container {
+        width: 95%;
+        @include flex(row, flex-start, center, 8px);
+  
+        & span {
+          color: $neutral-800;
+          font-weight: 600;
+        }
+  
+        & .new-quote-stage-divider {
+          height: 1px;
+          width: 40px;
+          background-color: $neutral-200;
+        }
       }
     }
   }
