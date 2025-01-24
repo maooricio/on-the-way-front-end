@@ -18,8 +18,8 @@ const NewQuotePage = () => {
 
   const initialState: IQuote = {
     userId: "",
-    deliveryTransport: false,
-    collectionTransport: false,
+    deliveryTransport: undefined,
+    collectionTransport: undefined,
     serviceDate: "",
     serviceHour: "00:00",
     pickupCity: "",

@@ -20,7 +20,7 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
   const handleCounter = (
     type: string,
     focusItem: IVehicles | IOperator,
-    focus: string
+    focus: string,
   ) => {
     if (focus === "isOperator") {
       setFormData((prev) => ({
@@ -107,7 +107,7 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
               onClick={() =>
                 setFormData((prev) => ({
                   ...prev,
-                  deliveryTransport: false,
+                  deliveryTransport: undefined,
                 }))
               }
             >
@@ -117,7 +117,18 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
 
           <span>25/05/2024 a las 23:00 h.</span>
 
-          <p>{formatCurrency(250000)}</p>
+          <p>{formatCurrency(Number(formData.deliveryTransport))}</p>
+
+          {/* <InputElement
+            type="text"
+            label=""
+            placeholder=""
+            name="deliveryTransport"
+            setFormData={setFormData}
+            error=""
+            value={formData.deliveryTransport}
+            icon={<></>}
+          /> */}
         </div>
       )}
 
@@ -130,7 +141,7 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
               onClick={() =>
                 setFormData((prev) => ({
                   ...prev,
-                  collectionTransport: false,
+                  collectionTransport: undefined,
                 }))
               }
             >
@@ -140,7 +151,18 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
 
           <span>28/05/2024 a las 09:00 h.</span>
 
-          <p>{formatCurrency(250000)}</p>
+          <p>{formatCurrency(Number(formData.collectionTransport))}</p>
+
+          {/* <InputElement
+            type="text"
+            label=""
+            placeholder=""
+            name="collectionTransport"
+            setFormData={setFormData}
+            error=""
+            value={formData.collectionTransport}
+            icon={<></>}
+          /> */}
         </div>
       )}
 
@@ -195,7 +217,7 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
                   setFormData((prev) => ({
                     ...prev,
                     operators: formData.operators.filter(
-                      (i) => i.id !== item.id
+                      (i) => i.id !== item.id,
                     ),
                   }))
                 }

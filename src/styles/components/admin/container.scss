@@ -2,15 +2,17 @@
 
 .admin-container {
   height: 100vh;
-  max-height: 100vh;
+  min-height: 100vh;
   overflow: auto;
   scrollbar-gutter: stable;
+  background-color: $secondary-50;
   @include flex(row, flex-start, normal);
 
   & .admin-content-container {
     width: 85%;
+    height: 100%;
     background-color: $secondary-50;
-    margin-left: calc(15% + 10px);
+    margin-left: 15%;
     @include flex(row, center, flex-start);
   }
 }
