@@ -176,12 +176,7 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
 
           <SelectWithInput
             labelName="Ciudad de descargue"
-            options={[
-              {
-                label: "Busca la ciudad",
-                value: "",
-              },
-            ]}
+            options={citiesOptions}
             setValue={handleOnSelect}
             setSearchValue={setUnloadingCity}
             value={formData.unloadingCity}

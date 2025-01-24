@@ -38,7 +38,7 @@ function SelectWithInput({
 
   return (
     <section className="custom-select-container">
-      <div className="custom-select" ref={wrapperRef}>
+      <div className="custom-select select-with-input" ref={wrapperRef}>
         <InputElement
           type="text"
           label={labelName ?? ""}
