@@ -5,7 +5,7 @@ import Image from "next/image";
 import user_photo from "@/assets/images/user_photo.jpg";
 import { IUser } from "@/utils/interfaces/user.interface";
 import { useEffect, useState } from "react";
-import { userIsLogin } from "@/utils/handlers/user_login";
+import { getUserLogged } from "@/utils/handlers/user_login";
 import SettingsSkeleton from "@/components/suspenses/settings";
 import EditProfileModal from "./edit_profile";
 
@@ -14,7 +14,7 @@ const ProfileInfo = () => {
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
   useEffect(() => {
-    const user = userIsLogin();
+    const user = getUserLogged();
 
     setUserInfo(user!);
   }, []);
