@@ -101,6 +101,32 @@
   }
 }
 
+@media screen and (max-height: 700px) {
+  .navbar-container {
+    & .navbar-footer {
+      width: 90%;
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .navbar-container {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .navbar-container {
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .navbar-container {
+    width: 30%;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .navbar-container {
     width: 100%;

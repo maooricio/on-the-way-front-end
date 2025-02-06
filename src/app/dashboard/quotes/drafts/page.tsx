@@ -84,7 +84,7 @@ const QuotesDraftPage = () => {
 
       <ul className="custom-list-container">
         <li className="custom-list-header">
-          <span className="only-mobile">Fecha</span>
+          <span className="not-mobile">Fecha</span>
           <span>Cotización</span>
           <span>Cliente</span>
           <span>Monto</span>
@@ -100,7 +100,7 @@ const QuotesDraftPage = () => {
                 key={item.id}
                 className="custom-list-row"
               >
-                <span className="only-mobile">{item.date}</span>
+                <span className="not-mobile">{item.date}</span>
                 <span>{item.quoteNumber}</span>
                 <span>
                   {user?.firstName} {user?.lastName}

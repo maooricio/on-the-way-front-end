@@ -4,48 +4,31 @@ import menu from "../../../assets/icons/utils/menu.svg";
 import menu_dark from "../../../assets/icons/utils/menu_dark.svg";
 import logout from "../../../assets/icons/utils/logout.svg";
 import { useState } from "react";
-import { INavbarLinks } from "../../../utils/interfaces/links.interface";
-import home from "../../../assets/icons/navbar/home.svg";
-import quotes from "../../../assets/icons/navbar/quotes.svg";
-import users from "../../../assets/icons/navbar/users.svg";
-import settings from "../../../assets/icons/navbar/settings.svg";
 import { Routes } from "../../../utils/router/router_enum";
 import user_photo from "../../../assets/images/user_photo.jpg";
-import { userLogout } from "../../../utils/handlers/user_login";
+import { getUserLogged, userLogout } from "../../../utils/handlers/user_login";
 import { redirect, usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import useScreenWidth from "@/utils/hooks/use_screen_width";
+import useScreenSize from "@/utils/hooks/use_screen_width";
+import { adminLinks, clientLinks } from "@/utils/router/links";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const width = useScreenWidth();
-  const clientSideIsLoaded = width !== null;
+  const screen = useScreenSize();
+  const clientSideIsLoaded = screen !== null;
 
   const [showNavbar, setShowNavbar] = useState<boolean>(false);
 
-  const links: INavbarLinks[] = [
-    {
-      name: "Inicio",
-      icon: home,
-      path: Routes.main,
-    },
-    {
-      name: "Cotizaciones",
-      icon: quotes,
-      path: Routes.quotes,
-    },
-    {
-      name: "Gestión usuarios",
-      icon: users,
-      path: Routes.users,
-    },
-    {
-      name: "Configuraciones",
-      icon: settings,
-      path: Routes.settings,
-    },
-  ];
+  const getLinks = () => {
+    const user = getUserLogged();
+
+    if (user?.role !== "admin") {
+      return clientLinks;
+    } else {
+      return adminLinks;
+    }
+  };
 
   const handleLogout = () => {
     userLogout();
@@ -62,11 +45,11 @@ const Navbar = () => {
         <button
           type="button"
           onClick={() => setShowNavbar(!showNavbar)}
-          disabled={clientSideIsLoaded && width > 768}
+          disabled={clientSideIsLoaded && screen.width > 768}
         >
           <Image
             src={
-              showNavbar || (clientSideIsLoaded && width > 768)
+              showNavbar || (clientSideIsLoaded && screen.width > 768)
                 ? menu
                 : menu_dark
             }
@@ -82,7 +65,7 @@ const Navbar = () => {
           />
 
           <ul className="navbar-links-container">
-            {links.map((i) => (
+            {getLinks().map((i) => (
               <li key={`${i.name}: ${i.path}`}>
                 <Link
                   href={i.path}
@@ -102,8 +85,12 @@ const Navbar = () => {
         <div className="navbar-user">
           <Image src={user_photo} alt="user profile pic" priority />
 
-          <span className="navbar-user-name">María Laura Dominguez</span>
-          <span className="navbar-user-role">Administrador</span>
+          {clientSideIsLoaded && screen.height > 700 && (
+            <>
+              <span className="navbar-user-name">María Laura Dominguez</span>
+              <span className="navbar-user-role">Administrador</span>
+            </>
+          )}
         </div>
 
         <button type="button" onClick={handleLogout}>

@@ -2,25 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { Routes } from "./utils/router/router_enum";
 import { IUserLogged } from "./utils/interfaces/user.interface";
-
-const ADMIN_ROUTES: string[] = [
-  Routes.main,
-  Routes.quotes,
-  Routes.users,
-  Routes.settings,
-  Routes.quotes_history,
-  Routes.quotes_new,
-  Routes.to_quote,
-  Routes.request_details,
-  Routes.quote_details,
-  Routes.quote_drafts,
-];
-const CLIENT_ROUTES: string[] = [
-  Routes.quotes,
-  Routes.quotes_history,
-  Routes.quotes_new,
-  Routes.settings,
-];
+import { ADMIN_ROUTES, CLIENT_ROUTES } from "./utils/router/links";
 
 export function middleware(req: NextRequest) {
   const token = req.cookies.get("authToken")?.value;

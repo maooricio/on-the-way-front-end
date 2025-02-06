@@ -96,10 +96,10 @@ const QuotesHistoryPage = () => {
 
       <ul className="custom-list-container">
         <li className="custom-list-header">
-          <span className="only-mobile">Fecha</span>
+          <span className="not-mobile">Fecha</span>
           <span>Cotización</span>
           <span>Cliente</span>
-          <span className="only-mobile">Monto</span>
+          <span className="not-mobile">Monto</span>
           <span>Estado</span>
         </li>
 
@@ -116,12 +116,12 @@ const QuotesHistoryPage = () => {
                 key={item.id}
                 className="custom-list-row"
               >
-                <span className="only-mobile">{item.date}</span>
+                <span className="not-mobile">{item.date}</span>
                 <span>{item.quoteNumber}</span>
                 <span>
                   {user?.firstName} {user?.lastName}
                 </span>
-                <span className="only-mobile">
+                <span className="not-mobile">
                   {formatCurrency(item.totalPrice)}
                 </span>
                 <span>
@@ -130,7 +130,7 @@ const QuotesHistoryPage = () => {
                       className="custom-list-state-dot"
                       style={{ backgroundColor: getStateColor(item.state!) }}
                     ></div>
-                    <p className="only-mobile">{quoteState?.label}</p>
+                    <p className="not-mobile">{quoteState?.label}</p>
                   </div>
 
                   <button type="button">

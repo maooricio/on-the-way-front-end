@@ -1,12 +1,12 @@
 "use client";
 import { getStateColor } from "@/utils/handlers/get_state_color";
-import useScreenWidth from "@/utils/hooks/use_screen_width";
+import useScreenSize from "@/utils/hooks/use_screen_width";
 import { Routes } from "@/utils/router/router_enum";
 import Link from "next/link";
 
 const LongCardTable = () => {
-  const width = useScreenWidth();
-  const clientSideIsLoaded = width !== null;
+  const screen = useScreenSize();
+  const clientSideIsLoaded = screen !== null;
 
   const fakeInfo = [
     {
@@ -50,26 +50,26 @@ const LongCardTable = () => {
     <section className="long-card-table-container">
       <ul className="long-card-table">
         <li className="long-card-table-header">
-          {clientSideIsLoaded && width > 768 && <span>Fecha</span>}
+          {clientSideIsLoaded && screen.width > 768 && <span>Fecha</span>}
           <span>Cotización</span>
           <span>Cliente</span>
           <span>Monto</span>
-          {clientSideIsLoaded && width > 768 && <span>Estado</span>}
+          {clientSideIsLoaded && screen.width > 768 && <span>Estado</span>}
         </li>
 
         {fakeInfo.map((i, index) => (
           <li key={`${i.quote}`} className="long-card-table-item">
-            {clientSideIsLoaded && width > 768 && <span>{i.date}</span>}
+            {clientSideIsLoaded && screen.width > 768 && <span>{i.date}</span>}
             <span>{i.quote}</span>
             <span>{i.client}</span>
-            {clientSideIsLoaded && width > 768 && <span>{i.amount}</span>}
+            {clientSideIsLoaded && screen.width > 768 && <span>{i.amount}</span>}
             <span>
               <div className="long-card-last-item">
                 <div
                   className="long-card-last-item-dot"
                   style={{ backgroundColor: getStateColor(i.state) }}
                 ></div>
-                {clientSideIsLoaded && width > 768 ? i.state : ""}
+                {clientSideIsLoaded && screen.width > 768 ? i.state : ""}
               </div>
 
               {(index === 1 || index === 2 || index === 4) && (

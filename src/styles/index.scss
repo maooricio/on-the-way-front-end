@@ -126,7 +126,7 @@ button[type="submit"],
 }
 
 @media screen and (max-width: 768px) {
-  .only-mobile {
+  .not-mobile {
     display: none;
   }
 }

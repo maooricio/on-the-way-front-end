@@ -17,6 +17,33 @@
   }
 }
 
+@media screen and (max-width: 1400px) {
+  .admin-container {
+    & .admin-content-container {
+      width: 80%;
+      margin-left: 20%;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .admin-container {
+    & .admin-content-container {
+      width: 75%;
+      margin-left: 25%;
+    }
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .admin-container {
+    & .admin-content-container {
+      width: 70%;
+      margin-left: 30%;
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .admin-container {
     & .admin-content-container {

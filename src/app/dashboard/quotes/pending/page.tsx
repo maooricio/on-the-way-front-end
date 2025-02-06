@@ -82,10 +82,10 @@ const QuotesPendingPage = () => {
 
       <ul className="custom-list-container to-quote-list">
         <li className="custom-list-header">
-          <span className="only-mobile">Fecha</span>
+          <span className="not-mobile">Fecha</span>
           <span>Cotización</span>
           <span>Cliente</span>
-          <span className="only-mobile">Responsable</span>
+          <span className="not-mobile">Responsable</span>
         </li>
 
         {quotesList.length > 0 ? (
@@ -98,11 +98,11 @@ const QuotesPendingPage = () => {
                 key={item.id}
                 className="custom-list-row"
               >
-                <span className="only-mobile">{item.date}</span>
+                <span className="not-mobile">{item.date}</span>
                 <span>{item.quoteNumber}</span>
                 <span>{user?.company}</span>
                 <span>
-                  <p className="only-mobile">
+                  <p className="not-mobile">
                     {user?.firstName} {user?.lastName}
                   </p>
 
