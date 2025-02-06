@@ -292,6 +292,16 @@
   }
 }
 
+@media screen and (max-width: 1300px) {
+  .normal-card-container {
+    & .normal-card-button-container {
+      & .without-bg {
+        padding-top: 8px;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .small-card-container {
     width: 100%;

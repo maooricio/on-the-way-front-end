@@ -10,30 +10,64 @@ import { getUserLogged, userLogout } from "../../../utils/handlers/user_login";
 import { redirect, usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { INavbarLinks } from "@/utils/interfaces/links.interface";
+import home from "@/assets/icons/navbar/home.svg";
+import quotes from "@/assets/icons/navbar/quotes.svg";
+import users from "@/assets/icons/navbar/users.svg";
+import settings from "@/assets/icons/navbar/settings.svg";
 import useScreenSize from "@/utils/hooks/use_screen_width";
-import { adminLinks, clientLinks } from "@/utils/router/links";
+
+const adminLinks: INavbarLinks[] = [
+  {
+    name: "Inicio",
+    icon: home,
+    path: Routes.main,
+  },
+  {
+    name: "Cotizaciones",
+    icon: quotes,
+    path: Routes.quotes,
+  },
+  {
+    name: "Gestión usuarios",
+    icon: users,
+    path: Routes.users,
+  },
+  {
+    name: "Configuraciones",
+    icon: settings,
+    path: Routes.settings,
+  },
+];
+
+const clientLinks: INavbarLinks[] = [
+  {
+    name: "Cotizaciones",
+    icon: quotes,
+    path: Routes.quotes,
+  },
+  {
+    name: "Configuraciones",
+    icon: settings,
+    path: Routes.settings,
+  },
+];
 
 const Navbar = () => {
   const pathname = usePathname();
+  const user = getUserLogged();
   const screen = useScreenSize();
-  const clientSideIsLoaded = screen !== null;
+  const clientSideIsLoaded = screen !== null && user !== null;
 
   const [showNavbar, setShowNavbar] = useState<boolean>(false);
-
-  const getLinks = () => {
-    const user = getUserLogged();
-
-    if (user?.role !== "admin") {
-      return clientLinks;
-    } else {
-      return adminLinks;
-    }
-  };
 
   const handleLogout = () => {
     userLogout();
     redirect(Routes.login);
   };
+
+  const links: INavbarLinks[] =
+    user?.role === "admin" ? adminLinks : clientLinks;
 
   return (
     <section
@@ -65,33 +99,36 @@ const Navbar = () => {
           />
 
           <ul className="navbar-links-container">
-            {getLinks().map((i) => (
-              <li key={`${i.name}: ${i.path}`}>
-                <Link
-                  href={i.path}
-                  className={`link ${pathname === i.path ? "is-focus" : ""}`}
-                  onClick={() => setTimeout(() => setShowNavbar(false), 100)}
-                >
-                  <Image src={i.icon} alt={`navbar icon: ${i.name}`} />
-                  <span>{i.name}</span>
-                </Link>
-              </li>
-            ))}
+            {clientSideIsLoaded &&
+              links.map((i) => (
+                <li key={`${i.name}: ${i.path}`}>
+                  <Link
+                    href={i.path}
+                    className={`link ${pathname === i.path ? "is-focus" : ""}`}
+                    onClick={() => setTimeout(() => setShowNavbar(false), 100)}
+                  >
+                    <Image src={i.icon} alt={`navbar icon: ${i.name}`} />
+                    <span>{i.name}</span>
+                  </Link>
+                </li>
+              ))}
           </ul>
         </nav>
       </header>
 
       <footer className="navbar-footer">
-        <div className="navbar-user">
-          <Image src={user_photo} alt="user profile pic" priority />
+        {clientSideIsLoaded && (
+          <div className="navbar-user">
+            <Image src={user_photo} alt="user profile pic" priority />
 
-          {clientSideIsLoaded && screen.height > 700 && (
-            <>
-              <span className="navbar-user-name">María Laura Dominguez</span>
-              <span className="navbar-user-role">Administrador</span>
-            </>
-          )}
-        </div>
+            {screen.height > 700 && (
+              <>
+                <span className="navbar-user-name">María Laura Dominguez</span>
+                <span className="navbar-user-role">Administrador</span>
+              </>
+            )}
+          </div>
+        )}
 
         <button type="button" onClick={handleLogout}>
           <Image src={logout} alt="log out icon" />

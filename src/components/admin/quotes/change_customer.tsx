@@ -9,10 +9,7 @@ import {
 import close from "@/assets/icons/utils/close.svg";
 import close_fill from "@/assets/icons/utils/close_fill.svg";
 import SelectWithInput from "@/components/elements/inputs/select";
-import {
-  ICustomerSelect,
-  IQuote,
-} from "@/utils/interfaces/quote.interface";
+import { ICustomerSelect, IQuote } from "@/utils/interfaces/quote.interface";
 import { FakeUsersList } from "@/utils/data/fakers";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
@@ -35,7 +32,13 @@ const ChangeCustomerModal = ({ setShowModal, setFormQuoteData }: Props) => {
     e.preventDefault();
 
     if (formData.selected) {
-      setFormQuoteData((prev) => ({ ...prev, userId: formData.selected?.id }));
+      setFormQuoteData((prev) => ({
+        ...prev,
+        userId:
+          formData.selected && typeof formData.selected !== "string"
+            ? formData.selected.id
+            : "",
+      }));
     }
 
     setShowModal(false);
@@ -120,13 +123,22 @@ const ChangeCustomerModal = ({ setShowModal, setFormQuoteData }: Props) => {
 
               <div className="new-quote-form-customer-content">
                 <div className="new-quote-form-customer-content-title">
-                  <p>{formData.selected.company}</p>
+                  <p>
+                    {formData.selected && typeof formData.selected !== "string"
+                      ? formData.selected.company
+                      : ""}
+                  </p>
                   <p>Carrera 43 No, 201 - 78. Of 199, Cundinamarca</p>
                 </div>
 
                 <p>
-                  Persona responsable: {formData.selected.firstName}{" "}
-                  {formData.selected.lastName}
+                  Persona responsable:{" "}
+                  {formData.selected && typeof formData.selected !== "string"
+                    ? formData.selected.firstName
+                    : ""}{" "}
+                  {formData.selected && typeof formData.selected !== "string"
+                    ? formData.selected.lastName
+                    : ""}
                 </p>
               </div>
 
