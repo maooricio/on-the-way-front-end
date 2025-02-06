@@ -88,7 +88,7 @@ const RegisterForm = ({ setShowForm }: Props) => {
             userRole === "customer" && "register-form-content-with-overflow"
           }`}
         >
-          <p>
+          <p className="generic-modal-description">
             Por favor, proporciona la siguiente información para registrar al
             usuario:
           </p>

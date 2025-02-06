@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "push": "npm version patch && git push"
   },
   "dependencies": {
     "js-cookie": "^3.0.5",

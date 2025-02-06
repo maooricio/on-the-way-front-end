@@ -237,6 +237,10 @@
 
       .generic-modal-header {
         margin-top: 24px;
+
+        & h1 {
+          font-size: 18px;
+        }
       }
 
       .generic-modal-description {
