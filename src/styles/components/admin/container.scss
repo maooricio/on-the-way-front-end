@@ -6,6 +6,7 @@
   overflow: auto;
   scrollbar-gutter: stable;
   background-color: $secondary-50;
+  @include scrollThin();
   @include flex(row, flex-start, normal);
 
   & .admin-content-container {

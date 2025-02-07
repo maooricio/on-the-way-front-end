@@ -1,7 +1,12 @@
 "use client";
 import InputElement from "@/components/elements/inputs/input";
 import { redirect } from "next/navigation";
-import { emptyUserError, IError, initialFormError } from "@/utils/data/erros";
+import {
+  emptyUserError,
+  IError,
+  initialFormError,
+  validateUserError,
+} from "@/utils/data/erros";
 import { userLogin } from "@/utils/handlers/user_login";
 import { ILoginFormData } from "@/utils/interfaces/user.interface";
 import { Routes } from "@/utils/router/router_enum";
@@ -31,7 +36,13 @@ const LoginPage = () => {
       return;
     }
 
-    userLogin(formData);
+    const response = userLogin(formData);
+
+    if (!response) {
+      setFormError(validateUserError);
+      return;
+    }
+
     redirect(Routes.main);
   };
 

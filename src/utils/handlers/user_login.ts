@@ -1,3 +1,4 @@
+import { FakeUsersLogged } from "../data/fakers";
 import { ILoginFormData, IUserLogged } from "../interfaces/user.interface";
 import Cookies from "js-cookie";
 
@@ -13,20 +14,19 @@ export const userLogout = (): void => {
   Cookies.remove("authToken");
 };
 
-export const userLogin = (userData: ILoginFormData): void => {
+export const userLogin = (userData: ILoginFormData): boolean => {
   const { user, password } = userData;
-  const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user);
 
-  const userToLogin: IUserLogged = {
-    email: isEmail ? user : `${user}@gmail.com`,
-    username: isEmail ? user.split("@")[0] : user,
-    firstName: "María Laura",
-    lastName: "Dominguez",
-    password,
-    role: user === "client" || user === "client@gmail.com" ? "client" : "admin",
-  };
+  const userToLogin = FakeUsersLogged.find(
+    (i) => i.email === user || i.username === user
+  );
+
+  if (!userToLogin || userToLogin.password !== password) {
+    return false;
+  }
 
   Cookies.set("authToken", JSON.stringify(userToLogin), { expires: 7 });
+  return true;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

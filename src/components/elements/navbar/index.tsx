@@ -1,12 +1,11 @@
 "use client";
-import otw_only_logo from "../../../assets/images/otw_only_logo.svg";
-import menu from "../../../assets/icons/utils/menu.svg";
-import menu_dark from "../../../assets/icons/utils/menu_dark.svg";
-import logout from "../../../assets/icons/utils/logout.svg";
+import otw_only_logo from "@/assets/images/otw_only_logo.svg";
+import menu from "@/assets/icons/utils/menu.svg";
+import menu_dark from "@/assets/icons/utils/menu_dark.svg";
+import logout from "@/assets/icons/utils/logout.svg";
 import { useState } from "react";
-import { Routes } from "../../../utils/router/router_enum";
-import user_photo from "../../../assets/images/user_photo.jpg";
-import { getUserLogged, userLogout } from "../../../utils/handlers/user_login";
+import { Routes } from "@/utils/router/router_enum";
+import { getUserLogged, userLogout } from "@/utils/handlers/user_login";
 import { redirect, usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -66,6 +65,17 @@ const Navbar = () => {
     redirect(Routes.login);
   };
 
+  const getRole = (role: string) => {
+    switch (role) {
+      case "admin":
+        return "Administrador";
+      case "client":
+        return "Cliente";
+      default:
+        return "";
+    }
+  };
+
   const links: INavbarLinks[] =
     user?.role === "admin" ? adminLinks : clientLinks;
 
@@ -119,12 +129,14 @@ const Navbar = () => {
       <footer className="navbar-footer">
         {clientSideIsLoaded && (
           <div className="navbar-user">
-            <Image src={user_photo} alt="user profile pic" priority />
+            <Image src={user.photo ?? otw_only_logo} alt="user profile pic" priority />
 
             {screen.height > 700 && (
               <>
-                <span className="navbar-user-name">María Laura Dominguez</span>
-                <span className="navbar-user-role">Administrador</span>
+                <span className="navbar-user-name">
+                  {user.firstName} {user.lastName}
+                </span>
+                <span className="navbar-user-role">{getRole(user.role)}</span>
               </>
             )}
           </div>

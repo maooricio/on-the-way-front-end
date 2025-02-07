@@ -25,6 +25,7 @@ export interface IUserLogged {
   lastName: string;
   password: string;
   role: string;
+  photo: StaticImageData;
 }
 
 export interface ILoginFormData {
