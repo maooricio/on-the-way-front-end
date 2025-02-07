@@ -98,7 +98,7 @@ const UsersPage = () => {
       <ul className="custom-list-container">
         <li className="custom-list-header">
           <span>Nombre y Apellido</span>
-          <span className="only-mobile">Razón Social</span>
+          <span className="not-mobile">Razón Social</span>
           <span>Rol</span>
           <span>Fecha de alta</span>
         </li>
@@ -113,7 +113,7 @@ const UsersPage = () => {
               <span>
                 {item.firstName} {item.lastName}
               </span>
-              <span className="only-mobile">{item.company}</span>
+              <span className="not-mobile">{item.company}</span>
               <span>{getRole(item.role!)}</span>
               <span>
                 {item.dischargeDate}
@@ -140,7 +140,11 @@ const UsersPage = () => {
       )}
 
       {userSelected && (
-        <UserDetails user={userSelected} setShowForm={setUserSelected} />
+        <UserDetails
+          user={userSelected}
+          setShowForm={setUserSelected}
+          setUserData={setUserSelected}
+        />
       )}
 
       {showRegisterForm && <RegisterForm setShowForm={setShowRegisterForm} />}

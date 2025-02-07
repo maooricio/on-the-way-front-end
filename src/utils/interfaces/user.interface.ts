@@ -18,6 +18,16 @@ export interface IUser {
   dischargeDate?: string;
 }
 
+export interface IUserLogged {
+  email: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  role: string;
+  photo: StaticImageData;
+}
+
 export interface ILoginFormData {
   user: string;
   password: string;

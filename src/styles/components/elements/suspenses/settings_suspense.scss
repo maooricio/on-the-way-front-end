@@ -1,25 +1,25 @@
 @use "../../../globals" as *;
 
 .settings-suspense {
-  @include flex(row, space-between, center);
   width: 100%;
   background-color: $primary-100;
   border: 1px solid $primary-200;
   border-radius: 24px;
   animation: ease suspense 2s infinite;
+  @include flex(row, space-between, center);
 
   & .photo-container {
-    @include flex(column, center, center);
     padding: 0 24px;
     padding-top: 28px;
+    @include flex(column, center, center);
 
     & .image-container {
-      @include flex(row, center, center);
       overflow: hidden;
       width: 120px;
       height: 120px;
       border-radius: 16px;
       background-color: $primary-200;
+      @include flex(row, center, center);
 
       & img {
         width: 100%;

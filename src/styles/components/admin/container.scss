@@ -2,16 +2,46 @@
 
 .admin-container {
   height: 100vh;
-  max-height: 100vh;
+  min-height: 100vh;
   overflow: auto;
   scrollbar-gutter: stable;
+  background-color: $secondary-50;
+  @include scrollThin();
   @include flex(row, flex-start, normal);
 
   & .admin-content-container {
     width: 85%;
+    height: 100%;
     background-color: $secondary-50;
-    margin-left: calc(15% + 10px);
+    margin-left: 15%;
     @include flex(row, center, flex-start);
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .admin-container {
+    & .admin-content-container {
+      width: 80%;
+      margin-left: 20%;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .admin-container {
+    & .admin-content-container {
+      width: 75%;
+      margin-left: 25%;
+    }
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .admin-container {
+    & .admin-content-container {
+      width: 70%;
+      margin-left: 30%;
+    }
   }
 }
 

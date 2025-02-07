@@ -6,14 +6,17 @@ import close from "@/assets/icons/utils/close.svg";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
 import { getRole } from "@/utils/handlers/get_role";
 import DeleteUser from "./delete";
+import EditUserModal from "./edit";
 
 interface Props {
   user: IUser;
   setShowForm: Dispatch<SetStateAction<IUser | undefined>>;
+  setUserData: Dispatch<SetStateAction<IUser | undefined>>;
 }
 
-const UserDetails = ({ user, setShowForm }: Props) => {
+const UserDetails = ({ user, setShowForm, setUserData }: Props) => {
   const [showDeleteUser, setShowDeleteUser] = useState<boolean>(false);
+  const [showEditUser, setShowEditUser] = useState<boolean>(false);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -128,7 +131,9 @@ const UserDetails = ({ user, setShowForm }: Props) => {
           <button type="button" onClick={() => setShowDeleteUser(true)}>
             Eliminar usuario
           </button>
-          <button type="button">Editar información</button>
+          <button type="button" onClick={() => setShowEditUser(true)}>
+            Editar información
+          </button>
           <button type="submit">Aceptar</button>
         </div>
       </form>
@@ -138,6 +143,14 @@ const UserDetails = ({ user, setShowForm }: Props) => {
           user={user}
           setShowModal={setShowDeleteUser}
           setShowDetails={setShowForm}
+        />
+      )}
+
+      {showEditUser && (
+        <EditUserModal
+          setShowModal={setShowEditUser}
+          setUserData={setUserData}
+          userData={user}
         />
       )}
     </section>

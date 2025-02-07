@@ -12,6 +12,7 @@ import arrow_down from "@/assets/icons/arrow/select_down.svg";
 import { getStateColor } from "@/utils/handlers/get_state_color";
 import AddCommentModal from "@/components/admin/quotes/add_comment";
 import CancelQuoteModal from "@/components/admin/quotes/cancel_quote";
+import { quotesFilterOptions } from "@/utils/data/quotes";
 
 export interface IDiscountData {
   discountVoucher: { type: string; amount: number };
@@ -23,6 +24,8 @@ const QuoteDetailsPage = () => {
   const quote: IQuote | undefined = FakeRequestsList.find((i) => i.id === id);
   const userSelected = FakeUsersList.find((i) => i.id === quote?.userId);
 
+  const quoteState = quotesFilterOptions.find((i) => i.value === quote?.state);
+
   const [quoteData, setQuoteData] = useState<IQuote | undefined>(quote);
 
   const [showQuoteInfo, setShowQuoteInfo] = useState<boolean>(true);
@@ -31,7 +34,7 @@ const QuoteDetailsPage = () => {
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.replace(Routes.quotes_history);
+    router.replace(`${Routes.quotes_new}?quote=${quote?.id}`);
   };
 
   return (
@@ -89,7 +92,7 @@ const QuoteDetailsPage = () => {
                       backgroundColor: getStateColor(quoteData.state ?? ""),
                     }}
                   >
-                    {quoteData.state}
+                    {quoteState?.label}
                   </span>
                 </div>
 
@@ -207,7 +210,7 @@ const QuoteDetailsPage = () => {
                           {formatCurrency(
                             quoteData.discountVoucher.type === "%"
                               ? 0 - 0 * (quoteData.discountVoucher.amount / 100)
-                              : 0 - quoteData.discountVoucher.amount
+                              : 0 - quoteData.discountVoucher.amount,
                           )}
                         </span>
                       </p>
@@ -220,7 +223,7 @@ const QuoteDetailsPage = () => {
                 <ul className="new-quote-request-comments">
                   {quoteData.comment.map((i) => {
                     const commentUser = FakeUsersList.find(
-                      (u) => u.id === i.userId
+                      (u) => u.id === i.userId,
                     );
 
                     return (
@@ -246,13 +249,15 @@ const QuoteDetailsPage = () => {
                 </ul>
               )}
 
-              <button
-                type="button"
-                className="add-comment-button"
-                onClick={() => setShowCommentModal(true)}
-              >
-                Añadir un comentario
-              </button>
+              {showQuoteInfo && (
+                <button
+                  type="button"
+                  className="add-comment-button"
+                  onClick={() => setShowCommentModal(true)}
+                >
+                  Añadir un comentario
+                </button>
+              )}
             </div>
 
             {quoteData.state !== "Cancelada" && (
@@ -264,7 +269,7 @@ const QuoteDetailsPage = () => {
                 >
                   Cancelar
                 </button>
-                <button type="submit">Enviar cotización</button>
+                <button type="submit">Editar cotización</button>
               </footer>
             )}
           </form>

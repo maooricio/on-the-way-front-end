@@ -1,11 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
 
-export default function useScreenWidth(): number | null {
-  const [width, setWidth] = useState<number | null>(null);
+interface IScreenSize {
+  width: number,
+  height: number
+}
+
+export default function useScreenSize(): IScreenSize | null {
+  const [size, setSize] = useState<IScreenSize | null>(null);
 
   useEffect(() => {
-    const handleResize = () => setWidth(innerWidth);
+    const handleResize = () => setSize({width: innerWidth, height: innerHeight});
 
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -13,5 +18,5 @@ export default function useScreenWidth(): number | null {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return width;
+  return size;
 }

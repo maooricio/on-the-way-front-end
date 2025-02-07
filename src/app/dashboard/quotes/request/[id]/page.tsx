@@ -25,10 +25,10 @@ const QuoteRequestDetailsPage = () => {
   const router = useRouter();
   const { id } = useParams();
   const requestSelected: IQuote | undefined = FakeRequestsList.find(
-    (i) => i.id === id
+    (i) => i.id === id,
   );
   const userSelected = FakeUsersList.find(
-    (i) => i.id === requestSelected?.userId
+    (i) => i.id === requestSelected?.userId,
   );
 
   const initialState: IQuoteRequest = {
@@ -36,10 +36,10 @@ const QuoteRequestDetailsPage = () => {
     collectionTransport: "",
     comment: "",
     ...Object.fromEntries(
-      requestSelected?.vehicles.map((v) => [v.id, ""]) || []
+      requestSelected?.vehicles.map((v) => [v.id, ""]) || [],
     ),
     ...Object.fromEntries(
-      requestSelected?.operators.map((o) => [o.id, ""]) || []
+      requestSelected?.operators.map((o) => [o.id, ""]) || [],
     ),
   };
 
@@ -58,7 +58,7 @@ const QuoteRequestDetailsPage = () => {
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.replace(Routes.quotes_history);
+    router.replace(`${Routes.quotes_new}?quote=${requestData.id}`);
   };
 
   const calculatePrice = () => {
@@ -323,7 +323,7 @@ const QuoteRequestDetailsPage = () => {
                             ? price -
                                 price *
                                   (requestData.discountVoucher.amount / 100)
-                            : price - requestData.discountVoucher.amount
+                            : price - requestData.discountVoucher.amount,
                         )}
                       </span>
                     </p>
@@ -336,7 +336,7 @@ const QuoteRequestDetailsPage = () => {
               <Link href={Routes.quotes} className="button">
                 Cancelar
               </Link>
-              <button type="submit">Enviar cotización</button>
+              <button type="submit">Editar cotización</button>
             </footer>
           </form>
         )}

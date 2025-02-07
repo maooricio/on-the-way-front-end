@@ -30,7 +30,7 @@ const QuotesPendingPage = () => {
   const [searchData, setSearchData] = useState<ISearch>(initialState);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [quotesList, setQuotesList] = useState<IQuote[][]>(
-    paginateList(FakeRequestsList)
+    paginateList(FakeRequestsList),
   );
 
   const handlePagination = (page: number) => {
@@ -41,7 +41,7 @@ const QuotesPendingPage = () => {
     const filteredQuotes = filterQuotes(
       FakeRequestsList,
       searchData.value,
-      "all"
+      "all",
     );
 
     setQuotesList(filteredQuotes);
@@ -80,12 +80,12 @@ const QuotesPendingPage = () => {
         </div>
       </section>
 
-      <ul className="custom-list-container">
+      <ul className="custom-list-container to-quote-list">
         <li className="custom-list-header">
-          <span className="only-mobile">Fecha</span>
+          <span className="not-mobile">Fecha</span>
           <span>Cotización</span>
           <span>Cliente</span>
-          <span>Responsable</span>
+          <span className="not-mobile">Responsable</span>
         </li>
 
         {quotesList.length > 0 ? (
@@ -98,15 +98,13 @@ const QuotesPendingPage = () => {
                 key={item.id}
                 className="custom-list-row"
               >
-                <span className="only-mobile">{item.date}</span>
+                <span className="not-mobile">{item.date}</span>
                 <span>{item.quoteNumber}</span>
+                <span>{user?.company}</span>
                 <span>
-                  {user?.firstName} {user?.lastName}
-                </span>
-                <span>
-                  <>
+                  <p className="not-mobile">
                     {user?.firstName} {user?.lastName}
-                  </>
+                  </p>
 
                   <button type="button">Cotizar</button>
                 </span>

@@ -3,7 +3,7 @@ import { IUser } from "./user.interface";
 import { IVehicles } from "./vehicles.interface";
 
 export interface ICustomerSelect {
-  selected?: IUser;
+  selected?: IUser | string;
   search: string;
 }
 
@@ -18,8 +18,8 @@ export interface IQuote {
   userId?: string;
   quoteNumber?: string;
   state?: string;
-  deliveryTransport: boolean;
-  collectionTransport: boolean;
+  deliveryTransport: string | undefined;
+  collectionTransport: string | undefined;
   serviceDate: string;
   serviceHour: string;
   pickupCity: string;

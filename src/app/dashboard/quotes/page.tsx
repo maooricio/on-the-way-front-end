@@ -89,9 +89,12 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button" className="button">
+              <Link
+                href={`${Routes.quotes_history}?state=pending`}
+                className="button"
+              >
                 Ver cotizaciones en proceso
-              </button>
+              </Link>
             </footer>
           }
         />
@@ -111,9 +114,9 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button" className="button">
+              <Link href={Routes.to_quote} className="button">
                 Ver solicitudes
-              </button>
+              </Link>
             </footer>
           }
         />
@@ -156,9 +159,12 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button" className="without-bg">
+              <Link
+                href={`${Routes.quotes_history}?state=paid`}
+                className="button without-bg"
+              >
                 Ver pagos recibidos
-              </button>
+              </Link>
             </footer>
           }
         />
@@ -177,9 +183,12 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button" className="without-bg">
+              <Link
+                href={`${Routes.quotes_history}?state=pending`}
+                className="button without-bg"
+              >
                 Ver pagos pendientes
-              </button>
+              </Link>
             </footer>
           }
         />
@@ -198,9 +207,12 @@ const QuotesPage = () => {
           }
           footer={
             <footer className="small-card-button-container">
-              <button type="button" className="without-bg">
+              <Link
+                href={`${Routes.quotes_history}?state=verify`}
+                className="button without-bg"
+              >
                 Verificar pagos
-              </button>
+              </Link>
             </footer>
           }
         />

@@ -83,16 +83,16 @@ const RegisterForm = ({ setShowForm }: Props) => {
           </button>
         </div>
 
-        <p className="generic-modal-description">
-          Por favor, proporciona la siguiente información para registrar al
-          usuario:
-        </p>
-
         <div
           className={`register-form-content-container ${
             userRole === "customer" && "register-form-content-with-overflow"
           }`}
         >
+          <p className="generic-modal-description">
+            Por favor, proporciona la siguiente información para registrar al
+            usuario:
+          </p>
+
           <CustomSelect
             labelName="Rol"
             options={[

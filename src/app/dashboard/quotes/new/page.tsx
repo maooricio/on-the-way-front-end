@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import back from "@/assets/icons/arrow/arrow_back.svg";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import NewQuoteStageOne from "@/components/admin/quotes/new/stage_1";
 import { useState } from "react";
 import NewQuoteStageTwo from "@/components/admin/quotes/new/stage_2";
@@ -13,11 +13,13 @@ import NewQuoteStageFive from "@/components/admin/quotes/new/stage_5";
 
 const NewQuotePage = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const quote = searchParams.get("quote");
 
   const initialState: IQuote = {
     userId: "",
-    deliveryTransport: false,
-    collectionTransport: false,
+    deliveryTransport: undefined,
+    collectionTransport: undefined,
     serviceDate: "",
     serviceHour: "00:00",
     pickupCity: "",
@@ -37,7 +39,7 @@ const NewQuotePage = () => {
   };
 
   const [formData, setFormData] = useState<IQuote>(initialState);
-  const [stage, setStage] = useState<number>(0);
+  const [stage, setStage] = useState<number>(!quote ? 0 : 1);
 
   const handleGoBack = () => {
     if (stage > 0) {
@@ -93,10 +95,7 @@ const NewQuotePage = () => {
           <NewQuoteSummary formData={formData} setFormData={setFormData} />
         </section>
       ) : (
-        <NewQuoteStageFive
-          formData={formData}
-          setFormData={setFormData}
-        />
+        <NewQuoteStageFive formData={formData} setFormData={setFormData} />
       )}
     </section>
   );

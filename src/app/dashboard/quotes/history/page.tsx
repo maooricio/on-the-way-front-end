@@ -11,7 +11,7 @@ import glass from "@/assets/icons/others/glass.svg";
 import { filterQuotes } from "@/utils/handlers/filters";
 import { quotesFilterOptions } from "@/utils/data/quotes";
 import back from "@/assets/icons/arrow/arrow_back.svg";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Routes } from "@/utils/router/router_enum";
 import { IQuote } from "@/utils/interfaces/quote.interface";
@@ -24,6 +24,8 @@ export interface ISearch {
 
 const QuotesHistoryPage = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const state = searchParams.get("state");
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pageRef = useRef<any>(null);
@@ -34,7 +36,7 @@ const QuotesHistoryPage = () => {
 
   const [searchData, setSearchData] = useState<ISearch>(initialState);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [roleFilter, setRoleFilter] = useState<string>("all");
+  const [stateFilter, setStateFilter] = useState<string>(state ?? "all");
   const [quotesList, setQuotesList] = useState<IQuote[][]>(
     paginateList(FakeQuotesList)
   );
@@ -47,12 +49,12 @@ const QuotesHistoryPage = () => {
     const filteredQuotes = filterQuotes(
       FakeQuotesList,
       searchData.value,
-      roleFilter
+      stateFilter
     );
 
     setQuotesList(filteredQuotes);
     setCurrentPage(1);
-  }, [roleFilter, searchData]);
+  }, [stateFilter, searchData]);
 
   return (
     <section className="quotes-history-container" ref={pageRef}>
@@ -73,8 +75,8 @@ const QuotesHistoryPage = () => {
         <div className="quotes-history-select-handler">
           <CustomSelect
             options={quotesFilterOptions}
-            setValue={setRoleFilter}
-            value={roleFilter}
+            setValue={setStateFilter}
+            value={stateFilter}
           />
         </div>
 
@@ -94,16 +96,19 @@ const QuotesHistoryPage = () => {
 
       <ul className="custom-list-container">
         <li className="custom-list-header">
-          <span className="only-mobile">Fecha</span>
+          <span className="not-mobile">Fecha</span>
           <span>Cotización</span>
           <span>Cliente</span>
-          <span className="only-mobile">Monto</span>
+          <span className="not-mobile">Monto</span>
           <span>Estado</span>
         </li>
 
         {quotesList.length > 0 ? (
           quotesList[currentPage - 1].map((item) => {
             const user = FakeUsersList.find((i) => i.id === item.userId);
+            const quoteState = quotesFilterOptions.find(
+              (i) => i.value === item.state
+            );
 
             return (
               <Link
@@ -111,12 +116,12 @@ const QuotesHistoryPage = () => {
                 key={item.id}
                 className="custom-list-row"
               >
-                <span className="only-mobile">{item.date}</span>
+                <span className="not-mobile">{item.date}</span>
                 <span>{item.quoteNumber}</span>
                 <span>
                   {user?.firstName} {user?.lastName}
                 </span>
-                <span className="only-mobile">
+                <span className="not-mobile">
                   {formatCurrency(item.totalPrice)}
                 </span>
                 <span>
@@ -125,7 +130,7 @@ const QuotesHistoryPage = () => {
                       className="custom-list-state-dot"
                       style={{ backgroundColor: getStateColor(item.state!) }}
                     ></div>
-                    <p className="only-mobile">{item.state}</p>
+                    <p className="not-mobile">{quoteState?.label}</p>
                   </div>
 
                   <button type="button">

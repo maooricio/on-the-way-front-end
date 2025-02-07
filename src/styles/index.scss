@@ -29,6 +29,7 @@
 @use "./components/admin/quotes/new_summary.scss";
 @use "./components/admin/quotes/request.scss";
 @use "./components/admin/quotes/q_details.scss";
+@use "./components/admin/quotes/to_quote.scss";
 
 // admin/users
 @use "./components/admin/users.scss";
@@ -37,7 +38,7 @@
 @use "./components/admin/users/delete.scss";
 
 // suspenses
-// @use "./components/elements/suspenses/settings_suspense.scss";
+@use "./components/elements/suspenses/settings_suspense.scss";
 
 body {
   margin: 0;
@@ -63,6 +64,7 @@ button[type="submit"],
   padding: 16px;
   border-radius: 12px;
   color: $generic-white;
+  white-space: nowrap;
   @include flex(row, center, center);
 
   &:hover {
@@ -82,6 +84,10 @@ button[type="submit"],
 
 .rotate {
   rotate: 180deg;
+}
+
+.full-width {
+  width: 100%;
 }
 
 .user-photo-container {
@@ -120,7 +126,7 @@ button[type="submit"],
 }
 
 @media screen and (max-width: 768px) {
-  .only-mobile {
+  .not-mobile {
     display: none;
   }
 }

@@ -1,9 +1,6 @@
 import InputElement from "@/components/elements/inputs/input";
 import { getSquareIcon, getStageIcon } from "@/utils/handlers/get_icon";
-import {
-  ICustomerSelect,
-  IQuote,
-} from "@/utils/interfaces/quote.interface";
+import { ICustomerSelect, IQuote } from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,8 +22,7 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
     search: "",
   };
 
-  const [pickupCity, setPickupCity] =
-    useState<ICustomerSelect>(initialState);
+  const [pickupCity, setPickupCity] = useState<ICustomerSelect>(initialState);
   const [unloadingCity, setUnloadingCity] =
     useState<ICustomerSelect>(initialState);
   const [serviceHour, setServiceHour] = useState<string>("");
@@ -37,38 +33,40 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleOnSelect = (payload: any) => {
-    setFormData((prev) => ({ ...prev, pickupCity: payload.value }));
+  const handleOnSelect = (payload: any, isPickupCity: boolean) => {
+    if (isPickupCity) {
+      setPickupCity({
+        selected: payload.value,
+        search: payload.value,
+      });
+      setFormData((prev) => ({ ...prev, pickupCity: payload.value }));
+    } else {
+      setUnloadingCity({
+        selected: payload.value,
+        search: payload.value,
+      });
+      setFormData((prev) => ({ ...prev, unloadingCity: payload.value }));
+    }
   };
 
   const handleSelect = (type: string) => {
-    const isToRest =
+    const selectValue =
       type === "delivery"
         ? formData.deliveryTransport
         : formData.collectionTransport;
 
-    // let price = formData.totalPrice;
-
-    // if (isToRest) {
-    //   price = formData.totalPrice - 250000;
-    // } else {
-    //   price = formData.totalPrice + 250000;
-    // }
-
     if (type === "delivery") {
       setFormData((prev) => ({
         ...prev,
-        deliveryTransport: !isToRest,
+        deliveryTransport: selectValue === undefined ? "250000" : undefined,
       }));
     } else {
       setFormData((prev) => ({
         ...prev,
-        collectionTransport: !isToRest,
+        collectionTransport: selectValue === undefined ? "250000" : undefined,
       }));
     }
   };
-
-  console.log({ pickupCity, unloadingCity });
 
   return (
     <section className="new-quote-content">
@@ -95,14 +93,14 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
             <button type="button" onClick={() => handleSelect("delivery")}>
               Transporte de entrega:{" "}
               <Image
-                src={getSquareIcon(formData.deliveryTransport)}
+                src={getSquareIcon(formData.deliveryTransport !== undefined)}
                 alt="checkbox icon"
               />
             </button>
             <button type="button" onClick={() => handleSelect("collection")}>
               Transporte de recogida:{" "}
               <Image
-                src={getSquareIcon(formData.collectionTransport)}
+                src={getSquareIcon(formData.collectionTransport !== undefined)}
                 alt="checkbox icon"
               />
             </button>
@@ -136,19 +134,19 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
           <SelectWithInput
             labelName="Ciudad de cargue"
             options={citiesOptions}
-            setValue={handleOnSelect}
+            setValue={(item) => handleOnSelect(item, true)}
             setSearchValue={setPickupCity}
-            value={formData.pickupCity}
+            value={pickupCity.search}
           />
 
           <InputElement
             type="text"
             label="Dirección de cargue"
             placeholder="Selecciona la fecha"
-            name="serviceDate"
+            name="pickupAddress"
             setFormData={setFormData}
             error=""
-            value={formData.serviceDate}
+            value={formData.pickupAddress}
             icon={<></>}
           />
 
@@ -156,10 +154,10 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
             type="text"
             label="Dirección de entrega"
             placeholder="Selecciona la fecha"
-            name="serviceDate"
+            name="deliveryAddress"
             setFormData={setFormData}
             error=""
-            value={formData.serviceDate}
+            value={formData.deliveryAddress}
             icon={<></>}
           />
 
@@ -167,34 +165,29 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
             type="text"
             label="Dirección de recogida"
             placeholder="Selecciona la fecha"
-            name="serviceDate"
+            name="collectionAddress"
             setFormData={setFormData}
             error=""
-            value={formData.serviceDate}
+            value={formData.collectionAddress}
             icon={<></>}
           />
 
           <SelectWithInput
             labelName="Ciudad de descargue"
-            options={[
-              {
-                label: "Busca la ciudad",
-                value: "",
-              },
-            ]}
-            setValue={handleOnSelect}
+            options={citiesOptions}
+            setValue={(item) => handleOnSelect(item, false)}
             setSearchValue={setUnloadingCity}
-            value={formData.unloadingCity}
+            value={unloadingCity.search}
           />
 
           <InputElement
             type="text"
             label="Dirección de descargue"
             placeholder="Selecciona la fecha"
-            name="serviceDate"
+            name="unloadingAdress"
             setFormData={setFormData}
             error=""
-            value={formData.serviceDate}
+            value={formData.unloadingAdress}
             icon={<></>}
           />
         </div>

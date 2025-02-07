@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
-import "@/styles/index.scss";
 import AdminContainer from "@/containers/admin";
-
-const PoppinsSans = Poppins({
-  weight: ["400", "500", "700", "800"],
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "On The Way",
@@ -18,11 +11,5 @@ export default function DashboardLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="es">
-      <body className={`${PoppinsSans}`}>
-        <AdminContainer>{children}</AdminContainer>
-      </body>
-    </html>
-  );
+  return <AdminContainer>{children}</AdminContainer>;
 }
