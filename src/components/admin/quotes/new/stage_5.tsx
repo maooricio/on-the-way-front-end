@@ -186,7 +186,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
                 onClick={() =>
                   setFormData((prev) => ({
                     ...prev,
-                    deliveryTransport: false,
+                    deliveryTransport: undefined,
                   }))
                 }
               >
@@ -209,7 +209,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
                 onClick={() =>
                   setFormData((prev) => ({
                     ...prev,
-                    collectionTransport: false,
+                    collectionTransport: undefined,
                   }))
                 }
               >
@@ -368,7 +368,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
                     {formatCurrency(
                       formData.discountVoucher.type === "%"
                         ? price -
-                            price * (formData.discountVoucher.amount / 100)
+                        price * (formData.discountVoucher.amount / 100)
                         : price - formData.discountVoucher.amount
                     )}
                   </span>

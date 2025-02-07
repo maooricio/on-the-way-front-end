@@ -14,10 +14,7 @@ import { Routes } from "@/utils/router/router_enum";
 import SelectWithInput from "@/components/elements/inputs/select";
 import close from "@/assets/icons/utils/close_fill.svg";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
-import {
-  ICustomerSelect,
-  IQuote,
-} from "@/utils/interfaces/quote.interface";
+import { ICustomerSelect, IQuote } from "@/utils/interfaces/quote.interface";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
@@ -77,7 +74,12 @@ const NewQuoteStageOne = ({
     e.preventDefault();
 
     if (formData.selected) {
-      setFormQuoteData((prev) => ({ ...prev, userId: formData.selected?.id }));
+      const userSelectedId =
+        typeof formData.selected !== "string"
+          ? formData.selected.id
+          : formData.selected;
+
+      setFormQuoteData((prev) => ({ ...prev, userId: userSelectedId }));
     }
 
     setStage(1);
@@ -128,13 +130,22 @@ const NewQuoteStageOne = ({
 
             <div className="new-quote-form-customer-content">
               <div className="new-quote-form-customer-content-title">
-                <p>{formData.selected.company}</p>
+                <p>
+                  {typeof formData.selected !== "string"
+                    ? formData.selected.company
+                    : ""}
+                </p>
                 <p>Carrera 43 No, 201 - 78. Of 199, Cundinamarca</p>
               </div>
 
               <p>
-                Persona responsable: {formData.selected.firstName}{" "}
-                {formData.selected.lastName}
+                Persona responsable:{" "}
+                {typeof formData.selected !== "string"
+                  ? formData.selected.firstName
+                  : ""}{" "}
+                {typeof formData.selected !== "string"
+                  ? formData.selected.lastName
+                  : ""}
               </p>
             </div>
 
