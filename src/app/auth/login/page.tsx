@@ -1,6 +1,5 @@
 "use client";
 import InputElement from "@/components/elements/inputs/input";
-import { redirect } from "next/navigation";
 import {
   emptyUserError,
   IError,
@@ -16,8 +15,11 @@ import otw_logo from "../../../assets/images/otw_logo.svg";
 import eye from "../../../assets/icons/utils/eye.svg";
 import eye_closed from "../../../assets/icons/utils/eye_closed.svg";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
+  const router = useRouter();
+
   const initialState: ILoginFormData = {
     user: "",
     password: "",
@@ -27,7 +29,7 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState<string>("password");
   const [formError, setFormError] = useState<IError>(initialFormError);
 
-  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { user, password } = formData;
 
@@ -36,14 +38,18 @@ const LoginPage = () => {
       return;
     }
 
-    const response = userLogin(formData);
+    try {
+      const response = await userLogin(formData);
 
-    if (!response) {
-      setFormError(validateUserError);
-      return;
+      if (!response) {
+        setFormError(validateUserError);
+        return;
+      }
+
+      router.push(Routes.main);
+    } catch (error) {
+      console.log({ error });
     }
-
-    redirect(Routes.main);
   };
 
   const handleOnChange = () => {
