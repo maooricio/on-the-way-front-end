@@ -4,7 +4,9 @@ export const emailRegEx =
   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]{1,})$/;
 
 export const getUserLogged = async (): Promise<IUserLogged> => {
-  const loggedRes = await fetch("/api/login", {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
+  const loggedRes = await fetch(`${baseUrl}/api/login`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

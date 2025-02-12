@@ -111,11 +111,11 @@ const Navbar = () => {
         <button
           type="button"
           onClick={() => setShowNavbar(!showNavbar)}
-          disabled={clientSideIsLoaded && screen.width > 768}
+          disabled={clientSideIsLoaded && screen.width > 900}
         >
           <Image
             src={
-              showNavbar || (clientSideIsLoaded && screen.width > 768)
+              showNavbar || (clientSideIsLoaded && screen.width > 900)
                 ? menu
                 : menu_dark
             }

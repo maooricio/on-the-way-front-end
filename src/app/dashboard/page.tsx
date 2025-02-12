@@ -144,7 +144,7 @@ export default function Home() {
       </section>
 
       <section className="long-card-container">
-        <LongCardTable />
+        <LongCardTable userRole="admin" />
       </section>
     </section>
   );

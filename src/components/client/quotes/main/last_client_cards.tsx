@@ -8,13 +8,13 @@ const ClientMainQuotesLast = () => {
       <SmallCard
         header={
           <header className="small-card-header has-both">
-            <span>Pagos recibidos</span>
+            <span>Pagos realizados</span>
           </header>
         }
         content={
           <div className="small-card-content">
-            <h3 className="is-title">$COP 641.023.773,50</h3>
-            <p>Total recibido en pagos de cotizaciones</p>
+            <h3 className="is-title">$COP 31.873.650,50</h3>
+            <p>Total realizado en pagos de cotizaciones</p>
           </div>
         }
         footer={
@@ -23,7 +23,7 @@ const ClientMainQuotesLast = () => {
               href={`${Routes.quotes_history}?state=paid`}
               className="button without-bg"
             >
-              Ver pagos recibidos
+              Ver pagos realizados
             </Link>
           </footer>
         }
@@ -37,8 +37,8 @@ const ClientMainQuotesLast = () => {
         }
         content={
           <div className="small-card-content">
-            <h3 className="is-title">$COP 17.494.010,00</h3>
-            <p>Total en pagos de 13 cotizaciones</p>
+            <h3 className="is-title">$COP 6.512.000,40</h3>
+            <p>Total en pagos de 06 cotizaciones</p>
           </div>
         }
         footer={
@@ -56,13 +56,13 @@ const ClientMainQuotesLast = () => {
       <SmallCard
         header={
           <header className="small-card-header has-both">
-            <span>Pagos por verificar</span>
+            <span>Pagos en verificación</span>
           </header>
         }
         content={
           <div className="small-card-content">
-            <h3 className="is-title">$COP 3.711.480,50</h3>
-            <p>Total en pagos de 4 cotizaciones</p>
+            <h3 className="is-title">$COP 1.908.680,00</h3>
+            <p>Total en pagos de 03 cotizaciones</p>
           </div>
         }
         footer={
@@ -71,7 +71,7 @@ const ClientMainQuotesLast = () => {
               href={`${Routes.quotes_history}?state=verify`}
               className="button without-bg"
             >
-              Verificar pagos
+              Ver pagos en verificación
             </Link>
           </footer>
         }

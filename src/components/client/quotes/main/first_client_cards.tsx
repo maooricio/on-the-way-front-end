@@ -11,7 +11,7 @@ const ClientMainQuotesFirst = () => {
       <NormalCard
         header={
           <header className="normal-card-header">
-            <h3 className="is-title">789</h3>
+            <h3 className="is-title">179</h3>
             <Image
               src={calculator}
               alt=""
@@ -22,7 +22,10 @@ const ClientMainQuotesFirst = () => {
         content={
           <div className="normal-card-content">
             <h3>Historial de cotizaciones</h3>
-            <p>Revisa todas las cotizaciones enviadas, o crea una nueva.</p>
+            <p>
+              Revisa todas las cotizaciones recibidas, o crea una nueva
+              solicitud.
+            </p>
           </div>
         }
         footer={
@@ -46,8 +49,8 @@ const ClientMainQuotesFirst = () => {
         }
         content={
           <div className="normal-card-content">
-            <h3>Por cotizar</h3>
-            <p>Solicitudes de cotización recibidas de clientes.</p>
+            <h3>Esperando cotización</h3>
+            <p>Solicitudes enviadas a la espera de cotización.</p>
           </div>
         }
         footer={

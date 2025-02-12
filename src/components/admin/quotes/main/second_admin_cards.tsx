@@ -5,8 +5,12 @@ import { Routes } from "@/utils/router/router_enum";
 import clock from "@/assets/icons/others/clock.svg";
 import pen from "@/assets/icons/others/pen.svg";
 import message from "@/assets/icons/others/message.svg";
+import useScreenSize from "@/utils/hooks/use_screen_width";
 
 const AdminMainQuotesSecond = () => {
+  const screen = useScreenSize();
+  const clientSideIsLoaded = screen !== null;
+
   return (
     <section className="small-cards-container">
       <SmallCard
@@ -31,7 +35,9 @@ const AdminMainQuotesSecond = () => {
               href={`${Routes.quotes_history}?state=pending`}
               className="button"
             >
-              Ver cotizaciones en proceso
+              {clientSideIsLoaded && (screen.width > 1240 || screen.width < 900)
+                ? "Ver cotizaciones en proceso"
+                : "En proceso"}
             </Link>
           </footer>
         }
@@ -46,7 +52,11 @@ const AdminMainQuotesSecond = () => {
         }
         content={
           <div className="small-card-content">
-            <h3>Solicitudes y comentarios</h3>
+            <h3>
+              {clientSideIsLoaded && (screen.width > 1050 || screen.width < 900)
+                ? "Solicitudes y comentarios"
+                : "Solicitudes"}
+            </h3>
             <p>Cotizaciones en proceso con solicitudes y/o comentarios.</p>
           </div>
         }
