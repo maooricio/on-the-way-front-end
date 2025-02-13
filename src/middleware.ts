@@ -22,6 +22,7 @@ const CLIENT_ROUTES: string[] = [
   Routes.quotes_new,
   Routes.settings,
   Routes.waiting_quote,
+  Routes.quote_details,
 ];
 
 export function middleware(req: NextRequest) {
@@ -46,13 +47,13 @@ export function middleware(req: NextRequest) {
   const userData: IUserLogged = token ? JSON.parse(token) : {};
 
   if (userData.role === "admin") {
-    if (!ADMIN_ROUTES.includes(pathname)) {
+    if (!ADMIN_ROUTES.some(route => pathname.startsWith(route.replace(/:\w+/g, "")))) {
       return NextResponse.redirect(new URL(Routes.main, req.url));
     }
   }
 
   if (userData.role === "client") {
-    if (!CLIENT_ROUTES.includes(pathname)) {
+    if (!CLIENT_ROUTES.some(route => pathname.startsWith(route.replace(/:\w+/g, "")))) {
       return NextResponse.redirect(new URL(Routes.quotes, req.url));
     }
   }

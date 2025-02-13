@@ -95,7 +95,7 @@ const QuotesWaitingPage = () => {
 
             return (
               <Link
-                href={`${Routes.quotes}/request/${item.id}`}
+                href={`${Routes.quotes}/${item.id}`}
                 key={item.id}
                 className="custom-list-row"
               >

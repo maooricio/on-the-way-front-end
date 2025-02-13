@@ -15,6 +15,7 @@ export interface IQuoteComment {
 
 export interface IQuote {
   id?: string;
+  name?: string;
   userId?: string;
   quoteNumber?: string;
   state?: string;

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import back from "@/assets/icons/arrow/arrow_back.svg";
 import { useParams, useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { IQuote } from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import { formatCurrency } from "@/utils/handlers/currency";
@@ -13,6 +13,10 @@ import { getStateColor } from "@/utils/handlers/get_state_color";
 import AddCommentModal from "@/components/admin/quotes/add_comment";
 import CancelQuoteModal from "@/components/admin/quotes/cancel_quote";
 import { quotesFilterOptions } from "@/utils/data/quotes";
+import { IUserLogged } from "@/utils/interfaces/user.interface";
+import { getUserLogged } from "@/utils/handlers/user_login";
+import pen from "@/assets/icons/utils/pen.svg";
+import ChangeQuoteNameModal from "@/components/client/quotes/change_name";
 
 export interface IDiscountData {
   discountVoucher: { type: string; amount: number };
@@ -31,11 +35,28 @@ const QuoteDetailsPage = () => {
   const [showQuoteInfo, setShowQuoteInfo] = useState<boolean>(true);
   const [showCommentModal, setShowCommentModal] = useState<boolean>(false);
   const [showCancelModal, setShowCancelModal] = useState<boolean>(false);
+  const [showChangeName, setShowChangeName] = useState<boolean>(false);
+
+  const [user, setUser] = useState<IUserLogged | undefined>();
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     router.replace(`${Routes.quotes_new}?quote=${quote?.id}`);
   };
+
+  const fetchUserLogged = async () => {
+    try {
+      const res = await getUserLogged();
+
+      setUser(res);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+  useEffect(() => {
+    fetchUserLogged();
+  }, []);
 
   return (
     <section className="new-quote-container">
@@ -43,7 +64,12 @@ const QuoteDetailsPage = () => {
         <button onClick={() => router.back()}>
           <Image src={back} alt="arrow back icon" />
         </button>
-        <h1>Detalle de cotización</h1>
+
+        {user?.role === "admin" ? (
+          <h1>Detalle de cotización</h1>
+        ) : (
+          <h1>Detalle de solicitud de cotización</h1>
+        )}
       </header>
 
       <section className="new-quote-content">
@@ -52,7 +78,7 @@ const QuoteDetailsPage = () => {
             className="new-quote-form quote-details-form"
             onSubmit={handleOnSubmit}
           >
-            {userSelected && (
+            {userSelected && user?.role === "admin" ? (
               <div className="new-quote-resume-customer">
                 <div className="user-photo-container">
                   <Image
@@ -74,6 +100,18 @@ const QuoteDetailsPage = () => {
                   </p>
                 </div>
               </div>
+            ) : (
+              <div className="new-quote-resume-customer">
+                <div className="client-request-info">
+                  <span>Nombre / referencia de cotización:</span>
+                  <span className="bold">
+                    {quoteData?.name ? quoteData.name : "-"}
+                  </span>
+                  <button type="button" onClick={() => setShowChangeName(true)}>
+                    <Image src={pen} alt="edit button" />
+                  </button>
+                </div>
+              </div>
             )}
 
             <div className="new-quote-resume">
@@ -86,36 +124,45 @@ const QuoteDetailsPage = () => {
                     Cotización {quoteData.quoteNumber}{" "}
                     <span>{quoteData.date}</span>
                   </p>
-                  <span
-                    className="quote-state"
-                    style={{
-                      backgroundColor: getStateColor(quoteData.state ?? ""),
-                    }}
-                  >
-                    {quoteState?.label}
-                  </span>
+
+                  {user?.role === "admin" ? (
+                    <span
+                      className="quote-state"
+                      style={{
+                        backgroundColor: getStateColor(quoteData.state ?? ""),
+                      }}
+                    >
+                      {quoteState?.label}
+                    </span>
+                  ) : (
+                    <span className="waiting-label">Esperando cotización</span>
+                  )}
                 </div>
 
-                <div className="new-quote-resume-details-row">
-                  <p className="admin-name">
-                    Cotizado por: {"Mariano Nahuel Duarte"}
-                  </p>
+                {user?.role === "admin" && (
+                  <div className="new-quote-resume-details-row">
+                    <p className="admin-name">
+                      Cotizado por: {"Mariano Nahuel Duarte"}
+                    </p>
 
-                  <span>{formatCurrency(quoteData.totalPrice)}</span>
-                </div>
+                    <span>{formatCurrency(quoteData.totalPrice)}</span>
+                  </div>
+                )}
 
-                <div className="new-quote-resume-details-row">
-                  <p className="comments-lenght">
-                    {quoteData.comment.length} Comentario
-                    {quoteData.comment.length > 1 && "s"}
-                  </p>
+                {user?.role === "admin" && (
+                  <div className="new-quote-resume-details-row">
+                    <p className="comments-lenght">
+                      {quoteData.comment.length} Comentario
+                      {quoteData.comment.length > 1 && "s"}
+                    </p>
 
-                  <Image
-                    src={arrow_down}
-                    alt="arrow down"
-                    className={showQuoteInfo ? "rotate" : ""}
-                  />
-                </div>
+                    <Image
+                      src={arrow_down}
+                      alt="arrow down"
+                      className={showQuoteInfo ? "rotate" : ""}
+                    />
+                  </div>
+                )}
               </div>
 
               {quoteData.deliveryTransport && showQuoteInfo && (
@@ -126,9 +173,11 @@ const QuoteDetailsPage = () => {
                   </div>
 
                   <div className="new-quote-summary-item-handler">
-                    <div>{"1".padStart(2, "0")}</div>
+                    <div className="quote-item-amount">
+                      {"1".padStart(2, "0")}
+                    </div>
 
-                    <p>{formatCurrency(250000)}</p>
+                    {user?.role === "admin" && <p>{formatCurrency(250000)}</p>}
                   </div>
                 </div>
               )}
@@ -141,9 +190,11 @@ const QuoteDetailsPage = () => {
                   </div>
 
                   <div className="new-quote-summary-item-handler">
-                    <div>{"1".padStart(2, "0")}</div>
+                    <div className="quote-item-amount">
+                      {"1".padStart(2, "0")}
+                    </div>
 
-                    <p>{formatCurrency(250000)}</p>
+                    {user?.role === "admin" && <p>{formatCurrency(250000)}</p>}
                   </div>
                 </div>
               )}
@@ -158,9 +209,13 @@ const QuoteDetailsPage = () => {
                     </div>
 
                     <div className="new-quote-summary-item-handler">
-                      <div>{item.amount.toString().padStart(2, "0")}</div>
+                      <div className="quote-item-amount">
+                        {item.amount.toString().padStart(2, "0")}
+                      </div>
 
-                      <p>{formatCurrency(item.price * item.amount)}</p>
+                      {user?.role === "admin" && (
+                        <p>{formatCurrency(item.price * item.amount)}</p>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -175,14 +230,18 @@ const QuoteDetailsPage = () => {
                     </div>
 
                     <div className="new-quote-summary-item-handler">
-                      <div>{item.amount.toString().padStart(2, "0")}</div>
+                      <div className="quote-item-amount">
+                        {item.amount.toString().padStart(2, "0")}
+                      </div>
 
-                      <p>{formatCurrency(item.price * item.amount)}</p>
+                      {user?.role === "admin" && (
+                        <p>{formatCurrency(item.price * item.amount)}</p>
+                      )}
                     </div>
                   </div>
                 ))}
 
-              {showQuoteInfo && (
+              {showQuoteInfo && user?.role === "admin" && (
                 <div className="new-quote-resume-footer">
                   {quoteData.discountVoucher.amount === 0 ? (
                     <p>
@@ -267,9 +326,12 @@ const QuoteDetailsPage = () => {
                   className="button"
                   onClick={() => setShowCancelModal(true)}
                 >
-                  Cancelar
+                  {user?.role === "admin" ? "Cancelar" : "Cancelar cotización"}
                 </button>
-                <button type="submit">Editar cotización</button>
+
+                {user?.role === "admin" && (
+                  <button type="submit">Editar cotización</button>
+                )}
               </footer>
             )}
           </form>
@@ -283,6 +345,14 @@ const QuoteDetailsPage = () => {
       {showCancelModal && (
         <CancelQuoteModal
           setShowModal={setShowCancelModal}
+          quote={quoteData}
+          setQuoteData={setQuoteData}
+        />
+      )}
+
+      {showChangeName && (
+        <ChangeQuoteNameModal
+          setShowModal={setShowChangeName}
           quote={quoteData}
           setQuoteData={setQuoteData}
         />
