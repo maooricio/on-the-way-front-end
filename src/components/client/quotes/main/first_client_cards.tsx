@@ -55,7 +55,7 @@ const ClientMainQuotesFirst = () => {
         }
         footer={
           <footer className="normal-card-button-container">
-            <Link href={Routes.to_quote} className="button">
+            <Link href={Routes.waiting_quote} className="button">
               Ver solicitudes
             </Link>
           </footer>

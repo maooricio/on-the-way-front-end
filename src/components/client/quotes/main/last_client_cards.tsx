@@ -1,8 +1,12 @@
 import Link from "next/link";
 import SmallCard from "@/components/admin/home/small_card";
 import { Routes } from "@/utils/router/router_enum";
+import useScreenSize from "@/utils/hooks/use_screen_width";
 
 const ClientMainQuotesLast = () => {
+  const screen = useScreenSize();
+  const clientSideIsLoaded = screen !== null;
+
   return (
     <section className="small-cards-container">
       <SmallCard
@@ -71,7 +75,9 @@ const ClientMainQuotesLast = () => {
               href={`${Routes.quotes_history}?state=verify`}
               className="button without-bg"
             >
-              Ver pagos en verificación
+              {clientSideIsLoaded && (screen.width > 1024 || screen.width < 900)
+                ? "Ver pagos en verificación"
+                : "Ver en verificación"}
             </Link>
           </footer>
         }

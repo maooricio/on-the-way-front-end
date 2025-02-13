@@ -21,6 +21,7 @@ const CLIENT_ROUTES: string[] = [
   Routes.quotes_history,
   Routes.quotes_new,
   Routes.settings,
+  Routes.waiting_quote,
 ];
 
 export function middleware(req: NextRequest) {
@@ -38,7 +39,7 @@ export function middleware(req: NextRequest) {
 
   if (pathname === "/") {
     return NextResponse.redirect(
-      new URL(token ? Routes.main : Routes.login, req.url)
+      new URL(token ? Routes.main : Routes.login, req.url),
     );
   }
 
