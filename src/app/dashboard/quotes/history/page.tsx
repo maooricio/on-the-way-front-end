@@ -17,6 +17,8 @@ import { Routes } from "@/utils/router/router_enum";
 import { IQuote } from "@/utils/interfaces/quote.interface";
 import { formatCurrency } from "@/utils/handlers/currency";
 import { getStateColor } from "@/utils/handlers/get_state_color";
+import { getUserLogged } from "@/utils/handlers/user_login";
+import { IUserLogged } from "@/utils/interfaces/user.interface";
 
 export interface ISearch {
   value: string;
@@ -37,24 +39,39 @@ const QuotesHistoryPage = () => {
   const [searchData, setSearchData] = useState<ISearch>(initialState);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [stateFilter, setStateFilter] = useState<string>(state ?? "all");
+  const [user, setUser] = useState<IUserLogged>();
   const [quotesList, setQuotesList] = useState<IQuote[][]>(
-    paginateList(FakeQuotesList)
+    paginateList(FakeQuotesList),
   );
 
   const handlePagination = (page: number) => {
     setCurrentPage(page);
   };
 
+  const fetchUserLogged = async () => {
+    try {
+      const res = await getUserLogged();
+
+      setUser(res);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
   useEffect(() => {
     const filteredQuotes = filterQuotes(
       FakeQuotesList,
       searchData.value,
-      stateFilter
+      stateFilter,
     );
 
     setQuotesList(filteredQuotes);
     setCurrentPage(1);
   }, [stateFilter, searchData]);
+
+  useEffect(() => {
+    fetchUserLogged();
+  }, []);
 
   return (
     <section className="quotes-history-container" ref={pageRef}>
@@ -74,7 +91,11 @@ const QuotesHistoryPage = () => {
 
         <div className="quotes-history-select-handler">
           <CustomSelect
-            options={quotesFilterOptions}
+            options={
+              user?.role === "admin"
+                ? quotesFilterOptions.slice(0, -1)
+                : quotesFilterOptions
+            }
             setValue={setStateFilter}
             value={stateFilter}
           />
@@ -107,7 +128,7 @@ const QuotesHistoryPage = () => {
           quotesList[currentPage - 1].map((item) => {
             const user = FakeUsersList.find((i) => i.id === item.userId);
             const quoteState = quotesFilterOptions.find(
-              (i) => i.value === item.state
+              (i) => i.value === item.state,
             );
 
             return (

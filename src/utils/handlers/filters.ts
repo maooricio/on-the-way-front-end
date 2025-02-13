@@ -13,7 +13,7 @@ export const filterUsers = (users: IUser[], search: string, role: string) => {
   // filter to role
   if (roleValue !== "all") {
     filteredUsers = allUsers.filter(
-      (i) => i.role?.toLowerCase() === roleValue.toLowerCase()
+      (i) => i.role?.toLowerCase() === roleValue.toLowerCase(),
     );
   }
 
@@ -32,7 +32,7 @@ export const filterUsers = (users: IUser[], search: string, role: string) => {
 export const filterQuotes = (
   quotes: IQuote[],
   search: string,
-  role: string
+  role: string,
 ) => {
   const allQuotes = [...quotes];
   const searchValue = search.toLowerCase().trim();
@@ -41,9 +41,15 @@ export const filterQuotes = (
   let filteredQuotes: IQuote[] = [...quotes];
 
   // filter to role
-  if (roleValue !== "all") {
+  if (roleValue !== "all" && roleValue !== "comment") {
     filteredQuotes = allQuotes.filter(
-      (i) => i.state?.toLowerCase() === roleValue.toLowerCase()
+      (i) => i.state?.toLowerCase() === roleValue.toLowerCase(),
+    );
+  }
+
+  if (roleValue === "comment") {
+    filteredQuotes = allQuotes.slice(3, 15).filter(
+      (i) => i.state?.toLowerCase() !== "paid",
     );
   }
 

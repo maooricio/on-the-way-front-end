@@ -214,6 +214,20 @@
           color: $primary-400;
         }
       }
+
+      & .delete-button {
+        background-color: #ef4444;
+
+        &:hover {
+          background-color: #ef4444;
+          color: $neutral-100;
+        }
+
+        &:active {
+          background-color: #ef4444;
+          color: $neutral-200;
+        }
+      }
     }
   }
 }

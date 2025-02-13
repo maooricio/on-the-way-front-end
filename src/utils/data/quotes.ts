@@ -35,4 +35,8 @@ export const quotesFilterOptions: ISelectOption[] = [
     value: "canceled",
     iconImg: cancel,
   },
+  {
+    label: "Nuevo comentario",
+    value: "comment",
+  }
 ];

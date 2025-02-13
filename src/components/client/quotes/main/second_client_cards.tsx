@@ -29,7 +29,7 @@ const ClientMainQuotesSecond = () => {
         footer={
           <footer className="small-card-button-container">
             <Link
-              href={`${Routes.quotes_history}?state=pending`}
+              href={`${Routes.quotes_history}?state=in_progress`}
               className="button"
             >
               {clientSideIsLoaded && (screen.width > 1240 || screen.width < 900)
@@ -55,7 +55,10 @@ const ClientMainQuotesSecond = () => {
         }
         footer={
           <footer className="small-card-button-container">
-            <Link href={Routes.to_quote} className="button">
+            <Link
+              href={`${Routes.quotes_history}?state=comment`}
+              className="button"
+            >
               Ver comentarios
             </Link>
           </footer>
