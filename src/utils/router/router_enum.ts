@@ -17,4 +17,8 @@ export enum Routes {
   quote_details = "/dashboard/quotes/:id",
   quote_drafts = "/dashboard/quotes/drafts",
   waiting_quote = "/dashboard/quotes/waiting",
+
+  // payment
+  payment = "/dashboard/payment",
+  payment_card = "/dashboard/payment/card",
 }

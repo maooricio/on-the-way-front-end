@@ -11,7 +11,7 @@ import AddDiscountVoucherModal from "@/components/admin/quotes/add_discount_vouc
 import otw_logo from "@/assets/images/otw_only_logo.svg";
 import ticket from "@/assets/icons/others/ticket.svg";
 import InputElement from "@/components/elements/inputs/input";
-import { FakeRequestsList, FakeUsersList } from "@/utils/data/fakers";
+import { FakeQuotesList, FakeUsersList } from "@/utils/data/fakers";
 
 export interface IQuoteRequest {
   [key: string]: string;
@@ -24,7 +24,7 @@ export interface IDiscountData {
 const QuoteRequestDetailsPage = () => {
   const router = useRouter();
   const { id } = useParams();
-  const requestSelected: IQuote | undefined = FakeRequestsList.find(
+  const requestSelected: IQuote | undefined = FakeQuotesList.find(
     (i) => i.id === id,
   );
   const userSelected = FakeUsersList.find(

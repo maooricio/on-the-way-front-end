@@ -37,6 +37,9 @@
 @use "./components/admin/users/details.scss";
 @use "./components/admin/users/delete.scss";
 
+// client/payment
+@use "./components/client/payment.scss";
+
 // suspenses
 @use "./components/elements/suspenses/settings_suspense.scss";
 

@@ -41,7 +41,7 @@ const QuotesHistoryPage = () => {
   const [stateFilter, setStateFilter] = useState<string>(state ?? "all");
   const [user, setUser] = useState<IUserLogged>();
   const [quotesList, setQuotesList] = useState<IQuote[][]>(
-    paginateList(FakeQuotesList),
+    paginateList(FakeQuotesList.filter(i => !i.isRequest)),
   );
 
   const handlePagination = (page: number) => {
@@ -60,7 +60,7 @@ const QuotesHistoryPage = () => {
 
   useEffect(() => {
     const filteredQuotes = filterQuotes(
-      FakeQuotesList,
+      FakeQuotesList.filter(i => !i.isRequest),
       searchData.value,
       stateFilter,
     );

@@ -7,7 +7,7 @@ import { IQuote } from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import { formatCurrency } from "@/utils/handlers/currency";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
-import { FakeRequestsList, FakeUsersList } from "@/utils/data/fakers";
+import { FakeQuotesList, FakeUsersList } from "@/utils/data/fakers";
 import arrow_down from "@/assets/icons/arrow/select_down.svg";
 import { getStateColor } from "@/utils/handlers/get_state_color";
 import AddCommentModal from "@/components/admin/quotes/add_comment";
@@ -17,6 +17,7 @@ import { IUserLogged } from "@/utils/interfaces/user.interface";
 import { getUserLogged } from "@/utils/handlers/user_login";
 import pen from "@/assets/icons/utils/pen.svg";
 import ChangeQuoteNameModal from "@/components/client/quotes/change_name";
+import { ISelectOption } from "@/utils/interfaces/select.interface";
 
 export interface IDiscountData {
   discountVoucher: { type: string; amount: number };
@@ -25,10 +26,12 @@ export interface IDiscountData {
 const QuoteDetailsPage = () => {
   const router = useRouter();
   const { id } = useParams();
-  const quote: IQuote | undefined = FakeRequestsList.find((i) => i.id === id);
+  const quote: IQuote | undefined = FakeQuotesList.find((i) => i.id === id);
   const userSelected = FakeUsersList.find((i) => i.id === quote?.userId);
 
-  const quoteState = quotesFilterOptions.find((i) => i.value === quote?.state);
+  const [quoteState, setQuoteState] = useState<ISelectOption | undefined>(
+    quotesFilterOptions.find((i) => i.value === quote?.state),
+  );
 
   const [quoteData, setQuoteData] = useState<IQuote | undefined>(quote);
 
@@ -41,7 +44,31 @@ const QuoteDetailsPage = () => {
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.replace(`${Routes.quotes_new}?quote=${quote?.id}`);
+
+    if (user?.role === "admin") {
+      router.replace(`${Routes.quotes_new}?quote=${quote?.id}`);
+    }
+
+    if (
+      !quoteData?.isRequest &&
+      user?.role === "client" &&
+      quoteState?.value === "in_progress"
+    ) {
+      if (quoteData) setQuoteData({ ...quoteData, state: "pending" });
+      setQuoteState({
+        label: "Pago pendiente",
+        value: "pending",
+      });
+      setShowQuoteInfo(false);
+    }
+
+    if (
+      !quoteData?.isRequest &&
+      user?.role === "client" &&
+      quoteState?.value === "pending"
+    ) {
+      router.push(Routes.payment);
+    }
   };
 
   const fetchUserLogged = async () => {
@@ -65,7 +92,7 @@ const QuoteDetailsPage = () => {
           <Image src={back} alt="arrow back icon" />
         </button>
 
-        {user?.role === "admin" ? (
+        {!quoteData?.isRequest ? (
           <h1>Detalle de cotización</h1>
         ) : (
           <h1>Detalle de solicitud de cotización</h1>
@@ -125,7 +152,7 @@ const QuoteDetailsPage = () => {
                     <span>{quoteData.date}</span>
                   </p>
 
-                  {user?.role === "admin" ? (
+                  {!quoteData?.isRequest ? (
                     <span
                       className="quote-state"
                       style={{
@@ -139,7 +166,7 @@ const QuoteDetailsPage = () => {
                   )}
                 </div>
 
-                {user?.role === "admin" && (
+                {!quoteData?.isRequest && (
                   <div className="new-quote-resume-details-row">
                     <p className="admin-name">
                       Cotizado por: {"Mariano Nahuel Duarte"}
@@ -149,7 +176,7 @@ const QuoteDetailsPage = () => {
                   </div>
                 )}
 
-                {user?.role === "admin" && (
+                {!quoteData?.isRequest && (
                   <div className="new-quote-resume-details-row">
                     <p className="comments-lenght">
                       {quoteData.comment.length} Comentario
@@ -177,7 +204,7 @@ const QuoteDetailsPage = () => {
                       {"1".padStart(2, "0")}
                     </div>
 
-                    {user?.role === "admin" && <p>{formatCurrency(250000)}</p>}
+                    {!quoteData?.isRequest && <p>{formatCurrency(250000)}</p>}
                   </div>
                 </div>
               )}
@@ -194,7 +221,7 @@ const QuoteDetailsPage = () => {
                       {"1".padStart(2, "0")}
                     </div>
 
-                    {user?.role === "admin" && <p>{formatCurrency(250000)}</p>}
+                    {!quoteData?.isRequest && <p>{formatCurrency(250000)}</p>}
                   </div>
                 </div>
               )}
@@ -213,7 +240,7 @@ const QuoteDetailsPage = () => {
                         {item.amount.toString().padStart(2, "0")}
                       </div>
 
-                      {user?.role === "admin" && (
+                      {!quoteData?.isRequest && (
                         <p>{formatCurrency(item.price * item.amount)}</p>
                       )}
                     </div>
@@ -234,14 +261,14 @@ const QuoteDetailsPage = () => {
                         {item.amount.toString().padStart(2, "0")}
                       </div>
 
-                      {user?.role === "admin" && (
+                      {!quoteData?.isRequest && (
                         <p>{formatCurrency(item.price * item.amount)}</p>
                       )}
                     </div>
                   </div>
                 ))}
 
-              {showQuoteInfo && user?.role === "admin" && (
+              {showQuoteInfo && !quoteData?.isRequest && (
                 <div className="new-quote-resume-footer">
                   {quoteData.discountVoucher.amount === 0 ? (
                     <p>
@@ -326,12 +353,24 @@ const QuoteDetailsPage = () => {
                   className="button"
                   onClick={() => setShowCancelModal(true)}
                 >
-                  {user?.role === "admin" ? "Cancelar" : "Cancelar cotización"}
+                  {!quoteData?.isRequest ? "Cancelar" : "Cancelar cotización"}
                 </button>
 
-                {user?.role === "admin" && (
+                {!quoteData?.isRequest && user?.role === "admin" && (
                   <button type="submit">Editar cotización</button>
                 )}
+
+                {!quoteData?.isRequest &&
+                  user?.role === "client" &&
+                  quoteState?.value === "in_progress" && (
+                    <button type="submit">Aceptar cotización</button>
+                  )}
+
+                {!quoteData?.isRequest &&
+                  user?.role === "client" &&
+                  quoteState?.value === "pending" && (
+                    <button type="submit">Proceder al pago</button>
+                  )}
               </footer>
             )}
           </form>

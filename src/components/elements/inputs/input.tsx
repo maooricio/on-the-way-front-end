@@ -20,6 +20,7 @@ import { IComment } from "@/components/admin/quotes/new/stage_5";
 import { IEditProfile } from "@/components/admin/settings/edit_profile";
 import { IEditUser } from "@/components/admin/users/edit";
 import { IQuoteName } from "@/components/client/quotes/change_name";
+import { ICardData } from "@/utils/interfaces/payment.interface";
 
 interface Props {
   type: string;
@@ -118,4 +119,5 @@ type SetFormDataActions =
   | Dispatch<SetStateAction<IComment>>
   | Dispatch<SetStateAction<IEditProfile>>
   | Dispatch<SetStateAction<IEditUser>>
-  | Dispatch<SetStateAction<IQuoteName>>;
+  | Dispatch<SetStateAction<IQuoteName>>
+  | Dispatch<SetStateAction<ICardData>>;

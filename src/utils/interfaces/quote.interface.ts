@@ -18,6 +18,7 @@ export interface IQuote {
   name?: string;
   userId?: string;
   quoteNumber?: string;
+  isRequest?: boolean;
   state?: string;
   deliveryTransport: string | undefined;
   collectionTransport: string | undefined;

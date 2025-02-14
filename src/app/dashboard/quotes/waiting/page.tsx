@@ -1,6 +1,6 @@
 "use client";
 import InputElement from "@/components/elements/inputs/input";
-import { FakeRequestsList, FakeUsersList } from "@/utils/data/fakers";
+import { FakeQuotesList, FakeUsersList } from "@/utils/data/fakers";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Pagination from "@/components/elements/handlers/pagination";
@@ -31,7 +31,7 @@ const QuotesWaitingPage = () => {
   const [searchData, setSearchData] = useState<ISearch>(initialState);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [quotesList, setQuotesList] = useState<IQuote[][]>(
-    paginateList(FakeRequestsList),
+    paginateList(FakeQuotesList.filter(i => i.isRequest)),
   );
 
   const handlePagination = (page: number) => {
@@ -40,7 +40,7 @@ const QuotesWaitingPage = () => {
 
   useEffect(() => {
     const filteredQuotes = filterQuotes(
-      FakeRequestsList,
+      FakeQuotesList.filter(i => i.isRequest),
       searchData.value,
       "all",
     );
