@@ -24,6 +24,9 @@ const CLIENT_ROUTES: string[] = [
   Routes.waiting_quote,
   Routes.quote_details,
   Routes.payment,
+  Routes.payment_card,
+  Routes.payment_deposit,
+  Routes.payment_pse,
 ];
 
 export function middleware(req: NextRequest) {

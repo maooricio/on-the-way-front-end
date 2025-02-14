@@ -19,7 +19,10 @@ const PaymentPage = () => {
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push(Routes.payment_card);
+
+    if (paymentSelected.value === "card") router.push(Routes.payment_card);
+    if (paymentSelected.value === "pse") router.push(Routes.payment_pse);
+    if (paymentSelected.value === "deposit") router.push(Routes.payment_deposit);
   };
 
   return (

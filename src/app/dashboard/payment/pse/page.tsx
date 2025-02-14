@@ -42,7 +42,7 @@ const PaymentPage = () => {
             className="new-quote-form payment-form"
             onSubmit={handleOnSubmit}
           >
-            <h3>Pagar con tarjeta de débito / crédito</h3>
+            <h3>Pagar con transferencia (PSE)</h3>
 
             <div className="new-quote-form-stage-two-content">
               <InputElement

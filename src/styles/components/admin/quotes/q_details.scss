@@ -243,6 +243,25 @@
       margin-top: 24px;
     }
   }
+
+  & .quote-payment-info {
+    width: 100%;
+    @include flex(row, flex-end, center, 16px);
+
+    span {
+      color: $neutral-800;
+      @include flex(row, center, center, 8px);
+
+      &:nth-child(2) {
+        font-weight: 600;
+        margin-right: 16px;
+      }
+
+      &:last-child {
+        color: $neutral-600;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 900px) {

@@ -18,6 +18,7 @@ import { getUserLogged } from "@/utils/handlers/user_login";
 import pen from "@/assets/icons/utils/pen.svg";
 import ChangeQuoteNameModal from "@/components/client/quotes/change_name";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
+import mastercard from "@/assets/icons/others/mastercard.svg";
 
 export interface IDiscountData {
   discountVoucher: { type: string; amount: number };
@@ -346,15 +347,33 @@ const QuoteDetailsPage = () => {
               )}
             </div>
 
+            {!quoteData?.isRequest &&
+              user?.role === "client" &&
+              quoteState?.value === "paid" && (
+                <div className="quote-payment-info">
+                  <span>22/05/2024 16:23:31</span>
+                  <span>Mauricio Cano Giraldo</span>
+                  <span>
+                    <Image src={mastercard} alt="payment icon" />
+                    Tarjeta Bancolombia terminada en 8820
+                  </span>
+                </div>
+              )}
+
             {quoteData.state !== "Cancelada" && (
               <footer className="new-quote-form-footer">
-                <button
-                  type="button"
-                  className="button"
-                  onClick={() => setShowCancelModal(true)}
-                >
-                  {!quoteData?.isRequest ? "Cancelar" : "Cancelar cotización"}
-                </button>
+                {quoteState?.value !== "paid" &&
+                  quoteState?.value !== "canceled" && (
+                    <button
+                      type="button"
+                      className="button"
+                      onClick={() => setShowCancelModal(true)}
+                    >
+                      {!quoteData?.isRequest
+                        ? "Cancelar"
+                        : "Cancelar cotización"}
+                    </button>
+                  )}
 
                 {!quoteData?.isRequest && user?.role === "admin" && (
                   <button type="submit">Editar cotización</button>
@@ -371,6 +390,12 @@ const QuoteDetailsPage = () => {
                   quoteState?.value === "pending" && (
                     <button type="submit">Proceder al pago</button>
                   )}
+
+                {user?.role === "client" && quoteState?.value === "paid" && (
+                  <button type="button" className="without-bg">
+                    Descargar comprobante de pago
+                  </button>
+                )}
               </footer>
             )}
           </form>

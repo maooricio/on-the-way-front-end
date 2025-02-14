@@ -21,4 +21,6 @@ export enum Routes {
   // payment
   payment = "/dashboard/payment",
   payment_card = "/dashboard/payment/card",
+  payment_pse = "/dashboard/payment/pse",
+  payment_deposit = "/dashboard/payment/deposit",
 }
