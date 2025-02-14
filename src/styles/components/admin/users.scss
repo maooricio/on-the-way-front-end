@@ -52,7 +52,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .admin-users-container {
     & .admin-users-handler {
       @include flex(column, center, flex-start, 16px);

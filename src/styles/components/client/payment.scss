@@ -1,0 +1,42 @@
+@use "../../globals" as *;
+
+.payment-form {
+  & h3 {
+    width: 98%;
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+
+  & .new-quote-form-stage-two-content {
+    margin: 0;
+    button[type="button"] {
+      width: 100%;
+      background-color: $neutral-50;
+      margin-top: 24px;
+      padding: 16px 0;
+      @include flex(row, flex-start, center, 16px);
+
+      & img {
+        margin-left: 18px;
+      }
+
+      & span {
+        color: $neutral-800;
+      }
+
+      &:hover {
+        background-color: #f6f6f6;
+      }
+    }
+  }
+
+  & .payment-description {
+    width: 100%;
+    color: $neutral-500;
+  }
+
+  & .payment-form-row {
+    width: 100%;
+    @include flex(row, space-between, center, 24px);
+  }
+}

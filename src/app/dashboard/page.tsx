@@ -19,7 +19,7 @@ export default function Home() {
         <SmallCard
           header={
             <header className="small-card-header">
-              <Image src={calculator} alt="" />
+              <Image src={calculator} alt="calculator icon" />
             </header>
           }
           content={
@@ -91,7 +91,11 @@ export default function Home() {
           header={
             <header className="normal-card-header">
               <h3>Usuarios registrados</h3>
-              <Image src={user} alt="" className="normal-card-header-item" />
+              <Image
+                src={user}
+                alt="user icon"
+                className="normal-card-header-item"
+              />
             </header>
           }
           content={
@@ -113,7 +117,11 @@ export default function Home() {
           header={
             <header className="normal-card-header">
               <h3>Pagos por verificar</h3>
-              <Image src={quote} alt="" className="normal-card-header-item" />
+              <Image
+                src={quote}
+                alt="quote icon"
+                className="normal-card-header-item"
+              />
             </header>
           }
           content={
@@ -136,7 +144,7 @@ export default function Home() {
       </section>
 
       <section className="long-card-container">
-        <LongCardTable />
+        <LongCardTable userRole="admin" />
       </section>
     </section>
   );

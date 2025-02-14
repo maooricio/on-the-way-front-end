@@ -79,7 +79,7 @@
         color: $primary-800;
       }
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: 900px) {
         padding-left: 8px;
       }
     }
@@ -127,6 +127,7 @@
 
     & h3 {
       font-size: 16px;
+      white-space: nowrap;
     }
 
     & p {
@@ -136,6 +137,14 @@
 
     & .is-title {
       font-size: 24px;
+
+      @media screen and (max-width: 1240px) {
+        font-size: 20px;
+      }
+
+      @media screen and (max-width: 1024px) {
+        font-size: 18px;
+      }
     }
   }
 
@@ -178,6 +187,18 @@
       &:active {
         background: none;
         color: $primary-800;
+      }
+    }
+
+    @media screen and (max-width: 1024px) {
+      margin-left: 0;
+
+      & .button {
+        margin-left: 16px;
+      }
+
+      & .without-bg {
+        margin-left: 0;
       }
     }
   }
@@ -302,7 +323,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .small-card-container {
     width: 100%;
   }

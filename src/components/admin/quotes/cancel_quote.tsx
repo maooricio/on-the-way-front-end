@@ -50,7 +50,7 @@ const CancelQuoteModal = ({ setShowModal, quote, setQuoteData }: Props) => {
           <p>¿Estás seguro que deseas cancelar la siguiente cotización?</p>
 
           <div className="cancel-quote-info">
-            <h3>{quoteUser?.company}</h3>
+            <h3>{quote?.name ? quote.name : quoteUser?.company}</h3>
             <p>
               Cotización {quote?.quoteNumber} <span>{quote?.date}</span>
             </p>
@@ -61,7 +61,9 @@ const CancelQuoteModal = ({ setShowModal, quote, setQuoteData }: Props) => {
           <button type="button" onClick={() => setShowModal(false)}>
             Conservar cotización
           </button>
-          <button type="submit">Sí, cancelar cotización</button>
+          <button type="submit" className="delete-button">
+            Sí, cancelar cotización
+          </button>
         </div>
       </form>
     </section>

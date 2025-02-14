@@ -21,6 +21,12 @@ const CLIENT_ROUTES: string[] = [
   Routes.quotes_history,
   Routes.quotes_new,
   Routes.settings,
+  Routes.waiting_quote,
+  Routes.quote_details,
+  Routes.payment,
+  Routes.payment_card,
+  Routes.payment_deposit,
+  Routes.payment_pse,
 ];
 
 export function middleware(req: NextRequest) {
@@ -38,20 +44,28 @@ export function middleware(req: NextRequest) {
 
   if (pathname === "/") {
     return NextResponse.redirect(
-      new URL(token ? Routes.main : Routes.login, req.url)
+      new URL(token ? Routes.main : Routes.login, req.url),
     );
   }
 
   const userData: IUserLogged = token ? JSON.parse(token) : {};
 
   if (userData.role === "admin") {
-    if (!ADMIN_ROUTES.includes(pathname)) {
+    if (
+      !ADMIN_ROUTES.some((route) =>
+        pathname.startsWith(route.replace(/:\w+/g, "")),
+      )
+    ) {
       return NextResponse.redirect(new URL(Routes.main, req.url));
     }
   }
 
   if (userData.role === "client") {
-    if (!CLIENT_ROUTES.includes(pathname)) {
+    if (
+      !CLIENT_ROUTES.some((route) =>
+        pathname.startsWith(route.replace(/:\w+/g, "")),
+      )
+    ) {
       return NextResponse.redirect(new URL(Routes.quotes, req.url));
     }
   }

@@ -115,7 +115,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .admin-settings-container {
     & .admin-settings-info {
       @include flex(column, flex-start, center);

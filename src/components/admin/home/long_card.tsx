@@ -4,7 +4,11 @@ import useScreenSize from "@/utils/hooks/use_screen_width";
 import { Routes } from "@/utils/router/router_enum";
 import Link from "next/link";
 
-const LongCardTable = () => {
+interface Props {
+  userRole: string;
+}
+
+const LongCardTable = ({ userRole }: Props) => {
   const screen = useScreenSize();
   const clientSideIsLoaded = screen !== null;
 
@@ -65,19 +69,19 @@ const LongCardTable = () => {
     <section className="long-card-table-container">
       <ul className="long-card-table">
         <li className="long-card-table-header">
-          {clientSideIsLoaded && screen.width > 768 && <span>Fecha</span>}
+          {clientSideIsLoaded && screen.width > 900 && <span>Fecha</span>}
           <span>Cotización</span>
-          <span>Cliente</span>
+          <span>{userRole === "admin" ? "Cliente" : "Nombre/ referencia"}</span>
           <span>Monto</span>
-          {clientSideIsLoaded && screen.width > 768 && <span>Estado</span>}
+          {clientSideIsLoaded && screen.width > 900 && <span>Estado</span>}
         </li>
 
         {fakeInfo.map((i, index) => (
           <li key={`${i.quote}`} className="long-card-table-item">
-            {clientSideIsLoaded && screen.width > 768 && <span>{i.date}</span>}
+            {clientSideIsLoaded && screen.width > 900 && <span>{i.date}</span>}
             <span>{i.quote}</span>
             <span>{i.client}</span>
-            {clientSideIsLoaded && screen.width > 768 && (
+            {clientSideIsLoaded && screen.width > 900 && (
               <span>{i.amount}</span>
             )}
             <span>
@@ -86,7 +90,7 @@ const LongCardTable = () => {
                   className="long-card-last-item-dot"
                   style={{ backgroundColor: getStateColor(i.state.value) }}
                 ></div>
-                {clientSideIsLoaded && screen.width > 768 ? i.state.label : ""}
+                {clientSideIsLoaded && screen.width > 900 ? i.state.label : ""}
               </div>
 
               {(index === 1 || index === 2 || index === 4) && (

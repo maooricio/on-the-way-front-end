@@ -30,6 +30,16 @@
         margin-right: 12px;
       }
     }
+
+    & .only-button-icon {
+      @include flex(row, flex-end, center);
+
+      & button[type="button"] {
+        margin-left: 100%;
+        translate: -100%;
+        @include flex(row, center, center);
+      }
+    }
   }
 
   & .custom-list-header {
@@ -75,7 +85,7 @@
         & p {
           all: unset;
 
-          @media screen and (max-width: 768px) {
+          @media screen and (max-width: 900px) {
             display: none;
           }
         }
@@ -93,7 +103,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .custom-list-container {
     & li {
       & span {

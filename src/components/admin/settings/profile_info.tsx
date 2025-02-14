@@ -12,10 +12,18 @@ const ProfileInfo = () => {
   const [userInfo, setUserInfo] = useState<IUser>();
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
-  useEffect(() => {
-    const user = getUserLogged();
+  const fetchUserLogged = async () => {
+    try {
+      const res = await getUserLogged();
 
-    setUserInfo(user!);
+      setUserInfo(res);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+  useEffect(() => {
+    fetchUserLogged();
   }, []);
 
   if (!userInfo) {

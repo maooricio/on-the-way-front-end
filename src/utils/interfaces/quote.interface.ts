@@ -15,8 +15,10 @@ export interface IQuoteComment {
 
 export interface IQuote {
   id?: string;
+  name?: string;
   userId?: string;
   quoteNumber?: string;
+  isRequest?: boolean;
   state?: string;
   deliveryTransport: string | undefined;
   collectionTransport: string | undefined;

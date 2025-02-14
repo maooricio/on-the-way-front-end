@@ -3,10 +3,10 @@ import otw_only_logo from "@/assets/images/otw_only_logo.svg";
 import menu from "@/assets/icons/utils/menu.svg";
 import menu_dark from "@/assets/icons/utils/menu_dark.svg";
 import logout from "@/assets/icons/utils/logout.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes } from "@/utils/router/router_enum";
 import { getUserLogged, userLogout } from "@/utils/handlers/user_login";
-import { redirect, usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { INavbarLinks } from "@/utils/interfaces/links.interface";
@@ -15,6 +15,7 @@ import quotes from "@/assets/icons/navbar/quotes.svg";
 import users from "@/assets/icons/navbar/users.svg";
 import settings from "@/assets/icons/navbar/settings.svg";
 import useScreenSize from "@/utils/hooks/use_screen_width";
+import { IUserLogged } from "@/utils/interfaces/user.interface";
 
 const adminLinks: INavbarLinks[] = [
   {
@@ -54,15 +55,30 @@ const clientLinks: INavbarLinks[] = [
 
 const Navbar = () => {
   const pathname = usePathname();
-  const user = getUserLogged();
   const screen = useScreenSize();
-  const clientSideIsLoaded = screen !== null && user !== null;
+  const router = useRouter();
 
   const [showNavbar, setShowNavbar] = useState<boolean>(false);
+  const [user, setUser] = useState<IUserLogged | undefined>();
 
-  const handleLogout = () => {
-    userLogout();
-    redirect(Routes.login);
+  const fetchUserLogged = async () => {
+    try {
+      const res = await getUserLogged();
+
+      setUser(res);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await userLogout();
+
+      router.push(Routes.login);
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   const getRole = (role: string) => {
@@ -79,6 +95,12 @@ const Navbar = () => {
   const links: INavbarLinks[] =
     user?.role === "admin" ? adminLinks : clientLinks;
 
+  useEffect(() => {
+    fetchUserLogged();
+  }, []);
+
+  const clientSideIsLoaded = screen !== null && user !== null;
+
   return (
     <section
       className={`navbar-container ${
@@ -89,11 +111,11 @@ const Navbar = () => {
         <button
           type="button"
           onClick={() => setShowNavbar(!showNavbar)}
-          disabled={clientSideIsLoaded && screen.width > 768}
+          disabled={clientSideIsLoaded && screen.width > 900}
         >
           <Image
             src={
-              showNavbar || (clientSideIsLoaded && screen.width > 768)
+              showNavbar || (clientSideIsLoaded && screen.width > 900)
                 ? menu
                 : menu_dark
             }
@@ -129,14 +151,14 @@ const Navbar = () => {
       <footer className="navbar-footer">
         {clientSideIsLoaded && (
           <div className="navbar-user">
-            <Image src={user.photo ?? otw_only_logo} alt="user profile pic" priority />
+            <Image src={user?.photo ?? otw_only_logo} alt="user profile pic" priority />
 
             {screen.height > 700 && (
               <>
                 <span className="navbar-user-name">
-                  {user.firstName} {user.lastName}
+                  {user?.firstName} {user?.lastName}
                 </span>
-                <span className="navbar-user-role">{getRole(user.role)}</span>
+                <span className="navbar-user-role">{getRole(user?.role ?? "")}</span>
               </>
             )}
           </div>

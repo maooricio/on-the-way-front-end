@@ -196,13 +196,41 @@ export const FakeQuotesList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 1200042.9,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq1",
@@ -221,13 +249,41 @@ export const FakeQuotesList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 1902000.0,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq2",
@@ -246,13 +302,41 @@ export const FakeQuotesList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 412000.5,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq3",
@@ -271,13 +355,41 @@ export const FakeQuotesList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 902000.5,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq4",
@@ -296,13 +408,41 @@ export const FakeQuotesList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 1002000.5,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq6",
@@ -321,13 +461,41 @@ export const FakeQuotesList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 1200000,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq7",
@@ -346,13 +514,41 @@ export const FakeQuotesList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 902000.5,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq8",
@@ -371,13 +567,41 @@ export const FakeQuotesList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 1812000,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq9",
@@ -421,13 +645,41 @@ export const FakeQuotesList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 753000,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasda1",
@@ -446,13 +698,41 @@ export const FakeQuotesList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 1200000,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdd3",
@@ -471,13 +751,41 @@ export const FakeQuotesList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 902000.5,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasda3",
@@ -496,13 +804,41 @@ export const FakeQuotesList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 302550,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasda4",
@@ -521,13 +857,41 @@ export const FakeQuotesList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 302550,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasda5",
@@ -546,19 +910,45 @@ export const FakeQuotesList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 302550,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
-];
-
-export const FakeRequestsList: IQuote[] = [
   {
     id: "asdfasdfasdq5",
+    isRequest: true,
     date: "12/03/2024",
     quoteNumber: "00278",
     state: "in_progress",
@@ -614,6 +1004,7 @@ export const FakeRequestsList: IQuote[] = [
     id: "asdfasdfasdq1",
     date: "12/03/2024",
     quoteNumber: "00158",
+    isRequest: true,
     state: "in_progress",
     userId: "asdfasdfasdw4",
     deliveryTransport: "",
@@ -627,18 +1018,47 @@ export const FakeRequestsList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 0,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq2",
     date: "10/03/2024",
     quoteNumber: "00201",
+    isRequest: true,
     state: "paid",
     userId: "asdfasdfasde3",
     deliveryTransport: "",
@@ -652,18 +1072,47 @@ export const FakeRequestsList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 0,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq3",
     date: "09/03/2024",
     quoteNumber: "00140",
+    isRequest: true,
     state: "canceled",
     userId: "asdfasdfasdo7",
     deliveryTransport: "",
@@ -677,18 +1126,47 @@ export const FakeRequestsList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 0,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq4",
     date: "05/03/2024",
     quoteNumber: "00250",
+    isRequest: true,
     state: "paid",
     userId: "asdfasdfasdp6",
     deliveryTransport: "",
@@ -702,18 +1180,47 @@ export const FakeRequestsList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 0,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq6",
     date: "05/03/2024",
     quoteNumber: "00210",
+    isRequest: true,
     state: "pending",
     userId: "asdfasdfasdg1",
     deliveryTransport: "",
@@ -727,18 +1234,47 @@ export const FakeRequestsList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 0,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq7",
     date: "09/03/2024",
     quoteNumber: "00183",
+    isRequest: true,
     state: "in_progress",
     userId: "asdfasdfasdq5",
     deliveryTransport: "",
@@ -752,18 +1288,47 @@ export const FakeRequestsList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 0,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
   {
     id: "asdfasdfasdq8",
     date: "10/03/2024",
     quoteNumber: "00287",
+    isRequest: true,
     state: "paid",
     userId: "asdfasdfasdq5",
     deliveryTransport: "",
@@ -777,12 +1342,40 @@ export const FakeRequestsList: IQuote[] = [
     unloadingCity: "",
     unloadingAdress: "",
     totalPrice: 0,
-    vehicles: [],
-    operators: [],
+    vehicles: [
+      {
+        id: "vehicle-asdf1",
+        name: "Motorizado",
+        image: motocycle,
+        weight: "Hasta 40 kilos",
+        price: 50000,
+        amount: 5,
+        sizes: {
+          length: 0,
+          width: 0,
+          height: 0,
+        },
+      },
+    ],
+    operators: [
+      {
+        name: "Personal de seguridad",
+        id: "security_personnel",
+        price: 70000,
+        amount: 2,
+      },
+    ],
     discountVoucher: {
       type: "%",
       amount: 0,
     },
-    comment: [],
+    comment: [
+      {
+        userId: "asdfasdfasdq5",
+        date: "21/05/2024 16:52:31",
+        comment:
+          "Consectetur adipiscing elit. Vestibulum mollis nunc a molestie dictum. Mauris venenatis, felis scelerisque aliquet lacinia, nulla nisi venenatis odio, id blandit mauris ipsum id sapien. Vestibulum malesuada.",
+      },
+    ],
   },
 ];

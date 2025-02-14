@@ -194,6 +194,12 @@
             color: $primary-800;
           }
         }
+
+        & .without-bg {
+          background: none;
+          color: $primary-600;
+          font-weight: 600; 
+        }
       }
 
       & .new-quote-operator {
@@ -203,7 +209,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .new-quote-container {
     & .new-quote-header {
       & button {

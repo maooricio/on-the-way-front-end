@@ -16,4 +16,11 @@ export enum Routes {
   request_details = "/dashboard/quotes/request/:id",
   quote_details = "/dashboard/quotes/:id",
   quote_drafts = "/dashboard/quotes/drafts",
+  waiting_quote = "/dashboard/quotes/waiting",
+
+  // payment
+  payment = "/dashboard/payment",
+  payment_card = "/dashboard/payment/card",
+  payment_pse = "/dashboard/payment/pse",
+  payment_deposit = "/dashboard/payment/deposit",
 }
