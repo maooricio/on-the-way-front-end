@@ -122,7 +122,7 @@ const EditUserModal = ({ setShowModal, setUserData, userData }: Props) => {
               userData?.lastName === formData.lastName
             }
           >
-            Cambiar cliente
+            Editar usuario
           </button>
         </div>
       </form>
