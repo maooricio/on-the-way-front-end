@@ -62,7 +62,7 @@ const AddCommentModal = ({ setShowModal, quote }: Props) => {
             Cancelar
           </button>
           <button type="submit" disabled={formData.comment.length === 0}>
-            Cambiar cliente
+            Añadir comentario
           </button>
         </div>
       </form>

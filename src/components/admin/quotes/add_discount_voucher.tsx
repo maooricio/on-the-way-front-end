@@ -12,7 +12,10 @@ import InputElement from "@/components/elements/inputs/input";
 import empty from "@/assets/icons/checkbox/circle_empty.svg";
 import fill from "@/assets/icons/checkbox/circle_fill.svg";
 import { parseCurrency, parsePercentage } from "@/utils/handlers/currency";
-import { IDiscountData, IQuoteRequest } from "@/app/dashboard/quotes/request/[id]/page";
+import {
+  IDiscountData,
+  IQuoteRequest,
+} from "@/app/dashboard/quotes/request/[id]/page";
 
 interface IVoucherData {
   type: string;
@@ -146,7 +149,7 @@ const AddDiscountVoucherModal = ({ setShowModal, setFormData }: Props) => {
             Cancelar
           </button>
           <button type="submit" disabled={discount.amount.length === 0}>
-            Cambiar cliente
+            Aplicar descuento
           </button>
         </div>
       </form>
