@@ -3,7 +3,7 @@ import React from "react";
 import at_sign from "@/assets/icons/others/at_sign.svg";
 
 interface Props {
-  email: string;
+  email: string | undefined;
 }
 
 const EmailSettings = ({ email }: Props) => {
@@ -14,7 +14,7 @@ const EmailSettings = ({ email }: Props) => {
         <Image src={at_sign} alt="at sign icon" />
       </div>
 
-      <span className="current-email">{email}</span>
+      <span className="current-email">{email ?? ""}</span>
 
       <p>
         Si necesita cambiar tu correo electrónico, ponte en contacto con el

@@ -99,7 +99,7 @@ const Navbar = () => {
     fetchUserLogged();
   }, []);
 
-  const clientSideIsLoaded = screen !== null && user !== null;
+  const clientSideIsLoaded = screen !== null && user !== undefined;
 
   return (
     <section

@@ -16,6 +16,7 @@ import eye from "../../../assets/icons/utils/eye.svg";
 import eye_closed from "../../../assets/icons/utils/eye_closed.svg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { authUser } from "@/utils/api/auth";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -39,13 +40,15 @@ const LoginPage = () => {
     }
 
     try {
-      const response = await userLogin(formData);
+      const userAuth = await authUser(formData);
+      const userData = JSON.parse(userAuth.data.data);
 
-      if (!response) {
+      if (userData.authToken == null) {
         setFormError(validateUserError);
         return;
       }
 
+      await userLogin(userAuth.data.data);
       router.push(Routes.main);
     } catch (error) {
       console.log({ error });

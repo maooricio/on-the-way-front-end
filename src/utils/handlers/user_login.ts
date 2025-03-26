@@ -1,17 +1,15 @@
-import { ILoginFormData, IUserLogged } from "../interfaces/user.interface";
+import { IUserLogged } from "../interfaces/user.interface";
 
 export const emailRegEx =
   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]{1,})$/;
 
 export const getUserLogged = async (): Promise<IUserLogged> => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-
-  const loggedRes = await fetch(`${baseUrl}/api/login`, {
+  const loggedRes = await fetch(`http://localhost:3000/api/login`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
 
-  const data: { body: IUserLogged } = await loggedRes.json();
+  const data = await loggedRes.json();
 
   return data.body;
 };
@@ -25,11 +23,11 @@ export const userLogout = async (): Promise<boolean> => {
   return logoutRes.ok;
 };
 
-export const userLogin = async (userData: ILoginFormData): Promise<boolean> => {
+export const userLogin = async (authToken: string): Promise<boolean> => {
   const loginRes = await fetch("/api/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(userData),
+    body: authToken,
   });
 
   return loginRes.ok;
@@ -38,6 +36,6 @@ export const userLogin = async (userData: ILoginFormData): Promise<boolean> => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const validateUserForm = (formData: any, rules: any) => {
   return Object.keys(rules).some(
-    (key: string) => formData[key].length < rules[key],
+    (key: string) => formData[key].length < rules[key]
   );
 };

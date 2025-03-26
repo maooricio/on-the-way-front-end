@@ -2,29 +2,18 @@
 import ProfilePhoto from "./profile_photo";
 import pen from "@/assets/icons/utils/pen.svg";
 import Image from "next/image";
-import { IUser } from "@/utils/interfaces/user.interface";
-import { useEffect, useState } from "react";
-import { getUserLogged } from "@/utils/handlers/user_login";
+import { Dispatch, SetStateAction, useState } from "react";
 import SettingsSkeleton from "@/components/suspenses/settings";
 import EditProfileModal from "./edit_profile";
+import { IUser } from "@/utils/interfaces/user.interface";
 
-const ProfileInfo = () => {
-  const [userInfo, setUserInfo] = useState<IUser>();
+interface Props {
+  userInfo: IUser | undefined;
+  setUserInfo: Dispatch<SetStateAction<IUser | undefined>>;
+}
+
+const ProfileInfo = ({ userInfo, setUserInfo }: Props) => {
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
-
-  const fetchUserLogged = async () => {
-    try {
-      const res = await getUserLogged();
-
-      setUserInfo(res);
-    } catch (error) {
-      console.log({ error });
-    }
-  };
-
-  useEffect(() => {
-    fetchUserLogged();
-  }, []);
 
   if (!userInfo) {
     return <SettingsSkeleton />;
