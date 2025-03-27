@@ -7,22 +7,32 @@ import {
 import arrow_left from "../../../assets/icons/arrow/arrow_left.svg";
 import CodeInputs from "./code_inputs";
 import Image from "next/image";
+import { verifyCode } from "@/utils/api/auth";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
+  email: string;
 }
 
-const PasswordCode = ({ setStage }: Props) => {
+const PasswordCode = ({ setStage, email }: Props) => {
   const initialState: string[] = ["", "", "", "", "", ""];
 
   const [formData, setFormData] = useState<string[]>(initialState);
   const [formError, setFormError] = useState<IError>(initialFormError);
 
-  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const isEveryFullFilled = formData.every((i) => i.length > 0);
 
     if (!isEveryFullFilled) {
+      setFormError(passwordCodeError);
+      return;
+    }
+    const emailCode = formData.join("");
+
+    const res = await verifyCode({ email, emailCode });
+
+    if (!res.data.data) {
       setFormError(passwordCodeError);
       return;
     }

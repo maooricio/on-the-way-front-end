@@ -13,8 +13,13 @@ import eye_closed from "../../../assets/icons/utils/eye_closed.svg";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { changePassword } from "@/utils/api/auth";
 
-const PasswordChange = () => {
+interface Props {
+  email: string;
+}
+
+const PasswordChange = ({ email }: Props) => {
   const initialState: INewPasswordFormData = {
     password: "",
     newPassword: "",
@@ -25,7 +30,7 @@ const PasswordChange = () => {
   const [showPassword, setShowPassword] = useState<string>("password");
   const [showNewPassword, setShowNewPassword] = useState<string>("password");
 
-  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { password, newPassword } = formData;
 
@@ -34,7 +39,11 @@ const PasswordChange = () => {
       return;
     }
 
-    redirect(Routes.login);
+    const res = await changePassword({ user: email, password });
+
+    console.log({ res });
+
+    // redirect(Routes.login);
   };
 
   const handleOnChange = () => {
@@ -92,7 +101,7 @@ const PasswordChange = () => {
             alt=""
             onClick={() =>
               setShowNewPassword(
-                showNewPassword === "text" ? "password" : "text",
+                showNewPassword === "text" ? "password" : "text"
               )
             }
           />

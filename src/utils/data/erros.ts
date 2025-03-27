@@ -22,8 +22,14 @@ const recoverPasswordError: IError = {
   value: "recoverPasswordError",
 };
 
+const userNotExistError: IError = {
+  label: "No existe ningún usuario con este correo electronico",
+  value: "userNotExistError",
+};
+
 const passwordCodeError: IError = {
-  label: "Debes ingresar el codigo que hemos enviado a tu correo electrónico para cambiar tu contraseña.",
+  label:
+    "Debes ingresar el codigo que hemos enviado a tu correo electrónico para cambiar tu contraseña.",
   value: "recoverPasswordError",
 };
 
@@ -39,4 +45,5 @@ export {
   passwordCodeError,
   newPasswordError,
   initialFormError,
+  userNotExistError,
 };

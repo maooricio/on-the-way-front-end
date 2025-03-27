@@ -109,7 +109,7 @@ const CodeInputs = ({ initialState, error, setFormData }: Props) => {
           value={i}
           placeholder="-"
           className={`code-input ${
-            error.value.length > 0 && i.length === 0 ? "input-has-error" : ""
+            error.value.length > 0 ? "input-has-error" : ""
           }`}
           onChange={(e) => handleOnChange(e, index)}
           onKeyDown={(e) => handleKeyDown(e)}

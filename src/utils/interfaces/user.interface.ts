@@ -37,6 +37,11 @@ export interface IPasswordFormData {
   email: string;
 }
 
+export interface IVerifyCodeData {
+  email: string;
+  emailCode: string;
+}
+
 export interface INewPasswordFormData {
   password: string;
   newPassword: string;
