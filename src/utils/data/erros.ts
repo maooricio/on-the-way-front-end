@@ -38,6 +38,11 @@ const newPasswordError: IError = {
   value: "recoverPasswordError",
 };
 
+const newPasswordSecondError: IError = {
+  label: "La contraseña no pudo ser actualizada.",
+  value: "recoverPasswordError",
+};
+
 export {
   validateUserError,
   emptyUserError,
@@ -46,4 +51,5 @@ export {
   newPasswordError,
   initialFormError,
   userNotExistError,
+  newPasswordSecondError,
 };

@@ -4,6 +4,7 @@ import {
   IError,
   initialFormError,
   newPasswordError,
+  newPasswordSecondError,
 } from "../../../utils/data/erros";
 import InputElement from "../../elements/inputs/input";
 import { Routes } from "../../../utils/router/router_enum";
@@ -41,9 +42,12 @@ const PasswordChange = ({ email }: Props) => {
 
     const res = await changePassword({ user: email, password });
 
-    console.log({ res });
+    if (!res.data.data) {
+      setFormError(newPasswordSecondError);
+      return;
+    }
 
-    // redirect(Routes.login);
+    redirect(Routes.login);
   };
 
   const handleOnChange = () => {
