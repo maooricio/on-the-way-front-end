@@ -3,6 +3,7 @@ import close from "@/assets/icons/utils/close.svg";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import InputElement from "@/components/elements/inputs/input";
 import { IUser } from "@/utils/interfaces/user.interface";
+import { editUserInfo } from "@/utils/api/settings";
 
 export interface IEditProfile {
   firstName: string;
@@ -21,19 +22,52 @@ const EditProfileModal = ({ setShowModal, setUserData, userData }: Props) => {
     lastName: userData?.lastName ?? "",
   };
   const [formData, setFormData] = useState<IEditProfile>(initialState);
+  const [formError, setFormError] = useState<IEditProfile>({
+    firstName: "",
+    lastName: "",
+  });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (userData) {
+    if (formData.firstName.length < 3) {
+      setFormError((prev) => ({
+        ...prev,
+        firstName: "El nombre no puede estar vacio.",
+      }));
+      return;
+    }
+
+    if (formData.lastName.length < 3) {
+      setFormError((prev) => ({
+        ...prev,
+        lastName: "El apellido no puede estar vacio.",
+      }));
+      return;
+    }
+
+    try {
+      const res = await editUserInfo(userData?.id ?? "", formData);
+
+      if (!res.data.data) {
+        setFormError((prev) => ({
+          ...prev,
+          lastName: "La información del usuario no pudo ser cambiada.",
+        }));
+        return;
+      }
+
       setUserData({
         ...userData,
         firstName: formData.firstName,
         lastName: formData.lastName,
+        username: "",
+        email: userData?.email ?? "",
       });
+      setShowModal(false);
+    } catch (error) {
+      console.log(error);
     }
-
-    setShowModal(false);
   };
 
   return (
@@ -63,7 +97,8 @@ const EditProfileModal = ({ setShowModal, setUserData, userData }: Props) => {
             placeholder="Añade una nota o comentario para el cliente..."
             name="firstName"
             setFormData={setFormData}
-            error=""
+            error={formError.firstName}
+            showError={formError.firstName.length > 0}
             value={formData.firstName}
             icon={<></>}
           />
@@ -74,7 +109,8 @@ const EditProfileModal = ({ setShowModal, setUserData, userData }: Props) => {
             placeholder="Añade una nota o comentario para el cliente..."
             name="lastName"
             setFormData={setFormData}
-            error=""
+            error={formError.lastName}
+            showError={formError.lastName.length > 0}
             value={formData.lastName}
             icon={<></>}
           />

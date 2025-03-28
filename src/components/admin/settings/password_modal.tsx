@@ -4,10 +4,12 @@ import Image from "next/image";
 import InputElement from "@/components/elements/inputs/input";
 import eye from "@/assets/icons/utils/eye.svg";
 import eye_closed from "@/assets/icons/utils/eye_closed.svg";
+import { authUser, changePassword } from "@/utils/api/auth";
 
 interface Props {
   setShowModal: Dispatch<SetStateAction<boolean>>;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+  email: string | undefined;
 }
 
 export interface IPassword {
@@ -16,7 +18,7 @@ export interface IPassword {
   secondNewPassword: string;
 }
 
-const PasswordModal = ({ setShowModal, setIsLoading }: Props) => {
+const PasswordModal = ({ setShowModal, setIsLoading, email }: Props) => {
   const initialState: IPassword = {
     currentPassword: "",
     newPassword: "",
@@ -31,11 +33,11 @@ const PasswordModal = ({ setShowModal, setIsLoading }: Props) => {
   const handleChangePassword = async () => {
     setIsLoading(true);
 
-    if (data.newPassword.length < 8) {
+    if (data.newPassword.length < 6) {
       setError((prev) => ({
         ...prev,
         newPassword:
-          "La contraseña debe contener minimo 8 caracteres alfanumericos.",
+          "La contraseña debe contener minimo 6 caracteres alfanumericos.",
       }));
       setIsLoading(false);
       return;
@@ -50,29 +52,52 @@ const PasswordModal = ({ setShowModal, setIsLoading }: Props) => {
       return;
     }
 
-    setTimeout(() => {
+    try {
+      const res = await changePassword({
+        user: email ?? "",
+        password: data.newPassword,
+      });
+
+      if (!res.data.data) {
+        setError((prev) => ({
+          ...prev,
+          secondNewPassword: "La contraseña no pudo ser cambiada.",
+        }));
+        setIsLoading(false);
+        return;
+      }
+
       setShowModal(false);
       setIsLoading(false);
-    }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleAuth = async () => {
     setIsLoading(true);
 
-    if (data.currentPassword.length < 8) {
-      setError((prev) => ({
-        ...prev,
-        currentPassword:
-          "La contraseña es incorrecta. Ingresa su contraseña actual para cambiarla.",
-      }));
-      setIsLoading(false);
-      return;
-    }
+    try {
+      const res = await authUser({
+        user: email ?? "",
+        password: data.currentPassword,
+      });
 
-    setTimeout(() => {
+      if (!res.data.data) {
+        setError((prev) => ({
+          ...prev,
+          currentPassword:
+            "La contraseña es incorrecta. Ingresa su contraseña actual para cambiarla.",
+        }));
+        setIsLoading(false);
+        return;
+      }
+
       setIsAuth(true);
       setIsLoading(false);
-    }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

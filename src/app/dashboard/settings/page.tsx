@@ -32,7 +32,7 @@ const SettingsPage = () => {
       <ProfileInfo userInfo={userInfo} setUserInfo={setUserInfo} />
 
       <section className="admin-settings-content">
-        <PasswordSettings />
+        <PasswordSettings email={userInfo?.email} />
         <EmailSettings email={userInfo?.email} />
       </section>
     </section>

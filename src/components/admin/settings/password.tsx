@@ -5,7 +5,11 @@ import Loader from "@/assets/images/loader";
 import Image from "next/image";
 import lock from "@/assets/icons/others/lock.svg";
 
-const PasswordSettings = () => {
+interface Props {
+  email: string | undefined;
+}
+
+const PasswordSettings = ({ email }: Props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -19,13 +23,16 @@ const PasswordSettings = () => {
 
         <p>Actualiza tu contraseña para mayor seguridad de tu cuenta.</p>
 
-        <button type="button" onClick={() => setShowModal(true)}>Cambiar contraseña</button>
+        <button type="button" onClick={() => setShowModal(true)}>
+          Cambiar contraseña
+        </button>
       </article>
 
       {showModal && (
         <PasswordModal
           setIsLoading={setIsLoading}
           setShowModal={setShowModal}
+          email={email}
         />
       )}
 
