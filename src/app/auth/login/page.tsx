@@ -43,7 +43,7 @@ const LoginPage = () => {
       const userAuth = await authUser(formData);
       const userData = JSON.parse(userAuth.data.data);
 
-      if (userData.authToken == null) {
+      if (!userData.authToken) {
         setFormError(validateUserError);
         return;
       }

@@ -4,6 +4,7 @@ import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import InputElement from "@/components/elements/inputs/input";
 import { IUser } from "@/utils/interfaces/user.interface";
 import { editUserInfo } from "@/utils/api/settings";
+import { userLogin } from "@/utils/handlers/user_login";
 
 export interface IEditProfile {
   firstName: string;
@@ -48,8 +49,9 @@ const EditProfileModal = ({ setShowModal, setUserData, userData }: Props) => {
 
     try {
       const res = await editUserInfo(userData?.id ?? "", formData);
+      const resData = JSON.parse(res.data.data);
 
-      if (!res.data.data) {
+      if (!resData.authToken) {
         setFormError((prev) => ({
           ...prev,
           lastName: "La información del usuario no pudo ser cambiada.",
@@ -57,6 +59,7 @@ const EditProfileModal = ({ setShowModal, setUserData, userData }: Props) => {
         return;
       }
 
+      await userLogin(res.data.data);
       setUserData({
         ...userData,
         firstName: formData.firstName,
@@ -97,7 +100,7 @@ const EditProfileModal = ({ setShowModal, setUserData, userData }: Props) => {
             placeholder="Añade una nota o comentario para el cliente..."
             name="firstName"
             setFormData={setFormData}
-            error={formError.firstName}
+            error={formError.lastName.length > 0 ? formError.lastName : formError.firstName}
             showError={formError.firstName.length > 0}
             value={formData.firstName}
             icon={<></>}

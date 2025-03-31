@@ -25,7 +25,7 @@ export async function GET(req: Request) {
   if (!referer && !origin) {
     return NextResponse.json(
       { error: "Acceso no autorizado" },
-      { status: 403 }
+      { status: 403 },
     );
   }
 
