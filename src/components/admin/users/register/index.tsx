@@ -43,7 +43,12 @@ const RegisterForm = ({ setShowForm }: Props) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setShowForm(false);
+
+    try {
+      setShowForm(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
