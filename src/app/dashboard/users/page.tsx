@@ -12,8 +12,10 @@ import { getRole } from "@/utils/handlers/get_role";
 import glass from "@/assets/icons/others/glass.svg";
 import { filterUsers } from "@/utils/handlers/filters";
 import RegisterForm from "@/components/admin/users/register";
-import { IUser } from "@/utils/interfaces/user.interface";
+import { IUser, IUserLogged } from "@/utils/interfaces/user.interface";
 import UserDetails from "@/components/admin/users/details";
+import { getAllUsers } from "@/utils/api/users";
+import { getUserLogged } from "@/utils/handlers/user_login";
 
 export interface ISearch {
   value: string;
@@ -31,28 +33,60 @@ const UsersPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [roleFilter, setRoleFilter] = useState<string>("all");
   const [userSelected, setUserSelected] = useState<IUser | undefined>(
-    undefined
+    undefined,
   );
+  const [allDefaultUsers, setAllDefaultUsers] = useState<IUser[]>([]);
   const [usersList, setUsersList] = useState<IUser[][]>(
-    paginateList(FakeUsersList)
+    paginateList(FakeUsersList),
   );
 
   const [showRegisterForm, setShowRegisterForm] = useState<boolean>(false);
+  const [user, setUser] = useState<IUserLogged | undefined>();
+
+  const fetchUserLogged = async () => {
+    try {
+      const res = await getUserLogged();
+
+      setUser(res);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+  const getUsers = async (userId: string) => {
+    try {
+      const res = await getAllUsers(userId);
+
+      console.log({ res });
+
+      setAllDefaultUsers(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handlePagination = (page: number) => {
     setCurrentPage(page);
   };
 
   useEffect(() => {
+    if (user) {
+      getUsers(user.id!);
+    } else {
+      fetchUserLogged();
+    }
+  }, [user]);
+
+  useEffect(() => {
     const filteredUsers = filterUsers(
-      FakeUsersList,
+      allDefaultUsers,
       searchData.value,
-      roleFilter
+      roleFilter,
     );
 
     setUsersList(filteredUsers);
     setCurrentPage(1);
-  }, [roleFilter, searchData]);
+  }, [roleFilter, searchData, allDefaultUsers]);
 
   return (
     <section className="admin-users-container" ref={pageRef}>
@@ -113,10 +147,10 @@ const UsersPage = () => {
               <span>
                 {item.firstName} {item.lastName}
               </span>
-              <span className="not-mobile">{item.company}</span>
+              <span className="not-mobile">{item.company ?? "-"}</span>
               <span>{getRole(item.role!)}</span>
               <span>
-                {item.dischargeDate}
+                {item.dischargeDate ?? "-"}
 
                 <button type="button">
                   <Image src={three_dots} alt="three dots icon" />

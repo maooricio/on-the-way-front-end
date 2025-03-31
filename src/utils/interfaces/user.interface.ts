@@ -19,6 +19,7 @@ export interface IUser {
 }
 
 export interface IUserLogged {
+  id?: string;
   email: string;
   username: string;
   firstName: string;
