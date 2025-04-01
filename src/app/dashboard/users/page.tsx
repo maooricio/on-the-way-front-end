@@ -8,7 +8,7 @@ import CustomSelect from "@/components/elements/handlers/custom_select";
 import { usersRoleOptions } from "@/utils/data/users";
 import { getRole } from "@/utils/handlers/get_role";
 import glass from "@/assets/icons/others/glass.svg";
-import { filterUsers } from "@/utils/handlers/filters";
+import { filterDate, filterUsers } from "@/utils/handlers/filters";
 import RegisterForm from "@/components/admin/users/register";
 import { IUser, IUserLogged } from "@/utils/interfaces/user.interface";
 import UserDetails from "@/components/admin/users/details";
@@ -61,6 +61,10 @@ const UsersPage = () => {
     setCurrentPage(page);
   };
 
+  const handleGetUsers = () => {
+    getUsers(user?.id ?? "");
+  }
+
   useEffect(() => {
     if (user) {
       getUsers(user.id!);
@@ -73,7 +77,7 @@ const UsersPage = () => {
     const filteredUsers = filterUsers(
       allDefaultUsers,
       searchData.value,
-      roleFilter,
+      roleFilter
     );
 
     setUsersList(filteredUsers);
@@ -142,7 +146,7 @@ const UsersPage = () => {
               <span className="not-mobile">{item.company ?? "-"}</span>
               <span>{getRole(item.role!)}</span>
               <span>
-                {item.dischargeDate ?? "-"}
+                {item.createdAt ? filterDate(item.createdAt) : "-"}
 
                 <button type="button">
                   <Image src={three_dots} alt="three dots icon" />
@@ -170,10 +174,16 @@ const UsersPage = () => {
           user={userSelected}
           setShowForm={setUserSelected}
           setUserData={setUserSelected}
+          handleGetUsers={handleGetUsers}
         />
       )}
 
-      {showRegisterForm && <RegisterForm setShowForm={setShowRegisterForm} />}
+      {showRegisterForm && (
+        <RegisterForm
+          setShowForm={setShowRegisterForm}
+          handleGetUsers={handleGetUsers}
+        />
+      )}
     </section>
   );
 };

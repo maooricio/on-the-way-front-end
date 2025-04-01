@@ -15,7 +15,7 @@ export interface IUser {
   address?: string;
   company?: string;
   role?: string;
-  dischargeDate?: string;
+  createdAt?: Date;
 }
 
 export interface IUserLogged {

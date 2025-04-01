@@ -12,9 +12,15 @@ interface Props {
   user: IUser;
   setShowForm: Dispatch<SetStateAction<IUser | undefined>>;
   setUserData: Dispatch<SetStateAction<IUser | undefined>>;
+  handleGetUsers: () => void;
 }
 
-const UserDetails = ({ user, setShowForm, setUserData }: Props) => {
+const UserDetails = ({
+  user,
+  setShowForm,
+  setUserData,
+  handleGetUsers,
+}: Props) => {
   const [showDeleteUser, setShowDeleteUser] = useState<boolean>(false);
   const [showEditUser, setShowEditUser] = useState<boolean>(false);
 
@@ -89,10 +95,10 @@ const UserDetails = ({ user, setShowForm, setUserData }: Props) => {
 
               <div className="user-details-row">
                 <p>
-                  Tipo de documento de la empresa <span>{user.firstName}</span>
+                  Tipo de documento de la empresa <span>{user.idType}</span>
                 </p>
                 <p>
-                  Número de documento de la empresa <span>{user.lastName}</span>
+                  Número de documento de la empresa <span>{user.idNumber}</span>
                 </p>
               </div>
 
@@ -108,19 +114,19 @@ const UserDetails = ({ user, setShowForm, setUserData }: Props) => {
 
               <div className="user-details-row">
                 <p>
-                  Email <span>{user.firstName}</span>
+                  Email <span>{user.email}</span>
                 </p>
                 <p>
-                  Teléfono <span>{user.lastName}</span>
+                  Teléfono <span>{user.phone}</span>
                 </p>
               </div>
 
               <div className="user-details-row">
                 <p>
-                  Ciudad <span>{user.firstName}</span>
+                  Ciudad <span>{user.city}</span>
                 </p>
                 <p>
-                  Dirección <span>{user.lastName}</span>
+                  Dirección <span>{user.address}</span>
                 </p>
               </div>
             </>
@@ -143,6 +149,7 @@ const UserDetails = ({ user, setShowForm, setUserData }: Props) => {
           user={user}
           setShowModal={setShowDeleteUser}
           setShowDetails={setShowForm}
+          handleGetUsers={handleGetUsers}
         />
       )}
 

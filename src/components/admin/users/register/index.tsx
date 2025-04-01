@@ -15,12 +15,14 @@ import RegisterCustomerForm from "./customer_form";
 import RegisterAdminForm from "./admin_form";
 import { createUser } from "@/utils/api/users";
 import { validateUserData } from "@/utils/handlers/user_register";
+import Loader from "@/assets/images/loader";
 
 interface Props {
   setShowForm: Dispatch<SetStateAction<boolean>>;
+  handleGetUsers: () => void;
 }
 
-const RegisterForm = ({ setShowForm }: Props) => {
+const RegisterForm = ({ setShowForm, handleGetUsers }: Props) => {
   const initialAdminState: IUser = {
     firstName: "",
     lastName: "",
@@ -42,9 +44,12 @@ const RegisterForm = ({ setShowForm }: Props) => {
   const [userRole, setUserRole] = useState<string>("");
   const [formData, setFormData] = useState<IUser>(initialAdminState);
   const [formError, setFormError] = useState<IUser>(initialAdminState);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+
     const formIsValid = validateUserData(userRole, formData, setFormError);
 
     if (!formIsValid) {
@@ -52,21 +57,26 @@ const RegisterForm = ({ setShowForm }: Props) => {
     }
 
     try {
-      const res = await createUser({...formData, role: userRole});
+      const res = await createUser({ ...formData, role: userRole });
 
       if (!res.data.data) {
         return;
       }
 
+      handleGetUsers();
       setShowForm(false);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleOnChange = () => {
-    setFormError(userRole === "admin" ? initialAdminState : initialCustomerState);
-  }
+    setFormError(
+      userRole === "admin" ? initialAdminState : initialCustomerState
+    );
+  };
 
   useEffect(() => {
     setFormData(
@@ -86,7 +96,11 @@ const RegisterForm = ({ setShowForm }: Props) => {
         onClick={() => setShowForm(false)}
       ></div>
 
-      <form onSubmit={handleSubmit} onChange={handleOnChange} className="register-form-container">
+      <form
+        onSubmit={handleSubmit}
+        onChange={handleOnChange}
+        className="register-form-container"
+      >
         <div className="generic-modal-header">
           <h1>Registrar usuario</h1>
 
@@ -95,7 +109,7 @@ const RegisterForm = ({ setShowForm }: Props) => {
             onClick={() => setShowForm(false)}
             style={{ all: "unset", cursor: "pointer" }}
           >
-            <Image src={close} alt="" />
+            <Image src={close} alt="close modal icon" />
           </button>
         </div>
 
@@ -145,6 +159,8 @@ const RegisterForm = ({ setShowForm }: Props) => {
           <button type="submit">Registrar usuario</button>
         </div>
       </form>
+
+      {isLoading && <Loader />}
     </section>
   );
 };

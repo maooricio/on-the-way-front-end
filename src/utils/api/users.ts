@@ -8,7 +8,16 @@ const getAllUsers = (id: string) => {
 };
 
 const createUser = (body: IUser) => {
-  return http.post(`${USERS_PATH}`, body);
-}
+  return http.post(`${USERS_PATH}`, {
+    ...body,
+    documentType: body.idType,
+    documentNumber: body.idNumber,
+    companyName: body.company,
+  });
+};
 
-export { getAllUsers, createUser };
+const deleteUser = (id: string) => {
+  return http.patch(`${USERS_PATH}/${id}`);
+};
+
+export { getAllUsers, createUser, deleteUser };

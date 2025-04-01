@@ -4,18 +4,35 @@ import close from "@/assets/icons/utils/close.svg";
 import { IUser } from "@/utils/interfaces/user.interface";
 import { getRole } from "@/utils/handlers/get_role";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
+import { deleteUser } from "@/utils/api/users";
 
 interface Props {
   user: IUser;
   setShowModal: Dispatch<SetStateAction<boolean>>;
   setShowDetails?: Dispatch<SetStateAction<IUser | undefined>>;
+  handleGetUsers: () => void;
 }
 
-const DeleteUser = ({ user, setShowModal, setShowDetails }: Props) => {
-  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+const DeleteUser = ({
+  user,
+  setShowModal,
+  setShowDetails,
+  handleGetUsers,
+}: Props) => {
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setShowModal(false);
-    setShowDetails!(undefined);
+
+    try {
+      const res = await deleteUser(user.id!);
+
+      if (!res.data.data) {
+        handleGetUsers();
+        setShowModal(false);
+        setShowDetails!(undefined);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
