@@ -5,6 +5,7 @@ import InputElement from "@/components/elements/inputs/input";
 import { IUser } from "@/utils/interfaces/user.interface";
 import CustomSelect from "@/components/elements/handlers/custom_select";
 import { usersRoleOptions } from "@/utils/data/users";
+import { editUser } from "@/utils/api/users";
 
 export interface IEditUser {
   firstName: string;
@@ -16,9 +17,17 @@ interface Props {
   setShowModal: Dispatch<SetStateAction<boolean>>;
   setUserData: Dispatch<SetStateAction<IUser | undefined>>;
   userData: IUser | undefined;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  handleGetUsers: () => void;
 }
 
-const EditUserModal = ({ setShowModal, setUserData, userData }: Props) => {
+const EditUserModal = ({
+  setShowModal,
+  setUserData,
+  userData,
+  setIsLoading,
+  handleGetUsers,
+}: Props) => {
   const initialState: IEditUser = {
     firstName: userData?.firstName ?? "",
     lastName: userData?.lastName ?? "",
@@ -27,18 +36,31 @@ const EditUserModal = ({ setShowModal, setUserData, userData }: Props) => {
   const [formData, setFormData] = useState<IEditUser>(initialState);
   const [userRole, setUserRole] = useState<string>(userData?.role ?? "");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    if (userData) {
+    try {
+      const res = await editUser(userData?.id, formData);
+
+      if (!res.data.data) {
+        return;
+      }
+
       setUserData({
         ...userData,
         firstName: formData.firstName,
         lastName: formData.lastName,
+        username: userData?.username,
+        email: formData.email,
       });
+      handleGetUsers();
+      setShowModal(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
-
-    setShowModal(false);
   };
 
   return (

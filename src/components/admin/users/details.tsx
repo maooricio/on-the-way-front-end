@@ -7,6 +7,7 @@ import otw_logo from "@/assets/images/otw_only_logo.svg";
 import { getRole } from "@/utils/handlers/get_role";
 import DeleteUser from "./delete";
 import EditUserModal from "./edit";
+import Loader from "@/assets/images/loader";
 
 interface Props {
   user: IUser;
@@ -23,6 +24,7 @@ const UserDetails = ({
 }: Props) => {
   const [showDeleteUser, setShowDeleteUser] = useState<boolean>(false);
   const [showEditUser, setShowEditUser] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -150,6 +152,7 @@ const UserDetails = ({
           setShowModal={setShowDeleteUser}
           setShowDetails={setShowForm}
           handleGetUsers={handleGetUsers}
+          setIsLoading={setIsLoading}
         />
       )}
 
@@ -158,8 +161,12 @@ const UserDetails = ({
           setShowModal={setShowEditUser}
           setUserData={setUserData}
           userData={user}
+          setIsLoading={setIsLoading}
+          handleGetUsers={handleGetUsers}
         />
       )}
+
+      {isLoading && <Loader />}
     </section>
   );
 };

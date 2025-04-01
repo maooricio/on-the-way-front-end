@@ -1,3 +1,4 @@
+import { IEditUser } from "@/components/admin/users/edit";
 import { IUser } from "../interfaces/user.interface";
 import http from "./http";
 
@@ -20,4 +21,8 @@ const deleteUser = (id: string) => {
   return http.patch(`${USERS_PATH}/${id}`);
 };
 
-export { getAllUsers, createUser, deleteUser };
+const editUser = (id: string | undefined, body: IEditUser) => {
+  return http.put(`${USERS_PATH}/${id}`, body);
+};
+
+export { getAllUsers, createUser, deleteUser, editUser };

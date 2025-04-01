@@ -11,6 +11,7 @@ interface Props {
   setShowModal: Dispatch<SetStateAction<boolean>>;
   setShowDetails?: Dispatch<SetStateAction<IUser | undefined>>;
   handleGetUsers: () => void;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const DeleteUser = ({
@@ -18,20 +19,26 @@ const DeleteUser = ({
   setShowModal,
   setShowDetails,
   handleGetUsers,
+  setIsLoading,
 }: Props) => {
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const res = await deleteUser(user.id!);
 
       if (!res.data.data) {
-        handleGetUsers();
-        setShowModal(false);
-        setShowDetails!(undefined);
+        return;
       }
+
+      handleGetUsers();
+      setShowModal(false);
+      setShowDetails!(undefined);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 

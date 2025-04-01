@@ -14,6 +14,7 @@ import { IUser, IUserLogged } from "@/utils/interfaces/user.interface";
 import UserDetails from "@/components/admin/users/details";
 import { getAllUsers } from "@/utils/api/users";
 import { getUserLogged } from "@/utils/handlers/user_login";
+import Loader from "@/assets/images/loader";
 
 export interface ISearch {
   value: string;
@@ -33,6 +34,7 @@ const UsersPage = () => {
   const [userSelected, setUserSelected] = useState<IUser | undefined>();
   const [allDefaultUsers, setAllDefaultUsers] = useState<IUser[]>([]);
   const [usersList, setUsersList] = useState<IUser[][]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [showRegisterForm, setShowRegisterForm] = useState<boolean>(false);
   const [user, setUser] = useState<IUserLogged | undefined>();
@@ -48,12 +50,16 @@ const UsersPage = () => {
   };
 
   const getUsers = async (userId: string) => {
+    setIsLoading(true);
+
     try {
       const res = await getAllUsers(userId);
 
       setAllDefaultUsers(res.data.data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -63,7 +69,7 @@ const UsersPage = () => {
 
   const handleGetUsers = () => {
     getUsers(user?.id ?? "");
-  }
+  };
 
   useEffect(() => {
     if (user) {
@@ -77,7 +83,7 @@ const UsersPage = () => {
     const filteredUsers = filterUsers(
       allDefaultUsers,
       searchData.value,
-      roleFilter
+      roleFilter,
     );
 
     setUsersList(filteredUsers);
@@ -184,6 +190,8 @@ const UsersPage = () => {
           handleGetUsers={handleGetUsers}
         />
       )}
+
+      {isLoading && <Loader />}
     </section>
   );
 };
