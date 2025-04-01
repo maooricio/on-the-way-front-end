@@ -32,10 +32,3 @@ export const userLogin = async (authToken: string): Promise<boolean> => {
 
   return loginRes.ok;
 };
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const validateUserForm = (formData: any, rules: any) => {
-  return Object.keys(rules).some(
-    (key: string) => formData[key].length < rules[key]
-  );
-};

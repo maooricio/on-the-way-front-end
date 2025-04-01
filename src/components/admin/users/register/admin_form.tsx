@@ -5,9 +5,10 @@ import { Dispatch, SetStateAction } from "react";
 interface Props {
   formData: IUser;
   setFormData: Dispatch<SetStateAction<IUser>>;
+  formError: IUser;
 }
 
-const RegisterAdminForm = ({ formData, setFormData }: Props) => {
+const RegisterAdminForm = ({ formData, setFormData, formError }: Props) => {
   return (
     <>
       <div className="register-form-content-row">
@@ -17,10 +18,10 @@ const RegisterAdminForm = ({ formData, setFormData }: Props) => {
           placeholder="Ingresa el nombre"
           name="firstName"
           setFormData={setFormData}
-          error=""
           value={formData.firstName}
+          error={formError.firstName}
+          showError={formError.firstName.length > 0}
           icon={<></>}
-          showError={false}
         />
 
         <InputElement
@@ -29,10 +30,10 @@ const RegisterAdminForm = ({ formData, setFormData }: Props) => {
           placeholder="Ingresa el apellido"
           name="lastName"
           setFormData={setFormData}
-          error=""
           value={formData.lastName}
+          error={formError.lastName}
+          showError={formError.lastName.length > 0}
           icon={<></>}
-          showError={false}
         />
       </div>
 
@@ -42,10 +43,10 @@ const RegisterAdminForm = ({ formData, setFormData }: Props) => {
         placeholder="Ingresa el email"
         name="email"
         setFormData={setFormData}
-        error=""
         value={formData.email}
+        error={formError.email}
+        showError={formError.email.length > 0}
         icon={<></>}
-        showError={false}
       />
     </>
   );

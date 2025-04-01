@@ -1,11 +1,9 @@
 "use client";
 import InputElement from "@/components/elements/inputs/input";
-import { FakeUsersList } from "@/utils/data/fakers";
 import { useEffect, useRef, useState } from "react";
 import three_dots from "@/assets/icons/dots/three_dots.svg";
 import Image from "next/image";
 import Pagination from "@/components/elements/handlers/pagination";
-import { paginateList } from "@/utils/handlers/paginate";
 import CustomSelect from "@/components/elements/handlers/custom_select";
 import { usersRoleOptions } from "@/utils/data/users";
 import { getRole } from "@/utils/handlers/get_role";
@@ -32,13 +30,9 @@ const UsersPage = () => {
   const [searchData, setSearchData] = useState<ISearch>(initialState);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [roleFilter, setRoleFilter] = useState<string>("all");
-  const [userSelected, setUserSelected] = useState<IUser | undefined>(
-    undefined,
-  );
+  const [userSelected, setUserSelected] = useState<IUser | undefined>();
   const [allDefaultUsers, setAllDefaultUsers] = useState<IUser[]>([]);
-  const [usersList, setUsersList] = useState<IUser[][]>(
-    paginateList(FakeUsersList),
-  );
+  const [usersList, setUsersList] = useState<IUser[][]>([]);
 
   const [showRegisterForm, setShowRegisterForm] = useState<boolean>(false);
   const [user, setUser] = useState<IUserLogged | undefined>();
@@ -56,8 +50,6 @@ const UsersPage = () => {
   const getUsers = async (userId: string) => {
     try {
       const res = await getAllUsers(userId);
-
-      console.log({ res });
 
       setAllDefaultUsers(res.data.data);
     } catch (error) {

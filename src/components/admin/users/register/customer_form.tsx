@@ -3,7 +3,7 @@ import InputElement from "@/components/elements/inputs/input";
 import { idTypeOptions } from "@/utils/data/id_types";
 import { IUser } from "@/utils/interfaces/user.interface";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import search from "@/assets/icons/others/glass.svg";
 
 interface Props {
@@ -13,6 +13,12 @@ interface Props {
 
 const RegisterCustomerForm = ({ formData, setFormData }: Props) => {
   const [idType, setIdType] = useState<string>("");
+
+  useEffect(() => {
+    setFormData((prev) => ({ ...prev, idType }));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idType]);
 
   return (
     <>

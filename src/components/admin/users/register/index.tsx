@@ -11,9 +11,10 @@ import close from "@/assets/icons/utils/close.svg";
 import CustomSelect from "@/components/elements/handlers/custom_select";
 import { usersRoleOptions } from "@/utils/data/users";
 import { IUser } from "@/utils/interfaces/user.interface";
-import { validateUserForm } from "@/utils/handlers/user_login";
 import RegisterCustomerForm from "./customer_form";
 import RegisterAdminForm from "./admin_form";
+import { createUser } from "@/utils/api/users";
+import { validateUserData } from "@/utils/handlers/user_register";
 
 interface Props {
   setShowForm: Dispatch<SetStateAction<boolean>>;
@@ -40,33 +41,43 @@ const RegisterForm = ({ setShowForm }: Props) => {
   };
   const [userRole, setUserRole] = useState<string>("");
   const [formData, setFormData] = useState<IUser>(initialAdminState);
+  const [formError, setFormError] = useState<IUser>(initialAdminState);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formIsValid = validateUserData(userRole, formData, setFormError);
+
+    if (!formIsValid) {
+      return;
+    }
 
     try {
+      const res = await createUser({...formData, role: userRole});
+
+      if (!res.data.data) {
+        return;
+      }
+
       setShowForm(false);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleOnChange = () => {
+    setFormError(userRole === "admin" ? initialAdminState : initialCustomerState);
+  }
+
   useEffect(() => {
     setFormData(
+      userRole === "admin" ? initialAdminState : initialCustomerState
+    );
+    setFormError(
       userRole === "admin" ? initialAdminState : initialCustomerState
     );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userRole]);
-
-  const formIsDisabled =
-    userRole === "admin"
-      ? validateUserForm(formData, {
-          firstName: 4,
-          lastName: 6,
-          email: 8,
-        })
-      : false;
 
   return (
     <section className="generic-modal">
@@ -75,7 +86,7 @@ const RegisterForm = ({ setShowForm }: Props) => {
         onClick={() => setShowForm(false)}
       ></div>
 
-      <form onSubmit={handleSubmit} className="register-form-container">
+      <form onSubmit={handleSubmit} onChange={handleOnChange} className="register-form-container">
         <div className="generic-modal-header">
           <h1>Registrar usuario</h1>
 
@@ -112,7 +123,11 @@ const RegisterForm = ({ setShowForm }: Props) => {
           />
 
           {userRole === "admin" && (
-            <RegisterAdminForm formData={formData} setFormData={setFormData} />
+            <RegisterAdminForm
+              formData={formData}
+              setFormData={setFormData}
+              formError={formError}
+            />
           )}
 
           {userRole === "customer" && (
@@ -127,9 +142,7 @@ const RegisterForm = ({ setShowForm }: Props) => {
           <button type="button" onClick={() => setShowForm(false)}>
             Cancelar
           </button>
-          <button type="submit" disabled={formIsDisabled}>
-            Registrar usuario
-          </button>
+          <button type="submit">Registrar usuario</button>
         </div>
       </form>
     </section>
