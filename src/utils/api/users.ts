@@ -25,4 +25,8 @@ const editUser = (id: string | undefined, body: IEditUser) => {
   return http.put(`${USERS_PATH}/${id}`, body);
 };
 
-export { getAllUsers, createUser, deleteUser, editUser };
+const getCustomers = () => {
+  return http.get(`${USERS_PATH}/customers`);
+};
+
+export { getAllUsers, createUser, deleteUser, editUser, getCustomers };

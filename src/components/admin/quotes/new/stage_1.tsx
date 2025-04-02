@@ -1,4 +1,3 @@
-import { FakeUsersList } from "@/utils/data/fakers";
 import { getStageIcon } from "@/utils/handlers/get_icon";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
 import Image from "next/image";
@@ -15,6 +14,8 @@ import SelectWithInput from "@/components/elements/inputs/select";
 import close from "@/assets/icons/utils/close_fill.svg";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
 import { ICustomerSelect, IQuote } from "@/utils/interfaces/quote.interface";
+import { getCustomers } from "@/utils/api/users";
+import { IUser } from "@/utils/interfaces/user.interface";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
@@ -27,47 +28,66 @@ const NewQuoteStageOne = ({
   setFormQuoteData,
   formQuoteData,
 }: Props) => {
-  const initialCustomer = FakeUsersList.find(
-    (i) => i.id === formQuoteData.userId
-  );
-
   const initialState: ICustomerSelect = {
-    selected: initialCustomer ?? undefined,
+    selected: undefined,
     search: "",
   };
 
   const [formData, setFormData] = useState<ICustomerSelect>(initialState);
   const [customersOptions, setCustomersOptions] = useState<ISelectOption[]>([]);
+  const [allCustomersList, setAllCustomersList] = useState<IUser[]>([]);
 
-  const getUsersOption = () => {
-    const customersList = FakeUsersList.filter((i) => {
-      const isCustomer = i.role === "customer";
-      const hasSearchValue = formData.search?.length > 0;
-      const searchFilter = hasSearchValue
-        ? i.company?.toLowerCase().includes(formData.search.toLowerCase())
-        : false;
+  const getUsersOption = async () => {
+    try {
+      const res = await getCustomers();
 
-      if (hasSearchValue) {
-        return isCustomer && searchFilter;
+      if (!res.data.data) {
+        return;
       }
 
-      return isCustomer;
-    });
+      const responseData = res.data.data;
 
-    setCustomersOptions(
-      customersList.map((i) => {
-        const name = `${i.firstName} ${i.lastName}`;
+      setAllCustomersList(responseData);
 
-        return {
-          label: (
-            <p className="new-quote-select-option">
-              {i.company} <span>Responsable: {name}</span>
-            </p>
+      const customersList = responseData.filter((i: IUser) => {
+        const hasSearchValue = formData.search?.length > 0;
+        const searchFilter = hasSearchValue
+          ? i.company?.toLowerCase().includes(formData.search.toLowerCase())
+          : false;
+
+        if (hasSearchValue) {
+          return searchFilter;
+        }
+
+        return hasSearchValue ? searchFilter : true;
+      });
+
+      setCustomersOptions(
+        customersList.map((i: IUser) => {
+          const name = `${i.firstName} ${i.lastName}`;
+
+          return {
+            label: (
+              <p className="new-quote-select-option">
+                {i.company} <span>Responsable: {name}</span>
+              </p>
+            ),
+            value: i.id!,
+          };
+        })
+      );
+
+      if (formQuoteData.userId) {
+        setFormData((prev) => ({
+          ...prev,
+          selected: responseData.find(
+            (i: IUser) => i.id === formQuoteData.userId
           ),
-          value: i.id!,
-        };
-      })
-    );
+        }));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -87,7 +107,7 @@ const NewQuoteStageOne = ({
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleOnSelect = (item: any) => {
-    const filteredUser = FakeUsersList.find((i) => i.id === item.value);
+    const filteredUser = allCustomersList.find((i) => i.id === item.value);
 
     setFormData({
       selected: filteredUser,
