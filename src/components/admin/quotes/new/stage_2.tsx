@@ -9,6 +9,7 @@ import calendar from "@/assets/icons/utils/calendar.svg";
 import CustomSelect from "@/components/elements/handlers/custom_select";
 import SelectWithInput from "@/components/elements/inputs/select";
 import { citiesOptions } from "@/utils/data/cities";
+import { quotesHoursOptions } from "@/utils/data/quotes";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
@@ -125,6 +126,7 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
                   label: "Selecciona la hora",
                   value: "",
                 },
+                ...quotesHoursOptions,
               ]}
               setValue={setServiceHour}
               value={serviceHour}

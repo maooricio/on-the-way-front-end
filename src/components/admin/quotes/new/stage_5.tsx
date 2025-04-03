@@ -24,6 +24,8 @@ import ChangeCustomerModal from "../change_customer";
 import AddDiscountVoucherModal from "../add_discount_voucher";
 import InputElement from "@/components/elements/inputs/input";
 import { useRouter } from "next/navigation";
+import { createQuotes } from "@/utils/api/quotes";
+import Loader from "@/assets/images/loader";
 
 export interface IComment {
   comment: string;
@@ -42,10 +44,26 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
   const [showCustomerModal, setShowCustomerModal] = useState<boolean>(false);
   const [showDiscountModal, setShowDiscountModal] = useState<boolean>(false);
   const [comment, setComment] = useState<{ comment: string }>({ comment: "" });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.replace(Routes.quotes_history);
+    setIsLoading(true);
+
+    try {
+      console.log({ formData });
+      const res = await createQuotes(formData);
+
+      if (!res.data.data) {
+        return;
+      }
+
+      router.replace(Routes.quotes_history);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCounter = (
@@ -368,7 +386,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
                     {formatCurrency(
                       formData.discountVoucher.type === "%"
                         ? price -
-                        price * (formData.discountVoucher.amount / 100)
+                            price * (formData.discountVoucher.amount / 100)
                         : price - formData.discountVoucher.amount
                     )}
                   </span>
@@ -402,6 +420,8 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
           setFormData={setFormData}
         />
       )}
+
+      {isLoading && <Loader />}
     </section>
   );
 };
