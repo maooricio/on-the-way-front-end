@@ -6,7 +6,7 @@ export interface IVehicles {
   price: number;
   amount: number;
   sizes: {
-    length: number | number[];
+    length: number[];
     width: number;
     height: number;
   };

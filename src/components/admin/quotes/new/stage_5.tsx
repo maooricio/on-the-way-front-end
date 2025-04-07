@@ -51,8 +51,13 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
     setIsLoading(true);
 
     try {
-      console.log({ formData });
-      const res = await createQuotes(formData);
+      const res = await createQuotes({
+        ...formData,
+        totalPrice:
+          formData.discountVoucher.type === "%"
+            ? price - price * (formData.discountVoucher.amount / 100)
+            : price - formData.discountVoucher.amount,
+      });
 
       if (!res.data.data) {
         return;
@@ -69,7 +74,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
   const handleCounter = (
     type: string,
     focusItem: IVehicles | IOperator,
-    focus: string
+    focus: string,
   ) => {
     if (focus === "isOperator") {
       setFormData((prev) => ({
@@ -271,7 +276,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
                     setFormData((prev) => ({
                       ...prev,
                       vehicles: formData.vehicles.filter(
-                        (i) => i.id !== item.id
+                        (i) => i.id !== item.id,
                       ),
                     }))
                   }
@@ -316,7 +321,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
                     setFormData((prev) => ({
                       ...prev,
                       operators: formData.operators.filter(
-                        (i) => i.id !== item.id
+                        (i) => i.id !== item.id,
                       ),
                     }))
                   }
@@ -387,7 +392,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
                       formData.discountVoucher.type === "%"
                         ? price -
                             price * (formData.discountVoucher.amount / 100)
-                        : price - formData.discountVoucher.amount
+                        : price - formData.discountVoucher.amount,
                     )}
                   </span>
                 </p>
