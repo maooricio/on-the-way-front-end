@@ -1,6 +1,6 @@
 import InputElement from "@/components/elements/inputs/input";
 import { getSquareIcon, getStageIcon } from "@/utils/handlers/get_icon";
-import { ICustomerSelect, IQuote } from "@/utils/interfaces/quote.interface";
+import { ICustomerSelect, IQuote, IQuoteErrors } from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import CustomSelect from "@/components/elements/handlers/custom_select";
 import SelectWithInput from "@/components/elements/inputs/select";
 import { citiesOptions } from "@/utils/data/cities";
 import { quotesHoursOptions } from "@/utils/data/quotes";
+import { validateQuoteInfo } from "@/utils/handlers/quote_info";
 
 interface Props {
   setStage: Dispatch<SetStateAction<number>>;
@@ -17,20 +18,43 @@ interface Props {
   setFormData: Dispatch<SetStateAction<IQuote>>;
 }
 
-const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
+const NewQuoteStageTwo = ({
+  setStage,
+  formData,
+  setFormData,
+}: Props) => {
   const initialState: ICustomerSelect = {
     selected: undefined,
     search: "",
   };
 
+  const initialFormErrors: IQuoteErrors = {
+    deliveryTransport: "",
+    collectionTransport: "",
+    serviceDate: "",
+    serviceHour: "",
+    pickupCity: "",
+    pickupAddress: "",
+    deliveryAddress: "",
+    collectionAddress: "",
+    unloadingCity: "",
+    unloadingAdress: "",
+  }
+
   const [pickupCity, setPickupCity] = useState<ICustomerSelect>(initialState);
   const [unloadingCity, setUnloadingCity] =
     useState<ICustomerSelect>(initialState);
   const [serviceHour, setServiceHour] = useState<string>("");
+  const [formError, setFormError] = useState<IQuoteErrors>(initialFormErrors);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStage(2);
+
+    const isValid = validateQuoteInfo(formData, setFormError);
+    
+    if (isValid) {
+      setStage(2);
+    }
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -114,9 +138,10 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
               placeholder="Selecciona la fecha"
               name="serviceDate"
               setFormData={setFormData}
-              error=""
               value={formData.serviceDate}
               icon={<Image src={calendar} alt="calendar icon" />}
+              error={formError.serviceDate}
+              showError={formError.serviceDate.length > 0}
             />
 
             <CustomSelect
@@ -147,9 +172,10 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
             placeholder="Selecciona la fecha"
             name="pickupAddress"
             setFormData={setFormData}
-            error=""
             value={formData.pickupAddress}
             icon={<></>}
+            error={formError.pickupAddress}
+            showError={formError.pickupAddress.length > 0}
           />
 
           <InputElement
@@ -158,9 +184,10 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
             placeholder="Selecciona la fecha"
             name="deliveryAddress"
             setFormData={setFormData}
-            error=""
             value={formData.deliveryAddress}
             icon={<></>}
+            error={formError.deliveryAddress}
+            showError={formError.deliveryAddress.length > 0}
           />
 
           <InputElement
@@ -169,9 +196,10 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
             placeholder="Selecciona la fecha"
             name="collectionAddress"
             setFormData={setFormData}
-            error=""
             value={formData.collectionAddress}
             icon={<></>}
+            error={formError.collectionAddress}
+            showError={formError.collectionAddress.length > 0}
           />
 
           <SelectWithInput
@@ -188,9 +216,10 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
             placeholder="Selecciona la fecha"
             name="unloadingAdress"
             setFormData={setFormData}
-            error=""
             value={formData.unloadingAdress}
             icon={<></>}
+            error={formError.unloadingAdress}
+            showError={formError.unloadingAdress.length > 0}
           />
         </div>
 

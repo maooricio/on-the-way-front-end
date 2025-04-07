@@ -4,7 +4,6 @@ import http from "./http";
 const QUOTES_PATH = "quotes";
 
 const createQuotes = (body: IQuote) => {
-  console.log({ body });
   return http.post(`${QUOTES_PATH}`, {
     ...body,
     vehicles: body.vehicles.map((i) => ({ ...i, image: i.id })),
@@ -12,4 +11,8 @@ const createQuotes = (body: IQuote) => {
   });
 };
 
-export { createQuotes };
+const getAllQuotes = () => {
+  return http.get(`${QUOTES_PATH}`);
+};
+
+export { createQuotes, getAllQuotes };

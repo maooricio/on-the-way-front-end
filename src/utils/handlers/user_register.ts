@@ -20,8 +20,6 @@ export const validateUserData = (
 
   let isValid = true;
 
-  console.log({userData})
-
   if (userFirstName.length <= 2) {
     setFormError((prev) => ({
       ...prev,

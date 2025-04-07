@@ -1,6 +1,6 @@
 "use client";
 import InputElement from "@/components/elements/inputs/input";
-import { FakeQuotesList, FakeUsersList } from "@/utils/data/fakers";
+import { FakeUsersList } from "@/utils/data/fakers";
 import { useEffect, useRef, useState } from "react";
 import three_dots from "@/assets/icons/dots/three_dots.svg";
 import Image from "next/image";
@@ -19,6 +19,7 @@ import { formatCurrency } from "@/utils/handlers/currency";
 import { getStateColor } from "@/utils/handlers/get_state_color";
 import { getUserLogged } from "@/utils/handlers/user_login";
 import { IUserLogged } from "@/utils/interfaces/user.interface";
+import { getAllQuotes } from "@/utils/api/quotes";
 
 export interface ISearch {
   value: string;
@@ -40,9 +41,8 @@ const QuotesHistoryPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [stateFilter, setStateFilter] = useState<string>(state ?? "all");
   const [user, setUser] = useState<IUserLogged>();
-  const [quotesList, setQuotesList] = useState<IQuote[][]>(
-    paginateList(FakeQuotesList.filter(i => !i.isRequest)),
-  );
+  const [allQuotes, setAllQuotes] = useState<IQuote[]>([]);
+  const [quotesList, setQuotesList] = useState<IQuote[][]>([]);
 
   const handlePagination = (page: number) => {
     setCurrentPage(page);
@@ -58,19 +58,33 @@ const QuotesHistoryPage = () => {
     }
   };
 
+  const fetchAllQuotes = async () => {
+    try {
+      const res = await getAllQuotes();
+
+      if (res.data.data) {
+        setAllQuotes(res.data.data);
+        setQuotesList(paginateList(res.data.data));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     const filteredQuotes = filterQuotes(
-      FakeQuotesList.filter(i => !i.isRequest),
+      allQuotes,
       searchData.value,
       stateFilter,
     );
 
     setQuotesList(filteredQuotes);
     setCurrentPage(1);
-  }, [stateFilter, searchData]);
+  }, [stateFilter, searchData, allQuotes]);
 
   useEffect(() => {
     fetchUserLogged();
+    fetchAllQuotes();
   }, []);
 
   return (

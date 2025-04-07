@@ -40,3 +40,16 @@ export interface IQuote {
   comment: IQuoteComment[];
   date?: string;
 }
+
+export interface IQuoteErrors {
+  deliveryTransport: string;
+  collectionTransport: string;
+  serviceDate: string;
+  serviceHour: string;
+  pickupCity: string;
+  pickupAddress: string;
+  deliveryAddress: string;
+  collectionAddress: string;
+  unloadingCity: string;
+  unloadingAdress: string;
+}
