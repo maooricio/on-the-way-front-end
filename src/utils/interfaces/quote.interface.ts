@@ -15,6 +15,7 @@ export interface IQuoteComment {
 
 export interface IQuote {
   id?: string;
+  _id?: string;
   name?: string;
   userId?: string;
   quoteNumber?: string;
@@ -39,6 +40,8 @@ export interface IQuote {
   };
   comment: IQuoteComment[];
   date?: string;
+  createdAt?: Date;
+  user?: IQuoteUserInfo;
 }
 
 export interface IQuoteErrors {
@@ -52,4 +55,10 @@ export interface IQuoteErrors {
   collectionAddress: string;
   unloadingCity: string;
   unloadingAdress: string;
+}
+
+export interface IQuoteUserInfo {
+  firstName: string;
+  lastName: string;
+  email: string;
 }

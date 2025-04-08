@@ -1,6 +1,5 @@
 "use client";
 import InputElement from "@/components/elements/inputs/input";
-import { FakeUsersList } from "@/utils/data/fakers";
 import { useEffect, useRef, useState } from "react";
 import three_dots from "@/assets/icons/dots/three_dots.svg";
 import Image from "next/image";
@@ -8,7 +7,7 @@ import Pagination from "@/components/elements/handlers/pagination";
 import { paginateList } from "@/utils/handlers/paginate";
 import CustomSelect from "@/components/elements/handlers/custom_select";
 import glass from "@/assets/icons/others/glass.svg";
-import { filterQuotes } from "@/utils/handlers/filters";
+import { filterDate, filterQuotes } from "@/utils/handlers/filters";
 import { quotesFilterOptions } from "@/utils/data/quotes";
 import back from "@/assets/icons/arrow/arrow_back.svg";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -63,8 +62,14 @@ const QuotesHistoryPage = () => {
       const res = await getAllQuotes();
 
       if (res.data.data) {
-        setAllQuotes(res.data.data);
-        setQuotesList(paginateList(res.data.data));
+        const allQuotesData = res.data.data.map((i: IQuote) => {
+          return {
+            ...i,
+            date: filterDate(i.createdAt!),
+          };
+        });
+        setAllQuotes(allQuotesData);
+        setQuotesList(paginateList(allQuotesData));
       }
     } catch (error) {
       console.log(error);
@@ -75,7 +80,7 @@ const QuotesHistoryPage = () => {
     const filteredQuotes = filterQuotes(
       allQuotes,
       searchData.value,
-      stateFilter,
+      stateFilter
     );
 
     setQuotesList(filteredQuotes);
@@ -140,21 +145,22 @@ const QuotesHistoryPage = () => {
 
         {quotesList.length > 0 ? (
           quotesList[currentPage - 1].map((item) => {
-            const user = FakeUsersList.find((i) => i.id === item.userId);
             const quoteState = quotesFilterOptions.find(
-              (i) => i.value === item.state,
+              (i) => i.value === item.state
             );
 
             return (
               <Link
-                href={`${Routes.quotes}/${item.id}`}
-                key={item.id}
+                href={`${Routes.quotes}/${item._id}`}
+                key={`quote: ${item.quoteNumber} - ${item._id}`}
                 className="custom-list-row"
               >
-                <span className="not-mobile">{item.date}</span>
+                <span className="not-mobile">{item.date ?? "-"}</span>
                 <span>{item.quoteNumber}</span>
                 <span>
-                  {user?.firstName} {user?.lastName}
+                  {item.user
+                    ? `${item.user.firstName} ${item.user.lastName}`
+                    : "-"}
                 </span>
                 <span className="not-mobile">
                   {formatCurrency(item.totalPrice)}
