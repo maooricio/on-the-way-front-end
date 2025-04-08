@@ -20,13 +20,13 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
   const handleCounter = (
     type: string,
     focusItem: IVehicles | IOperator,
-    focus: string,
+    focus: string
   ) => {
     if (focus === "isOperator") {
       setFormData((prev) => ({
         ...prev,
         operators: formData.operators.map((item) => {
-          if (item.id === focusItem.id) {
+          if (item._id === focusItem._id) {
             return {
               ...item,
               amount: type === "plus" ? item.amount + 1 : item.amount - 1,
@@ -40,7 +40,7 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
       setFormData((prev) => ({
         ...prev,
         vehicles: formData.vehicles.map((item) => {
-          if (item.id === focusItem.id) {
+          if (item._id === focusItem._id) {
             return {
               ...item,
               amount: type === "plus" ? item.amount + 1 : item.amount - 1,
@@ -107,7 +107,7 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
               onClick={() =>
                 setFormData((prev) => ({
                   ...prev,
-                  deliveryTransport: undefined,
+                  deliveryTransport: "",
                 }))
               }
             >
@@ -141,7 +141,7 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
               onClick={() =>
                 setFormData((prev) => ({
                   ...prev,
-                  collectionTransport: undefined,
+                  collectionTransport: "",
                 }))
               }
             >
@@ -168,7 +168,10 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
 
       {formData.vehicles.length > 0 &&
         formData.vehicles.map((item) => (
-          <div key={item.id} className="new-quote-summary-item">
+          <div
+            key={`${item.name} - ${item.price}`}
+            className="new-quote-summary-item"
+          >
             <div className="new-quote-summary-item-header">
               <h1>Vehículo {item.name}</h1>
               <button
@@ -176,7 +179,9 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
                 onClick={() =>
                   setFormData((prev) => ({
                     ...prev,
-                    vehicles: formData.vehicles.filter((i) => i.id !== item.id),
+                    vehicles: formData.vehicles.filter(
+                      (i) => i._id !== item._id
+                    ),
                   }))
                 }
               >
@@ -208,7 +213,10 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
 
       {formData.operators.length > 0 &&
         formData.operators.map((item) => (
-          <div key={item.id} className="new-quote-summary-item">
+          <div
+            key={`${item.name} - ${item.price}`}
+            className="new-quote-summary-item"
+          >
             <div className="new-quote-summary-item-header">
               <h1>{item.name}</h1>
               <button
@@ -217,7 +225,7 @@ const NewQuoteSummary = ({ formData, setFormData }: Props) => {
                   setFormData((prev) => ({
                     ...prev,
                     operators: formData.operators.filter(
-                      (i) => i.id !== item.id,
+                      (i) => i._id !== item._id
                     ),
                   }))
                 }

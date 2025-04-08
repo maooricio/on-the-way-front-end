@@ -7,7 +7,6 @@ import { IQuote } from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import { formatCurrency } from "@/utils/handlers/currency";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
-import { FakeUsersList } from "@/utils/data/fakers";
 import arrow_down from "@/assets/icons/arrow/select_down.svg";
 import { getStateColor } from "@/utils/handlers/get_state_color";
 import AddCommentModal from "@/components/admin/quotes/add_comment";
@@ -20,6 +19,7 @@ import ChangeQuoteNameModal from "@/components/client/quotes/change_name";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
 import mastercard from "@/assets/icons/others/mastercard.svg";
 import { getQuoteDetails } from "@/utils/api/quotes";
+import { filterDate } from "@/utils/handlers/filters";
 
 export interface IDiscountData {
   discountVoucher: { type: string; amount: number };
@@ -43,7 +43,7 @@ const QuoteDetailsPage = () => {
     e.preventDefault();
 
     if (user?.role === "admin") {
-      router.replace(`${Routes.quotes_new}?quote=${quoteData?.id}`);
+      router.replace(`${Routes.quotes_new}?quote=${quoteData?._id}`);
     }
 
     if (
@@ -324,12 +324,8 @@ const QuoteDetailsPage = () => {
               {quoteData.comment.length > 0 && showQuoteInfo && (
                 <ul className="new-quote-request-comments">
                   {quoteData.comment.map((i) => {
-                    const commentUser = FakeUsersList.find(
-                      (u) => u.id === i.userId
-                    );
-
                     return (
-                      <li key={`${i.userId}: ${i.date}`}>
+                      <li key={`${i.userId}: ${i._id}`}>
                         <div className="new-quote-request-comments-header">
                           <div className="user-photo-container">
                             <Image
@@ -339,9 +335,9 @@ const QuoteDetailsPage = () => {
                             />
                           </div>
                           <h3>
-                            {commentUser?.firstName} {commentUser?.lastName}
+                            {i.user?.firstName} {i.user?.lastName}
                           </h3>
-                          <span>{i.date}</span>
+                          <span>{filterDate(i.createdAt)}</span>
                         </div>
 
                         <p>{i.comment}</p>
@@ -418,7 +414,12 @@ const QuoteDetailsPage = () => {
       </section>
 
       {showCommentModal && (
-        <AddCommentModal setShowModal={setShowCommentModal} quote={quoteData} />
+        <AddCommentModal
+          setShowModal={setShowCommentModal}
+          quote={quoteData}
+          user={user}
+          refreshQuote={fetchQuoteDetails}
+        />
       )}
 
       {showCancelModal && (

@@ -3,13 +3,14 @@ import Image from "next/image";
 import back from "@/assets/icons/arrow/arrow_back.svg";
 import { useRouter, useSearchParams } from "next/navigation";
 import NewQuoteStageOne from "@/components/admin/quotes/new/stage_1";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewQuoteStageTwo from "@/components/admin/quotes/new/stage_2";
 import NewQuoteStageThree from "@/components/admin/quotes/new/stage_3";
 import { IQuote } from "@/utils/interfaces/quote.interface";
 import NewQuoteSummary from "@/components/admin/quotes/new/summary";
 import NewQuoteStageFour from "@/components/admin/quotes/new/stage_4";
 import NewQuoteStageFive from "@/components/admin/quotes/new/stage_5";
+import { getQuoteDetails } from "@/utils/api/quotes";
 
 const NewQuotePage = () => {
   const router = useRouter();
@@ -18,8 +19,8 @@ const NewQuotePage = () => {
 
   const initialState: IQuote = {
     userId: "",
-    deliveryTransport: undefined,
-    collectionTransport: undefined,
+    deliveryTransport: "",
+    collectionTransport: "",
     serviceDate: "",
     serviceHour: "00:00",
     pickupCity: "",
@@ -49,13 +50,27 @@ const NewQuotePage = () => {
     }
   };
 
+  const fetchQuoteDetails = async () => {
+    if (quote) {
+      const res = await getQuoteDetails(quote);
+
+      setFormData(res.data.data);
+    }
+  }
+
+  useEffect(() => {
+    fetchQuoteDetails();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [quote]);
+
   return (
     <section className="new-quote-container">
       <header className="new-quote-header">
         <button onClick={handleGoBack}>
           <Image src={back} alt="arrow back icon" />
         </button>
-        <h1>Nueva cotización</h1>
+        <h1>{!quote ? "Nueva" : "Editar"} cotización</h1>
       </header>
 
       {stage === 0 ? (

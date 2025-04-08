@@ -19,4 +19,11 @@ const getQuoteDetails = (quoteId: string | string[]) => {
   return http.get(`${QUOTES_PATH}/${quoteId}`);
 };
 
-export { createQuotes, getAllQuotes, getQuoteDetails };
+const addComment = (quoteId: string, comment: string, userId: string) => {
+  return http.post(`${QUOTES_PATH}/${quoteId}`, {
+    userId,
+    comment,
+  });
+};
+
+export { createQuotes, getAllQuotes, getQuoteDetails, addComment };

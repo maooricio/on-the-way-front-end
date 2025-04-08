@@ -7,7 +7,7 @@ import { IVehicles } from "../interfaces/vehicles.interface";
 
 export const VehiclesData: IVehicles[] = [
   {
-    id: "vehicle-motocycle",
+    imageId: "vehicle-motocycle",
     name: "Motorizado",
     image: motocycle,
     weight: "Hasta 40 kilos",
@@ -20,7 +20,7 @@ export const VehiclesData: IVehicles[] = [
     },
   },
   {
-    id: "vehicle-van",
+    imageId: "vehicle-van",
     name: "Carry - Furgón",
     image: van,
     weight: "Hasta 700 kilos (7 m³)",
@@ -33,7 +33,7 @@ export const VehiclesData: IVehicles[] = [
     },
   },
   {
-    id: "vehicle-small_truck",
+    imageId: "vehicle-small_truck",
     name: "Nhr - Furgón",
     image: small_truck,
     weight: "Hasta 2.5 toneladas (13 m³)",
@@ -46,7 +46,7 @@ export const VehiclesData: IVehicles[] = [
     },
   },
   {
-    id: "vehicle-normal_truck",
+    imageId: "vehicle-normal_truck",
     name: "Turbo - Estacas",
     image: normal_truck,
     weight: "Hasta 4.5 toneladas (25 m³)",
@@ -59,7 +59,7 @@ export const VehiclesData: IVehicles[] = [
     },
   },
   {
-    id: "vehicle-long_truck",
+    imageId: "vehicle-long_truck",
     name: "Sencillo - Estacas",
     image: long_truck,
     weight: "Hasta 9 toneladas (38 m³)",

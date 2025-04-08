@@ -1,10 +1,20 @@
 import InputElement from "@/components/elements/inputs/input";
 import { getSquareIcon, getStageIcon } from "@/utils/handlers/get_icon";
-import { ICustomerSelect, IQuote, IQuoteErrors } from "@/utils/interfaces/quote.interface";
+import {
+  ICustomerSelect,
+  IQuote,
+  IQuoteErrors,
+} from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import Image from "next/image";
 import Link from "next/link";
-import { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import calendar from "@/assets/icons/utils/calendar.svg";
 import CustomSelect from "@/components/elements/handlers/custom_select";
 import SelectWithInput from "@/components/elements/inputs/select";
@@ -18,13 +28,9 @@ interface Props {
   setFormData: Dispatch<SetStateAction<IQuote>>;
 }
 
-const NewQuoteStageTwo = ({
-  setStage,
-  formData,
-  setFormData,
-}: Props) => {
+const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
   const initialState: ICustomerSelect = {
-    selected: undefined,
+    selected: "",
     search: "",
   };
 
@@ -39,19 +45,19 @@ const NewQuoteStageTwo = ({
     collectionAddress: "",
     unloadingCity: "",
     unloadingAdress: "",
-  }
+  };
 
   const [pickupCity, setPickupCity] = useState<ICustomerSelect>(initialState);
   const [unloadingCity, setUnloadingCity] =
     useState<ICustomerSelect>(initialState);
-  const [serviceHour, setServiceHour] = useState<string>("");
+  const [serviceHour, setServiceHour] = useState<string>("00:00");
   const [formError, setFormError] = useState<IQuoteErrors>(initialFormErrors);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const isValid = validateQuoteInfo(formData, setFormError);
-    
+
     if (isValid) {
       setStage(2);
     }
@@ -83,15 +89,37 @@ const NewQuoteStageTwo = ({
     if (type === "delivery") {
       setFormData((prev) => ({
         ...prev,
-        deliveryTransport: selectValue === undefined ? "250000" : undefined,
+        deliveryTransport: selectValue === undefined ? "250000" : "",
       }));
     } else {
       setFormData((prev) => ({
         ...prev,
-        collectionTransport: selectValue === undefined ? "250000" : undefined,
+        collectionTransport: selectValue === undefined ? "250000" : "",
       }));
     }
   };
+
+  useEffect(() => {
+    if (formData.serviceHour) {
+      setServiceHour(formData.serviceHour);
+    }
+
+    if (formData.pickupCity) {
+      setPickupCity({
+        selected: formData.pickupCity,
+        search: formData.pickupCity,
+      });
+    }
+
+    if (formData.unloadingCity) {
+      setUnloadingCity({
+        selected: formData.unloadingCity,
+        search: formData.unloadingCity,
+      });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <section className="new-quote-content">
@@ -118,14 +146,14 @@ const NewQuoteStageTwo = ({
             <button type="button" onClick={() => handleSelect("delivery")}>
               Transporte de entrega:{" "}
               <Image
-                src={getSquareIcon(formData.deliveryTransport !== undefined)}
+                src={getSquareIcon(formData.deliveryTransport?.length > 0)}
                 alt="checkbox icon"
               />
             </button>
             <button type="button" onClick={() => handleSelect("collection")}>
               Transporte de recogida:{" "}
               <Image
-                src={getSquareIcon(formData.collectionTransport !== undefined)}
+                src={getSquareIcon(formData.collectionTransport?.length > 0)}
                 alt="checkbox icon"
               />
             </button>
@@ -138,7 +166,7 @@ const NewQuoteStageTwo = ({
               placeholder="Selecciona la fecha"
               name="serviceDate"
               setFormData={setFormData}
-              value={formData.serviceDate}
+              value={formData.serviceDate || ""}
               icon={<Image src={calendar} alt="calendar icon" />}
               error={formError.serviceDate}
               showError={formError.serviceDate.length > 0}
@@ -154,7 +182,7 @@ const NewQuoteStageTwo = ({
                 ...quotesHoursOptions,
               ]}
               setValue={setServiceHour}
-              value={serviceHour}
+              value={serviceHour || ""}
             />
           </div>
 
@@ -163,7 +191,7 @@ const NewQuoteStageTwo = ({
             options={citiesOptions}
             setValue={(item) => handleOnSelect(item, true)}
             setSearchValue={setPickupCity}
-            value={pickupCity.search}
+            value={pickupCity.search || ""}
           />
 
           <InputElement
@@ -172,7 +200,7 @@ const NewQuoteStageTwo = ({
             placeholder="Selecciona la fecha"
             name="pickupAddress"
             setFormData={setFormData}
-            value={formData.pickupAddress}
+            value={formData.pickupAddress || ""}
             icon={<></>}
             error={formError.pickupAddress}
             showError={formError.pickupAddress.length > 0}
@@ -184,7 +212,7 @@ const NewQuoteStageTwo = ({
             placeholder="Selecciona la fecha"
             name="deliveryAddress"
             setFormData={setFormData}
-            value={formData.deliveryAddress}
+            value={formData.deliveryAddress || ""}
             icon={<></>}
             error={formError.deliveryAddress}
             showError={formError.deliveryAddress.length > 0}
@@ -196,7 +224,7 @@ const NewQuoteStageTwo = ({
             placeholder="Selecciona la fecha"
             name="collectionAddress"
             setFormData={setFormData}
-            value={formData.collectionAddress}
+            value={formData.collectionAddress || ""}
             icon={<></>}
             error={formError.collectionAddress}
             showError={formError.collectionAddress.length > 0}
@@ -207,7 +235,7 @@ const NewQuoteStageTwo = ({
             options={citiesOptions}
             setValue={(item) => handleOnSelect(item, false)}
             setSearchValue={setUnloadingCity}
-            value={unloadingCity.search}
+            value={unloadingCity.search || ""}
           />
 
           <InputElement
@@ -216,7 +244,7 @@ const NewQuoteStageTwo = ({
             placeholder="Selecciona la fecha"
             name="unloadingAdress"
             setFormData={setFormData}
-            value={formData.unloadingAdress}
+            value={formData.unloadingAdress || ""}
             icon={<></>}
             error={formError.unloadingAdress}
             showError={formError.unloadingAdress.length > 0}

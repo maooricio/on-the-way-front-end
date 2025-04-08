@@ -196,6 +196,7 @@
       all: unset;
       list-style: none;
       margin-top: 32px;
+      width: 100%;
       @include flex(column, flex-start, center, 16px);
 
       & li {

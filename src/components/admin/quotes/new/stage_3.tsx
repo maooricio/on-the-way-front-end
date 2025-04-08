@@ -22,20 +22,20 @@ const NewQuoteStageThree = ({ setStage, formData, setFormData }: Props) => {
   };
 
   const handleOnSelect = (vehicle: IVehicles) => {
-    const isSelected = formData.vehicles.find((i) => i.id === vehicle.id);
+    const isSelected = formData.vehicles.find((i) => i.imageId === vehicle.imageId);
 
     setFormData((prev) => ({
       ...prev,
       vehicles: isSelected
-        ? formData.vehicles.filter((item) => item.id !== vehicle.id)
+        ? formData.vehicles.filter((item) => item.imageId !== vehicle.imageId)
         : [...formData.vehicles, vehicle],
     }));
   };
 
   const isSelected = (vehicle: IVehicles) => {
-    const vehicleFinded = formData.vehicles.find((i) => i.id === vehicle.id);
+    const vehicleFinded = formData.vehicles.find((i) => i.imageId === vehicle.imageId);
 
-    return vehicleFinded ? true : false;
+    return !!vehicleFinded;
   };
 
   return (
@@ -62,7 +62,7 @@ const NewQuoteStageThree = ({ setStage, formData, setFormData }: Props) => {
 
         {VehiclesData.map((i) => (
           <div
-            key={i.id}
+            key={i.imageId}
             className={`new-quote-vehicle-container ${
               isSelected(i) ? "new-quote-vehicle-container-selected" : ""
             }`}
@@ -84,7 +84,7 @@ const NewQuoteStageThree = ({ setStage, formData, setFormData }: Props) => {
               <h3>{i.weight}</h3>
 
               <span>
-                {i.sizes.length === 0
+                {i.sizes.length.length === 1
                   ? "Paquetes pequeños"
                   : `Largo: ${
                       Array.isArray(i.sizes.length)

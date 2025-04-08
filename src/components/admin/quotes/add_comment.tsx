@@ -4,22 +4,49 @@ import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { IQuote } from "@/utils/interfaces/quote.interface";
 import InputElement from "@/components/elements/inputs/input";
 import { IComment } from "./new/stage_5";
+import { addComment } from "@/utils/api/quotes";
+import Loader from "@/assets/images/loader";
+import { IUserLogged } from "@/utils/interfaces/user.interface";
 
 interface Props {
   setShowModal: Dispatch<SetStateAction<boolean>>;
   quote: IQuote | undefined;
+  user: IUserLogged | undefined;
+  refreshQuote: () => Promise<void>;
 }
 
-const AddCommentModal = ({ setShowModal, quote }: Props) => {
+const AddCommentModal = ({ setShowModal, quote, user, refreshQuote }: Props) => {
   const initialState: IComment = {
     comment: "",
   };
   const [formData, setFormData] = useState<IComment>(initialState);
+  const [error, setError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(quote);
-    setShowModal(false);
+    setIsLoading(true);
+
+    try {
+      const res = await addComment(
+        quote?._id ?? "",
+        formData.comment,
+        user?.id ?? ""
+      );
+
+      if (!res.data.data) {
+        setError("Error al añadir el comentario");
+        return;
+      }
+
+      await refreshQuote();
+      setShowModal(false);
+    } catch (error) {
+      console.log(error);
+      setError("Error al añadir el comentario");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -29,7 +56,7 @@ const AddCommentModal = ({ setShowModal, quote }: Props) => {
         onClick={() => setShowModal(false)}
       ></div>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} onChange={() => setError("")}>
         <div className="generic-modal-header">
           <h1>Añadir un comentario</h1>
 
@@ -51,9 +78,10 @@ const AddCommentModal = ({ setShowModal, quote }: Props) => {
             placeholder="Añade una nota o comentario para el cliente..."
             name="comment"
             setFormData={setFormData}
-            error=""
+            error={error}
             value={formData.comment}
             icon={<></>}
+            showError={error.length > 0}
           />
         </div>
 
@@ -66,6 +94,8 @@ const AddCommentModal = ({ setShowModal, quote }: Props) => {
           </button>
         </div>
       </form>
+
+      {isLoading && <Loader />}
     </section>
   );
 };
