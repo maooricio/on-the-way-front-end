@@ -15,4 +15,8 @@ const getAllQuotes = () => {
   return http.get(`${QUOTES_PATH}`);
 };
 
-export { createQuotes, getAllQuotes };
+const getQuoteDetails = (quoteId: string | string[]) => {
+  return http.get(`${QUOTES_PATH}/${quoteId}`);
+};
+
+export { createQuotes, getAllQuotes, getQuoteDetails };

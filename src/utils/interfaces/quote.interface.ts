@@ -61,4 +61,5 @@ export interface IQuoteUserInfo {
   firstName: string;
   lastName: string;
   email: string;
+  companyName: string;
 }

@@ -7,7 +7,7 @@ import { IQuote } from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import { formatCurrency } from "@/utils/handlers/currency";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
-import { FakeQuotesList, FakeUsersList } from "@/utils/data/fakers";
+import { FakeUsersList } from "@/utils/data/fakers";
 import arrow_down from "@/assets/icons/arrow/select_down.svg";
 import { getStateColor } from "@/utils/handlers/get_state_color";
 import AddCommentModal from "@/components/admin/quotes/add_comment";
@@ -19,6 +19,7 @@ import pen from "@/assets/icons/utils/pen.svg";
 import ChangeQuoteNameModal from "@/components/client/quotes/change_name";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
 import mastercard from "@/assets/icons/others/mastercard.svg";
+import { getQuoteDetails } from "@/utils/api/quotes";
 
 export interface IDiscountData {
   discountVoucher: { type: string; amount: number };
@@ -27,14 +28,9 @@ export interface IDiscountData {
 const QuoteDetailsPage = () => {
   const router = useRouter();
   const { id } = useParams();
-  const quote: IQuote | undefined = FakeQuotesList.find((i) => i.id === id);
-  const userSelected = FakeUsersList.find((i) => i.id === quote?.userId);
 
-  const [quoteState, setQuoteState] = useState<ISelectOption | undefined>(
-    quotesFilterOptions.find((i) => i.value === quote?.state),
-  );
-
-  const [quoteData, setQuoteData] = useState<IQuote | undefined>(quote);
+  const [quoteState, setQuoteState] = useState<ISelectOption | undefined>();
+  const [quoteData, setQuoteData] = useState<IQuote | undefined>();
 
   const [showQuoteInfo, setShowQuoteInfo] = useState<boolean>(true);
   const [showCommentModal, setShowCommentModal] = useState<boolean>(false);
@@ -47,7 +43,7 @@ const QuoteDetailsPage = () => {
     e.preventDefault();
 
     if (user?.role === "admin") {
-      router.replace(`${Routes.quotes_new}?quote=${quote?.id}`);
+      router.replace(`${Routes.quotes_new}?quote=${quoteData?.id}`);
     }
 
     if (
@@ -82,8 +78,27 @@ const QuoteDetailsPage = () => {
     }
   };
 
+  const fetchQuoteDetails = async () => {
+    try {
+      const res = await getQuoteDetails(id!);
+
+      if (res.data.data) {
+        const quoteData = res.data.data;
+        setQuoteData(quoteData);
+        setQuoteState(
+          quotesFilterOptions.find((i) => i.value === quoteData.state)
+        );
+      }
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
   useEffect(() => {
     fetchUserLogged();
+    fetchQuoteDetails();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -106,7 +121,7 @@ const QuoteDetailsPage = () => {
             className="new-quote-form quote-details-form"
             onSubmit={handleOnSubmit}
           >
-            {userSelected && user?.role === "admin" ? (
+            {quoteData.user && user?.role === "admin" ? (
               <div className="new-quote-resume-customer">
                 <div className="user-photo-container">
                   <Image
@@ -118,13 +133,13 @@ const QuoteDetailsPage = () => {
 
                 <div className="new-quote-resume-customer-content">
                   <div className="new-quote-resume-customer-content-title">
-                    <p>{userSelected.company}</p>
+                    <p>{quoteData.user.companyName}</p>
                     <p>Carrera 43 No, 201 - 78. Of 199, Cundinamarca</p>
                   </div>
 
                   <p>
-                    Persona responsable: {userSelected.firstName}{" "}
-                    {userSelected.lastName}
+                    Persona responsable: {quoteData.user.firstName}{" "}
+                    {quoteData.user.lastName}
                   </p>
                 </div>
               </div>
@@ -230,7 +245,7 @@ const QuoteDetailsPage = () => {
               {quoteData.vehicles.length > 0 &&
                 showQuoteInfo &&
                 quoteData.vehicles.map((item) => (
-                  <div key={item.id} className="new-quote-summary-item">
+                  <div key={item._id} className="new-quote-summary-item">
                     <div className="new-quote-summary-item-header">
                       <h1>Vehículo {item.name}</h1>
                       <span>{item.weight}</span>
@@ -251,7 +266,7 @@ const QuoteDetailsPage = () => {
               {quoteData.operators.length > 0 &&
                 showQuoteInfo &&
                 quoteData.operators.map((item) => (
-                  <div key={item.id} className="new-quote-summary-item">
+                  <div key={item._id} className="new-quote-summary-item">
                     <div className="new-quote-summary-item-header">
                       <h1>{item.name}</h1>
                       <span>-</span>
@@ -297,7 +312,7 @@ const QuoteDetailsPage = () => {
                           {formatCurrency(
                             quoteData.discountVoucher.type === "%"
                               ? 0 - 0 * (quoteData.discountVoucher.amount / 100)
-                              : 0 - quoteData.discountVoucher.amount,
+                              : 0 - quoteData.discountVoucher.amount
                           )}
                         </span>
                       </p>
@@ -310,7 +325,7 @@ const QuoteDetailsPage = () => {
                 <ul className="new-quote-request-comments">
                   {quoteData.comment.map((i) => {
                     const commentUser = FakeUsersList.find(
-                      (u) => u.id === i.userId,
+                      (u) => u.id === i.userId
                     );
 
                     return (
