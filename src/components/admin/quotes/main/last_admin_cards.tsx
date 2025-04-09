@@ -68,7 +68,7 @@ const AdminMainQuotesLast = () => {
         footer={
           <footer className="small-card-button-container">
             <Link
-              href={`${Routes.quotes_history}?state=verify`}
+              href={`${Routes.quotes_history}?state=to_verify`}
               className="button without-bg"
             >
               Verificar pagos

@@ -1,7 +1,9 @@
 import Image from "next/image";
 import close from "@/assets/icons/utils/close.svg";
-import { Dispatch, FormEvent, SetStateAction } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { IQuote } from "@/utils/interfaces/quote.interface";
+import { editQuote } from "@/utils/api/quotes";
+import Loader from "@/assets/images/loader";
 
 interface Props {
   setShowModal: Dispatch<SetStateAction<boolean>>;
@@ -10,17 +12,34 @@ interface Props {
 }
 
 const CancelQuoteModal = ({ setShowModal, quote, setQuoteData }: Props) => {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    if (quote) {
-      setQuoteData({
-        ...quote,
-        state: "Cancelada",
+    try {
+      const res = await editQuote(quote?._id ?? "", {
+        state: "canceled",
       });
-    }
 
-    setShowModal(false);
+      if (!res.data.data) {
+        return;
+      }
+
+      if (quote) {
+        setQuoteData({
+          ...quote,
+          state: "Cancelada",
+        });
+      }
+
+      setShowModal(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(true);
+    }
   };
 
   return (
@@ -63,6 +82,8 @@ const CancelQuoteModal = ({ setShowModal, quote, setQuoteData }: Props) => {
           </button>
         </div>
       </form>
+
+      {isLoading && <Loader />}
     </section>
   );
 };

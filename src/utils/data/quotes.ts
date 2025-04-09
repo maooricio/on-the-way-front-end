@@ -27,7 +27,7 @@ export const quotesFilterOptions: ISelectOption[] = [
   },
   {
     label: "Verificar pago",
-    value: "verify",
+    value: "to_verify",
     iconImg: waiting,
   },
   {
