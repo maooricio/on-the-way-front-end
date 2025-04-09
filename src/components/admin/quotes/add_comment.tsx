@@ -12,10 +12,17 @@ interface Props {
   setShowModal: Dispatch<SetStateAction<boolean>>;
   quote: IQuote | undefined;
   user: IUserLogged | undefined;
-  refreshQuote: () => Promise<void>;
+  refreshQuote?: () => Promise<void>;
+  refreshComments?: (onlyComments: boolean) => Promise<void>;
 }
 
-const AddCommentModal = ({ setShowModal, quote, user, refreshQuote }: Props) => {
+const AddCommentModal = ({
+  setShowModal,
+  quote,
+  user,
+  refreshQuote,
+  refreshComments,
+}: Props) => {
   const initialState: IComment = {
     comment: "",
   };
@@ -39,7 +46,8 @@ const AddCommentModal = ({ setShowModal, quote, user, refreshQuote }: Props) => 
         return;
       }
 
-      await refreshQuote();
+      await refreshQuote!();
+      await refreshComments!(true);
       setShowModal(false);
     } catch (error) {
       console.log(error);

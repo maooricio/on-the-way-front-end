@@ -1,4 +1,3 @@
-import { FakeUsersList } from "../data/fakers";
 import { IQuote } from "../interfaces/quote.interface";
 import { IUser } from "../interfaces/user.interface";
 import { paginateList } from "./paginate";
@@ -56,8 +55,7 @@ export const filterQuotes = (
   // filter to search value
   if (searchValue.length > 0) {
     filteredQuotes = filteredQuotes.filter((i) => {
-      const user = FakeUsersList.find((u) => u.id === i.userId);
-      const customer = `${user?.firstName} ${user?.lastName}`;
+      const customer = `${i.user?.firstName} ${i.user?.lastName}`;
 
       return (
         customer.toLowerCase().includes(searchValue) ||

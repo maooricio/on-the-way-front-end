@@ -149,7 +149,7 @@ const UsersPage = () => {
               <span>
                 {item.firstName} {item.lastName}
               </span>
-              <span className="not-mobile">{item.company ?? "-"}</span>
+              <span className="not-mobile">{item.companyName ?? "-"}</span>
               <span>{getRole(item.role!)}</span>
               <span>
                 {item.createdAt ? filterDate(item.createdAt) : "-"}

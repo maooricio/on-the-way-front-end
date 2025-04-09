@@ -1,7 +1,6 @@
 "use client";
-import { FakeUsersList } from "@/utils/data/fakers";
 import { getStageIcon } from "@/utils/handlers/get_icon";
-import { IQuote } from "@/utils/interfaces/quote.interface";
+import { IQuote, IQuoteUserInfo } from "@/utils/interfaces/quote.interface";
 import { Routes } from "@/utils/router/router_enum";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,8 +23,10 @@ import ChangeCustomerModal from "../change_customer";
 import AddDiscountVoucherModal from "../add_discount_voucher";
 import InputElement from "@/components/elements/inputs/input";
 import { useRouter } from "next/navigation";
-import { createQuotes } from "@/utils/api/quotes";
+import { createQuotes, editQuote } from "@/utils/api/quotes";
 import Loader from "@/assets/images/loader";
+import { getCustomers } from "@/utils/api/users";
+import { IUser } from "@/utils/interfaces/user.interface";
 
 export interface IComment {
   comment: string;
@@ -33,11 +34,10 @@ export interface IComment {
 interface Props {
   formData: IQuote;
   setFormData: Dispatch<SetStateAction<IQuote>>;
+  quoteToEdit: string | null;
 }
 
-const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
-  const userSelected = FakeUsersList.find((i) => i.id === formData.userId);
-
+const NewQuoteStageFive = ({ formData, setFormData, quoteToEdit }: Props) => {
   const router = useRouter();
 
   const [price, setPrice] = useState<number>(0);
@@ -45,25 +45,38 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
   const [showDiscountModal, setShowDiscountModal] = useState<boolean>(false);
   const [comment, setComment] = useState<{ comment: string }>({ comment: "" });
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [userSelected, setUserSelected] = useState<IQuoteUserInfo | undefined>(
+    formData.user
+  );
 
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const res = await createQuotes({
-        ...formData,
-        totalPrice:
-          formData.discountVoucher.type === "%"
-            ? price - price * (formData.discountVoucher.amount / 100)
-            : price - formData.discountVoucher.amount,
-      });
+      if (!quoteToEdit) {
+        const res = await createQuotes({
+          ...formData,
+          totalPrice:
+            formData.discountVoucher.type === "%"
+              ? price - price * (formData.discountVoucher.amount / 100)
+              : price - formData.discountVoucher.amount,
+        });
 
-      if (!res.data.data) {
-        return;
+        if (!res.data.data) {
+          return;
+        }
+
+        router.replace(Routes.quotes_history);
+      } else {
+        const res = await editQuote(quoteToEdit, formData);
+
+        if (!res.data.data) {
+          return;
+        }
+
+        router.replace(Routes.quotes_history);
       }
-
-      router.replace(Routes.quotes_history);
     } catch (error) {
       console.log(error);
     } finally {
@@ -74,13 +87,13 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
   const handleCounter = (
     type: string,
     focusItem: IVehicles | IOperator,
-    focus: string,
+    focus: string
   ) => {
     if (focus === "isOperator") {
       setFormData((prev) => ({
         ...prev,
         operators: formData.operators.map((item) => {
-          if (item.id === focusItem.id) {
+          if (item._id === focusItem._id) {
             return {
               ...item,
               amount: type === "plus" ? item.amount + 1 : item.amount - 1,
@@ -94,7 +107,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
       setFormData((prev) => ({
         ...prev,
         vehicles: formData.vehicles.map((item) => {
-          if (item.id === focusItem.id) {
+          if (item._id === focusItem._id) {
             return {
               ...item,
               amount: type === "plus" ? item.amount + 1 : item.amount - 1,
@@ -142,11 +155,38 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
     setPrice(price);
   };
 
+  const getUserSelected = async () => {
+    try {
+      const res = await getCustomers();
+
+      if (!res.data.data) {
+        return;
+      }
+
+      const user = res.data.data.find((i: IUser) => i.id === formData.userId);
+
+      setUserSelected({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        companyName: user.companyName,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     calculatePrice();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
+
+  useEffect(() => {
+    getUserSelected();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <section className="new-quote-content">
@@ -179,7 +219,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
 
               <div className="new-quote-resume-customer-content">
                 <div className="new-quote-resume-customer-content-title">
-                  <p>{userSelected.company}</p>
+                  <p>{userSelected.companyName}</p>
                   <p>Carrera 43 No, 201 - 78. Of 199, Cundinamarca</p>
                 </div>
 
@@ -209,7 +249,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
                 onClick={() =>
                   setFormData((prev) => ({
                     ...prev,
-                    deliveryTransport: undefined,
+                    deliveryTransport: "",
                   }))
                 }
               >
@@ -232,7 +272,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
                 onClick={() =>
                   setFormData((prev) => ({
                     ...prev,
-                    collectionTransport: undefined,
+                    collectionTransport: "",
                   }))
                 }
               >
@@ -242,8 +282,11 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
           )}
 
           {formData.vehicles.length > 0 &&
-            formData.vehicles.map((item) => (
-              <div key={item.id} className="new-quote-summary-item">
+            formData.vehicles.map((item, index) => (
+              <div
+                key={`${item.name}: ${item.imageId} - ${index}`}
+                className="new-quote-summary-item"
+              >
                 <div className="new-quote-summary-item-header">
                   <h1>Vehículo {item.name}</h1>
                   <span>{item.weight}</span>
@@ -276,7 +319,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
                     setFormData((prev) => ({
                       ...prev,
                       vehicles: formData.vehicles.filter(
-                        (i) => i.id !== item.id,
+                        (i) => i.imageId !== item.imageId
                       ),
                     }))
                   }
@@ -287,8 +330,11 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
             ))}
 
           {formData.operators.length > 0 &&
-            formData.operators.map((item) => (
-              <div key={item.id} className="new-quote-summary-item">
+            formData.operators.map((item, index) => (
+              <div
+                key={`${item.name}: ${item._id} - ${index}`}
+                className="new-quote-summary-item"
+              >
                 <div className="new-quote-summary-item-header">
                   <h1>{item.name}</h1>
                   <span>-</span>
@@ -321,7 +367,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
                     setFormData((prev) => ({
                       ...prev,
                       operators: formData.operators.filter(
-                        (i) => i.id !== item.id,
+                        (i) => i.id !== item.id
                       ),
                     }))
                   }
@@ -331,16 +377,18 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
               </div>
             ))}
 
-          <InputElement
-            type="textarea"
-            label=""
-            placeholder="Añade una nota o comentario para el cliente..."
-            name="comment"
-            setFormData={setComment}
-            error=""
-            value={comment.comment}
-            icon={<></>}
-          />
+          {!quoteToEdit && (
+            <InputElement
+              type="textarea"
+              label=""
+              placeholder="Añade una nota o comentario para el cliente..."
+              name="comment"
+              setFormData={setComment}
+              error=""
+              value={comment.comment}
+              icon={<></>}
+            />
+          )}
 
           <div className="new-quote-resume-footer">
             {formData.discountVoucher.amount === 0 ? (
@@ -392,7 +440,7 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
                       formData.discountVoucher.type === "%"
                         ? price -
                             price * (formData.discountVoucher.amount / 100)
-                        : price - formData.discountVoucher.amount,
+                        : price - formData.discountVoucher.amount
                     )}
                   </span>
                 </p>
@@ -408,7 +456,9 @@ const NewQuoteStageFive = ({ formData, setFormData }: Props) => {
           <Link href={Routes.quotes} className="button">
             Guardar en borradores
           </Link>
-          <button type="submit">Enviar cotización</button>
+          <button type="submit">
+            {!quoteToEdit ? "Enviar" : "Editar"} cotización
+          </button>
         </footer>
       </form>
 

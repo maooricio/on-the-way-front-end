@@ -39,7 +39,7 @@ const RegisterForm = ({ setShowForm, handleGetUsers }: Props) => {
     idNumber: "",
     city: "",
     address: "",
-    company: "",
+    companyName: "",
   };
   const [userRole, setUserRole] = useState<string>("");
   const [formData, setFormData] = useState<IUser>(initialAdminState);

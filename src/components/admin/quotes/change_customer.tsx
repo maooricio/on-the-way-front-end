@@ -10,9 +10,10 @@ import close from "@/assets/icons/utils/close.svg";
 import close_fill from "@/assets/icons/utils/close_fill.svg";
 import SelectWithInput from "@/components/elements/inputs/select";
 import { ICustomerSelect, IQuote } from "@/utils/interfaces/quote.interface";
-import { FakeUsersList } from "@/utils/data/fakers";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
 import otw_logo from "@/assets/images/otw_only_logo.svg";
+import { IUser } from "@/utils/interfaces/user.interface";
+import { getCustomers } from "@/utils/api/users";
 
 interface Props {
   setShowModal: Dispatch<SetStateAction<boolean>>;
@@ -27,6 +28,7 @@ const ChangeCustomerModal = ({ setShowModal, setFormQuoteData }: Props) => {
 
   const [formData, setFormData] = useState<ICustomerSelect>(initialState);
   const [customersOptions, setCustomersOptions] = useState<ISelectOption[]>([]);
+  const [allCustomersList, setAllCustomersList] = useState<IUser[]>([]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,45 +46,67 @@ const ChangeCustomerModal = ({ setShowModal, setFormQuoteData }: Props) => {
     setShowModal(false);
   };
 
-  const getUsersOption = () => {
-    const customersList = FakeUsersList.filter((i) => {
-      const isCustomer = i.role === "customer";
-      const hasSearchValue = formData.search?.length > 0;
-      const searchFilter = hasSearchValue
-        ? i.company?.toLowerCase().includes(formData.search.toLowerCase())
-        : false;
+  const getUsersOption = async () => {
+    try {
+      const res = await getCustomers();
 
-      if (hasSearchValue) {
-        return isCustomer && searchFilter;
+      if (!res.data.data) {
+        return;
       }
 
-      return isCustomer;
-    });
+      const responseData = res.data.data;
 
-    setCustomersOptions(
-      customersList.map((i) => {
-        const name = `${i.firstName} ${i.lastName}`;
+      setAllCustomersList(responseData);
 
-        return {
-          label: (
-            <p className="new-quote-select-option">
-              {i.company} <span>Responsable: {name}</span>
-            </p>
-          ),
-          value: i.id!,
-        };
-      })
-    );
+      const customersList = responseData.filter((i: IUser) => {
+        const hasSearchValue = formData.search?.length > 0;
+        const searchFilter = hasSearchValue
+          ? i.companyName?.toLowerCase().includes(formData.search.toLowerCase())
+          : false;
+
+        if (hasSearchValue) {
+          return searchFilter;
+        }
+
+        return hasSearchValue ? searchFilter : true;
+      });
+
+      setCustomersOptions(
+        customersList.map((i: IUser) => {
+          const name = `${i.firstName} ${i.lastName}`;
+
+          return {
+            label: (
+              <p className="new-quote-select-option">
+                {i.companyName} <span>Responsable: {name}</span>
+              </p>
+            ),
+            value: i.id!,
+          };
+        })
+      );
+
+      // if (formQuoteData.userId) {
+      //   setFormData((prev) => ({
+      //     ...prev,
+      //     selected: responseData.find(
+      //       (i: IUser) => i.id === formQuoteData.userId
+      //     ),
+      //   }));
+      // }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleOnSelect = (item: any) => {
-    const filteredUser = FakeUsersList.find((i) => i.id === item.value);
+    const filteredUser = allCustomersList.find((i) => i.id === item.value);
 
     setFormData({
       selected: filteredUser,
       search:
-        typeof item.label !== "string" ? filteredUser?.company : item.label,
+        typeof item.label !== "string" ? filteredUser?.companyName : item.label,
     });
   };
 
@@ -125,7 +149,7 @@ const ChangeCustomerModal = ({ setShowModal, setFormQuoteData }: Props) => {
                 <div className="new-quote-form-customer-content-title">
                   <p>
                     {formData.selected && typeof formData.selected !== "string"
-                      ? formData.selected.company
+                      ? formData.selected.companyName
                       : ""}
                   </p>
                   <p>Carrera 43 No, 201 - 78. Of 199, Cundinamarca</p>

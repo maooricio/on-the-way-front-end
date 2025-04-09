@@ -13,7 +13,6 @@ const createUser = (body: IUser) => {
     ...body,
     documentType: body.idType,
     documentNumber: body.idNumber,
-    companyName: body.company,
   });
 };
 

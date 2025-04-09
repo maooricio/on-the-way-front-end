@@ -2,7 +2,6 @@ import Image from "next/image";
 import close from "@/assets/icons/utils/close.svg";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 import { IQuote } from "@/utils/interfaces/quote.interface";
-import { FakeUsersList } from "@/utils/data/fakers";
 
 interface Props {
   setShowModal: Dispatch<SetStateAction<boolean>>;
@@ -11,8 +10,6 @@ interface Props {
 }
 
 const CancelQuoteModal = ({ setShowModal, quote, setQuoteData }: Props) => {
-  const quoteUser = FakeUsersList.find((i) => i.id === quote?.userId);
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -50,7 +47,7 @@ const CancelQuoteModal = ({ setShowModal, quote, setQuoteData }: Props) => {
           <p>¿Estás seguro que deseas cancelar la siguiente cotización?</p>
 
           <div className="cancel-quote-info">
-            <h3>{quote?.name ? quote.name : quoteUser?.company}</h3>
+            <h3>{quote?.name}</h3>
             <p>
               Cotización {quote?.quoteNumber} <span>{quote?.date}</span>
             </p>

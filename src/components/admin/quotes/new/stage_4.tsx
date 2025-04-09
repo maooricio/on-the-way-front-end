@@ -4,10 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getStageIcon } from "@/utils/handlers/get_icon";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
-import {
-  ICustomerSelect,
-  IQuote,
-} from "@/utils/interfaces/quote.interface";
+import { ICustomerSelect, IQuote } from "@/utils/interfaces/quote.interface";
 import { operatorsOptions } from "@/utils/data/jobs";
 import { ISelectOption } from "@/utils/interfaces/select.interface";
 import close from "@/assets/icons/utils/close_fill.svg";
@@ -25,8 +22,7 @@ const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
     search: "",
   };
 
-  const [selectData, setSelectData] =
-    useState<ICustomerSelect>(initialState);
+  const [selectData, setSelectData] = useState<ICustomerSelect>(initialState);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -114,7 +110,10 @@ const NewQuoteStageFour = ({ setStage, formData, setFormData }: Props) => {
         <div className="new-quote-form-content operators-selected-container">
           {formData.operators.length > 0 &&
             formData.operators.map((i) => (
-              <span key={i.id} className="operator-selected-container">
+              <span
+                key={`${i.name}: ${i.id}`}
+                className="operator-selected-container"
+              >
                 {i.name}{" "}
                 <button type="button" onClick={() => removeOperator(i)}>
                   <Image src={close} alt="close icon" />

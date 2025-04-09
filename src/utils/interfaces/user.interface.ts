@@ -13,7 +13,7 @@ export interface IUser {
   idNumber?: string;
   city?: string;
   address?: string;
-  company?: string;
+  companyName?: string;
   role?: string;
   createdAt?: Date;
 }

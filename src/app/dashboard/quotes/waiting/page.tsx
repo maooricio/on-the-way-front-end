@@ -1,18 +1,18 @@
 "use client";
 import InputElement from "@/components/elements/inputs/input";
-import { FakeQuotesList, FakeUsersList } from "@/utils/data/fakers";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Pagination from "@/components/elements/handlers/pagination";
 import { paginateList } from "@/utils/handlers/paginate";
 import glass from "@/assets/icons/others/glass.svg";
-import { filterQuotes } from "@/utils/handlers/filters";
+import { filterDate, filterQuotes } from "@/utils/handlers/filters";
 import back from "@/assets/icons/arrow/arrow_back.svg";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Routes } from "@/utils/router/router_enum";
 import { IQuote } from "@/utils/interfaces/quote.interface";
 import trash from "@/assets/icons/utils/trash.svg";
+import { getAllQuotes } from "@/utils/api/quotes";
 
 export interface ISearch {
   value: string;
@@ -30,24 +30,48 @@ const QuotesWaitingPage = () => {
 
   const [searchData, setSearchData] = useState<ISearch>(initialState);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [quotesList, setQuotesList] = useState<IQuote[][]>(
-    paginateList(FakeQuotesList.filter(i => i.isRequest)),
-  );
+  const [allQuotes, setAllQuotes] = useState<IQuote[]>([]);
+  const [quotesList, setQuotesList] = useState<IQuote[][]>([]);
 
   const handlePagination = (page: number) => {
     setCurrentPage(page);
   };
 
+  const fetchAllQuotes = async () => {
+    try {
+      const res = await getAllQuotes();
+
+      if (res.data.data) {
+        const allQuotesData = res.data.data.map((i: IQuote) => {
+          return {
+            ...i,
+            date: filterDate(i.createdAt!),
+          };
+        });
+        setAllQuotes(allQuotesData);
+        setQuotesList(paginateList(allQuotesData));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     const filteredQuotes = filterQuotes(
-      FakeQuotesList.filter(i => i.isRequest),
+      allQuotes.filter((i) => i.isRequest),
       searchData.value,
-      "all",
+      "all"
     );
 
     setQuotesList(filteredQuotes);
     setCurrentPage(1);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchData]);
+
+  useEffect(() => {
+    fetchAllQuotes();
+  }, []);
 
   return (
     <section className="quotes-history-container" ref={pageRef}>
@@ -91,8 +115,6 @@ const QuotesWaitingPage = () => {
 
         {quotesList.length > 0 ? (
           quotesList[currentPage - 1].map((item) => {
-            const user = FakeUsersList.find((i) => i.id === item.userId);
-
             return (
               <Link
                 href={`${Routes.quotes}/${item.id}`}
@@ -101,7 +123,7 @@ const QuotesWaitingPage = () => {
               >
                 <span className="not-mobile">{item.date}</span>
                 <span>{item.quoteNumber}</span>
-                <span>{user?.company}</span>
+                <span>{item.user?.companyName}</span>
                 <span className="only-button-icon">
                   <button type="button">
                     <Image src={trash} alt="delete icon" />

@@ -26,10 +26,10 @@ const RegisterCustomerForm = ({ formData, setFormData }: Props) => {
         type="text"
         label="Razón social"
         placeholder="Ingresa la razón social"
-        name="company"
+        name="companyName"
         setFormData={setFormData}
         error=""
-        value={formData.company ?? ""}
+        value={formData.companyName ?? ""}
         icon={<></>}
         showError={false}
       />

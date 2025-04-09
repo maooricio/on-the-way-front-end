@@ -11,7 +11,7 @@ export const validateUserData = (
   const userLastName = userData.lastName;
   const userEmail = userData.email;
   // customer info
-  const userCompany = userData.company ?? "";
+  const userCompany = userData.companyName ?? "";
   const userIdType = userData.idType ?? "";
   const userIdNumber = userData.idNumber ?? "";
   const userPhone = userData.phone ?? "";

@@ -288,14 +288,15 @@ const QuoteDetailsPage = () => {
                 <div className="new-quote-resume-footer">
                   {quoteData.discountVoucher.amount === 0 ? (
                     <p>
-                      <span>Total:</span> <span>{formatCurrency(0)}</span>
+                      <span>Total:</span>{" "}
+                      <span>{formatCurrency(quoteData.totalPrice)}</span>
                     </p>
                   ) : (
                     <div className="new-quote-summary-with-discount">
                       <p>
                         <span>Subtotal:</span>{" "}
                         <span className="text-regular">
-                          {formatCurrency(0)}
+                          {formatCurrency(quoteData.totalPrice)}
                         </span>
                       </p>
                       <p>
@@ -311,8 +312,11 @@ const QuoteDetailsPage = () => {
                         <span>
                           {formatCurrency(
                             quoteData.discountVoucher.type === "%"
-                              ? 0 - 0 * (quoteData.discountVoucher.amount / 100)
-                              : 0 - quoteData.discountVoucher.amount
+                              ? quoteData.totalPrice -
+                                  quoteData.totalPrice *
+                                    (quoteData.discountVoucher.amount / 100)
+                              : quoteData.totalPrice -
+                                  quoteData.discountVoucher.amount
                           )}
                         </span>
                       </p>

@@ -65,3 +65,35 @@ export interface IQuoteUserInfo {
   email: string;
   companyName: string;
 }
+
+
+export interface IQuoteToEdit {
+  id?: string;
+  _id?: string;
+  name?: string;
+  userId?: string;
+  quoteNumber?: string;
+  isRequest?: boolean;
+  state?: string;
+  deliveryTransport?: string;
+  collectionTransport?: string;
+  serviceDate?: string;
+  serviceHour?: string;
+  pickupCity?: string;
+  pickupAddress?: string;
+  deliveryAddress?: string;
+  collectionAddress?: string;
+  unloadingCity?: string;
+  unloadingAdress?: string;
+  totalPrice?: number;
+  vehicles?: IVehicles[];
+  operators?: IOperator[];
+  discountVoucher?: {
+    type: string;
+    amount: number;
+  };
+  comment?: IQuoteComment[];
+  date?: string;
+  createdAt?: Date;
+  user?: IQuoteUserInfo;
+}

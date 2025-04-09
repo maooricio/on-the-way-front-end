@@ -51,12 +51,19 @@ const NewQuotePage = () => {
   };
 
   const fetchQuoteDetails = async () => {
-    if (quote) {
-      const res = await getQuoteDetails(quote);
+    try {
+      if (quote) {
+        const res = await getQuoteDetails(quote);
 
-      setFormData(res.data.data);
+        setFormData({
+          ...res.data.data,
+          totalPrice: 0,
+        });
+      }
+    } catch (error) {
+      console.log({ error });
     }
-  }
+  };
 
   useEffect(() => {
     fetchQuoteDetails();
@@ -110,7 +117,11 @@ const NewQuotePage = () => {
           <NewQuoteSummary formData={formData} setFormData={setFormData} />
         </section>
       ) : (
-        <NewQuoteStageFive formData={formData} setFormData={setFormData} />
+        <NewQuoteStageFive
+          formData={formData}
+          setFormData={setFormData}
+          quoteToEdit={quote}
+        />
       )}
     </section>
   );

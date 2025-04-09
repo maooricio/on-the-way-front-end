@@ -52,7 +52,7 @@ const NewQuoteStageOne = ({
       const customersList = responseData.filter((i: IUser) => {
         const hasSearchValue = formData.search?.length > 0;
         const searchFilter = hasSearchValue
-          ? i.company?.toLowerCase().includes(formData.search.toLowerCase())
+          ? i.companyName?.toLowerCase().includes(formData.search.toLowerCase())
           : false;
 
         if (hasSearchValue) {
@@ -69,7 +69,7 @@ const NewQuoteStageOne = ({
           return {
             label: (
               <p className="new-quote-select-option">
-                {i.company} <span>Responsable: {name}</span>
+                {i.companyName} <span>Responsable: {name}</span>
               </p>
             ),
             value: i.id!,
@@ -112,7 +112,7 @@ const NewQuoteStageOne = ({
     setFormData({
       selected: filteredUser,
       search:
-        typeof item.label !== "string" ? filteredUser?.company : item.label,
+        typeof item.label !== "string" ? filteredUser?.companyName : item.label,
     });
   };
 
@@ -152,7 +152,7 @@ const NewQuoteStageOne = ({
               <div className="new-quote-form-customer-content-title">
                 <p>
                   {typeof formData.selected !== "string"
-                    ? formData.selected.company
+                    ? formData.selected.companyName
                     : ""}
                 </p>
                 <p>Carrera 43 No, 201 - 78. Of 199, Cundinamarca</p>

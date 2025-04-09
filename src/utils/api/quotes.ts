@@ -1,4 +1,4 @@
-import { IQuote } from "../interfaces/quote.interface";
+import { IQuote, IQuoteToEdit } from "../interfaces/quote.interface";
 import http from "./http";
 
 const QUOTES_PATH = "quotes";
@@ -6,13 +6,16 @@ const QUOTES_PATH = "quotes";
 const createQuotes = (body: IQuote) => {
   return http.post(`${QUOTES_PATH}`, {
     ...body,
-    vehicles: body.vehicles.map((i) => ({ ...i, image: i.id })),
     state: "in_progress",
   });
 };
 
 const getAllQuotes = () => {
   return http.get(`${QUOTES_PATH}`);
+};
+
+const getAllQuotesRequests = () => {
+  return http.get(`${QUOTES_PATH}/requests`);
 };
 
 const getQuoteDetails = (quoteId: string | string[]) => {
@@ -26,4 +29,15 @@ const addComment = (quoteId: string, comment: string, userId: string) => {
   });
 };
 
-export { createQuotes, getAllQuotes, getQuoteDetails, addComment };
+const editQuote = (quoteId: string, body: IQuoteToEdit) => {
+  return http.patch(`${QUOTES_PATH}/${quoteId}`, body);
+};
+
+export {
+  createQuotes,
+  getAllQuotes,
+  getQuoteDetails,
+  addComment,
+  editQuote,
+  getAllQuotesRequests,
+};

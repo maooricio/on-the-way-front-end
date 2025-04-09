@@ -11,7 +11,11 @@ import AddDiscountVoucherModal from "@/components/admin/quotes/add_discount_vouc
 import otw_logo from "@/assets/images/otw_only_logo.svg";
 import ticket from "@/assets/icons/others/ticket.svg";
 import InputElement from "@/components/elements/inputs/input";
-import { FakeQuotesList, FakeUsersList } from "@/utils/data/fakers";
+import { filterDate } from "@/utils/handlers/filters";
+import { editQuote, getQuoteDetails } from "@/utils/api/quotes";
+import { IVehicles } from "@/utils/interfaces/vehicles.interface";
+import { IOperator } from "@/utils/interfaces/operator.interface";
+import Loader from "@/assets/images/loader";
 
 export interface IQuoteRequest {
   [key: string]: string;
@@ -24,41 +28,69 @@ export interface IDiscountData {
 const QuoteRequestDetailsPage = () => {
   const router = useRouter();
   const { id } = useParams();
-  const requestSelected: IQuote | undefined = FakeQuotesList.find(
-    (i) => i.id === id,
-  );
-  const userSelected = FakeUsersList.find(
-    (i) => i.id === requestSelected?.userId,
-  );
 
-  const initialState: IQuoteRequest = {
+  const initialFormDataState: IQuoteRequest = {
+    userId: "",
     deliveryTransport: "",
     collectionTransport: "",
-    comment: "",
-    ...Object.fromEntries(
-      requestSelected?.vehicles.map((v) => [v.id, ""]) || [],
-    ),
-    ...Object.fromEntries(
-      requestSelected?.operators.map((o) => [o.id, ""]) || [],
-    ),
   };
 
-  const initialDiscount: IDiscountData = {
-    discountVoucher: requestSelected
-      ? requestSelected.discountVoucher
-      : { type: "%", amount: 0 },
+  const initialDiscountState: IDiscountData = {
+    discountVoucher: { type: "%", amount: 0 },
   };
 
-  const [formData, setFormData] = useState<IQuoteRequest>(initialState);
+  const [formData, setFormData] = useState<IQuoteRequest>(initialFormDataState);
+  const [requestData, setRequestData] = useState<IQuote | undefined>();
   const [discountData, setDiscountData] =
-    useState<IDiscountData>(initialDiscount);
-  const [requestData, setRequestData] = useState<IQuote>(requestSelected!);
+    useState<IDiscountData>(initialDiscountState);
   const [showDiscountModal, setShowDiscountModal] = useState<boolean>(false);
   const [price, setPrice] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.replace(`${Routes.quotes_new}?quote=${requestData.id}`);
+    setIsLoading(true);
+
+    try {
+      const res = await editQuote(requestData?._id ?? "", {
+        state: "in_progress",
+        isRequest: false,
+        totalPrice: price,
+        discountVoucher: discountData.discountVoucher,
+      });
+
+      if (res.data.data) {
+        router.push(Routes.quotes);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchQuoteDetails = async () => {
+    try {
+      const res = await getQuoteDetails(id!);
+
+      if (res.data.data) {
+        const quoteData = res.data.data;
+        setFormData({
+          userId: "",
+          deliveryTransport: "",
+          collectionTransport: "",
+          ...Object.fromEntries(
+            quoteData.vehicles.map((v: IVehicles) => [v.imageId, ""]) || []
+          ),
+          ...Object.fromEntries(
+            quoteData.operators.map((o: IOperator) => [o.id, ""]) || []
+          ),
+        });
+        setRequestData(quoteData);
+      }
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   const calculatePrice = () => {
@@ -84,11 +116,20 @@ const QuoteRequestDetailsPage = () => {
   }, [formData]);
 
   useEffect(() => {
-    setRequestData((prev) => ({
-      ...prev,
-      discountVoucher: discountData.discountVoucher,
-    }));
+    setRequestData((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        discountVoucher: discountData.discountVoucher,
+      };
+    });
   }, [discountData]);
+
+  useEffect(() => {
+    fetchQuoteDetails();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <section className="new-quote-container">
@@ -106,7 +147,7 @@ const QuoteRequestDetailsPage = () => {
             onSubmit={handleOnSubmit}
           >
             <div className="new-quote-resume">
-              {userSelected && (
+              {requestData.user && (
                 <div className="new-quote-resume-customer">
                   <div className="new-quote-resume-customer-info">
                     <div className="user-photo-container">
@@ -119,13 +160,13 @@ const QuoteRequestDetailsPage = () => {
 
                     <div className="new-quote-resume-customer-content">
                       <div className="new-quote-resume-customer-content-title">
-                        <p>{userSelected.company}</p>
+                        <p>{requestData.user.companyName}</p>
                         <p>Carrera 43 No, 201 - 78. Of 199, Cundinamarca</p>
                       </div>
 
                       <p>
-                        Persona responsable: {userSelected.firstName}{" "}
-                        {userSelected.lastName}
+                        Persona responsable: {requestData.user.firstName}{" "}
+                        {requestData.user.lastName}
                       </p>
                     </div>
                   </div>
@@ -133,7 +174,7 @@ const QuoteRequestDetailsPage = () => {
                   {requestData.comment.length > 0 && (
                     <ul className="new-quote-request-comments">
                       {requestData.comment.map((i) => (
-                        <li key={`${i.userId}: ${i.date}`}>
+                        <li key={`${i.userId}: ${i._id}`}>
                           <div className="new-quote-request-comments-header">
                             <div className="user-photo-container">
                               <Image
@@ -143,7 +184,7 @@ const QuoteRequestDetailsPage = () => {
                               />
                             </div>
                             <h3>Comentario</h3>
-                            <span>{i.date}</span>
+                            <span>{filterDate(i.createdAt)}</span>
                           </div>
 
                           <p>{i.comment}</p>
@@ -212,10 +253,41 @@ const QuoteRequestDetailsPage = () => {
 
               {requestData.vehicles.length > 0 &&
                 requestData.vehicles.map((item) => (
-                  <div key={item.id} className="new-quote-summary-item">
+                  <div
+                    key={`${item.name}: ${item._id}`}
+                    className="new-quote-summary-item"
+                  >
                     <div className="new-quote-summary-item-header">
                       <h1>Vehículo {item.name}</h1>
                       <span>{item.weight}</span>
+                    </div>
+
+                    <div className="new-quote-summary-item-handler">
+                      <div>{item.amount.toString().padStart(2, "0")}</div>
+
+                      <InputElement
+                        type="text"
+                        label=""
+                        placeholder="$00,00"
+                        name={item.imageId}
+                        setFormData={setFormData}
+                        error=""
+                        value={formData[item.imageId] || ""}
+                        icon={<></>}
+                      />
+                    </div>
+                  </div>
+                ))}
+
+              {requestData.operators.length > 0 &&
+                requestData.operators.map((item) => (
+                  <div
+                    key={`${item.name}: ${item._id}`}
+                    className="new-quote-summary-item"
+                  >
+                    <div className="new-quote-summary-item-header">
+                      <h1>{item.name}</h1>
+                      <span>-</span>
                     </div>
 
                     <div className="new-quote-summary-item-handler">
@@ -234,42 +306,6 @@ const QuoteRequestDetailsPage = () => {
                     </div>
                   </div>
                 ))}
-
-              {requestData.operators.length > 0 &&
-                requestData.operators.map((item) => (
-                  <div key={item.id} className="new-quote-summary-item">
-                    <div className="new-quote-summary-item-header">
-                      <h1>{item.name}</h1>
-                      <span>-</span>
-                    </div>
-
-                    <div className="new-quote-summary-item-handler">
-                      <div>{item.amount.toString().padStart(2, "0")}</div>
-
-                      <InputElement
-                        type="text"
-                        label=""
-                        placeholder="$00,00"
-                        name={item.id}
-                        setFormData={setFormData}
-                        error=""
-                        value={formData[item.id]}
-                        icon={<></>}
-                      />
-                    </div>
-                  </div>
-                ))}
-
-              <InputElement
-                type="textarea"
-                label=""
-                placeholder="Añade una nota o comentario para el cliente..."
-                name="comment"
-                setFormData={setFormData}
-                error=""
-                value={formData.comment}
-                icon={<></>}
-              />
 
               <div className="new-quote-resume-footer">
                 {requestData.discountVoucher.amount === 0 ? (
@@ -323,7 +359,7 @@ const QuoteRequestDetailsPage = () => {
                             ? price -
                                 price *
                                   (requestData.discountVoucher.amount / 100)
-                            : price - requestData.discountVoucher.amount,
+                            : price - requestData.discountVoucher.amount
                         )}
                       </span>
                     </p>
@@ -348,6 +384,8 @@ const QuoteRequestDetailsPage = () => {
           setFormData={setDiscountData}
         />
       )}
+
+      {isLoading && <Loader />}
     </section>
   );
 };

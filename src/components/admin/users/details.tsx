@@ -91,7 +91,7 @@ const UserDetails = ({
             <>
               <div className="user-details-row">
                 <p>
-                  Razón social <span>{user.company}</span>
+                  Razón social <span>{user.companyName}</span>
                 </p>
               </div>
 
