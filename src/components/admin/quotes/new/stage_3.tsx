@@ -13,16 +13,24 @@ interface Props {
   setStage: Dispatch<SetStateAction<number>>;
   formData: IQuote;
   setFormData: Dispatch<SetStateAction<IQuote>>;
+  saveDraft: () => Promise<void>;
 }
 
-const NewQuoteStageThree = ({ setStage, formData, setFormData }: Props) => {
+const NewQuoteStageThree = ({
+  setStage,
+  formData,
+  setFormData,
+  saveDraft,
+}: Props) => {
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStage(3);
   };
 
   const handleOnSelect = (vehicle: IVehicles) => {
-    const isSelected = formData.vehicles.find((i) => i.imageId === vehicle.imageId);
+    const isSelected = formData.vehicles.find(
+      (i) => i.imageId === vehicle.imageId
+    );
 
     setFormData((prev) => ({
       ...prev,
@@ -33,7 +41,9 @@ const NewQuoteStageThree = ({ setStage, formData, setFormData }: Props) => {
   };
 
   const isSelected = (vehicle: IVehicles) => {
-    const vehicleFinded = formData.vehicles.find((i) => i.imageId === vehicle.imageId);
+    const vehicleFinded = formData.vehicles.find(
+      (i) => i.imageId === vehicle.imageId
+    );
 
     return !!vehicleFinded;
   };
@@ -58,7 +68,9 @@ const NewQuoteStageThree = ({ setStage, formData, setFormData }: Props) => {
       </header>
 
       <form onSubmit={handleOnSubmit} className="new-quote-form-vehicles">
-        <p className="full-width">Escoja a continuación el tipo de vehículo que necesita:</p>
+        <p className="full-width">
+          Escoja a continuación el tipo de vehículo que necesita:
+        </p>
 
         {VehiclesData.map((i) => (
           <div
@@ -77,7 +89,7 @@ const NewQuoteStageThree = ({ setStage, formData, setFormData }: Props) => {
             </div>
 
             <div className="new-quote-vehicle-icon">
-              <Image src={i.image} alt="vehicle icon" />
+              <Image src={i.image!} alt="vehicle icon" />
             </div>
 
             <div className="new-quote-vehicle-info">
@@ -100,9 +112,9 @@ const NewQuoteStageThree = ({ setStage, formData, setFormData }: Props) => {
           <Link href={Routes.quotes} className="button">
             Cancelar cotización
           </Link>
-          <Link href={Routes.quotes} className="button">
+          <button type="button" className="button" onClick={saveDraft}>
             Guardar en borradores
-          </Link>
+          </button>
           <button type="submit" disabled={formData.vehicles.length === 0}>
             Continuar
           </button>

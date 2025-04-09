@@ -35,9 +35,15 @@ interface Props {
   formData: IQuote;
   setFormData: Dispatch<SetStateAction<IQuote>>;
   quoteToEdit: string | null;
+  saveDraft: () => Promise<void>;
 }
 
-const NewQuoteStageFive = ({ formData, setFormData, quoteToEdit }: Props) => {
+const NewQuoteStageFive = ({
+  formData,
+  setFormData,
+  quoteToEdit,
+  saveDraft,
+}: Props) => {
   const router = useRouter();
 
   const [price, setPrice] = useState<number>(0);
@@ -461,9 +467,9 @@ const NewQuoteStageFive = ({ formData, setFormData, quoteToEdit }: Props) => {
           <Link href={Routes.quotes} className="button">
             Cancelar cotización
           </Link>
-          <Link href={Routes.quotes} className="button">
+          <button type="button" className="button" onClick={saveDraft}>
             Guardar en borradores
-          </Link>
+          </button>
           <button type="submit">
             {!quoteToEdit ? "Enviar" : "Editar"} cotización
           </button>

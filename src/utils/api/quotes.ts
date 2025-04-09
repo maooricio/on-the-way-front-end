@@ -18,6 +18,10 @@ const getAllQuotesRequests = () => {
   return http.get(`${QUOTES_PATH}/requests`);
 };
 
+const getAllQuotesDrafts = () => {
+  return http.get(`${QUOTES_PATH}/drafts`);
+};
+
 const getQuoteDetails = (quoteId: string | string[]) => {
   return http.get(`${QUOTES_PATH}/${quoteId}`);
 };
@@ -33,6 +37,13 @@ const editQuote = (quoteId: string, body: IQuoteToEdit) => {
   return http.patch(`${QUOTES_PATH}/${quoteId}`, body);
 };
 
+const saveQuoteDraft = (body: IQuote) => {
+  return http.post(`${QUOTES_PATH}`, {
+    ...body,
+    state: "draft",
+  });
+};
+
 export {
   createQuotes,
   getAllQuotes,
@@ -40,4 +51,6 @@ export {
   addComment,
   editQuote,
   getAllQuotesRequests,
+  saveQuoteDraft,
+  getAllQuotesDrafts,
 };

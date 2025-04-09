@@ -10,7 +10,9 @@ import { IQuote } from "@/utils/interfaces/quote.interface";
 import NewQuoteSummary from "@/components/admin/quotes/new/summary";
 import NewQuoteStageFour from "@/components/admin/quotes/new/stage_4";
 import NewQuoteStageFive from "@/components/admin/quotes/new/stage_5";
-import { getQuoteDetails } from "@/utils/api/quotes";
+import { getQuoteDetails, saveQuoteDraft } from "@/utils/api/quotes";
+import { Routes } from "@/utils/router/router_enum";
+import Loader from "@/assets/images/loader";
 
 const NewQuotePage = () => {
   const router = useRouter();
@@ -41,6 +43,7 @@ const NewQuotePage = () => {
 
   const [formData, setFormData] = useState<IQuote>(initialState);
   const [stage, setStage] = useState<number>(!quote ? 0 : 1);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleGoBack = () => {
     if (stage > 0) {
@@ -62,6 +65,24 @@ const NewQuotePage = () => {
       }
     } catch (error) {
       console.log({ error });
+    }
+  };
+
+  const saveDraft = async () => {
+    setIsLoading(true);
+
+    try {
+      const res = await saveQuoteDraft(formData);
+
+      if (!res.data.data) {
+        return;
+      }
+
+      router.push(Routes.quote_drafts);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -92,6 +113,7 @@ const NewQuotePage = () => {
             setStage={setStage}
             formData={formData}
             setFormData={setFormData}
+            saveDraft={saveDraft}
           />
 
           <NewQuoteSummary formData={formData} setFormData={setFormData} />
@@ -102,6 +124,7 @@ const NewQuotePage = () => {
             setStage={setStage}
             formData={formData}
             setFormData={setFormData}
+            saveDraft={saveDraft}
           />
 
           <NewQuoteSummary formData={formData} setFormData={setFormData} />
@@ -112,6 +135,7 @@ const NewQuotePage = () => {
             setStage={setStage}
             formData={formData}
             setFormData={setFormData}
+            saveDraft={saveDraft}
           />
 
           <NewQuoteSummary formData={formData} setFormData={setFormData} />
@@ -121,8 +145,11 @@ const NewQuotePage = () => {
           formData={formData}
           setFormData={setFormData}
           quoteToEdit={quote}
+          saveDraft={saveDraft}
         />
       )}
+
+      {isLoading && <Loader />}
     </section>
   );
 };

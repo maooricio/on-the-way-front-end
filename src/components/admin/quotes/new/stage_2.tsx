@@ -26,9 +26,15 @@ interface Props {
   setStage: Dispatch<SetStateAction<number>>;
   formData: IQuote;
   setFormData: Dispatch<SetStateAction<IQuote>>;
+  saveDraft: () => Promise<void>;
 }
 
-const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
+const NewQuoteStageTwo = ({
+  setStage,
+  formData,
+  setFormData,
+  saveDraft,
+}: Props) => {
   const initialState: ICustomerSelect = {
     selected: "",
     search: "",
@@ -255,9 +261,9 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
           <Link href={Routes.quotes} className="button">
             Cancelar cotización
           </Link>
-          <Link href={Routes.quotes} className="button">
+          <button type="button" className="button" onClick={saveDraft}>
             Guardar en borradores
-          </Link>
+          </button>
           <button type="submit">Continuar</button>
         </footer>
       </form>

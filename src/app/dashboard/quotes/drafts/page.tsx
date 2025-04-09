@@ -13,7 +13,7 @@ import { Routes } from "@/utils/router/router_enum";
 import { IQuote } from "@/utils/interfaces/quote.interface";
 import { formatCurrency } from "@/utils/handlers/currency";
 import delete_icon from "@/assets/icons/utils/trash.svg";
-import { getAllQuotes } from "@/utils/api/quotes";
+import { getAllQuotesDrafts } from "@/utils/api/quotes";
 
 export interface ISearch {
   value: string;
@@ -40,7 +40,7 @@ const QuotesDraftPage = () => {
 
   const fetchAllQuotes = async () => {
     try {
-      const res = await getAllQuotes();
+      const res = await getAllQuotesDrafts();
 
       if (res.data.data) {
         const allQuotesData = res.data.data.map((i: IQuote) => {
@@ -114,8 +114,8 @@ const QuotesDraftPage = () => {
           quotesList[currentPage - 1].map((item) => {
             return (
               <Link
-                href={`${Routes.quotes}/request/${item.id}`}
-                key={item.id}
+                href={`${Routes.quotes}/request/${item._id}`}
+                key={item._id}
                 className="custom-list-row"
               >
                 <span className="not-mobile">{item.date}</span>
