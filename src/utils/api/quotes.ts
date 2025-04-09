@@ -10,16 +10,16 @@ const createQuotes = (body: IQuote) => {
   });
 };
 
-const getAllQuotes = () => {
-  return http.get(`${QUOTES_PATH}`);
+const getAllQuotes = (userId: string | undefined) => {
+  return http.get(`${QUOTES_PATH}?userId=${userId}`);
 };
 
-const getAllQuotesRequests = () => {
-  return http.get(`${QUOTES_PATH}/requests`);
+const getAllQuotesRequests = (userId: string | undefined) => {
+  return http.get(`${QUOTES_PATH}/requests?userId=${userId}`);
 };
 
-const getAllQuotesDrafts = () => {
-  return http.get(`${QUOTES_PATH}/drafts`);
+const getAllQuotesDrafts = (userId: string | undefined) => {
+  return http.get(`${QUOTES_PATH}/drafts?userId=${userId}`);
 };
 
 const getQuoteDetails = (quoteId: string | string[]) => {

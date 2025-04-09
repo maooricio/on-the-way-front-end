@@ -19,6 +19,7 @@ import { getStateColor } from "@/utils/handlers/get_state_color";
 import { getUserLogged } from "@/utils/handlers/user_login";
 import { IUserLogged } from "@/utils/interfaces/user.interface";
 import { getAllQuotes } from "@/utils/api/quotes";
+import Loader from "@/assets/images/loader";
 
 export interface ISearch {
   value: string;
@@ -42,24 +43,33 @@ const QuotesHistoryPage = () => {
   const [user, setUser] = useState<IUserLogged>();
   const [allQuotes, setAllQuotes] = useState<IQuote[]>([]);
   const [quotesList, setQuotesList] = useState<IQuote[][]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handlePagination = (page: number) => {
     setCurrentPage(page);
   };
 
   const fetchUserLogged = async () => {
+    setIsLoading(true);
+
     try {
       const res = await getUserLogged();
 
       setUser(res);
     } catch (error) {
       console.log({ error });
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const fetchAllQuotes = async () => {
+  const fetchAllQuotes = async (): Promise<void> => {
+    setIsLoading(true);
+
     try {
-      const res = await getAllQuotes();
+      const res = await getAllQuotes(
+        user?.role === "customer" ? user.id : undefined
+      );
 
       if (res.data.data) {
         const allQuotesData = res.data.data.map((i: IQuote) => {
@@ -73,6 +83,8 @@ const QuotesHistoryPage = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -88,9 +100,14 @@ const QuotesHistoryPage = () => {
   }, [stateFilter, searchData, allQuotes]);
 
   useEffect(() => {
-    fetchUserLogged();
-    fetchAllQuotes();
-  }, []);
+    if (!user) {
+      fetchUserLogged();
+    } else {
+      fetchAllQuotes();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   return (
     <section className="quotes-history-container" ref={pageRef}>
@@ -195,6 +212,8 @@ const QuotesHistoryPage = () => {
           onPageChange={handlePagination}
         />
       )}
+
+      {isLoading && <Loader />}
     </section>
   );
 };

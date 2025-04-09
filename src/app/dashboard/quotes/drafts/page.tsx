@@ -14,6 +14,9 @@ import { IQuote } from "@/utils/interfaces/quote.interface";
 import { formatCurrency } from "@/utils/handlers/currency";
 import delete_icon from "@/assets/icons/utils/trash.svg";
 import { getAllQuotesDrafts } from "@/utils/api/quotes";
+import { IUserLogged } from "@/utils/interfaces/user.interface";
+import { getUserLogged } from "@/utils/handlers/user_login";
+import Loader from "@/assets/images/loader";
 
 export interface ISearch {
   value: string;
@@ -33,14 +36,32 @@ const QuotesDraftPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [allQuotes, setAllQuotes] = useState<IQuote[]>([]);
   const [quotesList, setQuotesList] = useState<IQuote[][]>([]);
+  const [user, setUser] = useState<IUserLogged>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handlePagination = (page: number) => {
     setCurrentPage(page);
   };
 
+  const fetchUserLogged = async () => {
+    setIsLoading(true);
+
+    try {
+      const res = await getUserLogged();
+
+      setUser(res);
+    } catch (error) {
+      console.log({ error });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const fetchAllQuotes = async () => {
     try {
-      const res = await getAllQuotesDrafts();
+      const res = await getAllQuotesDrafts(
+        user?.role === "customer" ? user.id : undefined
+      );
 
       if (res.data.data) {
         const allQuotesData = res.data.data.map((i: IQuote) => {
@@ -67,8 +88,14 @@ const QuotesDraftPage = () => {
   }, [searchData]);
 
   useEffect(() => {
-    fetchAllQuotes();
-  }, []);
+    if (!user) {
+      fetchUserLogged();
+    } else {
+      fetchAllQuotes();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   return (
     <section className="quotes-history-container" ref={pageRef}>
@@ -147,6 +174,8 @@ const QuotesDraftPage = () => {
           onPageChange={handlePagination}
         />
       )}
+
+      {isLoading && <Loader />}
     </section>
   );
 };

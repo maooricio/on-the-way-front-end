@@ -72,7 +72,7 @@ const ClientMainQuotesLast = () => {
         footer={
           <footer className="small-card-button-container">
             <Link
-              href={`${Routes.quotes_history}?state=verify`}
+              href={`${Routes.quotes_history}?state=to_verify`}
               className="button without-bg"
             >
               {clientSideIsLoaded && (screen.width > 1024 || screen.width < 900)
