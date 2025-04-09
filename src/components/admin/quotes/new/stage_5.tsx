@@ -61,6 +61,14 @@ const NewQuoteStageFive = ({ formData, setFormData, quoteToEdit }: Props) => {
             formData.discountVoucher.type === "%"
               ? price - price * (formData.discountVoucher.amount / 100)
               : price - formData.discountVoucher.amount,
+          vehicles: formData.vehicles.map((i) => ({
+            name: i.name,
+            imageId: i.imageId,
+            weight: i.weight,
+            price: i.price,
+            amount: i.amount,
+            sizes: i.sizes,
+          })),
         });
 
         if (!res.data.data) {

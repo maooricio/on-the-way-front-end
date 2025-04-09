@@ -89,12 +89,12 @@ const NewQuoteStageTwo = ({ setStage, formData, setFormData }: Props) => {
     if (type === "delivery") {
       setFormData((prev) => ({
         ...prev,
-        deliveryTransport: selectValue === undefined ? "250000" : "",
+        deliveryTransport: selectValue.length === 0 ? "250000" : "",
       }));
     } else {
       setFormData((prev) => ({
         ...prev,
-        collectionTransport: selectValue === undefined ? "250000" : "",
+        collectionTransport: selectValue.length === 0 ? "250000" : "",
       }));
     }
   };

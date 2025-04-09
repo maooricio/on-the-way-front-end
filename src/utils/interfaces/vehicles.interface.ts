@@ -2,7 +2,7 @@ export interface IVehicles {
   _id?: string;
   imageId: string;
   name: string;
-  image: string;
+  image?: string;
   weight: string;
   price: number;
   amount: number;
