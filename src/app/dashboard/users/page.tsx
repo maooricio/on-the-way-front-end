@@ -67,8 +67,8 @@ const UsersPage = () => {
     setCurrentPage(page);
   };
 
-  const handleGetUsers = () => {
-    getUsers(user?.id ?? "");
+  const handleGetUsers = async () => {
+    await getUsers(user?.id ?? "");
   };
 
   useEffect(() => {

@@ -41,9 +41,8 @@ const LoginPage = () => {
 
     try {
       const userAuth = await authUser(formData);
-      const userData = JSON.parse(userAuth.data.data);
 
-      if (!userData.authToken) {
+      if (userAuth.data.statusCode !== 200) {
         setFormError(validateUserError);
         return;
       }

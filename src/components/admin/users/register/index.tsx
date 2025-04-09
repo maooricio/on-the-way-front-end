@@ -19,7 +19,7 @@ import Loader from "@/assets/images/loader";
 
 interface Props {
   setShowForm: Dispatch<SetStateAction<boolean>>;
-  handleGetUsers: () => void;
+  handleGetUsers: () => Promise<void>;
 }
 
 const RegisterForm = ({ setShowForm, handleGetUsers }: Props) => {
@@ -63,7 +63,7 @@ const RegisterForm = ({ setShowForm, handleGetUsers }: Props) => {
         return;
       }
 
-      handleGetUsers();
+      await handleGetUsers();
       setShowForm(false);
     } catch (error) {
       console.log(error);
